@@ -2,6 +2,7 @@
 
 namespace Firefly;
 
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 
 class FireflyServiceProvider extends ServiceProvider
@@ -68,13 +69,15 @@ class FireflyServiceProvider extends ServiceProvider
      */
     protected function registerWebRoutes()
     {
-        Route::group([
-            'prefix' => config('firefly.web.prefix'),
-            'namespace' => config('firefly.web.namespace'),
-            'middleware' => config('firefly.web.middleware'),
-        ], function () {
-            $this->loadRoutesFrom(__DIR__.'/../routes/web.php');
-        });
+        if (config('firefly.web.enabled')) {
+            Route::group([
+                'prefix' => config('firefly.web.prefix'),
+                'namespace' => config('firefly.web.namespace'),
+                'middleware' => config('firefly.web.middleware'),
+            ], function () {
+                $this->loadRoutesFrom(__DIR__.'/../routes/web.php');
+            });
+        }
     }
 
     /**
