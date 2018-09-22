@@ -8,9 +8,7 @@
          convertWarningsToExceptions="true"
          processIsolation="false"
          stopOnError="false"
-         stopOnFailure="false"
-         syntaxCheck="true"
-         verbose="true">
+         stopOnFailure="false">
     <testsuites>
         <testsuite name="Firefly Test Suite">
             <directory suffix="Test.php">./tests</directory>
