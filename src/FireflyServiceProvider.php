@@ -46,7 +46,7 @@ class FireflyServiceProvider extends ServiceProvider
     protected function mergeConfiguration()
     {
         $this->mergeConfigFrom(
-            __DIR__.'../config/firefly.php', 'firefly'
+            __DIR__.'/../config/firefly.php', 'firefly'
         );
     }
 
