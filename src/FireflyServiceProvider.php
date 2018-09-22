@@ -1,6 +1,6 @@
 <?php
 
-namespace AndreasElia\Firefly;
+namespace Firefly;
 
 use Illuminate\Support\ServiceProvider;
 
