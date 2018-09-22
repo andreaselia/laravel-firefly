@@ -1,8 +1,8 @@
 <?php
 
-namespace AndreasElia\Firefly\Test;
+namespace Firefly\Test;
 
-use AndreasElia\Firefly\FireflyServiceProvider;
+use Firefly\FireflyServiceProvider;
 use Orchestra\Testbench\TestCase as OrchestraTestCase;
 
 class TestCase extends OrchestraTestCase
