@@ -70,11 +70,7 @@ class FireflyServiceProvider extends ServiceProvider
     protected function registerWebRoutes()
     {
         if (config('firefly.web.enabled')) {
-            Route::group([
-                'prefix' => config('firefly.web.prefix'),
-                'namespace' => config('firefly.web.namespace'),
-                'middleware' => config('firefly.web.middleware'),
-            ], function () {
+            Route::group(config('firefly.web'), function () {
                 $this->loadRoutesFrom(__DIR__.'/../routes/web.php');
             });
         }
@@ -88,11 +84,7 @@ class FireflyServiceProvider extends ServiceProvider
     protected function registerApiRoutes()
     {
         if (config('firefly.api.enabled')) {
-            Route::group([
-                'prefix' => config('firefly.api.prefix'),
-                'namespace' => config('firefly.api.namespace'),
-                'middleware' => config('firefly.api.middleware'),
-            ], function () {
+            Route::group(config('firefly.api'), function () {
                 $this->loadRoutesFrom(__DIR__.'/../routes/api.php');
             });
         }
