@@ -1,0 +1,44 @@
+{
+    "name": "andreaselia/laravel-firefly",
+    "description": "A simple forum package for Laravel.",
+    "keywords": ["laravel", "forum", "discussion", "firefly"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Andreas Elia",
+            "email": "andreaselia@live.co.uk"
+        },
+        {
+            "name": "Tom Irons",
+            "email": "tom.irons@hotmail.com"
+        }
+    ],
+    "require": {
+        "php": "^7.1",
+        "laravel/framework": "~5.7.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^7.3",
+        "orchestra/testbench": "^3.7",
+        "mockery/mockery": "^1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Firefly\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Firefly\\Test\\": "tests"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Firefly\\FireflyServiceProvider"
+            ]
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
