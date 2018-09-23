@@ -51,14 +51,14 @@ return [
     'api' => [
         'enabled'    => false,
         'prefix'     => 'api/forum',
-        'namespace'  => '\Firefly\Controllers\Api',
+        'namespace'  => '\Firefly\Http\Controllers\Api',
         'middleware' => ['api', 'auth:api'],
     ],
 
     'web' => [
         'enabled'    => true,
         'prefix'     => 'forum',
-        'namespace'  => '\Firefly\Controllers',
+        'namespace'  => '\Firefly\Http\Controllers',
         'middleware' => 'web',
     ],
 
