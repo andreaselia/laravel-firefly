@@ -2,8 +2,6 @@
 
 namespace Firefly\Http\Controllers;
 
-use Firefly\Http\Controllers\Controller;
-
 class ForumController extends Controller
 {
     /**
