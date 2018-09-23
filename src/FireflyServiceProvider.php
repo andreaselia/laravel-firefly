@@ -98,11 +98,11 @@ class FireflyServiceProvider extends ServiceProvider
     protected function defineAssetPublishing()
     {
         $this->publishes([
-            __DIR__ . '/../config/firefly.php' => config_path('firefly.php')
+            __DIR__.'/../config/firefly.php' => config_path('firefly.php'),
         ], 'config');
 
         $this->publishes([
-            __DIR__ . '/../database/migrations/' => database_path('migrations')
+            __DIR__.'/../database/migrations/' => database_path('migrations'),
         ], 'migrations');
     }
 }
