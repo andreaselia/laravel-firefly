@@ -2,7 +2,9 @@
 
 namespace Firefly\Http\Controllers;
 
-class Controller
+use Illuminate\Routing\Controller as BaseController;
+
+class Controller extends BaseController
 {
     //
 }
