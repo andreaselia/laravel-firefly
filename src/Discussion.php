@@ -12,6 +12,16 @@ class Discussion extends Model
      * @var array
      */
     protected $fillable = [
-        'title',
+        'title', 'slug'
     ];
+
+    /**
+     * Get all the posted for the discussion.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
+    }
 }

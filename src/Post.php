@@ -14,4 +14,14 @@ class Post extends Model
     protected $fillable = [
         'content',
     ];
+
+    /**
+     * Get the author of the post.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function author()
+    {
+        return $this->belongsTo(config('firefly.user'));
+    }
 }
