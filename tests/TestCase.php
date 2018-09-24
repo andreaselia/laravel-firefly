@@ -18,6 +18,8 @@ class TestCase extends OrchestraTestCase
 
         $this->loadLaravelMigrations();
 
+        $this->withFactories(__DIR__.'/../database/factories');
+
         $this->artisan('migrate')->run();
     }
 
