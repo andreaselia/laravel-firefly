@@ -1,6 +1,6 @@
 <?php
 
-Route::get('/', 'ForumController@index');
+Route::get('/', 'ForumController@index')->name('forum.index');
 
 // Groups...
 Route::get('{tag}', 'GroupController@show')->name('group.show');
