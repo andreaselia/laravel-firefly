@@ -2,7 +2,7 @@
 
 namespace Firefly\Test;
 
-trait TestModels
+trait FakeModels
 {
     /**
      * @var \Firefly\Test\Fixtures\User
