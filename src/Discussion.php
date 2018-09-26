@@ -3,12 +3,13 @@
 namespace Firefly;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 
 class Discussion extends Model
 {
-    use HasSlug;
+    use HasSlug, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -18,6 +19,13 @@ class Discussion extends Model
     protected $fillable = [
         'title'
     ];
+
+    /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = ['deleted_at'];
 
     /**
      * Get the options for generating the slug.
