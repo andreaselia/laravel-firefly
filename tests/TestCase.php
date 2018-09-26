@@ -11,25 +11,7 @@ use Orchestra\Testbench\TestCase as OrchestraTestCase;
 
 class TestCase extends OrchestraTestCase
 {
-    /**
-     * @var \Firefly\Test\Fixtures\User
-     */
-    public $user;
-
-    /**
-     * @var \Firefly\Test\Fixtures\Group
-     */
-    public $group;
-
-    /**
-     * @var \Firefly\Test\Fixtures\Discussion
-     */
-    public $discussion;
-
-    /**
-     * @var \Firefly\Test\Fixtures\Post
-     */
-    public $post;
+    use TestModels;
 
     /**
      * Setup the test environment.
