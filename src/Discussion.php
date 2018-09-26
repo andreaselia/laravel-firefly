@@ -40,4 +40,14 @@ class Discussion extends Model
     {
         return $this->hasMany(Post::class);
     }
+
+    /**
+     * Get the URI for the discussion.
+     *
+     * @return string
+     */
+    public function getUriAttribute()
+    {
+        return "{$this->id}-{$this->slug}";
+    }
 }
