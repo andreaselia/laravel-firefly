@@ -1,9 +1,10 @@
 <?php
 
-namespace Firefly\Test;
+namespace Firefly\Test\Feature;
 
 use Firefly\Test\Fixtures\Discussion;
 use Firefly\Test\Fixtures\User;
+use Firefly\Test\TestCase;
 
 class DiscussionTest extends TestCase
 {
