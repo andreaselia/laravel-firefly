@@ -92,4 +92,34 @@ class DiscussionTest extends TestCase
         $crawler->assertStatus(302);
         $crawler->assertRedirect('/forum/' . $discussion->uri);
     }
+
+    public function test_discussion_gets_stickied()
+    {
+        $discussion = $this->getDiscussion();
+
+        $crawler = $this->actingAs($this->getUser())
+            ->put('forum/' . $discussion->uri . '/stick');
+
+        $discussion = $this->getDiscussion()->refresh();
+
+        $this->assertNotNull($discussion->stickied_at);
+
+        $crawler->assertStatus(302);
+        $crawler->assertRedirect('/forum/' . $discussion->uri);
+    }
+
+    public function test_discussion_gets_unstickied()
+    {
+        $discussion = $this->getDiscussion()->lock();
+
+        $crawler = $this->actingAs($this->getUser())
+            ->put('forum/' . $discussion->uri . '/unstick');
+
+        $discussion = $this->getDiscussion()->refresh();
+
+        $this->assertNull($discussion->stickied_at);
+
+        $crawler->assertStatus(302);
+        $crawler->assertRedirect('/forum/' . $discussion->uri);
+    }
 }
