@@ -17,7 +17,7 @@ class Discussion extends Model
      * @var array
      */
     protected $fillable = [
-        'title'
+        'title', 'locked_at', 'stickied_at',
     ];
 
     /**
@@ -25,7 +25,9 @@ class Discussion extends Model
      *
      * @var array
      */
-    protected $dates = ['deleted_at'];
+    protected $dates = [
+        'locked_at', 'stickied_at', 'deleted_at'
+    ];
 
     /**
      * Get the options for generating the slug.
