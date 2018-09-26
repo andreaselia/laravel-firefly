@@ -60,4 +60,60 @@ class Discussion extends Model
     {
         return "{$this->id}-{$this->slug}";
     }
+
+    /**
+     * Lock the discussion.
+     *
+     * @return $this
+     */
+    public function lock()
+    {
+        $this->update([
+            'locked_at' => now(),
+        ]);
+
+        return $this;
+    }
+
+    /**
+     * Unlock the discussion.
+     *
+     * @return $this
+     */
+    public function unlock()
+    {
+        $this->update([
+            'locked_at' => null,
+        ]);
+
+        return $this;
+    }
+
+    /**
+     * Stick the discussion.
+     *
+     * @return $this
+     */
+    public function stick()
+    {
+        $this->update([
+            'stickied_at' => now(),
+        ]);
+
+        return $this;
+    }
+
+    /**
+     * Unstick the discussion.
+     *
+     * @return $this
+     */
+    public function unstick()
+    {
+        $this->update([
+            'stickied_at' => null,
+        ]);
+
+        return $this;
+    }
 }
