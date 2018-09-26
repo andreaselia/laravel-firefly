@@ -11,7 +11,7 @@ use Orchestra\Testbench\TestCase as OrchestraTestCase;
 
 class TestCase extends OrchestraTestCase
 {
-    use TestModels;
+    use FakeModels;
 
     /**
      * Setup the test environment.
