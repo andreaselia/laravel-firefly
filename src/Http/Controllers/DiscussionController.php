@@ -66,4 +66,60 @@ class DiscussionController extends Controller
 
         return redirect()->route('forum.index');
     }
+
+    /**
+     * Lock the specified discussion.
+     *
+     * @param Request $request
+     * @param Discussion $discussion
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function lock(Request $request, Discussion $discussion)
+    {
+        $discussion->lock();
+
+        return redirect()->route('discussion.show', [$discussion->id, $discussion->slug]);
+    }
+
+    /**
+     * Unlock the specified discussion.
+     *
+     * @param Request $request
+     * @param Discussion $discussion
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function unlock(Request $request, Discussion $discussion)
+    {
+        $discussion->unlock();
+
+        return redirect()->route('discussion.show', [$discussion->id, $discussion->slug]);
+    }
+
+    /**
+     * Stick the specified discussion.
+     *
+     * @param Request $request
+     * @param Discussion $discussion
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function stick(Request $request, Discussion $discussion)
+    {
+        $discussion->stick();
+
+        return redirect()->route('discussion.show', [$discussion->id, $discussion->slug]);
+    }
+
+    /**
+     * Unstick the specified discussion.
+     *
+     * @param Request $request
+     * @param Discussion $discussion
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function unstick(Request $request, Discussion $discussion)
+    {
+        $discussion->unstick();
+
+        return redirect()->route('discussion.show', [$discussion->id, $discussion->slug]);
+    }
 }
