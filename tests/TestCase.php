@@ -12,6 +12,26 @@ use Orchestra\Testbench\TestCase as OrchestraTestCase;
 class TestCase extends OrchestraTestCase
 {
     /**
+     * @var \Firefly\Test\Fixtures\User
+     */
+    public $user;
+
+    /**
+     * @var \Firefly\Test\Fixtures\Group
+     */
+    public $group;
+
+    /**
+     * @var \Firefly\Test\Fixtures\Discussion
+     */
+    public $discussion;
+
+    /**
+     * @var \Firefly\Test\Fixtures\Post
+     */
+    public $post;
+
+    /**
      * Setup the test environment.
      *
      * @return void
@@ -48,27 +68,25 @@ class TestCase extends OrchestraTestCase
      */
     protected function setupDatabase()
     {
-        $user = User::create([
+        $this->user = User::create([
             'name' => 'Test Rat',
             'email' => 'test@example.com',
             'password' => bcrypt('secret')
         ]);
 
-        $group = Group::create([
+        $this->group = Group::create([
             'name' => 'Example Group',
-            'slug' => 'example-group',
             'color' => '#2964c4',
         ]);
 
-        $discussion = Discussion::create([
-            'user_id' => $user->id,
+        $this->discussion = Discussion::create([
+            'user_id' => $this->user->id,
             'title' => 'Example Discsussion',
-            'slug' => 'example-discussion',
         ]);
 
-        $post = Post::create([
-            'discussion_id' => $discussion->id,
-            'user_id' => $user->id,
+        $this->post = Post::create([
+            'discussion_id' => $this->discussion->id,
+            'user_id' => $this->user->id,
             'content' => 'Lorem ipsum',
         ]);
     }
