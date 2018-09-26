@@ -3,6 +3,7 @@
 namespace Firefly\Http\Controllers;
 
 use Firefly\Discussion;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class DiscussionController extends Controller
@@ -21,12 +22,13 @@ class DiscussionController extends Controller
      * Store the new discussion.
      *
      * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {
         $discussion = $request->user()->discussions()->create($request->all());
 
-        return $discussion;
+        return redirect()->route('discussion.show', [$discussion->id, $discussion->slug]);
     }
 
     /**
@@ -43,21 +45,25 @@ class DiscussionController extends Controller
      * Store the new discussion.
      *
      * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(Request $request, Discussion $discussion)
     {
         $discussion->update($request->all());
 
-        return $discussion;
+        return redirect()->route('discussion.show', [$discussion->id, $discussion->slug]);
     }
 
     /**
      * Delete the specified discussion.
      *
      * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function delete(Request $request, Discussion $discussion)
     {
-        //
+        $discussion->delete();
+
+        return redirect()->route('forum.index');
     }
 }
