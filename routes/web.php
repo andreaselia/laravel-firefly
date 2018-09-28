@@ -15,3 +15,6 @@ Route::get('{tag}/discussion/create', 'DiscussionController@create')->name('disc
 Route::post('{tag}/discussion', 'DiscussionController@store')->name('discussion.store');
 Route::put('{discussion}-{slug}', 'DiscussionController@update')->name('discussion.update');
 Route::delete('{discussion}-{slug}', 'DiscussionController@delete')->name('discussion.delete');
+
+// Posts...
+Route::post('{discussion}-{slug}', 'PostController@store')->name('post.store');
