@@ -10,6 +10,9 @@ class DiscussionTest extends TestCase
 {
     public function test_discussion_was_created()
     {
+        // Clear all previous discussions
+        Discussion::truncate();
+
         $crawler = $this->actingAs($this->getUser())
             ->post('forum/example-tag/discussion', [
                 'title' => 'Foo Bar',
@@ -17,13 +20,13 @@ class DiscussionTest extends TestCase
 
         $discussions = Discussion::all();
 
-        $this->assertTrue($discussions->count() == 2);
+        $this->assertTrue($discussions->count() == 1);
         $this->assertDatabaseHas('discussions', [
             'title' => 'Foo Bar',
             'slug' => 'foo-bar',
         ]);
 
-        $discussion = Discussion::find(2);
+        $discussion = Discussion::first();
 
         $crawler->assertStatus(302);
         $crawler->assertRedirect('forum/' . $discussion->uri);
