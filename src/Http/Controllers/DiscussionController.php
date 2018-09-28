@@ -15,7 +15,7 @@ class DiscussionController extends Controller
      */
     public function create()
     {
-        //
+        return view('firefly::discussions.create');
     }
 
     /**
@@ -38,7 +38,7 @@ class DiscussionController extends Controller
      */
     public function show(Discussion $discussion)
     {
-        //
+        return view('firefly::discussions.show')->withDiscussion($discussion);
     }
 
     /**
