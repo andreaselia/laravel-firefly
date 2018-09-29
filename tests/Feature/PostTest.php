@@ -15,7 +15,7 @@ class PostTest extends TestCase
         $discussion = $this->getDiscussion();
 
         $crawler = $this->actingAs($this->getUser())
-            ->postJson('forum/' . $discussion->uri, [
+            ->post('forum/' . $discussion->uri, [
                 'content' => 'Foo Bar',
             ]);
 
@@ -26,7 +26,29 @@ class PostTest extends TestCase
             'content' => 'Foo Bar',
         ]);
 
-        $crawler->assertStatus(302);
-        $crawler->assertRedirect('forum/' . $discussion->uri);
+        $crawler->assertOk();
+        $crawler->assertJson([
+            'content' => 'Foo Bar',
+        ]);
+    }
+
+    public function test_post_was_updated()
+    {
+        $discussion = $this->getDiscussion();
+        $post = $this->getPost();
+
+        $crawler = $this->actingAs($this->getUser())
+            ->put('forum/' . $discussion->uri . '/' . $post->id, [
+                'content' => 'Bar Foo',
+            ]);
+
+        $post->refresh();
+
+        $this->assertEquals('Bar Foo', $post->content);
+
+        $crawler->assertOk();
+        $crawler->assertJson([
+            'content' => 'Bar Foo',
+        ]);
     }
 }
