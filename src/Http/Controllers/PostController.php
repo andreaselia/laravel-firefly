@@ -41,11 +41,15 @@ class PostController extends Controller
      * Store the new discussion.
      *
      * @param Request $request
-     * @return \Illuminate\Http\RedirectResponse
+     * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Discussion $discussion)
+    public function update(Request $request, Discussion $discussion, $slug, Post $post)
     {
-        //
+        $post->update(
+            $request->only('content')
+        );
+
+        return response()->json($post);
     }
 
     /**
