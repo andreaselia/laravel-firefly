@@ -56,10 +56,12 @@ class PostController extends Controller
      * Delete the specified discussion.
      *
      * @param Request $request
-     * @return \Illuminate\Http\RedirectResponse
+     * @return \Illuminate\Http\Response
      */
-    public function delete(Request $request, Discussion $discussion)
+    public function delete(Request $request, Discussion $discussion, $slug, Post $post)
     {
-        //
+        $post->delete();
+
+        return response()->json($post);
     }
 }
