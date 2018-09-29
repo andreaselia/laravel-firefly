@@ -19,3 +19,4 @@ Route::delete('{discussion}-{slug}', 'DiscussionController@delete')->name('discu
 // Posts...
 Route::post('{discussion}-{slug}', 'PostController@store')->name('post.store');
 Route::put('{discussion}-{slug}/{post}', 'PostController@update')->name('post.update');
+Route::delete('{discussion}-{slug}/{post}', 'PostController@delete')->name('post.delete');
