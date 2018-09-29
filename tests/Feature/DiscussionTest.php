@@ -28,8 +28,8 @@ class DiscussionTest extends TestCase
 
         $discussion = Discussion::first();
 
-        $crawler->assertStatus(302);
-        $crawler->assertRedirect('forum/' . $discussion->uri);
+        $crawler->assertRedirect();
+        $crawler->assertLocation('forum/' . $discussion->uri);
     }
 
     public function test_discussion_was_updated()
@@ -46,8 +46,8 @@ class DiscussionTest extends TestCase
         $this->assertTrue($discussion->title == 'Bar Foo');
         $this->assertTrue($discussion->slug == 'bar-foo');
 
-        $crawler->assertStatus(302);
-        $crawler->assertRedirect('forum/' . $discussion->uri);
+        $crawler->assertRedirect();
+        $crawler->assertLocation('forum/' . $discussion->uri);
     }
 
     public function test_discussion_was_soft_deleted()
@@ -62,8 +62,8 @@ class DiscussionTest extends TestCase
         $this->assertFalse($discussion->exists());
         $this->assertNotNull($discussion->deleted_at);
 
-        $crawler->assertStatus(302);
-        $crawler->assertRedirect('/forum');
+        $crawler->assertRedirect();
+        $crawler->assertLocation('forum');
     }
 
     public function test_discussion_gets_locked()
@@ -77,8 +77,8 @@ class DiscussionTest extends TestCase
 
         $this->assertNotNull($discussion->locked_at);
 
-        $crawler->assertStatus(302);
-        $crawler->assertRedirect('/forum/' . $discussion->uri);
+        $crawler->assertRedirect();
+        $crawler->assertLocation('forum/' . $discussion->uri);
     }
 
     public function test_discussion_gets_unlocked()
@@ -92,8 +92,8 @@ class DiscussionTest extends TestCase
 
         $this->assertNull($discussion->locked_at);
 
-        $crawler->assertStatus(302);
-        $crawler->assertRedirect('/forum/' . $discussion->uri);
+        $crawler->assertRedirect();
+        $crawler->assertLocation('forum/' . $discussion->uri);
     }
 
     public function test_discussion_gets_stickied()
@@ -107,8 +107,8 @@ class DiscussionTest extends TestCase
 
         $this->assertNotNull($discussion->stickied_at);
 
-        $crawler->assertStatus(302);
-        $crawler->assertRedirect('/forum/' . $discussion->uri);
+        $crawler->assertRedirect();
+        $crawler->assertLocation('forum/' . $discussion->uri);
     }
 
     public function test_discussion_gets_unstickied()
@@ -122,7 +122,7 @@ class DiscussionTest extends TestCase
 
         $this->assertNull($discussion->stickied_at);
 
-        $crawler->assertStatus(302);
-        $crawler->assertRedirect('/forum/' . $discussion->uri);
+        $crawler->assertRedirect();
+        $crawler->assertLocation('forum/' . $discussion->uri);
     }
 }
