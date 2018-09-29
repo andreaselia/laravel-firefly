@@ -51,4 +51,20 @@ class PostTest extends TestCase
             'content' => 'Bar Foo',
         ]);
     }
+
+    public function test_post_was_soft_deleted()
+    {
+        $discussion = $this->getDiscussion();
+        $post = $this->getPost();
+
+        $crawler = $this->actingAs($this->getUser())
+            ->delete('forum/' . $discussion->uri . '/' . $post->id);
+
+        $post->refresh();
+
+        $this->assertFalse($post->exists());
+        $this->assertNotNull($post->deleted_at);
+
+        $crawler->assertOk();
+    }
 }
