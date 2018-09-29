@@ -43,8 +43,8 @@ class DiscussionTest extends TestCase
 
         $discussion = $this->getDiscussion()->refresh();
 
-        $this->assertTrue($discussion->title == 'Bar Foo');
-        $this->assertTrue($discussion->slug == 'bar-foo');
+        $this->assertEquals('Bar Foo', $discussion->title);
+        $this->assertEquals('bar-foo', $discussion->slug);
 
         $crawler->assertRedirect();
         $crawler->assertLocation('forum/' . $discussion->uri);
