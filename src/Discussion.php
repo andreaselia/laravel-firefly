@@ -26,7 +26,7 @@ class Discussion extends Model
      * @var array
      */
     protected $dates = [
-        'locked_at', 'stickied_at', 'deleted_at'
+        'locked_at', 'stickied_at', 'deleted_at',
     ];
 
     /**
