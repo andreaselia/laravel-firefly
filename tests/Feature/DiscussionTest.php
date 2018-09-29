@@ -41,7 +41,7 @@ class DiscussionTest extends TestCase
                 'title' => 'Bar Foo',
             ]);
 
-        $discussion = $this->getDiscussion()->refresh();
+        $discussion->refresh();
 
         $this->assertEquals('Bar Foo', $discussion->title);
         $this->assertEquals('bar-foo', $discussion->slug);
@@ -57,7 +57,7 @@ class DiscussionTest extends TestCase
         $crawler = $this->actingAs($this->getUser())
             ->delete('forum/' . $discussion->uri);
 
-        $discussion = $this->getDiscussion()->refresh();
+        $discussion->refresh();
 
         $this->assertFalse($discussion->exists());
         $this->assertNotNull($discussion->deleted_at);
@@ -73,7 +73,7 @@ class DiscussionTest extends TestCase
         $crawler = $this->actingAs($this->getUser())
             ->put('forum/' . $discussion->uri . '/lock');
 
-        $discussion = $this->getDiscussion()->refresh();
+        $discussion->refresh();
 
         $this->assertNotNull($discussion->locked_at);
 
@@ -88,7 +88,7 @@ class DiscussionTest extends TestCase
         $crawler = $this->actingAs($this->getUser())
             ->put('forum/' . $discussion->uri . '/unlock');
 
-        $discussion = $this->getDiscussion()->refresh();
+        $discussion->refresh();
 
         $this->assertNull($discussion->locked_at);
 
@@ -103,7 +103,7 @@ class DiscussionTest extends TestCase
         $crawler = $this->actingAs($this->getUser())
             ->put('forum/' . $discussion->uri . '/stick');
 
-        $discussion = $this->getDiscussion()->refresh();
+        $discussion->refresh();
 
         $this->assertNotNull($discussion->stickied_at);
 
@@ -118,7 +118,7 @@ class DiscussionTest extends TestCase
         $crawler = $this->actingAs($this->getUser())
             ->put('forum/' . $discussion->uri . '/unstick');
 
-        $discussion = $this->getDiscussion()->refresh();
+        $discussion->refresh();
 
         $this->assertNull($discussion->stickied_at);
 
