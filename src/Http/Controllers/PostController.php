@@ -3,6 +3,7 @@
 namespace Firefly\Http\Controllers;
 
 use Firefly\Discussion;
+use Firefly\Post;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -21,17 +22,19 @@ class PostController extends Controller
      * Store the new discussion.
      *
      * @param Request $request
-     * @return \Illuminate\Http\RedirectResponse
+     * @return \Illuminate\Http\Response
      */
     public function store(Request $request, Discussion $discussion)
     {
         $user = $request->user();
 
-        $post = $user->posts()->make($request->all());
+        $post = $user->posts()->make(
+            $request->only('content')
+        );
 
         $discussion->posts()->save($post);
 
-        return redirect()->route('discussion.show', [$discussion->id, $discussion->slug]);
+        return response()->json($post);
     }
 
     /**
