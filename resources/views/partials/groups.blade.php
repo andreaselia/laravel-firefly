@@ -7,5 +7,5 @@
         <div class="badge badge-pill badge-danger">{{ __('Locked') }}</div>
     @endif
 
-    <div class="badge badge-pill" style="background: {{ $group->color }}">{{ $group->name }}</div>
+    <div class="badge badge-pill" style="background-color: {{ $group->color }}">{{ $group->name }}</div>
 @endforeach
