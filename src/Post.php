@@ -36,4 +36,14 @@ class Post extends Model
     {
         return $this->belongsTo(config('firefly.user'));
     }
+
+    /**
+     * Get the discussion the post belongs to.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function discussion()
+    {
+        return $this->belongsTo(Discussion::class);
+    }
 }
