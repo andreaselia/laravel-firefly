@@ -2,6 +2,7 @@
 
 namespace Firefly\Test;
 
+use Carbon\Carbon;
 use Firefly\Test\Fixtures\Post;
 use Firefly\Test\TestCase;
 
@@ -66,5 +67,37 @@ class PostTest extends TestCase
         $this->assertNotNull($post->deleted_at);
 
         $crawler->assertOk();
+    }
+
+    public function test_post_was_hidden_successfully()
+    {
+        $post = $this->getPost();
+
+        $crawler = $this->actingAs($this->getUser())
+            ->patchJson('forum/posts/' . $post->id . '/hide');
+
+        $post->refresh();
+
+        $crawler->assertOk();
+        $crawler->assertJsonStructure();
+
+        $this->assertNotNull($post->hidden_at);
+        $this->assertInstanceOf(Carbon::class, $post->hidden_at);
+    }
+
+    public function test_post_was_unhidden_successfully()
+    {
+        $post = $this->getPost();
+
+        $crawler = $this->actingAs($this->getUser())
+            ->patchJson('forum/posts/' . $post->id . '/unhide');
+
+        $post->refresh();
+
+        $crawler->assertOk();
+        $crawler->assertJsonStructure();
+
+        $this->assertNull($post->hidden_at);
+        $this->assertNotInstanceOf(Carbon::class, $post->hidden_at);
     }
 }
