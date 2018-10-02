@@ -76,12 +76,10 @@ class PostController extends Controller
      * Hide the specified post.
      *
      * @param Request $request
-     * @param Discussion $discussion
-     * @param $slug
      * @param Post $post
      * @return \Illuminate\Http\JsonResponse
      */
-    public function hide(Request $request, Discussion $discussion, $slug, Post $post)
+    public function hide(Request $request, Post $post)
     {
         $post->hide();
 
@@ -92,12 +90,10 @@ class PostController extends Controller
      * Unhide the specified post.
      *
      * @param Request $request
-     * @param Discussion $discussion
-     * @param $slug
      * @param Post $post
      * @return \Illuminate\Http\JsonResponse
      */
-    public function unhide(Request $request, Discussion $discussion, $slug, Post $post)
+    public function unhide(Request $request, Post $post)
     {
         $post->unhide();
 
