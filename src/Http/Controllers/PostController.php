@@ -71,4 +71,36 @@ class PostController extends Controller
 
         return response()->json($post);
     }
+
+    /**
+     * Hide the specified post.
+     *
+     * @param Request $request
+     * @param Discussion $discussion
+     * @param $slug
+     * @param Post $post
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function hide(Request $request, Discussion $discussion, $slug, Post $post)
+    {
+        $post->hide();
+
+        return response()->json($post);
+    }
+
+    /**
+     * Unhide the specified post.
+     *
+     * @param Request $request
+     * @param Discussion $discussion
+     * @param $slug
+     * @param Post $post
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function unhide(Request $request, Discussion $discussion, $slug, Post $post)
+    {
+        $post->unhide();
+
+        return response()->json($post);
+    }
 }
