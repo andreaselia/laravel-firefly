@@ -22,6 +22,7 @@ class PostController extends Controller
      * Store the new discussion.
      *
      * @param Request $request
+     * @param Discussion $discussion
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request, Discussion $discussion)
@@ -41,6 +42,9 @@ class PostController extends Controller
      * Store the new discussion.
      *
      * @param Request $request
+     * @param Discussion $discussion
+     * @param $slug
+     * @param Post $post
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Discussion $discussion, $slug, Post $post)
@@ -56,6 +60,9 @@ class PostController extends Controller
      * Delete the specified discussion.
      *
      * @param Request $request
+     * @param Discussion $discussion
+     * @param $slug
+     * @param Post $post
      * @return \Illuminate\Http\Response
      */
     public function delete(Request $request, Discussion $discussion, $slug, Post $post)
