@@ -20,3 +20,5 @@ Route::delete('{discussion}-{slug}', 'DiscussionController@delete')->name('discu
 Route::post('{discussion}-{slug}', 'PostController@store')->name('post.store');
 Route::put('{discussion}-{slug}/{post}', 'PostController@update')->name('post.update');
 Route::delete('{discussion}-{slug}/{post}', 'PostController@delete')->name('post.delete');
+Route::patch('posts/{post}/hide', 'PostController@hide')->name('post.hide');
+Route::patch('posts/{post}/unhide', 'PostController@unhide')->name('post.unhide');
