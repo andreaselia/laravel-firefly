@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Post extends Model
 {
-    use SoftDeletes;
+    use Hideable, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -15,7 +15,7 @@ class Post extends Model
      * @var array
      */
     protected $fillable = [
-        'content',
+        'content', 'hidden_at',
     ];
 
     /**
@@ -24,7 +24,7 @@ class Post extends Model
      * @var array
      */
     protected $dates = [
-        'deleted_at',
+        'deleted_at', 'hidden_at',
     ];
 
     /**

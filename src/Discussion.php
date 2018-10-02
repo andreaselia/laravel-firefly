@@ -9,7 +9,7 @@ use Spatie\Sluggable\SlugOptions;
 
 class Discussion extends Model
 {
-    use HasSlug, SoftDeletes;
+    use HasSlug, Hideable, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -17,7 +17,7 @@ class Discussion extends Model
      * @var array
      */
     protected $fillable = [
-        'title', 'locked_at', 'stickied_at',
+        'title', 'locked_at', 'stickied_at', 'hidden_at',
     ];
 
     /**
@@ -26,7 +26,7 @@ class Discussion extends Model
      * @var array
      */
     protected $dates = [
-        'locked_at', 'stickied_at', 'deleted_at',
+        'locked_at', 'stickied_at', 'hidden_at', 'deleted_at',
     ];
 
     /**
