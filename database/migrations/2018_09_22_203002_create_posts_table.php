@@ -18,6 +18,7 @@ class CreatePostsTable extends Migration
             $table->unsignedInteger('discussion_id');
             $table->unsignedInteger('user_id');
             $table->text('content');
+            $table->timestamp('hidden_at')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

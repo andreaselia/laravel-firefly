@@ -20,6 +20,7 @@ class CreateDiscussionsTable extends Migration
             $table->string('slug');
             $table->timestamp('locked_at')->nullable();
             $table->timestamp('stickied_at')->nullable();
+            $table->timestamp('hidden_at')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
