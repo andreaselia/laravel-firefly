@@ -42,7 +42,7 @@ class Discussion extends Model
     }
 
     /**
-     * Get all the posted for the discussion.
+     * Get all the posts for the discussion.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
