@@ -26,6 +26,11 @@ class DiscussionController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'title' => 'required|min:5|max:255',
+        ]);
+
+
         $discussion = $request->user()->discussions()->create($request->all());
 
         return redirect()->route('discussion.show', [$discussion->id, $discussion->slug]);
@@ -49,6 +54,10 @@ class DiscussionController extends Controller
      */
     public function update(Request $request, Discussion $discussion)
     {
+        $request->validate([
+            'title' => 'required|min:5|max:255',
+        ]);
+
         $discussion->update($request->all());
 
         return redirect()->route('discussion.show', [$discussion->id, $discussion->slug]);
