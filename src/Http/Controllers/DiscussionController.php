@@ -122,4 +122,32 @@ class DiscussionController extends Controller
 
         return redirect()->route('discussion.show', [$discussion->id, $discussion->slug]);
     }
+
+    /**
+     * Hide the specified discussion.
+     *
+     * @param Request $request
+     * @param Discussion $discussion
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function hide(Request $request, Discussion $discussion)
+    {
+        $discussion->hide();
+
+        return response()->json($discussion);
+    }
+
+    /**
+     * Unhide the specified discussion.
+     *
+     * @param Request $request
+     * @param Discussion $discussion
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function unhide(Request $request, Discussion $discussion)
+    {
+        $discussion->unhide();
+
+        return response()->json($discussion);
+    }
 }

@@ -15,6 +15,8 @@ Route::get('{tag}/discussion/create', 'DiscussionController@create')->name('disc
 Route::post('{tag}/discussion', 'DiscussionController@store')->name('discussion.store');
 Route::put('{discussion}-{slug}', 'DiscussionController@update')->name('discussion.update');
 Route::delete('{discussion}-{slug}', 'DiscussionController@delete')->name('discussion.delete');
+Route::patch('discussions/{discussion}/hide', 'DiscussionController@hide')->name('discussion.hide');
+Route::patch('discussions/{discussion}/unhide', 'DiscussionController@unhide')->name('discussion.unhide');
 
 // Posts...
 Route::post('{discussion}-{slug}', 'PostController@store')->name('post.store');
