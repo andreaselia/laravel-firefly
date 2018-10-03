@@ -156,7 +156,7 @@ class DiscussionTest extends TestCase
         $discussion = $this->getDiscussion();
 
         $crawler = $this->actingAs($this->getUser())
-            ->patchJson('forum/discussions/' . $discussion->id . '/hide');
+            ->patch('forum/discussions/' . $discussion->id . '/hide');
 
         $discussion->refresh();
 
@@ -172,7 +172,7 @@ class DiscussionTest extends TestCase
         $discussion = $this->getDiscussion();
 
         $crawler = $this->actingAs($this->getUser())
-            ->patchJson('forum/discussions/' . $discussion->id . '/unhide');
+            ->patch('forum/discussions/' . $discussion->id . '/unhide');
 
         $discussion->refresh();
 
