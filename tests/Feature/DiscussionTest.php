@@ -33,6 +33,17 @@ class DiscussionTest extends TestCase
         $crawler->assertLocation('forum/' . $discussion->uri);
     }
 
+    public function test_creation_validation_failed()
+    {
+        $crawler = $this->actingAs($this->getUser())
+            ->postJson('forum/example-tag/discussion', [
+                'title' => 'Foo',
+            ]);
+
+        $crawler->assertStatus(422);
+        $crawler->assertJsonValidationErrors('title');
+    }
+
     public function test_discussion_was_updated()
     {
         $discussion = $this->getDiscussion();
@@ -49,6 +60,19 @@ class DiscussionTest extends TestCase
 
         $crawler->assertRedirect();
         $crawler->assertLocation('forum/' . $discussion->uri);
+    }
+
+    public function test_update_validation_failed()
+    {
+        $discussion = $this->getDiscussion();
+
+        $crawler = $this->actingAs($this->getUser())
+            ->putJson('forum/' . $discussion->uri, [
+                'title' => 'Foo',
+            ]);
+
+        $crawler->assertStatus(422);
+        $crawler->assertJsonValidationErrors('title');
     }
 
     public function test_discussion_was_soft_deleted()
