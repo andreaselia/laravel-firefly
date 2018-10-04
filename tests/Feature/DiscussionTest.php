@@ -170,13 +170,7 @@ class DiscussionTest extends TestCase
             ]);
 
         $crawler->assertStatus(422);
-        $crawler->assertJson([
-            'errors' => [
-                'title' => [
-                    'The title field is required.'
-                ]
-            ]
-        ]);
+        $crawler->assertJsonValidationErrors('title');
 
         // Update
         $discussion = $this->getDiscussion();
@@ -187,13 +181,7 @@ class DiscussionTest extends TestCase
             ]);
 
         $crawler->assertStatus(422);
-        $crawler->assertJson([
-            'errors' => [
-                'title' => [
-                    'The title field is required.'
-                ]
-            ]
-        ]);
+        $crawler->assertJsonValidationErrors('title');
     }
 
     public function test_title_has_at_least_5_characters()
@@ -207,13 +195,7 @@ class DiscussionTest extends TestCase
             ]);
 
         $crawler->assertStatus(422);
-        $crawler->assertJson([
-            'errors' => [
-                'title' => [
-                    'The title must be at least 5 characters.'
-                ]
-            ]
-        ]);
+        $crawler->assertJsonValidationErrors('title');
 
         // Update
         $discussion = $this->getDiscussion();
@@ -224,13 +206,7 @@ class DiscussionTest extends TestCase
             ]);
 
         $crawler->assertStatus(422);
-        $crawler->assertJson([
-            'errors' => [
-                'title' => [
-                    'The title must be at least 5 characters.'
-                ]
-            ]
-        ]);
+        $crawler->assertJsonValidationErrors('title');
     }
 
     public function test_title_has_a_max_of_255_characters()
@@ -244,13 +220,7 @@ class DiscussionTest extends TestCase
             ]);
 
         $crawler->assertStatus(422);
-        $crawler->assertJson([
-            'errors' => [
-                'title' => [
-                    'The title may not be greater than 255 characters.'
-                ]
-            ]
-        ]);
+        $crawler->assertJsonValidationErrors('title');
 
         // Update
         $discussion = $this->getDiscussion();
@@ -261,12 +231,6 @@ class DiscussionTest extends TestCase
             ]);
 
         $crawler->assertStatus(422);
-        $crawler->assertJson([
-            'errors' => [
-                'title' => [
-                    'The title may not be greater than 255 characters.'
-                ]
-            ]
-        ]);
+        $crawler->assertJsonValidationErrors('title');
     }
 }
