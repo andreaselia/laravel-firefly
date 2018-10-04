@@ -162,6 +162,7 @@ class DiscussionTest extends TestCase
     public function test_title_is_required()
     {
         $title = '';
+
         // Create
         $crawler = $this->actingAs($this->getUser())
             ->postJson('forum/example-tag/discussion', [
