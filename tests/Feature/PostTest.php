@@ -100,4 +100,60 @@ class PostTest extends TestCase
         $this->assertNull($post->hidden_at);
         $this->assertNotInstanceOf(Carbon::class, $post->hidden_at);
     }
+
+    public function test_content_is_required()
+    {
+        $content = '';
+
+        // Create
+        $discussion = $this->getDiscussion();
+
+        $crawler = $this->actingAs($this->getUser())
+            ->postJson('forum/' . $discussion->uri, [
+                'content' => $content,
+            ]);
+
+        $crawler->assertStatus(422);
+        $crawler->assertJsonValidationErrors('content');
+
+        // Update
+        $discussion = $this->getDiscussion();
+        $post = $this->getPost();
+
+        $crawler = $this->actingAs($this->getUser())
+            ->putJson('forum/' . $discussion->uri . '/' . $post->id, [
+                'content' => $content,
+            ]);
+
+        $crawler->assertStatus(422);
+        $crawler->assertJsonValidationErrors('content');
+    }
+
+    public function test_title_has_at_least_5_characters()
+    {
+        $content = 'Foo';
+
+        // Create
+        $discussion = $this->getDiscussion();
+
+        $crawler = $this->actingAs($this->getUser())
+            ->postJson('forum/' . $discussion->uri, [
+                'content' => $content,
+            ]);
+
+        $crawler->assertStatus(422);
+        $crawler->assertJsonValidationErrors('content');
+
+        // Update
+        $discussion = $this->getDiscussion();
+        $post = $this->getPost();
+
+        $crawler = $this->actingAs($this->getUser())
+            ->putJson('forum/' . $discussion->uri . '/' . $post->id, [
+                'content' => $content,
+            ]);
+
+        $crawler->assertStatus(422);
+        $crawler->assertJsonValidationErrors('content');
+    }
 }
