@@ -3,6 +3,8 @@
 namespace Firefly\Http\Controllers;
 
 use Firefly\Discussion;
+use Firefly\Http\Requests\StoreDiscussionRequest;
+use Firefly\Http\Requests\UpdateDiscussionRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
@@ -24,13 +26,8 @@ class DiscussionController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
+    public function store(StoreDiscussionRequest $request)
     {
-        $request->validate([
-            'title' => 'required|min:5|max:255',
-        ]);
-
-
         $discussion = $request->user()->discussions()->create($request->all());
 
         return redirect()->route('discussion.show', [$discussion->id, $discussion->slug]);
@@ -52,12 +49,8 @@ class DiscussionController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, Discussion $discussion)
+    public function update(UpdateDiscussionRequest $request, Discussion $discussion)
     {
-        $request->validate([
-            'title' => 'required|min:5|max:255',
-        ]);
-
         $discussion->update($request->all());
 
         return redirect()->route('discussion.show', [$discussion->id, $discussion->slug]);

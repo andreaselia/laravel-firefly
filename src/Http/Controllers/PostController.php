@@ -3,6 +3,8 @@
 namespace Firefly\Http\Controllers;
 
 use Firefly\Discussion;
+use Firefly\Http\Requests\StorePostRequest;
+use Firefly\Http\Requests\UpdatePostRequest;
 use Firefly\Post;
 use Illuminate\Http\Request;
 
@@ -25,12 +27,8 @@ class PostController extends Controller
      * @param Discussion $discussion
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, Discussion $discussion)
+    public function store(StorePostRequest $request, Discussion $discussion)
     {
-        $request->validate([
-            'content' => 'required|min:5',
-        ]);
-
         $user = $request->user();
 
         $post = $user->posts()->make(
@@ -51,12 +49,8 @@ class PostController extends Controller
      * @param Post $post
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Discussion $discussion, $slug, Post $post)
+    public function update(UpdatePostRequest $request, Discussion $discussion, $slug, Post $post)
     {
-        $request->validate([
-            'content' => 'required|min:5',
-        ]);
-
         $post->update(
             $request->only('content')
         );
