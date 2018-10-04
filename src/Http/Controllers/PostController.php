@@ -27,6 +27,10 @@ class PostController extends Controller
      */
     public function store(Request $request, Discussion $discussion)
     {
+        $request->validate([
+            'content' => 'required|min:5',
+        ]);
+
         $user = $request->user();
 
         $post = $user->posts()->make(
@@ -49,6 +53,10 @@ class PostController extends Controller
      */
     public function update(Request $request, Discussion $discussion, $slug, Post $post)
     {
+        $request->validate([
+            'content' => 'required|min:5',
+        ]);
+
         $post->update(
             $request->only('content')
         );
