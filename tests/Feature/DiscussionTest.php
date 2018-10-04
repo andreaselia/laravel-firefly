@@ -162,6 +162,13 @@ class DiscussionTest extends TestCase
     public function test_title_is_required()
     {
         $title = '';
+        $validJson = [
+            'errors' => [
+                'title' => [
+                    'The title field is required.',
+                ]
+            ]
+        ];
 
         // Create
         $crawler = $this->actingAs($this->getUser())
@@ -171,6 +178,7 @@ class DiscussionTest extends TestCase
 
         $crawler->assertStatus(422);
         $crawler->assertJsonValidationErrors('title');
+        $crawler->assertJson($validJson);
 
         // Update
         $discussion = $this->getDiscussion();
@@ -182,11 +190,19 @@ class DiscussionTest extends TestCase
 
         $crawler->assertStatus(422);
         $crawler->assertJsonValidationErrors('title');
+        $crawler->assertJson($validJson);
     }
 
     public function test_title_has_at_least_5_characters()
     {
         $title = 'Foo';
+        $validJson = [
+            'errors' => [
+                'title' => [
+                    'The title must be at least 5 characters.',
+                ]
+            ]
+        ];
 
         // Create
         $crawler = $this->actingAs($this->getUser())
@@ -196,6 +212,7 @@ class DiscussionTest extends TestCase
 
         $crawler->assertStatus(422);
         $crawler->assertJsonValidationErrors('title');
+        $crawler->assertJson($validJson);
 
         // Update
         $discussion = $this->getDiscussion();
@@ -207,11 +224,19 @@ class DiscussionTest extends TestCase
 
         $crawler->assertStatus(422);
         $crawler->assertJsonValidationErrors('title');
+        $crawler->assertJson($validJson);
     }
 
     public function test_title_has_a_max_of_255_characters()
     {
         $title = str_random(256);
+        $validJson = [
+            'errors' => [
+                'title' => [
+                    'The title may not be greater than 255 characters.',
+                ]
+            ]
+        ];
 
         // Create
         $crawler = $this->actingAs($this->getUser())
@@ -221,6 +246,7 @@ class DiscussionTest extends TestCase
 
         $crawler->assertStatus(422);
         $crawler->assertJsonValidationErrors('title');
+        $crawler->assertJson($validJson);
 
         // Update
         $discussion = $this->getDiscussion();
@@ -232,5 +258,6 @@ class DiscussionTest extends TestCase
 
         $crawler->assertStatus(422);
         $crawler->assertJsonValidationErrors('title');
+        $crawler->assertJson($validJson);
     }
 }

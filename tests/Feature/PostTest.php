@@ -104,6 +104,13 @@ class PostTest extends TestCase
     public function test_content_is_required()
     {
         $content = '';
+        $validJson = [
+            'errors' => [
+                'content' => [
+                    'The content field is required.',
+                ]
+            ]
+        ];
 
         // Create
         $discussion = $this->getDiscussion();
@@ -115,6 +122,7 @@ class PostTest extends TestCase
 
         $crawler->assertStatus(422);
         $crawler->assertJsonValidationErrors('content');
+        $crawler->assertJson($validJson);
 
         // Update
         $discussion = $this->getDiscussion();
@@ -127,11 +135,19 @@ class PostTest extends TestCase
 
         $crawler->assertStatus(422);
         $crawler->assertJsonValidationErrors('content');
+        $crawler->assertJson($validJson);
     }
 
     public function test_title_has_at_least_5_characters()
     {
         $content = 'Foo';
+        $validJson = [
+            'errors' => [
+                'content' => [
+                    'The content must be at least 5 characters.',
+                ]
+            ]
+        ];
 
         // Create
         $discussion = $this->getDiscussion();
@@ -143,6 +159,7 @@ class PostTest extends TestCase
 
         $crawler->assertStatus(422);
         $crawler->assertJsonValidationErrors('content');
+        $crawler->assertJson($validJson);
 
         // Update
         $discussion = $this->getDiscussion();
@@ -155,5 +172,6 @@ class PostTest extends TestCase
 
         $crawler->assertStatus(422);
         $crawler->assertJsonValidationErrors('content');
+        $crawler->assertJson($validJson);
     }
 }
