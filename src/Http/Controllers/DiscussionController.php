@@ -23,7 +23,7 @@ class DiscussionController extends Controller
     /**
      * Store the new discussion.
      *
-     * @param Request $request
+     * @param \Firefly\Http\Requests\StoreDiscussionRequest $request
      * @return \Illuminate\Http\RedirectResponse
      */
     public function store(StoreDiscussionRequest $request)
@@ -36,7 +36,7 @@ class DiscussionController extends Controller
     /**
      * Show the specified discussion.
      *
-     * @param Discussion $discussion
+     * @param \Firefly\Discussion $discussion
      * @return \Illuminate\View\View
      */
     public function show(Discussion $discussion)
@@ -47,7 +47,7 @@ class DiscussionController extends Controller
     /**
      * Update the new discussion.
      *
-     * @param Request $request
+     * @param \Firefly\Http\Requests\UpdateDiscussionRequest $request
      * @return \Illuminate\Http\RedirectResponse
      */
     public function update(UpdateDiscussionRequest $request, Discussion $discussion)
@@ -60,7 +60,7 @@ class DiscussionController extends Controller
     /**
      * Delete the specified discussion.
      *
-     * @param Request $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
     public function delete(Request $request, Discussion $discussion)
@@ -73,8 +73,8 @@ class DiscussionController extends Controller
     /**
      * Lock the specified discussion.
      *
-     * @param Request $request
-     * @param Discussion $discussion
+     * @param \Illuminate\Http\Request $request
+     * @param \Firefly\Discussion $discussion
      * @return \Illuminate\Http\RedirectResponse
      */
     public function lock(Request $request, Discussion $discussion)
@@ -87,8 +87,8 @@ class DiscussionController extends Controller
     /**
      * Unlock the specified discussion.
      *
-     * @param Request $request
-     * @param Discussion $discussion
+     * @param \Illuminate\Http\Request $request
+     * @param \Firefly\Discussion $discussion
      * @return \Illuminate\Http\RedirectResponse
      */
     public function unlock(Request $request, Discussion $discussion)
@@ -101,8 +101,8 @@ class DiscussionController extends Controller
     /**
      * Stick the specified discussion.
      *
-     * @param Request $request
-     * @param Discussion $discussion
+     * @param \Illuminate\Http\Request $request
+     * @param \Firefly\Discussion $discussion
      * @return \Illuminate\Http\RedirectResponse
      */
     public function stick(Request $request, Discussion $discussion)
@@ -115,8 +115,8 @@ class DiscussionController extends Controller
     /**
      * Unstick the specified discussion.
      *
-     * @param Request $request
-     * @param Discussion $discussion
+     * @param \Illuminate\Http\Request $request
+     * @param \Firefly\Discussion $discussion
      * @return \Illuminate\Http\RedirectResponse
      */
     public function unstick(Request $request, Discussion $discussion)
@@ -129,8 +129,8 @@ class DiscussionController extends Controller
     /**
      * Hide the specified discussion.
      *
-     * @param Request $request
-     * @param Discussion $discussion
+     * @param \Illuminate\Http\Request $request
+     * @param \Firefly\Discussion $discussion
      * @return \Illuminate\Http\JsonResponse
      */
     public function hide(Request $request, Discussion $discussion)
@@ -143,8 +143,8 @@ class DiscussionController extends Controller
     /**
      * Unhide the specified discussion.
      *
-     * @param Request $request
-     * @param Discussion $discussion
+     * @param \Illuminate\Http\Request $request
+     * @param \Firefly\Discussion $discussion
      * @return \Illuminate\Http\JsonResponse
      */
     public function unhide(Request $request, Discussion $discussion)

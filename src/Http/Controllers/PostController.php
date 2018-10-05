@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 class PostController extends Controller
 {
     /**
-     * Show the form for creating a new discussion.
+     * Show the form for creating a new post.
      *
      * @return \Illuminate\View\View
      */
@@ -21,10 +21,10 @@ class PostController extends Controller
     }
 
     /**
-     * Store the new discussion.
+     * Store the new post.
      *
-     * @param Request $request
-     * @param Discussion $discussion
+     * @param \Illuminate\Http\Request $request
+     * @param \Firefly\Discussion $discussion
      * @return \Illuminate\Http\Response
      */
     public function store(StorePostRequest $request, Discussion $discussion)
@@ -41,12 +41,12 @@ class PostController extends Controller
     }
 
     /**
-     * Update the new discussion.
+     * Update the specified post.
      *
-     * @param Request $request
-     * @param Discussion $discussion
+     * @param \Illuminate\Http\Request $request
+     * @param \Firefly\Discussion $discussion
      * @param $slug
-     * @param Post $post
+     * @param \Firefly\Post $post
      * @return \Illuminate\Http\Response
      */
     public function update(UpdatePostRequest $request, Discussion $discussion, $slug, Post $post)
@@ -59,12 +59,12 @@ class PostController extends Controller
     }
 
     /**
-     * Delete the specified discussion.
+     * Delete the specified post.
      *
-     * @param Request $request
-     * @param Discussion $discussion
+     * @param \Illuminate\Http\Request $request
+     * @param \Firefly\Discussion $discussion
      * @param $slug
-     * @param Post $post
+     * @param \Firefly\Post $post
      * @return \Illuminate\Http\Response
      */
     public function delete(Request $request, Discussion $discussion, $slug, Post $post)
@@ -77,8 +77,8 @@ class PostController extends Controller
     /**
      * Hide the specified post.
      *
-     * @param Request $request
-     * @param Post $post
+     * @param \Illuminate\Http\Request $request
+     * @param \Firefly\Post $post
      * @return \Illuminate\Http\JsonResponse
      */
     public function hide(Request $request, Post $post)
@@ -91,8 +91,8 @@ class PostController extends Controller
     /**
      * Unhide the specified post.
      *
-     * @param Request $request
-     * @param Post $post
+     * @param \Illuminate\Http\Request $request
+     * @param \Firefly\Post $post
      * @return \Illuminate\Http\JsonResponse
      */
     public function unhide(Request $request, Post $post)
