@@ -14,7 +14,9 @@ class FireflyServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
+        'Firefly\Discussion' => 'Firefly\Policies\DiscussionPolicy',
         'Firefly\Group' => 'Firefly\Policies\GroupPolicy',
+        'Firefly\Post' => 'Firefly\Policies\PostPolicy',
     ];
 
     /**
