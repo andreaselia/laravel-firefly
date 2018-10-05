@@ -29,6 +29,8 @@ class PostController extends Controller
      */
     public function store(StorePostRequest $request, Discussion $discussion)
     {
+        $this->authorize('create', Post::class);
+
         $user = $request->user();
 
         $post = $user->posts()->make(
@@ -51,6 +53,8 @@ class PostController extends Controller
      */
     public function update(UpdatePostRequest $request, Discussion $discussion, $slug, Post $post)
     {
+        $this->authorize('update', $post);
+
         $post->update(
             $request->only('content')
         );
@@ -69,6 +73,8 @@ class PostController extends Controller
      */
     public function delete(Request $request, Discussion $discussion, $slug, Post $post)
     {
+        $this->authorize('delete', $post);
+
         $post->delete();
 
         return response()->json($post);
@@ -83,6 +89,8 @@ class PostController extends Controller
      */
     public function hide(Request $request, Post $post)
     {
+        $this->authorize('hide', $post);
+
         $post->hide();
 
         return response()->json($post);
@@ -97,6 +105,8 @@ class PostController extends Controller
      */
     public function unhide(Request $request, Post $post)
     {
+        $this->authorize('unhide', $post);
+
         $post->unhide();
 
         return response()->json($post);
