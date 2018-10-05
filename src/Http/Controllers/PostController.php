@@ -23,7 +23,7 @@ class PostController extends Controller
     /**
      * Store the new post.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param \Firefly\Http\Requests\StorePostRequest $request
      * @param \Firefly\Discussion $discussion
      * @return \Illuminate\Http\Response
      */
@@ -43,7 +43,7 @@ class PostController extends Controller
     /**
      * Update the specified post.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param \Firefly\Http\Requests\UpdatePostRequest $request
      * @param \Firefly\Discussion $discussion
      * @param $slug
      * @param \Firefly\Post $post
