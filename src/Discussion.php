@@ -42,6 +42,28 @@ class Discussion extends Model
     }
 
     /**
+     * Return the user that created the discussion.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function user()
+    {
+        return $this->belongsTo(config('firefly.user'))->withDefault([
+            'name' => 'Unknown Author',
+        ]);
+    }
+
+    /**
+     * Alias for the 'user' method.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function author()
+    {
+        return $this->user();
+    }
+
+    /**
      * Get all of the groups this discussion belongs to.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany

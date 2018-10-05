@@ -28,13 +28,25 @@ class Post extends Model
     ];
 
     /**
-     * Get the author of the post.
+     * Get the user who created the post.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function user()
+    {
+        return $this->belongsTo(config('firefly.user'))->withDefault([
+            'name' => 'Unknown Author',
+        ]);
+    }
+
+    /**
+     * Alias for the 'user' method.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function author()
     {
-        return $this->belongsTo(config('firefly.user'));
+        return $this->user();
     }
 
     /**
