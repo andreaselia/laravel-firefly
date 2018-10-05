@@ -3,7 +3,7 @@
 Route::get('/', 'ForumController@index')->name('forum.index');
 
 // Groups...
-Route::get('{tag}', 'GroupController@show')->name('group.show');
+Route::get('{group}', 'GroupController@show')->name('group.show');
 
 // Discussions...
 Route::get('{discussion}-{slug}', 'DiscussionController@show')->name('discussion.show');
@@ -11,8 +11,8 @@ Route::put('{discussion}-{slug}/lock', 'DiscussionController@lock')->name('discu
 Route::put('{discussion}-{slug}/unlock', 'DiscussionController@unlock')->name('discussion.unlock');
 Route::put('{discussion}-{slug}/stick', 'DiscussionController@stick')->name('discussion.stick');
 Route::put('{discussion}-{slug}/unstick', 'DiscussionController@unstick')->name('discussion.unstick');
-Route::get('{tag}/discussion/create', 'DiscussionController@create')->name('discussion.create');
-Route::post('{tag}/discussion', 'DiscussionController@store')->name('discussion.store');
+Route::get('{group}/discussion/create', 'DiscussionController@create')->name('discussion.create');
+Route::post('{group}/discussion', 'DiscussionController@store')->name('discussion.store');
 Route::put('{discussion}-{slug}', 'DiscussionController@update')->name('discussion.update');
 Route::delete('{discussion}-{slug}', 'DiscussionController@delete')->name('discussion.delete');
 Route::patch('discussions/{discussion}/hide', 'DiscussionController@hide')->name('discussion.hide');
