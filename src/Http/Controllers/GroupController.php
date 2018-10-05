@@ -20,12 +20,14 @@ class GroupController extends Controller
     /**
      * Store the new group.
      *
-     * @param Request $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {
-        //
+        Group::create($request->all());
+
+        return redirect()->back();
     }
 
     /**
@@ -47,7 +49,9 @@ class GroupController extends Controller
      */
     public function update(Request $request, Group $group)
     {
-        //
+        $group->update($request->all());
+
+        return redirect()->back();
     }
 
     /**
@@ -59,6 +63,8 @@ class GroupController extends Controller
      */
     public function delete(Request $request, Group $group)
     {
-        //
+        $group->delete();
+
+        return redirect()->back();
     }
 }
