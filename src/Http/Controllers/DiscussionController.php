@@ -37,6 +37,7 @@ class DiscussionController extends Controller
      * Show the specified discussion.
      *
      * @param Discussion $discussion
+     * @return \Illuminate\View\View
      */
     public function show(Discussion $discussion)
     {
