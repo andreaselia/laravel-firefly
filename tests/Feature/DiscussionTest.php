@@ -15,7 +15,7 @@ class DiscussionTest extends TestCase
         Discussion::truncate();
 
         $crawler = $this->actingAs($this->getUser())
-            ->post('forum/example-tag/discussion', [
+            ->post('forum/1/discussion', [
                 'title' => 'Foo Bar',
             ]);
 
@@ -172,7 +172,7 @@ class DiscussionTest extends TestCase
 
         // Create
         $crawler = $this->actingAs($this->getUser())
-            ->postJson('forum/example-tag/discussion', [
+            ->postJson('forum/1/discussion', [
                 'title' => $title,
             ]);
 
@@ -206,7 +206,7 @@ class DiscussionTest extends TestCase
 
         // Create
         $crawler = $this->actingAs($this->getUser())
-            ->postJson('forum/example-tag/discussion', [
+            ->postJson('forum/1/discussion', [
                 'title' => $title,
             ]);
 
@@ -240,7 +240,7 @@ class DiscussionTest extends TestCase
 
         // Create
         $crawler = $this->actingAs($this->getUser())
-            ->postJson('forum/example-tag/discussion', [
+            ->postJson('forum/1/discussion', [
                 'title' => $title,
             ]);
 
