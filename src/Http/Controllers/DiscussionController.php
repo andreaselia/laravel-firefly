@@ -29,6 +29,8 @@ class DiscussionController extends Controller
      */
     public function store(StoreDiscussionRequest $request, Group $group)
     {
+        $this->authorize('create', Discussion::class);
+
         $user = $request->user();
 
         $discussion = $user->discussions()->make(
@@ -59,6 +61,8 @@ class DiscussionController extends Controller
      */
     public function update(UpdateDiscussionRequest $request, Discussion $discussion)
     {
+        $this->authorize('update', $discussion);
+
         $discussion->update($request->all());
 
         return redirect()->route('discussion.show', [$discussion->id, $discussion->slug]);
@@ -72,6 +76,8 @@ class DiscussionController extends Controller
      */
     public function delete(Request $request, Discussion $discussion)
     {
+        $this->authorize('delete', $discussion);
+
         $discussion->delete();
 
         return redirect()->route('forum.index');
@@ -86,6 +92,8 @@ class DiscussionController extends Controller
      */
     public function lock(Request $request, Discussion $discussion)
     {
+        $this->authorize('lock', $discussion);
+
         $discussion->lock();
 
         return redirect()->route('discussion.show', [$discussion->id, $discussion->slug]);
@@ -100,6 +108,8 @@ class DiscussionController extends Controller
      */
     public function unlock(Request $request, Discussion $discussion)
     {
+        $this->authorize('unlock', $discussion);
+
         $discussion->unlock();
 
         return redirect()->route('discussion.show', [$discussion->id, $discussion->slug]);
@@ -114,6 +124,8 @@ class DiscussionController extends Controller
      */
     public function stick(Request $request, Discussion $discussion)
     {
+        $this->authorize('stick', $discussion);
+
         $discussion->stick();
 
         return redirect()->route('discussion.show', [$discussion->id, $discussion->slug]);
@@ -128,6 +140,8 @@ class DiscussionController extends Controller
      */
     public function unstick(Request $request, Discussion $discussion)
     {
+        $this->authorize('unstick', $discussion);
+
         $discussion->unstick();
 
         return redirect()->route('discussion.show', [$discussion->id, $discussion->slug]);
@@ -142,6 +156,8 @@ class DiscussionController extends Controller
      */
     public function hide(Request $request, Discussion $discussion)
     {
+        $this->authorize('hide', $discussion);
+
         $discussion->hide();
 
         return response()->json($discussion);
@@ -156,6 +172,8 @@ class DiscussionController extends Controller
      */
     public function unhide(Request $request, Discussion $discussion)
     {
+        $this->authorize('hide', $discussion);
+
         $discussion->unhide();
 
         return response()->json($discussion);
