@@ -3,6 +3,7 @@
 namespace Firefly\Http\Controllers;
 
 use Firefly\Discussion;
+use Firefly\Group;
 use Firefly\Http\Requests\StoreDiscussionRequest;
 use Firefly\Http\Requests\UpdateDiscussionRequest;
 use Illuminate\Http\RedirectResponse;
@@ -26,9 +27,15 @@ class DiscussionController extends Controller
      * @param \Firefly\Http\Requests\StoreDiscussionRequest $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(StoreDiscussionRequest $request)
+    public function store(StoreDiscussionRequest $request, Group $group)
     {
-        $discussion = $request->user()->discussions()->create($request->all());
+        $user = $request->user();
+
+        $discussion = $user->discussions()->make(
+            $request->all()
+        );
+
+        $group->discussions()->save($discussion);
 
         return redirect()->route('discussion.show', [$discussion->id, $discussion->slug]);
     }
