@@ -2,11 +2,21 @@
 
 namespace Firefly;
 
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 
 class FireflyServiceProvider extends ServiceProvider
 {
+    /**
+     * The policy mappings for the package.
+     *
+     * @var array
+     */
+    protected $policies = [
+        'Firefly\Group' => 'Firefly\Policies\GroupPolicy',
+    ];
+
     /**
      * Bootstrap any application services.
      *
@@ -17,6 +27,7 @@ class FireflyServiceProvider extends ServiceProvider
         $this->loadMigrations();
         $this->defineAssetPublishing();
         $this->registerRoutes();
+        $this->registerPolicies();
     }
 
     /**
@@ -104,5 +115,17 @@ class FireflyServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/../database/migrations/' => database_path('migrations'),
         ], 'migrations');
+    }
+
+    /**
+     * Register the package's policies.
+     *
+     * @return void
+     */
+    private function registerPolicies()
+    {
+        foreach ($this->policies as $key => $value) {
+            Gate::policy($key, $value);
+        }
     }
 }
