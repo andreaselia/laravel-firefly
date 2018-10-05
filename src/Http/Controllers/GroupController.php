@@ -2,14 +2,62 @@
 
 namespace Firefly\Http\Controllers;
 
+use Firefly\Group;
+use Illuminate\Http\Request;
+
 class GroupController extends Controller
 {
     /**
-     * Show the discussions for the specified tag.
+     * Show the form for creating a new group.
      *
      * @return \Illuminate\View\View
      */
-    public function show()
+    public function create()
+    {
+        //
+    }
+
+    /**
+     * Store the new group.
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function store(Request $request)
+    {
+        //
+    }
+
+    /**
+     * Show the discussions for the specified group.
+     *
+     * @return \Illuminate\View\View
+     */
+    public function show(Group $group)
+    {
+        //
+    }
+
+    /**
+     * Update the specified group.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param \Firefly\Group $group
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function update(Request $request, Group $group)
+    {
+        //
+    }
+
+    /**
+     * Delete the specified group.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param \Firefly\Group $group
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function delete(Request $request, Group $group)
     {
         //
     }
