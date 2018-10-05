@@ -41,7 +41,7 @@ class PostController extends Controller
     }
 
     /**
-     * Store the new discussion.
+     * Update the new discussion.
      *
      * @param Request $request
      * @param Discussion $discussion

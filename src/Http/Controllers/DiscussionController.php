@@ -45,7 +45,7 @@ class DiscussionController extends Controller
     }
 
     /**
-     * Store the new discussion.
+     * Update the new discussion.
      *
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
