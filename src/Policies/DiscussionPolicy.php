@@ -79,4 +79,76 @@ class DiscussionPolicy
     {
         return true;
     }
+
+    /**
+     * Determine whether the user can lock the discussion.
+     *
+     * @param  $user
+     * @param  \Firefly\Discussion  $discussion
+     * @return mixed
+     */
+    public function lock($user, Discussion $discussion)
+    {
+        return true;
+    }
+
+    /**
+     * Determine whether the user can unlock the discussion.
+     *
+     * @param  $user
+     * @param  \Firefly\Discussion  $discussion
+     * @return mixed
+     */
+    public function unlock($user, Discussion $discussion)
+    {
+        return true;
+    }
+
+    /**
+     * Determine whether the user can stick the discussion.
+     *
+     * @param  $user
+     * @param  \Firefly\Discussion  $discussion
+     * @return mixed
+     */
+    public function stick($user, Discussion $discussion)
+    {
+        return true;
+    }
+
+    /**
+     * Determine whether the user can unstick the discussion.
+     *
+     * @param  $user
+     * @param  \Firefly\Discussion  $discussion
+     * @return mixed
+     */
+    public function unstick($user, Discussion $discussion)
+    {
+        return true;
+    }
+
+    /**
+     * Determine whether the user can hide the discussion.
+     *
+     * @param  $user
+     * @param  \Firefly\Discussion  $discussion
+     * @return mixed
+     */
+    public function hide($user, Discussion $discussion)
+    {
+        return true;
+    }
+
+    /**
+     * Determine whether the user can unhide the discussion.
+     *
+     * @param  $user
+     * @param  \Firefly\Discussion  $discussion
+     * @return mixed
+     */
+    public function unhide($user, Discussion $discussion)
+    {
+        return true;
+    }
 }
