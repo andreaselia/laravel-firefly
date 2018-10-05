@@ -42,6 +42,16 @@ class Discussion extends Model
     }
 
     /**
+     * Get all of the groups this discussion belongs to.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function groups()
+    {
+        return $this->belongsToMany(Group::class);
+    }
+
+    /**
      * Get all the posts for the discussion.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany

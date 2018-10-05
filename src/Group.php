@@ -30,4 +30,14 @@ class Group extends Model
             ->generateSlugsFrom('name')
             ->saveSlugsTo('slug');
     }
+
+    /**
+     * Get all of the discussions that belong to this group.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function discussions()
+    {
+        return $this->belongsToMany(Discussion::class);
+    }
 }
