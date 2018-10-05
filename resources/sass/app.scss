@@ -1,0 +1,26 @@
+@import 'variables';
+@import 'forms';
+@import 'buttons';
+
+html {
+    background-color: $grey-1;
+    font-family: 'Nunito', sans-serif;
+    -ms-text-size-adjust: 100%;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    font-weight: 400;
+    font-size: 1em;
+}
+
+p {
+    line-height: 1;
+}
+
+a {
+    color: inherit;
+    text-decoration: underline;
+
+    &:hover {
+        text-decoration: none;
+    }
+}
