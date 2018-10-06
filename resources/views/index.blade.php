@@ -5,7 +5,13 @@
     <div class="container">
         <div class="row">
             <div class="col">
-                <h1>Discussions</h1>
+                <div class="d-flex justify-content-between align-items-center">
+                    <h1>Discussions</h1>
+
+                    {{-- TODO: auth/policy check --}}
+                    <a href="#" class="btn btn-yellow">New Discussion</a>
+                </div>
+
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quis quos aut sequi totam ducimus nihil, vitae repellendus expedita quas nemo.</p>
             </div>
         </div>

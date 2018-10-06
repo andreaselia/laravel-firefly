@@ -5,6 +5,11 @@
     align-items: center;
     padding: 10px 0;
 
+    &.clean {
+        box-shadow: none;
+        padding: 1.5rem 0 0;
+    }
+
     > .container {
         display: flex;
     }
@@ -35,10 +40,9 @@
             margin: 0;
 
             > li {
-                padding: 0 15px;
-
                 > a {
                     &:not(.btn) {
+                        padding: 0 15px;
                         font-weight: 700;
                         color: $licorice;
                     }

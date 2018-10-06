@@ -4,7 +4,7 @@
     </div>
 
     <div class="modal-body">
-        <form action="{{ route('discussions.store') }}" method="POST">
+        <form role="form">
             <div class="form-group">
                 <label for="title">{{ __('Title') }}</label>
                 <input type="text" name="title" id="title" value="{{ old('title') }}" class="form-control">
