@@ -1,4 +1,12 @@
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito:400,700|Rubik:400,500,700,900');
+
+// Variables
 @import 'variables';
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap-grid';
+
 @import 'forms';
 @import 'buttons';
 
@@ -10,6 +18,10 @@ html {
     -webkit-font-smoothing: antialiased;
     font-weight: 400;
     font-size: 1em;
+}
+
+.navbar {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .05);
 }
 
 p {
