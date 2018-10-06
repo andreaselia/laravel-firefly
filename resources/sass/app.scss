@@ -30,10 +30,15 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
     color: $grey-4;
+    margin-top: 0;
 }
 
 p {
     line-height: 1;
+
+    &:last-of-type {
+        margin-bottom: 0;
+    }
 }
 
 a {
@@ -44,4 +49,14 @@ a {
     &:hover {
         color: $grey-4;
     }
+}
+
+.group-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+    color: #fff;
+    padding: 2rem .5rem;
 }

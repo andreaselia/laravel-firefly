@@ -2,7 +2,7 @@
     display: inline-block;
     vertical-align: middle;
     text-align: center;
-    padding: 15px 30px;
+    padding: 10px 15px;
     font-size: .85em;
     border-radius: 5px;
     font-weight: 700;
@@ -21,7 +21,17 @@
     }
 }
 
+.btn-red {
+    background-color: $red;
+    color: #fff;
+}
+
 .btn-green {
     background-color: $green;
+    color: #fff;
+}
+
+.btn-blue {
+    background-color: $blue;
     color: #fff;
 }
