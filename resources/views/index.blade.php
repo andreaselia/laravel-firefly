@@ -18,7 +18,7 @@
     <div class="row">
         <div class="col">
             @if (! count($discussions))
-                <div class="notification">
+                <div class="notification notification-yellow">
                     {{ __('Uh oh, there are no discussions.') }}
                 </div>
             @endif

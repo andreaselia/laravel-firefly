@@ -6,6 +6,7 @@
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap-grid';
+@import '~bootstrap/scss/utilities/spacing';
 
 @import 'navbar';
 @import 'hero';
@@ -39,6 +40,10 @@ p {
     &:last-of-type {
         margin-bottom: 0;
     }
+}
+
+ul {
+    margin: 0;
 }
 
 a {

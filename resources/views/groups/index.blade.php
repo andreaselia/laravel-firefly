@@ -22,7 +22,7 @@
     <div class="row">
         @if (! count($groups))
             <div class="col">
-                <div class="notification">
+                <div class="notification notification-yellow">
                     {{ __('Uh oh, there are no groups.') }}
                 </div>
             </div>
