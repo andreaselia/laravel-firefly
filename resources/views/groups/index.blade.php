@@ -7,6 +7,8 @@
             <div class="col">
                 <div class="d-flex justify-content-between align-items-center">
                     <h1>Groups</h1>
+
+                    {{-- TODO: auth/policy check --}}
                     <a href="#" class="btn btn-green">Add Group</a>
                 </div>
             </div>
@@ -18,6 +20,14 @@
 @section('content')
 <div class="container">
     <div class="row">
+        @if (! count($groups))
+            <div class="col">
+                <div class="notification">
+                    {{ __('Uh oh, there are no groups.') }}
+                </div>
+            </div>
+        @endif
+
         @foreach ($groups as $group)
             <div class="col-sm-6 col-md-4 col-lg-2">
                 <a href="{{ route('group.show', $group) }}" class="group-item" style="background-color: {{ $group->color }};">

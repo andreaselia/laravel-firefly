@@ -10,6 +10,9 @@
     p {
         font-size: 1.5rem;
         line-height: 1.35;
-        max-width: 768px;
+        
+        @include media-breakpoint-up(lg) {
+            max-width: 768px;
+        }
     }
 }
