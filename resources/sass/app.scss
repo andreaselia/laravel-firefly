@@ -1,5 +1,5 @@
 // Fonts
-@import url('https://fonts.googleapis.com/css?family=Nunito:400,700|Rubik:400,500,700,900');
+@import url('https://fonts.googleapis.com/css?family=Nunito:400,700');
 
 // Variables
 @import 'variables';
@@ -7,21 +7,29 @@
 // Bootstrap
 @import '~bootstrap/scss/bootstrap-grid';
 
+@import 'navbar';
+@import 'hero';
+@import 'notifications';
 @import 'forms';
 @import 'buttons';
 
 html {
-    background-color: $grey-1;
+    background-color: #fff;
     font-family: 'Nunito', sans-serif;
     -ms-text-size-adjust: 100%;
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
     font-weight: 400;
     font-size: 1em;
+    color: $grey-3;
 }
 
-.navbar {
-    box-shadow: 0 2px 4px rgba(0, 0, 0, .05);
+body {
+    margin: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: $grey-4;
 }
 
 p {
@@ -30,9 +38,10 @@ p {
 
 a {
     color: inherit;
-    text-decoration: underline;
+    text-decoration: none;
+    transition: .3s all;
 
     &:hover {
-        text-decoration: none;
+        color: $grey-4;
     }
 }

@@ -14,9 +14,7 @@ class ForumController extends Controller
      */
     public function index()
     {
-        $groups = Group::all();
-        $discussions = Discussion::paginate();
-
-        return view('firefly::index')->with(compact('groups', 'discussions'));
+        return view('firefly::index')->withGroups(Group::all())
+            ->withDiscussions(Discussion::paginate());
     }
 }

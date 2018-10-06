@@ -1,33 +1,40 @@
 @extends('firefly::layouts.app')
 
+@section('hero')
+<header class="hero">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h1>Discussions</h1>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quis quos aut sequi totam ducimus nihil, vitae repellendus expedita quas nemo.</p>
+            </div>
+        </div>
+    </div>
+</header>
+@endsection
+
 @section('content')
-@if (count($groups))
-    <a href="{{ route('discussion.create') }}" class="btn btn-primary">{{ __('New Discussion') }}</a>
-@endif
+<div class="container">
+    <div class="row">
+        <div class="col">
+            @if (! count($discussions))
+                <div class="notification">
+                    {{ __('Uh oh, there are no discussions.') }}
+                </div>
+            @endif
 
-<ul class="list-group">
-    @if (! count($groups))
-        <li class="list-group-item">
-            {{ __('Uh oh, there are no groups.') }}
-        </li>
-    @endif
+            <ul class="discussion-list">
+                @foreach ($discussions as $discussion)
+                    <li class="list-item">
+                        <a href="{{ route('discussion.show', $discussion) }}"></a>
+                    </li>
+                @endforeach
+            </ul>
 
-    @foreach ($groups as $group)
-        <a href="{{ route('group.show', $group) }}" class="list-group-item" style="background-color: {{ $group->color }};">{{ $group->name }}</a>
-    @endforeach
-</ul>
-    
-<h1>{{ __('Discussions') }}</h1>
-
-<ul class="list-group list-group-flush">
-    @if (! count($discussions))
-        <li class="list-group-item">
-            {{ __('Uh oh, there are no discussions.') }}
-        </li>
-    @endif
-
-    @each('firefly::partials.discussion', $discussions, 'discussion')
-</ul>
-
-{!! $discussions->links() !!}
+            <div class="pagination">
+                {!! $discussions->links() !!}
+            </div>
+        </div>
+    </div>
+</div>
 @endsection
