@@ -13,6 +13,8 @@
 @import 'notifications';
 @import 'forms';
 @import 'buttons';
+@import 'discussions';
+@import 'groups';
 
 html {
     background-color: #fff;
@@ -54,14 +56,4 @@ a {
     &:hover {
         color: $grey-4;
     }
-}
-
-.group-item {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 5px;
-    margin-bottom: 1rem;
-    color: #fff;
-    padding: 2rem .5rem;
 }

@@ -30,6 +30,15 @@
             @endif
 
             <ul class="discussion-list">
+                <li class="list-item">
+                    <a href="#" class="list-item-title">When given the choice between being right or being kind, choose kind.</a>
+                    <div class="list-item-data">
+                        <a href="#" class="list-item-author">August Williams</a>
+                        <span class="list-item-date">42 minutes ago</span>
+                        <span class="list-item-posts">3 posts</span>
+                    </div>
+                </li>
+
                 @foreach ($discussions as $discussion)
                     <li class="list-item">
                         <a href="{{ route('discussion.show', $discussion) }}"></a>
