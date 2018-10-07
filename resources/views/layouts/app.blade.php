@@ -20,7 +20,7 @@
     <link href="{{ asset('/vendor/firefly/css/app.css') }}" rel="stylesheet">
 </head>
 <body>
-    <nav class="navbar{{ rand(0, 1) == 1 ? ' clean' : '' }}">
+    <nav class="navbar">
         <div class="container">
             <a class="navbar-brand" href="{{ url('/') }}">
                 <svg width="32" height="32" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><circle stroke="#000" stroke-width="3" cx="16" cy="16" r="14.5"/><path d="M14.554 11.033l6.79 4.514a1 1 0 0 1 .002 1.664l-6.79 4.541A1 1 0 0 1 13 20.921v-9.055a1 1 0 0 1 1.554-.833z" fill="#000"/></g></svg>
