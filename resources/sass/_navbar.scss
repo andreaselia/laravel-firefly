@@ -1,0 +1,46 @@
+.navbar {
+    display: flex;
+    align-items: center;
+    padding: 1.5rem 0 0;
+
+    > .container {
+        display: flex;
+    }
+
+    &-brand {
+        display: flex;
+        align-items: center;
+        font-weight: 700;
+        color: $licorice;
+        margin-right: 1.75rem;
+
+        svg {
+            margin-right: .75rem;
+        }
+    }
+
+    &-items {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-grow: 1;
+
+        > ul {
+            display: flex;
+            align-items: center;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+
+            > li {
+                > a {
+                    &:not(.btn) {
+                        padding: 0 15px;
+                        font-weight: 700;
+                        color: $licorice;
+                    }
+                }
+            }
+        }
+    }
+}

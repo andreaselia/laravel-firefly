@@ -2,25 +2,75 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>@yield('title', 'Firefly')</title>
+    <title>{{ config('app.name', 'Firefly') }}</title>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito:400,500,700,900" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
+
+    <!-- Styles -->
+    <link href="{{ asset('/vendor/firefly/css/app.css') }}" rel="stylesheet">
 </head>
 <body>
-    <main class="py-4">
-        <div class="container">
+    <div id="app">
+        <nav class="navbar">
+            <div class="container">
+                <a class="navbar-brand" href="{{ url('/') }}">
+                    <svg width="32" height="32" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><circle stroke="#121212" stroke-width="3" cx="16" cy="16" r="14.5"/><path d="M14.554 11.033l6.79 4.514a1 1 0 0 1 .002 1.664l-6.79 4.541A1 1 0 0 1 13 20.921v-9.055a1 1 0 0 1 1.554-.833z" fill="#121212"/></g></svg>
+
+                    {{ config('app.name', 'Firefly') }}
+                </a>
+
+                <div class="navbar-items">
+                    <ul>
+                        <li><a href="{{ route('group.index') }}">{{ __('Groups') }}</a></li>
+                        <li><a href="{{ route('forum.index') }}">{{ __('Discussions') }}</a></li>
+                    </ul>
+
+                    <ul>
+                        @guest
+                            <li><a href="{{ route('login') }}">{{ __('Log in') }}</a></li>
+
+                            @if (Route::has('register'))
+                                <li><a href="{{ route('register') }}" class="btn btn-green">{{ __('Sign up') }}</a></li>
+                            @endif
+                        @else
+                            <li>
+                                <a href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    {{ Auth::user()->name }} <span class="caret"></span>
+                                </a>
+
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                    </a>
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        @csrf
+                                    </form>
+                                </div>
+                            </li>
+                        @endguest
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        @yield('hero')
+
+        <main>
             @yield('content')
-        </div>
-    </main>
+        </main>
+
+        @yield('modals')
+    </div>
+
+    <!-- Scripts -->
+    <script src="{{ asset('/vendor/firefly/js/app.js') }}" defer></script>
 </body>
 </html>

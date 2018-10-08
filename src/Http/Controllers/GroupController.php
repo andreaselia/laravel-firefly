@@ -8,6 +8,16 @@ use Illuminate\Http\Request;
 class GroupController extends Controller
 {
     /**
+     * Show the groups index.
+     *
+     * @return \Illuminate\View\View
+     */
+    public function index()
+    {
+        return view('firefly::groups.index')->withGroups(Group::paginate());
+    }
+
+    /**
      * Show the form for creating a new group.
      *
      * @return \Illuminate\View\View

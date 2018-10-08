@@ -2,6 +2,9 @@
 
 namespace Firefly\Http\Controllers;
 
+use Firefly\Group;
+use Firefly\Discussion;
+
 class ForumController extends Controller
 {
     /**
@@ -11,6 +14,7 @@ class ForumController extends Controller
      */
     public function index()
     {
-        return view('firefly::index');
+        return view('firefly::index')->withGroups(Group::all())
+            ->withDiscussions(Discussion::paginate());
     }
 }

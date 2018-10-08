@@ -1,0 +1,30 @@
+.notification {
+    background-color: $grey-1;
+    border-radius: 5px;
+    font-size: .85em;
+    line-height: 1.45;
+    padding: .5rem .75rem;
+    text-align: center;
+    color: $grey-5;
+    margin-bottom: 2rem;
+}
+
+.notification-red {
+    background-color: lighten($red, 40%);
+    color: darken($red, 20%);
+}
+
+.notification-green {
+    background-color: lighten($green, 40%);
+    color: darken($green, 20%);
+}
+
+.notification-blue {
+    background-color: lighten($blue, 40%);
+    color: darken($blue, 20%);
+}
+
+.notification-yellow {
+    background-color: lighten($yellow, 20%);
+    color: darken($yellow, 35%);
+}

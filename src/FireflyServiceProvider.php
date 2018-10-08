@@ -30,6 +30,7 @@ class FireflyServiceProvider extends ServiceProvider
         $this->defineAssetPublishing();
         $this->registerRoutes();
         $this->registerPolicies();
+        $this->loadViews();
     }
 
     /**
@@ -50,6 +51,16 @@ class FireflyServiceProvider extends ServiceProvider
     protected function loadMigrations()
     {
         $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
+    }
+
+    /**
+     * Load the package views.
+     *
+     * @return void
+     */
+    protected function loadViews()
+    {
+        $this->loadViewsFrom(__DIR__.'/../resources/views', 'firefly');
     }
 
     /**
@@ -117,6 +128,10 @@ class FireflyServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/../database/migrations/' => database_path('migrations'),
         ], 'migrations');
+
+        $this->publishes([
+            __DIR__.'/../public/' => public_path('vendor/firefly'),
+        ], 'public');
     }
 
     /**

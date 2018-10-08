@@ -1,0 +1,21 @@
+.hero {
+    background-color: $grey-1;;
+    padding: 3.75rem 0;
+    margin: 1.5rem 0 2rem;
+
+    h1 {
+        font-size: 2.25rem;
+        line-height: 1.15;
+        color: $licorice;
+        margin: 0;
+    }
+
+    p {
+        font-size: 1.5rem;
+        line-height: 1.35;
+        
+        @include media-breakpoint-up(lg) {
+            max-width: 768px;
+        }
+    }
+}
