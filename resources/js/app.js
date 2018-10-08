@@ -9,9 +9,8 @@ const app = new Vue({
 
     methods: {
         toggleModal: function (toggleModal) {
-            alert(toggleModal);
             try {
-                $(`#${toggleModal}`).toggle();
+                $('#' + toggleModal + 'Modal').toggle();
             } catch (e) {}
         }
     }

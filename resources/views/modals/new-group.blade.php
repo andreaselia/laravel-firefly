@@ -16,7 +16,7 @@
                     <input type="color" name="color" id="color" value="{{ old('color') }}" class="form-control">
                 </div>
 
-                <button type="submit" class="btn btn-primary">
+                <button type="submit" class="btn btn-green">
                     {{ __('Submit') }}
                 </button>
             </form>

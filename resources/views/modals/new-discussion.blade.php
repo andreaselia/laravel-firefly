@@ -1,4 +1,4 @@
-<div class="modal" id="newDiscussionModal">
+<div class="modal modal-large" id="newDiscussionModal">
     <div class="modal-inner">
         <div class="modal-title">
             {{ __('New Discussion') }}
@@ -17,7 +17,7 @@
                         <textarea name="content" id="content" class="form-control" rows="5">{{ old('content') }}</textarea>
                     </div>
 
-                    <button type="submit" class="btn btn-primary">
+                    <button type="submit" class="btn btn-green">
                         {{ __('Submit') }}
                     </button>
                 </form>
