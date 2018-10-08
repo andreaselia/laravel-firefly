@@ -5,21 +5,29 @@
         </div>
 
         <div class="modal-body">
-            <form role="form">
-                <div class="form-group">
-                    <label for="title">{{ __('Name') }}</label>
-                    <input type="text" name="name" id="name" value="{{ old('name') }}" class="form-control">
-                </div>
+            <new-group inline-template>
+                <form role="form" @submit.prevent="submit">
+                    <div class="form-group">
+                        <label for="title">{{ __('Name') }}</label>
+                        <input type="text" name="name" id="name" value="{{ old('name') }}" class="form-control">
+                    </div>
 
-                <div class="form-group">
-                    <label for="title">{{ __('Color') }}</label>
-                    <input type="color" name="color" id="color" value="{{ old('color') }}" class="form-control">
-                </div>
+                    <div class="form-group">
+                        <label for="title">{{ __('Color') }}</label>
+                        <input type="color" name="color" id="color" value="{{ old('color') }}" class="form-control">
+                    </div>
 
-                <button type="submit" class="btn btn-green">
-                    {{ __('Submit') }}
-                </button>
-            </form>
+                    <div class="d-flex justify-content-end">
+                        <button type="button" class="btn btn-grey mr-2" @click.prevent="toggleModal('newDiscussion')">
+                            {{ __('Cancel') }}
+                        </button>
+
+                        <button type="submit" class="btn btn-green">
+                            {{ __('Submit') }}
+                        </button>
+                    </div>
+                </form>
+            </new-group>
         </div>
     </div>
 </div>

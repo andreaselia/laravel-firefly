@@ -1,5 +1,12 @@
 .form-group {
     margin-bottom: 1rem;
+
+    > label {
+        margin-bottom: 3px;
+        display: block;
+        font-weight: 600;
+        color: $grey-4;
+    }
 }
 
 .form-control {
@@ -7,15 +14,20 @@
     border: 1px solid $grey-2;
     border-radius: 5px;
     width: 100%;
-    padding: 20px 15px;
+    padding: 0 15px;
     line-height: 1.2;
     color: $grey-4;
     transition: .3s all;
+    height: 40px;
 
     &:focus {
         background-color: #fff;
         border-color: $primary;
         box-shadow: 0 0 0 3px rgba($primary, .25);
         outline: none;
+    }
+
+    &[type="color"] {
+        padding: 3px 5px;
     }
 }
