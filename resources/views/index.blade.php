@@ -9,7 +9,7 @@
                     <h1>Discussions</h1>
 
                     {{-- TODO: auth/policy check --}}
-                    <a href="#" class="btn btn-yellow">New Discussion</a>
+                    <a href="#" class="btn btn-yellow" @click.prevent="toggleModal('newDiscussion')">New Discussion</a>
                 </div>
 
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quis quos aut sequi totam ducimus nihil, vitae repellendus expedita quas nemo.</p>
@@ -52,4 +52,8 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('modals')
+@include('firefly::modals.new-discussion')
 @endsection
