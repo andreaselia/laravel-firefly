@@ -41,7 +41,7 @@
                             @endif
                         @else
                             <li>
-                                <strong class="mr-3">{{ Auth::user()->name }}</strong>
+                                <strong class="mr-4">{{ Auth::user()->name }}</strong>
                             </li>
                             <li>
                                 <a class="btn btn-red" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">

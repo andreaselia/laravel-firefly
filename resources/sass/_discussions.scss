@@ -4,3 +4,22 @@ ul {
         padding: 0;
     }
 }
+
+.list-item {
+    margin-bottom: 25px;
+
+    > a {
+        font-size: 1.25em;
+        font-weight: 700;
+        line-height: 1.6;
+        color: $licorice;
+    }
+
+    &-data {
+        line-height: 1.8;
+    }
+
+    &-date {
+        margin: 0 15px;
+    }
+}

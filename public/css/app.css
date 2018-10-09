@@ -4346,6 +4346,25 @@ ul.discussion-list {
   padding: 0;
 }
 
+.list-item {
+  margin-bottom: 25px;
+}
+
+.list-item > a {
+  font-size: 1.25em;
+  font-weight: 700;
+  line-height: 1.6;
+  color: #121212;
+}
+
+.list-item-data {
+  line-height: 1.8;
+}
+
+.list-item-date {
+  margin: 0 15px;
+}
+
 .group-item {
   display: -webkit-box;
   display: -ms-flexbox;
