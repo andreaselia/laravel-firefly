@@ -131,7 +131,7 @@ class FireflyServiceProvider extends ServiceProvider
 
         $this->publishes([
             __DIR__.'/../public/' => public_path('vendor/firefly'),
-        ], 'firefly-assets
+        ], 'firefly-assets');
     }
 
     /**
