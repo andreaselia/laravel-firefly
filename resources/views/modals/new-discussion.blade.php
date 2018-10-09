@@ -5,7 +5,7 @@
         </div>
 
         <div class="modal-body">
-            <new-discussion inline-template>
+            <new-discussion :group="{{ json_encode($group) }}" inline-template>
                 <form role="form" @submit.prevent="submit">
                     <div class="form-group">
                         <label for="title">{{ __('Title') }}</label>

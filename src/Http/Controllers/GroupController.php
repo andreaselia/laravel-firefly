@@ -45,11 +45,13 @@ class GroupController extends Controller
     /**
      * Show the discussions for the specified group.
      *
+     * @param \Firefly\Group $group
      * @return \Illuminate\View\View
      */
     public function show(Group $group)
     {
-        //
+        return view('firefly::groups.show')->withGroup($group)
+            ->withDiscussions($group->discussions()->paginate());
     }
 
     /**
