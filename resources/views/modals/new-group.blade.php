@@ -9,12 +9,12 @@
                 <form role="form" @submit.prevent="submit">
                     <div class="form-group">
                         <label for="title">{{ __('Name') }}</label>
-                        <input type="text" name="name" id="name" value="{{ old('name') }}" class="form-control">
+                        <input type="text" v-model="name" id="name" value="{{ old('name') }}" class="form-control">
                     </div>
 
                     <div class="form-group">
                         <label for="title">{{ __('Color') }}</label>
-                        <input type="color" name="color" id="color" value="{{ old('color') }}" class="form-control">
+                        <input type="text" v-model="color" id="color" value="{{ old('color') }}" class="form-control">
                     </div>
 
                     <div class="d-flex justify-content-end">

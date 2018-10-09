@@ -4276,7 +4276,6 @@ html {
   color: #666666;
   -webkit-transition: .3s all;
   transition: .3s all;
-  height: 40px;
 }
 
 .form-control:focus {
@@ -4287,8 +4286,8 @@ html {
   outline: none;
 }
 
-.form-control[type="color"] {
-  padding: 3px 5px;
+input.form-control {
+  height: 40px;
 }
 
 .btn {

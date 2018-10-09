@@ -6,7 +6,7 @@
         <div class="row">
             <div class="col">
                 <div class="d-flex justify-content-between align-items-center">
-                    <h1>Discussions</h1>
+                    <h1>{{ $group->name }}</h1>
 
                     {{-- TODO: auth/policy check --}}
                     <a href="#" class="btn btn-yellow" @click.prevent="toggleModal('newDiscussion')">New Discussion</a>
