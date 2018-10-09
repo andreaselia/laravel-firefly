@@ -123,6 +123,7 @@ window.Vue = __webpack_require__(4);
 Vue.component('new-group', {
     data: function data() {
         return {
+            group_id: '',
             name: '',
             color: ''
         };
@@ -136,6 +137,7 @@ Vue.component('new-group', {
 
         submit: function submit(e) {
             axios.post('/forum/groups', {
+                group_id: this.group_id,
                 name: this.name,
                 color: this.color
             }).then(function (res) {
