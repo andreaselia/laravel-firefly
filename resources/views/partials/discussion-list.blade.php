@@ -7,7 +7,7 @@
 <ul class="discussion-list">
     @foreach ($discussions as $discussion)
         <li class="list-item">
-            <a href="{{ route('discussion.show', $discussion) }}" class="list-item-title">{{ $discussion->title }}</a>
+            <a href="{{ route('discussion.show', [$discussion->id, $discussion->slug]) }}" class="list-item-title">{{ $discussion->title }}</a>
 
             <div class="list-item-data">
                 <a href="#" class="list-item-author">{{ $discussion->user->name }}</a>

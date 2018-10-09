@@ -2,10 +2,12 @@
 
 Route::get('/', 'ForumController@index')->name('forum.index');
 
-// Groups...
-Route::get('groups', 'GroupController@index')->name('group.index');
-Route::get('{group}', 'GroupController@show')->name('group.show');
-Route::post('groups', 'GroupController@store')->name('group.store');
+// Posts...
+Route::post('{discussion}-{slug}', 'PostController@store')->name('post.store');
+Route::put('{discussion}-{slug}/{post}', 'PostController@update')->name('post.update');
+Route::delete('{discussion}-{slug}/{post}', 'PostController@delete')->name('post.delete');
+Route::patch('posts/{post}/hide', 'PostController@hide')->name('post.hide');
+Route::patch('posts/{post}/unhide', 'PostController@unhide')->name('post.unhide');
 
 // Discussions...
 Route::get('{discussion}-{slug}', 'DiscussionController@show')->name('discussion.show');
@@ -20,9 +22,7 @@ Route::delete('{discussion}-{slug}', 'DiscussionController@delete')->name('discu
 Route::patch('discussions/{discussion}/hide', 'DiscussionController@hide')->name('discussion.hide');
 Route::patch('discussions/{discussion}/unhide', 'DiscussionController@unhide')->name('discussion.unhide');
 
-// Posts...
-Route::post('{discussion}-{slug}', 'PostController@store')->name('post.store');
-Route::put('{discussion}-{slug}/{post}', 'PostController@update')->name('post.update');
-Route::delete('{discussion}-{slug}/{post}', 'PostController@delete')->name('post.delete');
-Route::patch('posts/{post}/hide', 'PostController@hide')->name('post.hide');
-Route::patch('posts/{post}/unhide', 'PostController@unhide')->name('post.unhide');
+// Groups...
+Route::get('groups', 'GroupController@index')->name('group.index');
+Route::get('{group}', 'GroupController@show')->name('group.show');
+Route::post('groups', 'GroupController@store')->name('group.store');
