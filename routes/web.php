@@ -5,6 +5,7 @@ Route::get('/', 'ForumController@index')->name('forum.index');
 // Groups...
 Route::get('groups', 'GroupController@index')->name('group.index');
 Route::get('{group}', 'GroupController@show')->name('group.show');
+Route::post('groups', 'GroupController@store')->name('group.store');
 
 // Discussions...
 Route::get('{discussion}-{slug}', 'DiscussionController@show')->name('discussion.show');

@@ -3,6 +3,8 @@
 namespace Firefly\Http\Controllers;
 
 use Firefly\Group;
+use Firefly\Http\Requests\StoreGroupRequest;
+use Firefly\Http\Requests\UpdateGroupRequest;
 use Illuminate\Http\Request;
 
 class GroupController extends Controller
@@ -30,10 +32,10 @@ class GroupController extends Controller
     /**
      * Store the new group.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param \Firefly\Http\Requests\StoreGroupRequest $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
+    public function store(StoreGroupRequest $request)
     {
         Group::create($request->all());
 
@@ -53,11 +55,11 @@ class GroupController extends Controller
     /**
      * Update the specified group.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param \Firefly\Http\Requests\UpdateGroupRequest $request
      * @param \Firefly\Group $group
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, Group $group)
+    public function update(UpdateGroupRequest $request, Group $group)
     {
         $group->update($request->all());
 

@@ -12,6 +12,6 @@ class Discussion extends Model
      * @var array
      */
     protected $fillable = [
-        'title', 'slug', 'user_id'
+        'title', 'slug', 'user_id',
     ];
 }
