@@ -33,11 +33,19 @@ class DiscussionController extends Controller
 
         $user = $request->user();
 
+        // Make the discussion under the user and save it to the group
         $discussion = $user->discussions()->make(
-            $request->all()
+            $request->only('title')
         );
 
         $group->discussions()->save($discussion);
+
+        // Make the post under the user and save it to the discussion
+        $post = $user->posts()->make(
+            $request->only('content')
+        );
+
+        $discussion->posts()->save($post);
 
         return redirect()->route('discussion.show', [$discussion->id, $discussion->slug]);
     }

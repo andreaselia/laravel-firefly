@@ -123,15 +123,15 @@ class FireflyServiceProvider extends ServiceProvider
     {
         $this->publishes([
             __DIR__.'/../config/firefly.php' => config_path('firefly.php'),
-        ], 'config');
+        ], 'firefly-config');
 
         $this->publishes([
             __DIR__.'/../database/migrations/' => database_path('migrations'),
-        ], 'migrations');
+        ], 'firefly-migrations');
 
         $this->publishes([
             __DIR__.'/../public/' => public_path('vendor/firefly'),
-        ], 'public');
+        ], 'firefly-assets');
     }
 
     /**

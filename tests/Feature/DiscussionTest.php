@@ -17,6 +17,7 @@ class DiscussionTest extends TestCase
         $crawler = $this->actingAs($this->getUser())
             ->post('forum/1/discussion', [
                 'title' => 'Foo Bar',
+                'content' => 'Lorem Ipsum',
             ]);
 
         $discussions = Discussion::all();
