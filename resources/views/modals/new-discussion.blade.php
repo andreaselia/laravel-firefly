@@ -6,20 +6,26 @@
 
         <div class="modal-body">
             <new-discussion inline-template>
-                <form role="form">
+                <form role="form" @submit.prevent="submit">
                     <div class="form-group">
                         <label for="title">{{ __('Title') }}</label>
-                        <input type="text" name="title" id="title" value="{{ old('title') }}" class="form-control">
+                        <input type="text" v-model="title" id="title" value="{{ old('title') }}" class="form-control">
                     </div>
 
                     <div class="form-group">
                         <label for="content">{{ __('Content') }}</label>
-                        <textarea name="content" id="content" class="form-control" rows="5">{{ old('content') }}</textarea>
+                        <textarea v-model="content" id="content" class="form-control" rows="5">{{ old('content') }}</textarea>
                     </div>
 
-                    <button type="submit" class="btn btn-green">
-                        {{ __('Submit') }}
-                    </button>
+                    <div class="d-flex justify-content-end">
+                        <button type="button" class="btn btn-grey mr-2" @click.prevent="toggleModal('newDiscussion')">
+                            {{ __('Cancel') }}
+                        </button>
+
+                        <button type="submit" class="btn btn-green">
+                            {{ __('Submit') }}
+                        </button>
+                    </div>
                 </form>
             </new-discussion>
         </div>
