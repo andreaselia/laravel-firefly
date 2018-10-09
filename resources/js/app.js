@@ -17,7 +17,6 @@ window.Vue = require('vue');
 Vue.component('new-group', {
     data() {
         return {
-            group_id: '',
             name: '',
             color: ''
         }
@@ -30,7 +29,6 @@ Vue.component('new-group', {
 
         submit: function (e) {
             axios.post('/forum/groups', {
-                group_id: this.group_id,
                 name: this.name,
                 color: this.color
             }).then(res => {
@@ -41,6 +39,8 @@ Vue.component('new-group', {
 });
 
 Vue.component('new-discussion', {
+    props: ['group'],
+
     data() {
         return {
             title: '',
@@ -54,7 +54,8 @@ Vue.component('new-discussion', {
         },
 
         submit: function (e) {
-            axios.post('/forum/discussions', {
+            axios.post('/forum/' + this.group.id + '/discussion', {
+                group_id: this.group.id,
                 title: this.title,
                 content: this.content
             });
