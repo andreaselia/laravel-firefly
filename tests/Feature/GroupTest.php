@@ -30,4 +30,22 @@ class GroupTest extends TestCase
         $crawler->assertRedirect();
         $crawler->assertLocation('forum/' . $group->uri);
     }
+
+    public function test_discussion_was_updated()
+    {
+        $group = $this->getGroup();
+
+        $crawler = $this->actingAs($this->getUser())
+            ->putJson('forum/groups/' . $group->slug, [
+                'name' => 'Bar Foo',
+            ]);
+
+        $group->refresh();
+
+        $this->assertEquals('Bar Foo', $group->name);
+        $this->assertEquals('bar-foo', $group->slug);
+
+        $crawler->assertRedirect();
+        $crawler->assertLocation('forum/' . $group->slug);
+    }
 }
