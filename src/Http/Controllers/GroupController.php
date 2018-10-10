@@ -39,7 +39,7 @@ class GroupController extends Controller
     {
         Group::create($request->all());
 
-        return redirect()->back();
+        return redirect()->route('firefly.forum.index');
     }
 
     /**
