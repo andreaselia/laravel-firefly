@@ -2,9 +2,7 @@
 
 namespace Firefly\Test\Feature;
 
-use Carbon\Carbon;
 use Firefly\Test\Fixtures\Group;
-use Firefly\Test\Fixtures\User;
 use Firefly\Test\TestCase;
 
 class GroupTest extends TestCase
