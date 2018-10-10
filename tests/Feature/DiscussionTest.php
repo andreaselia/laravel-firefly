@@ -4,7 +4,6 @@ namespace Firefly\Test\Feature;
 
 use Carbon\Carbon;
 use Firefly\Test\Fixtures\Discussion;
-use Firefly\Test\Fixtures\User;
 use Firefly\Test\TestCase;
 
 class DiscussionTest extends TestCase
