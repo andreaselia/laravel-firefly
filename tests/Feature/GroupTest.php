@@ -36,7 +36,7 @@ class GroupTest extends TestCase
         $group = $this->getGroup();
 
         $crawler = $this->actingAs($this->getUser())
-            ->putJson('forum/groups/' . $group->slug, [
+            ->put('forum/' . $group->slug, [
                 'name' => 'Bar Foo',
             ]);
 
