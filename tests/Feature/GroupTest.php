@@ -36,7 +36,7 @@ class GroupTest extends TestCase
         $group = $this->getGroup();
 
         $crawler = $this->actingAs($this->getUser())
-            ->put('forum/' . $group->slug, [
+            ->put('forum/groups/' . $group->slug, [
                 'name' => 'Bar Foo',
             ]);
 
