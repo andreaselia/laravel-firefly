@@ -48,4 +48,20 @@ class GroupTest extends TestCase
         $crawler->assertRedirect();
         $crawler->assertLocation('forum/' . $group->slug);
     }
+
+    public function test_group_was_soft_deleted()
+    {
+        $group = $this->getGroup();
+
+        $crawler = $this->actingAs($this->getUser())
+            ->delete('forum/groups/' . $group->slug);
+
+        $group->refresh();
+
+        $this->assertFalse($group->exists());
+        $this->assertNotNull($group->deleted_at);
+
+        $crawler->assertRedirect();
+        $crawler->assertLocation('forum');
+    }
 }
