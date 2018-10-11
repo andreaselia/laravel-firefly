@@ -21,6 +21,7 @@ Route::name(config('firefly.web.name'))->group(function() {
     Route::get('{group}', 'GroupController@show')->name('group.show');
     Route::post('groups', 'GroupController@store')->name('group.store');
     Route::put('groups/{group}', 'GroupController@update')->name('group.update');
+    Route::delete('groups/{group}', 'GroupController@delete')->name('group.delete');
 
     // Posts...
     Route::post('{discussion}-{slug}', 'PostController@store')->name('post.store');
