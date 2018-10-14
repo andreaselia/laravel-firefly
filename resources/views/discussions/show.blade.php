@@ -14,7 +14,7 @@
 
             {{-- TODO: move to modal or keep inline? --}}
             <div class="mt-5">
-                <form action="{{ route('post.store', [$discussion->id, $discussion->slug]) }}" method="POST">
+                <form action="{{ route('firefly.post.store', [$discussion->id, $discussion->slug]) }}" method="POST">
                     <div class="form-group">
                         <label for="content">{{ __('Content') }}</label>
                         <textarea name="content" id="content" class="form-control" rows="3">{{ old('content') }}</textarea>
