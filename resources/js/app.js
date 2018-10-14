@@ -28,11 +28,13 @@ Vue.component('new-group', {
         },
 
         submit: function (e) {
+            var self = this;
+
             axios.post('/forum/groups', {
                 name: this.name,
                 color: this.color
             }).then(res => {
-                this.$parent.$options.methods.toggleModal(toggleModal);
+                self.toggleModal('newGroup');
             });
         }
     }
@@ -54,12 +56,14 @@ Vue.component('new-discussion', {
         },
 
         submit: function (e) {
+            var self = this;
+
             axios.post('/forum/' + this.group.id + '/discussion', {
                 group_id: this.group.id,
                 title: this.title,
                 content: this.content
             }).then(res => {
-                this.$parent.$options.methods.toggleModal(toggleModal);
+                self.toggleModal('newDiscussion');
             });
         }
     }
