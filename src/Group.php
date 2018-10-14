@@ -3,12 +3,23 @@
 namespace Firefly;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 
 class Group extends Model
 {
-    use HasSlug;
+    use HasSlug, SoftDeletes;
+
+    /**
+     * Get the route key for the model.
+     *
+     * @return string
+     */
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
 
     /**
      * The attributes that are mass assignable.
@@ -17,6 +28,15 @@ class Group extends Model
      */
     protected $fillable = [
         'name', 'color',
+    ];
+
+    /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = [
+        'deleted_at',
     ];
 
     /**

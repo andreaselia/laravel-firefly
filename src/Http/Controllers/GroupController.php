@@ -39,7 +39,7 @@ class GroupController extends Controller
     {
         Group::create($request->all());
 
-        return redirect()->back();
+        return redirect()->route('firefly.forum.index');
     }
 
     /**
@@ -63,9 +63,11 @@ class GroupController extends Controller
      */
     public function update(UpdateGroupRequest $request, Group $group)
     {
-        $group->update($request->all());
+        $this->authorize('update', $group);
 
-        return redirect()->back();
+        $group->update($request->only('name'));
+
+        return redirect()->route('firefly.group.show', $group->slug);
     }
 
     /**
@@ -79,6 +81,6 @@ class GroupController extends Controller
     {
         $group->delete();
 
-        return redirect()->back();
+        return redirect()->route('firefly.forum.index');
     }
 }

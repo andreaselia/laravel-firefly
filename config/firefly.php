@@ -56,6 +56,7 @@ return [
     ],
 
     'web' => [
+        'name'       => 'firefly.',
         'enabled'    => true,
         'prefix'     => 'forum',
         'namespace'  => '\Firefly\Http\Controllers',

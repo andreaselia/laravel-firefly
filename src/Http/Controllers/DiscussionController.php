@@ -47,7 +47,7 @@ class DiscussionController extends Controller
 
         $discussion->posts()->save($post);
 
-        return redirect()->route('discussion.show', [$discussion->id, $discussion->slug]);
+        return redirect()->route('firefly.discussion.show', [$discussion->id, $discussion->slug]);
     }
 
     /**
@@ -74,7 +74,7 @@ class DiscussionController extends Controller
 
         $discussion->update($request->all());
 
-        return redirect()->route('discussion.show', [$discussion->id, $discussion->slug]);
+        return redirect()->route('firefly.discussion.show', [$discussion->id, $discussion->slug]);
     }
 
     /**
@@ -89,7 +89,7 @@ class DiscussionController extends Controller
 
         $discussion->delete();
 
-        return redirect()->route('forum.index');
+        return redirect()->route('firefly.forum.index');
     }
 
     /**
@@ -105,7 +105,7 @@ class DiscussionController extends Controller
 
         $discussion->lock();
 
-        return redirect()->route('discussion.show', [$discussion->id, $discussion->slug]);
+        return redirect()->route('firefly.discussion.show', [$discussion->id, $discussion->slug]);
     }
 
     /**
@@ -121,7 +121,7 @@ class DiscussionController extends Controller
 
         $discussion->unlock();
 
-        return redirect()->route('discussion.show', [$discussion->id, $discussion->slug]);
+        return redirect()->route('firefly.discussion.show', [$discussion->id, $discussion->slug]);
     }
 
     /**
@@ -137,7 +137,7 @@ class DiscussionController extends Controller
 
         $discussion->stick();
 
-        return redirect()->route('discussion.show', [$discussion->id, $discussion->slug]);
+        return redirect()->route('firefly.discussion.show', [$discussion->id, $discussion->slug]);
     }
 
     /**
@@ -153,7 +153,7 @@ class DiscussionController extends Controller
 
         $discussion->unstick();
 
-        return redirect()->route('discussion.show', [$discussion->id, $discussion->slug]);
+        return redirect()->route('firefly.discussion.show', [$discussion->id, $discussion->slug]);
     }
 
     /**
