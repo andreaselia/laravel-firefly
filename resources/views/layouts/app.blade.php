@@ -28,8 +28,8 @@
 
                 <div class="navbar-items">
                     <ul>
-                        <li><a href="{{ route('group.index') }}">{{ __('Groups') }}</a></li>
-                        <li><a href="{{ route('forum.index') }}">{{ __('Discussions') }}</a></li>
+                        <li><a href="{{ route('firefly.group.index') }}">{{ __('Groups') }}</a></li>
+                        <li><a href="{{ route('firefly.forum.index') }}">{{ __('Discussions') }}</a></li>
                     </ul>
 
                     <ul>
