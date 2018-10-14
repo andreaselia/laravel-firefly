@@ -1045,7 +1045,7 @@ Vue.component('new-discussion', {
 
             var self = this;
 
-            axios.post('/forum/' + this.group.id + '/discussion', {
+            axios.post('/forum/' + this.group.slug + '/discussion', {
                 group_id: this.group.id,
                 title: this.title,
                 content: this.content
@@ -1054,6 +1054,29 @@ Vue.component('new-discussion', {
                 _this2.content = '';
 
                 self.toggleModal('newDiscussion');
+            });
+        }
+    }
+});
+
+Vue.component('new-post', {
+    props: ['discussion'],
+
+    data: function data() {
+        return {
+            content: ''
+        };
+    },
+
+
+    methods: {
+        submit: function submit(e) {
+            var _this3 = this;
+
+            axios.post('/forum/' + this.discussion.id + '-' + this.discussion.slug, {
+                content: this.content
+            }).then(function (res) {
+                _this3.content = '';
             });
         }
     }

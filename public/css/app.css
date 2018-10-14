@@ -4290,6 +4290,10 @@ input.form-control {
   height: 40px;
 }
 
+textarea.form-control {
+  padding: 15px;
+}
+
 .btn {
   display: inline-block;
   vertical-align: middle;

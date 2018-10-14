@@ -12,16 +12,17 @@
                 </div>
             @endforeach
 
-            {{-- TODO: move to modal or keep inline? --}}
             <div class="mt-5">
-                <form action="{{ route('firefly.post.store', [$discussion->id, $discussion->slug]) }}" method="POST">
-                    <div class="form-group">
-                        <label for="content">{{ __('Content') }}</label>
-                        <textarea name="content" id="content" class="form-control" rows="3">{{ old('content') }}</textarea>
-                    </div>
+                <new-post :discussion="{{ $discussion }}"  inline-template>
+                    <form role="form" @submit.prevent="submit">
+                        <div class="form-group">
+                            <label for="content">{{ __('Content') }}</label>
+                            <textarea v-model="content" id="content" class="form-control" rows="3">{{ old('content') }}</textarea>
+                        </div>
 
-                    <button type="submit" class="btn btn-blue">{{ __('Submit Reply') }}</button>
-                </form>
+                        <button type="submit" class="btn btn-blue">{{ __('Submit Reply') }}</button>
+                    </form>
+                </new-post>
             </div>
         </div>
     </div>
