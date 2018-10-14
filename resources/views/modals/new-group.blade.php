@@ -18,7 +18,7 @@
                     </div>
 
                     <div class="d-flex justify-content-end">
-                        <button type="button" class="btn btn-grey mr-2" @click.prevent="toggleModal('newDiscussion')">
+                        <button type="button" class="btn btn-grey mr-2" @click.prevent="toggleModal('newGroup')">
                             {{ __('Cancel') }}
                         </button>
 
