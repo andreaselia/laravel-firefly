@@ -34,6 +34,9 @@ Vue.component('new-group', {
                 name: this.name,
                 color: this.color
             }).then(res => {
+                this.name = '';
+                this.color = '';
+
                 self.toggleModal('newGroup');
             });
         }
@@ -63,6 +66,9 @@ Vue.component('new-discussion', {
                 title: this.title,
                 content: this.content
             }).then(res => {
+                this.title = '';
+                this.content = '';
+
                 self.toggleModal('newDiscussion');
             });
         }

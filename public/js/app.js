@@ -1007,12 +1007,17 @@ Vue.component('new-group', {
         },
 
         submit: function submit(e) {
+            var _this = this;
+
             var self = this;
 
             axios.post('/forum/groups', {
                 name: this.name,
                 color: this.color
             }).then(function (res) {
+                _this.name = '';
+                _this.color = '';
+
                 self.toggleModal('newGroup');
             });
         }
@@ -1036,6 +1041,8 @@ Vue.component('new-discussion', {
         },
 
         submit: function submit(e) {
+            var _this2 = this;
+
             var self = this;
 
             axios.post('/forum/' + this.group.id + '/discussion', {
@@ -1043,6 +1050,9 @@ Vue.component('new-discussion', {
                 title: this.title,
                 content: this.content
             }).then(function (res) {
+                _this2.title = '';
+                _this2.content = '';
+
                 self.toggleModal('newDiscussion');
             });
         }
