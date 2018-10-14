@@ -32,7 +32,7 @@ Vue.component('new-group', {
                 name: this.name,
                 color: this.color
             }).then(res => {
-                console.log(res);
+                this.$parent.$options.methods.toggleModal(toggleModal);
             });
         }
     }
@@ -58,6 +58,8 @@ Vue.component('new-discussion', {
                 group_id: this.group.id,
                 title: this.title,
                 content: this.content
+            }).then(res => {
+                this.$parent.$options.methods.toggleModal(toggleModal);
             });
         }
     }

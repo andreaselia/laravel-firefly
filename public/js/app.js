@@ -1002,16 +1002,28 @@ Vue.component('new-group', {
 
 
     methods: {
-        toggleModal: function toggleModal(_toggleModal) {
-            this.$parent.$options.methods.toggleModal(_toggleModal);
-        },
+        toggleModal: function (_toggleModal) {
+            function toggleModal(_x) {
+                return _toggleModal.apply(this, arguments);
+            }
+
+            toggleModal.toString = function () {
+                return _toggleModal.toString();
+            };
+
+            return toggleModal;
+        }(function (toggleModal) {
+            this.$parent.$options.methods.toggleModal(toggleModal);
+        }),
 
         submit: function submit(e) {
+            var _this = this;
+
             axios.post('/forum/groups', {
                 name: this.name,
                 color: this.color
             }).then(function (res) {
-                console.log(res);
+                _this.$parent.$options.methods.toggleModal(toggleModal);
             });
         }
     }
@@ -1029,15 +1041,29 @@ Vue.component('new-discussion', {
 
 
     methods: {
-        toggleModal: function toggleModal(_toggleModal2) {
-            this.$parent.$options.methods.toggleModal(_toggleModal2);
-        },
+        toggleModal: function (_toggleModal2) {
+            function toggleModal(_x2) {
+                return _toggleModal2.apply(this, arguments);
+            }
+
+            toggleModal.toString = function () {
+                return _toggleModal2.toString();
+            };
+
+            return toggleModal;
+        }(function (toggleModal) {
+            this.$parent.$options.methods.toggleModal(toggleModal);
+        }),
 
         submit: function submit(e) {
+            var _this2 = this;
+
             axios.post('/forum/' + this.group.id + '/discussion', {
                 group_id: this.group.id,
                 title: this.title,
                 content: this.content
+            }).then(function (res) {
+                _this2.$parent.$options.methods.toggleModal(toggleModal);
             });
         }
     }
@@ -1047,17 +1073,37 @@ var app = new Vue({
     el: '#app',
 
     methods: _defineProperty({
-        toggleModal: function toggleModal(_toggleModal3) {
+        toggleModal: function (_toggleModal3) {
+            function toggleModal(_x3) {
+                return _toggleModal3.apply(this, arguments);
+            }
+
+            toggleModal.toString = function () {
+                return _toggleModal3.toString();
+            };
+
+            return toggleModal;
+        }(function (toggleModal) {
             try {
-                $('#' + _toggleModal3 + 'Modal').toggle();
+                $('#' + toggleModal + 'Modal').toggle();
             } catch (e) {}
+        })
+
+    }, 'toggleModal', function (_toggleModal4) {
+        function toggleModal(_x4) {
+            return _toggleModal4.apply(this, arguments);
         }
 
-    }, 'toggleModal', function toggleModal(_toggleModal4) {
+        toggleModal.toString = function () {
+            return _toggleModal4.toString();
+        };
+
+        return toggleModal;
+    }(function (toggleModal) {
         try {
-            $('#' + _toggleModal4 + 'Modal').toggle();
+            $('#' + toggleModal + 'Modal').toggle();
         } catch (e) {}
-    })
+    }))
 });
 
 /***/ }),
