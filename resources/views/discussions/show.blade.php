@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-8">
             @foreach ($posts as $post)
-                <div class="list-group-item list-group-item-action">
+                <div class="list-group-item list-group-item-action mb-4">
                     <p>{{ $post->user->name }} {{ $post->created_at->diffForHumans() }}</p>
 
                     <p>{{ $post->content }}</p>
@@ -20,7 +20,7 @@
                             <textarea v-model="content" id="content" class="form-control" rows="3">{{ old('content') }}</textarea>
                         </div>
 
-                        <button type="submit" class="btn btn-blue">{{ __('Submit Reply') }}</button>
+                        <button type="submit" class="btn btn-blue" v-show="content.length > 0">{{ __('Submit Reply') }}</button>
                     </form>
                 </new-post>
             </div>
