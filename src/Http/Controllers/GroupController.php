@@ -37,7 +37,12 @@ class GroupController extends Controller
      */
     public function store(StoreGroupRequest $request)
     {
-        Group::create($request->all());
+        $group = Group::create($request->all());
+
+        // TODO: remove after API is complete
+        if ($request->ajax()) {
+            return $group;
+        }
 
         return redirect()->route('firefly.forum.index');
     }

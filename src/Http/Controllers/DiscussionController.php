@@ -47,6 +47,11 @@ class DiscussionController extends Controller
 
         $discussion->posts()->save($post);
 
+        // TODO: remove after API is complete
+        if ($request->ajax()) {
+            return $discussion;
+        }
+
         return redirect()->route('firefly.discussion.show', [$discussion->id, $discussion->slug]);
     }
 
