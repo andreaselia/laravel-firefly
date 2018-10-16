@@ -1,5 +1,3 @@
 <?php
 
-Route::get('/', function () {
-    //
-});
+Route::post('/discussions', 'DiscussionController@store');
