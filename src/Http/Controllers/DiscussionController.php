@@ -29,6 +29,10 @@ class DiscussionController extends Controller
      */
     public function store(StoreDiscussionRequest $request, Group $group)
     {
+        if ($request->isJson()) {
+            $group = Group::findOrFail($request->group_id);
+        }
+
         $this->authorize('create', Discussion::class);
 
         $user = $request->user();
@@ -47,7 +51,9 @@ class DiscussionController extends Controller
 
         $discussion->posts()->save($post);
 
-        return redirect()->route('firefly.discussion.show', [$discussion->id, $discussion->slug]);
+        return $request->isJson()
+            ? response()->json($discussion)
+            : redirect()->route('firefly.discussion.show', [$discussion->id, $discussion->slug]);
     }
 
     /**
