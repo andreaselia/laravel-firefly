@@ -4,14 +4,16 @@ namespace Firefly\Test\Feature;
 
 use Carbon\Carbon;
 use Firefly\Test\Fixtures\Discussion;
+use Firefly\Test\Fixtures\Post;
 use Firefly\Test\TestCase;
 
 class DiscussionTest extends TestCase
 {
     public function test_discussion_was_created()
     {
-        // Clear all previous discussions
+        // Clear all previous discussions and posts
         Discussion::truncate();
+        Post::truncate();
 
         $crawler = $this->actingAs($this->getUser())
             ->post('forum/example-group/discussion', [
@@ -25,6 +27,13 @@ class DiscussionTest extends TestCase
         $this->assertDatabaseHas('discussions', [
             'title' => 'Foo Bar',
             'slug' => 'foo-bar',
+        ]);
+
+        $posts = Post::all();
+
+        $this->assertTrue($posts->count() == 1);
+        $this->assertDatabaseHas('posts', [
+            'content' => 'Lorem Ipsum',
         ]);
 
         $discussion = Discussion::first();
