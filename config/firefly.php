@@ -51,7 +51,7 @@ return [
     'api' => [
         'enabled'    => false,
         'prefix'     => 'api/forum',
-        'namespace'  => '\Firefly\Http\Controllers\Api',
+        'namespace'  => '\Firefly\Http\Controllers',
         'middleware' => ['api', 'auth:api'],
     ],
 
