@@ -32,3 +32,9 @@ input {
         height: 40px;
     }
 }
+
+textarea {
+    &.form-control {
+        padding: 15px;
+    }
+}

@@ -7,7 +7,7 @@
                 <div class="card-body">
                     <div class="card-title">{{ __('Edit Discussion') }}</div>
 
-                    <form action="{{ route('discussion.update', $discussion) }}" method="POST">
+                    <form action="{{ route('firefly.discussion.update', $discussion) }}" method="POST">
                         {{ method_field('PUT') }}
 
                         <div class="form-group">

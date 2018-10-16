@@ -32,7 +32,7 @@
 
         @foreach ($groups as $group)
             <div class="col-sm-6 col-md-4 col-lg-2">
-                <a href="{{ route('group.show', $group) }}" class="group-item" style="background-color: {{ $group->color }};">
+                <a href="{{ route('firefly.group.show', $group) }}" class="group-item" style="background-color: {{ $group->color }};">
                     {{ $group->name }}
                 </a>
             </div>
