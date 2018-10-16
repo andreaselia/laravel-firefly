@@ -53,7 +53,7 @@ class TestCase extends OrchestraTestCase
         $this->user = User::create([
             'name' => 'Test Rat',
             'email' => 'test@example.com',
-            'password' => bcrypt('secret')
+            'password' => bcrypt('secret'),
         ]);
 
         $this->group = Group::create([
