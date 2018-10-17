@@ -7,7 +7,6 @@ use Firefly\Group;
 use Firefly\Http\Controllers\Controller;
 use Firefly\Http\Requests\StoreDiscussionRequest;
 use Firefly\Services\DiscussionService;
-use Firefly\Services\PostService;
 
 class DiscussionController extends Controller
 {
@@ -19,21 +18,13 @@ class DiscussionController extends Controller
     public $discussionService;
 
     /**
-     * Instance of the post service.
-     *
-     * @var \Firefly\Services\PostService
-     */
-    public $postService;
-
-    /**
      * Create a new instance of the controller.
      *
      * @param \Firefly\Services\DiscussionService $service
      */
-    public function __construct(DiscussionService $discussionService, PostService $postService)
+    public function __construct(DiscussionService $discussionService)
     {
         $this->discussionService = $discussionService;
-        $this->postService = $postService;
     }
 
     /**
@@ -48,13 +39,7 @@ class DiscussionController extends Controller
 
         $this->authorize('create', Discussion::class);
 
-        $discussion = $this->discussionService->make($request);
-
-        $group->discussions()->save($discussion);
-
-        $discussion->posts()->save(
-            $this->postService->make($request)
-        );
+        $discussion = $this->discussionService->make($request, $group);
 
         return response()->json($discussion);
     }
