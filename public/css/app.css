@@ -11208,13 +11208,9 @@ a.text-yellow:focus {
 }
 
 .alert {
-  background-color: #f5f5f5;
-  border-radius: 5px;
   font-size: .85em;
   line-height: 1.45;
   padding: .5rem .75rem;
-  text-align: center;
-  color: #464646;
   margin-bottom: 2rem;
 }
 

@@ -1,5 +1,5 @@
 @if (! count($discussions))
-    <div class="alert alert-yellow">
+    <div class="alert alert-yellow text-center" role="alert">
         {{ __('Uh oh, there are no discussions.') }}
     </div>
 @endif

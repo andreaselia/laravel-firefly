@@ -26,8 +26,8 @@
 <div class="container">
     <div class="row">
         @if (! count($groups))
-            <div class="col">
-                <div class="alert alert-yellow">
+            <div class="col-12">
+                <div class="alert alert-yellow text-center" role="alert">
                     {{ __('Uh oh, there are no groups.') }}
                 </div>
             </div>
@@ -35,7 +35,7 @@
 
         @foreach ($groups as $group)
             <div class="col-sm-6 col-md-4 col-lg-2">
-                <a href="{{ route('firefly.group.show', $group) }}" class="btn btn-lg" style="background-color: {{ $group->color }};">
+                <a href="{{ route('firefly.group.show', $group) }}" class="group-item" style="background-color: {{ $group->color }};">
                     {{ $group->name }}
                 </a>
             </div>
