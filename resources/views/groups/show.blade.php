@@ -8,11 +8,14 @@
                 <div class="d-flex justify-content-between align-items-center">
                     <h1>{{ $group->name }}</h1>
 
-                    {{-- TODO: auth/policy check --}}
-                    <a href="#" class="btn btn-yellow" @click.prevent="toggleModal('newDiscussion')">New Discussion</a>
+                    @if (Auth::check() && Auth::user()->can('create', Firefly\Discussion::class))
+                        <button type="button" class="btn btn-yellow" @click.prevent="toggleModal('newDiscussion')">
+                            {{ __('New Discussion') }}
+                        </button>
+                    @endif
                 </div>
 
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quis quos aut sequi totam ducimus nihil, vitae repellendus expedita quas nemo.</p>
+                <p>{{ __('Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quis quos aut sequi totam ducimus nihil, vitae repellendus expedita quas nemo.') }}</p>
             </div>
         </div>
     </div>

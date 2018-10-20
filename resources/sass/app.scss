@@ -5,36 +5,25 @@
 @import 'variables';
 
 // Bootstrap
-@import '~bootstrap/scss/bootstrap-grid';
-@import '~bootstrap/scss/utilities/spacing';
+@import '~bootstrap/scss/bootstrap';
 
 @import 'navbar';
 @import 'hero';
-@import 'notifications';
+@import 'alerts';
 @import 'forms';
 @import 'buttons';
 @import 'discussions';
 @import 'groups';
 @import 'modals';
 
-html {
-    background-color: #fff;
-    font-family: 'Nunito', sans-serif;
+body {
     -ms-text-size-adjust: 100%;
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
-    font-weight: 400;
-    font-size: 1em;
-    color: $grey-3;
-}
-
-body {
-    margin: 0;
 }
 
 h1, h2, h3, h4, h5, h6 {
     color: $grey-4;
-    margin-top: 0;
 }
 
 p {

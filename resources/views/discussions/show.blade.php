@@ -20,7 +20,9 @@
                             <textarea v-model="content" id="content" class="form-control" rows="3">{{ old('content') }}</textarea>
                         </div>
 
-                        <button type="submit" class="btn btn-blue" v-show="content.length > 0">{{ __('Submit Reply') }}</button>
+                        <button type="submit" class="btn btn-blue" v-show="content.length > 0">
+                            {{ __('Submit Reply') }}
+                        </button>
                     </form>
                 </new-post>
             </div>

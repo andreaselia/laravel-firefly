@@ -10,3 +10,19 @@ $red: #f64646;
 $green: #46c891;
 $blue: #3081f2;
 $yellow: #ffd151;
+
+$body-bg: #fff;
+$body-color: $grey-3;
+
+$font-family-sans-serif: 'Nunito', sans-serif;
+
+$theme-colors: (
+    'red': $red,
+    'green': $green,
+    'blue': $blue,
+    'yellow': $yellow
+);
+
+$border-radius: .3125rem;
+
+$btn-font-weight: 700;

@@ -37,7 +37,7 @@
                             <li><a href="{{ route('login') }}">{{ __('Log in') }}</a></li>
 
                             @if (Route::has('register'))
-                                <li><a href="{{ route('register') }}" class="btn btn-green">{{ __('Sign up') }}</a></li>
+                                <li><a href="{{ route('register') }}" class="btn btn-blue">{{ __('Sign up') }}</a></li>
                             @endif
                         @else
                             <li>

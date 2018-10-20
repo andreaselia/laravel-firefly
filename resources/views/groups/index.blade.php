@@ -6,13 +6,16 @@
         <div class="row">
             <div class="col">
                 <div class="d-flex justify-content-between align-items-center">
-                    <h1>Groups</h1>
+                    <h1>{{ __('Groups') }}</h1>
 
-                    {{-- TODO: auth/policy check --}}
-                    <a href="#" class="btn btn-yellow" @click.prevent="toggleModal('newGroup')">Add Group</a>
+                    @if (Auth::check() && Auth::user()->can('create', Firefly\Group::class))
+                        <button type="button" class="btn btn-yellow" @click.prevent="toggleModal('newGroup')">
+                            {{ __('Add Group') }}
+                        </button>
+                    @endif
                 </div>
 
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quis quos aut sequi totam ducimus nihil, vitae repellendus expedita quas nemo.</p>
+                <p>{{ __('Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quis quos aut sequi totam ducimus nihil, vitae repellendus expedita quas nemo.') }}</p>
             </div>
         </div>
     </div>
@@ -24,7 +27,7 @@
     <div class="row">
         @if (! count($groups))
             <div class="col">
-                <div class="notification notification-yellow">
+                <div class="alert alert-yellow">
                     {{ __('Uh oh, there are no groups.') }}
                 </div>
             </div>
@@ -32,7 +35,7 @@
 
         @foreach ($groups as $group)
             <div class="col-sm-6 col-md-4 col-lg-2">
-                <a href="{{ route('firefly.group.show', $group) }}" class="group-item" style="background-color: {{ $group->color }};">
+                <a href="{{ route('firefly.group.show', $group) }}" class="btn btn-lg" style="background-color: {{ $group->color }};">
                     {{ $group->name }}
                 </a>
             </div>
