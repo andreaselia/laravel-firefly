@@ -6,11 +6,29 @@ use Firefly\Discussion;
 use Firefly\Group;
 use Firefly\Http\Requests\StoreDiscussionRequest;
 use Firefly\Http\Requests\UpdateDiscussionRequest;
+use Firefly\Services\DiscussionService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class DiscussionController extends Controller
 {
+    /**
+     * Instance of the discussion service.
+     *
+     * @var \Firefly\Services\DiscussionService
+     */
+    public $discussionService;
+
+    /**
+     * Create a new instance of the controller.
+     *
+     * @param \Firefly\Services\DiscussionService $service
+     */
+    public function __construct(DiscussionService $discussionService)
+    {
+        $this->discussionService = $discussionService;
+    }
+
     /**
      * Show the form for creating a new discussion.
      *
@@ -31,26 +49,7 @@ class DiscussionController extends Controller
     {
         $this->authorize('create', Discussion::class);
 
-        $user = $request->user();
-
-        // Make the discussion under the user and save it to the group
-        $discussion = $user->discussions()->make(
-            $request->only('title')
-        );
-
-        $group->discussions()->save($discussion);
-
-        // Make the post under the user and save it to the discussion
-        $post = $user->posts()->make(
-            $request->only('content')
-        );
-
-        $discussion->posts()->save($post);
-
-        // TODO: remove after API is complete
-        if ($request->ajax()) {
-            return $discussion;
-        }
+        $discussion = $this->discussionService->make($request, $group);
 
         return redirect()->route('firefly.discussion.show', [$discussion->id, $discussion->slug]);
     }

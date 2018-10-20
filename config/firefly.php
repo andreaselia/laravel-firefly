@@ -49,7 +49,7 @@ return [
     */
 
     'api' => [
-        'enabled'    => false,
+        'enabled'    => true,
         'prefix'     => 'api/forum',
         'namespace'  => '\Firefly\Http\Controllers\Api',
         'middleware' => ['api', 'auth:api'],
