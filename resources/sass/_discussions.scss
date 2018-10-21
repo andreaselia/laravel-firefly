@@ -3,18 +3,7 @@ ul {
         .list-item {
             margin-bottom: 25px;
 
-            > a {
-                font-size: 1.125rem;
-                font-weight: 700;
-                line-height: 1.3;
-                color: $licorice;
-                text-decoration: none;
-            }
-
             &-meta {
-                font-size: .75rem;
-                line-height: 1.5;
-
                 .author {
                     color: $licorice;
                 }
@@ -29,4 +18,17 @@ ul {
             }
         }
     }
+}
+
+.list-item-head {
+    font-size: 1.125rem;
+    font-weight: 700;
+    line-height: 1.3;
+    color: $licorice;
+    text-decoration: none;
+}
+
+.list-item-meta {
+    font-size: .75rem;
+    line-height: 1.5;
 }

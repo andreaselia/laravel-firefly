@@ -11261,7 +11261,15 @@ ul.discussion-list .list-item {
   margin-bottom: 25px;
 }
 
-ul.discussion-list .list-item > a {
+ul.discussion-list .list-item-meta .author {
+  color: #121212;
+}
+
+ul.discussion-list .list-item-meta .date {
+  margin: 0 .5rem;
+}
+
+.list-item-head {
   font-size: 1.125rem;
   font-weight: 700;
   line-height: 1.3;
@@ -11269,17 +11277,9 @@ ul.discussion-list .list-item > a {
   text-decoration: none;
 }
 
-ul.discussion-list .list-item-meta {
+.list-item-meta {
   font-size: .75rem;
   line-height: 1.5;
-}
-
-ul.discussion-list .list-item-meta .author {
-  color: #121212;
-}
-
-ul.discussion-list .list-item-meta .date {
-  margin: 0 .5rem;
 }
 
 .group-item {

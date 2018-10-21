@@ -34,8 +34,8 @@
                         <span class="group-color mr-3" style="background-color: {{ $group->color }};"></span>
 
                         <div>
-                            <a href="{{ route('firefly.group.show', $group) }}" class="list-item-name">{{ $group->name }}</a>
-                            <small class="text-muted">32 discussions</small>
+                            <a href="{{ route('firefly.group.show', $group) }}" class="list-item-head">{{ $group->name }}</a>
+                            <div class="list-item-meta">32 discussions</div>
                         </div>
                     </div>
                 </div>

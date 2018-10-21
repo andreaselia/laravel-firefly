@@ -7,7 +7,7 @@
 <ul class="list-unstyled discussion-list">
     @foreach ($discussions as $discussion)
         <li class="list-item">
-            <a href="{{ route('firefly.discussion.show', [$discussion->id, $discussion->slug]) }}" class="list-item-title">
+            <a href="{{ route('firefly.discussion.show', [$discussion->id, $discussion->slug]) }}" class="list-item-head">
                 {{ $discussion->title }}
             </a>
 
