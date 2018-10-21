@@ -19,32 +19,30 @@
 @endsection
 
 @section('content')
-<section class="gradient">
-    <div class="container">
-        @if (! count($groups))
-            <div class="alert alert-yellow text-center" role="alert">
-                {{ __('Uh oh, there are no groups.') }}
-            </div>
-        @endif
+<div class="container">
+    @if (! count($groups))
+        <div class="alert alert-yellow text-center" role="alert">
+            {{ __('Uh oh, there are no groups.') }}
+        </div>
+    @endif
 
-        <div class="row">
-            @foreach ($groups as $group)
-                <div class="col-12 col-sm-6 col-lg-4">
-                    <div class="group-item d-flex align-items-center">
-                        <span class="group-color mr-3" style="background-color: {{ $group->color }};"></span>
+    <div class="row">
+        @foreach ($groups as $group)
+            <div class="col-12 col-sm-6 col-lg-4">
+                <div class="group-item d-flex align-items-center">
+                    <span class="group-color mr-3" style="background-color: {{ $group->color }};"></span>
 
-                        <div>
-                            <a href="{{ route('firefly.group.show', $group) }}" class="list-item-head">{{ $group->name }}</a>
-                            <div class="list-item-meta">32 discussions</div>
-                        </div>
+                    <div>
+                        <a href="{{ route('firefly.group.show', $group) }}" class="list-item-head">{{ $group->name }}</a>
+                        <div class="list-item-meta">32 discussions</div>
                     </div>
                 </div>
-            @endforeach
-        </div>
-
-        {!! $groups->links() !!}
+            </div>
+        @endforeach
     </div>
-</section>
+
+    {!! $groups->links() !!}
+</div>
 @endsection
 
 @section('modals')

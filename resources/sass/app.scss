@@ -17,6 +17,7 @@
 @import 'modals';
 
 body {
+    background-color: $grey-0;
     -ms-text-size-adjust: 100%;
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
@@ -48,10 +49,6 @@ a {
     }
 }
 
-section {
+main {
     padding: 3.75rem 0;
-
-    &.gradient {
-        background: linear-gradient($grey-1 -60px, #fff 210px);
-    }
 }

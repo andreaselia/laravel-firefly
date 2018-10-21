@@ -11,9 +11,7 @@
 @endsection
 
 @section('content')
-<section class="gradient">
-    <div class="container">
-        @include('firefly::partials.discussion-list')
-    </div>
-</section>
+<div class="container">
+    @include('firefly::partials.discussion-list')
+</div>
 @endsection
