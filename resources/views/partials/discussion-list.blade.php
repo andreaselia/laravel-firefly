@@ -11,10 +11,10 @@
                 {{ $discussion->title }}
             </a>
 
-            <div class="list-item-data">
-                <a href="#" class="list-item-author">{{ $discussion->user->name }}</a>
-                <span class="list-item-date">{{ $discussion->created_at->diffForHumans() }}</span>
-                <span class="list-item-count">3 {{ __('posts') }}</span>
+            <div class="list-item-meta">
+                {{ __('Posted by') }} <a href="#" class="author">{{ $discussion->user->name }}</a>
+                <span class="date">{{ $discussion->created_at->diffForHumans() }}</span>
+                <span class="count">3 {{ __('replies') }}</span>
             </div>
         </li>
     @endforeach

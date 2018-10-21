@@ -11262,19 +11262,24 @@ ul.discussion-list .list-item {
 }
 
 ul.discussion-list .list-item > a {
-  font-size: 1.25em;
+  font-size: 1.125rem;
   font-weight: 700;
-  line-height: 1.6;
+  line-height: 1.3;
   color: #121212;
   text-decoration: none;
 }
 
-ul.discussion-list .list-item-data {
-  line-height: 1.8;
+ul.discussion-list .list-item-meta {
+  font-size: .75rem;
+  line-height: 1.5;
 }
 
-ul.discussion-list .list-item-date {
-  margin: 0 15px;
+ul.discussion-list .list-item-meta .author {
+  color: #121212;
+}
+
+ul.discussion-list .list-item-meta .date {
+  margin: 0 .5rem;
 }
 
 .group-item {

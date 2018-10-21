@@ -4,19 +4,28 @@ ul {
             margin-bottom: 25px;
 
             > a {
-                font-size: 1.25em;
+                font-size: 1.125rem;
                 font-weight: 700;
-                line-height: 1.6;
+                line-height: 1.3;
                 color: $licorice;
                 text-decoration: none;
             }
 
-            &-data {
-                line-height: 1.8;
-            }
+            &-meta {
+                font-size: .75rem;
+                line-height: 1.5;
 
-            &-date {
-                margin: 0 15px;
+                .author {
+                    color: $licorice;
+                }
+
+                .date {
+                    margin: 0 .5rem;
+                }
+
+                .count {
+                    //
+                }
             }
         }
     }
