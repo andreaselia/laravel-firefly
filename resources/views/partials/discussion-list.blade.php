@@ -4,7 +4,7 @@
     </div>
 @endif
 
-<ul class="discussion-list">
+<ul class="list-unstyled discussion-list">
     @foreach ($discussions as $discussion)
         <li class="list-item">
             <a href="{{ route('firefly.discussion.show', [$discussion->id, $discussion->slug]) }}" class="list-item-title">
@@ -20,6 +20,4 @@
     @endforeach
 </ul>
 
-<div class="pagination">
-    {!! $discussions->links() !!}
-</div>
+{!! $discussions->links() !!}

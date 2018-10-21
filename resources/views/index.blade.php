@@ -3,23 +3,17 @@
 @section('hero')
 <header class="hero">
     <div class="container">
-        <div class="row">
-            <div class="col">
-                <h1>{{ __('Discussions') }}</h1>
+        <h1>{{ __('Discussions') }}</h1>
 
-                <p>{{ __('Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quis quos aut sequi totam ducimus nihil, vitae repellendus expedita quas nemo.') }}</p>
-            </div>
-        </div>
+        <p>{{ __('Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quis quos aut sequi totam ducimus nihil, vitae repellendus expedita quas.') }}</p>
     </div>
 </header>
 @endsection
 
 @section('content')
-<div class="container">
-    <div class="row">
-        <div class="col">
-            @include('firefly::partials.discussion-list')
-        </div>
+<section class="gradient">
+    <div class="container">
+        @include('firefly::partials.discussion-list')
     </div>
-</div>
+</section>
 @endsection

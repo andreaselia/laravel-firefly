@@ -22,7 +22,7 @@
                             {{ __('Cancel') }}
                         </button>
 
-                        <button type="submit" class="btn btn-green">
+                        <button type="submit" class="btn btn-primary">
                             {{ __('Submit') }}
                         </button>
                     </div>

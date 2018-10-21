@@ -37,20 +37,22 @@
                             <li><a href="{{ route('login') }}">{{ __('Log in') }}</a></li>
 
                             @if (Route::has('register'))
-                                <li><a href="{{ route('register') }}" class="btn btn-blue">{{ __('Sign up') }}</a></li>
+                                <li><a href="{{ route('register') }}" class="btn btn-blue">{{ __('Register') }}</a></li>
                             @endif
                         @else
-                            <li>
-                                <strong class="mr-4">{{ Auth::user()->name }}</strong>
-                            </li>
-                            <li>
-                                <a class="btn btn-red" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                    {{ __('Logout') }}
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="accountDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    {{ Auth::user()->name }}
                                 </a>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                        {{ __('Log out') }}
+                                    </a>
 
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                    @csrf
-                                </form>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        @csrf
+                                    </form>
+                                </div>
                             </li>
                         @endguest
                     </ul>
