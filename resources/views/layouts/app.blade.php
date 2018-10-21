@@ -28,22 +28,31 @@
 
                 <div class="navbar-items">
                     <ul>
-                        <li><a href="{{ route('firefly.group.index') }}">{{ __('Groups') }}</a></li>
-                        <li><a href="{{ route('firefly.forum.index') }}">{{ __('Discussions') }}</a></li>
+                        <li class="nav-item">
+                            <a href="{{ route('firefly.group.index') }}" class="nav-link">{{ __('Groups') }}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('firefly.forum.index') }}" class="nav-link">{{ __('Discussions') }}</a>
+                        </li>
                     </ul>
 
                     <ul>
                         @guest
-                            <li><a href="{{ route('login') }}">{{ __('Login') }}</a></li>
+                            <li class="nav-item">
+                                <a href="{{ route('login') }}" class="nav-link">{{ __('Login') }}</a>
+                            </li>
 
                             @if (Route::has('register'))
-                                <li><a href="{{ route('register') }}" class="btn btn-blue">{{ __('Register') }}</a></li>
+                                <li class="nav-item">
+                                    <a href="{{ route('register') }}" class="nav-link btn btn-blue">{{ __('Register') }}</a>
+                                </li>
                             @endif
                         @else
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="accountDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     {{ Auth::user()->name }}
                                 </a>
+                                
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
