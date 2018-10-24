@@ -1,25 +1,34 @@
 ul {
     &.discussion-list {
-        list-style: none;
-        padding: 0;
+        .list-item {
+            margin-bottom: 25px;
+
+            &-meta {
+                .author {
+                    color: $licorice;
+                }
+
+                .date {
+                    margin: 0 .5rem;
+                }
+
+                .count {
+                    //
+                }
+            }
+        }
     }
 }
 
-.list-item {
-    margin-bottom: 25px;
+.list-item-head {
+    font-size: 1.125rem;
+    font-weight: 700;
+    line-height: 1.3;
+    color: $licorice;
+    text-decoration: none;
+}
 
-    > a {
-        font-size: 1.25em;
-        font-weight: 700;
-        line-height: 1.6;
-        color: $licorice;
-    }
-
-    &-data {
-        line-height: 1.8;
-    }
-
-    &-date {
-        margin: 0 15px;
-    }
+.list-item-meta {
+    font-size: .75rem;
+    line-height: 1.5;
 }

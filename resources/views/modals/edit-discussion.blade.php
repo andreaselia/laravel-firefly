@@ -5,7 +5,7 @@
         </div>
 
         <div class="modal-body">
-            <new-discussion :group="{{ $group }}" inline-template>
+            <edit-discussion :group="{{ $group }}" :discussion="{{ $discussion }}" inline-template>
                 <form role="form" @submit.prevent="submit">
                     <div class="form-group">
                         <label for="title">{{ __('Title') }}</label>
@@ -27,7 +27,7 @@
                         </button>
                     </div>
                 </form>
-            </new-discussion>
+            </edit-discussion>
         </div>
     </div>
 </div>

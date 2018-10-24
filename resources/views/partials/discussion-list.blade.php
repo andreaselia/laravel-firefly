@@ -1,25 +1,23 @@
 @if (! count($discussions))
-    <div class="notification notification-yellow">
+    <div class="alert alert-yellow text-center" role="alert">
         {{ __('Uh oh, there are no discussions.') }}
     </div>
 @endif
 
-<ul class="discussion-list">
+<ul class="list-unstyled discussion-list">
     @foreach ($discussions as $discussion)
         <li class="list-item">
-            <a href="{{ route('firefly.discussion.show', [$discussion->id, $discussion->slug]) }}" class="list-item-title">
+            <a href="{{ route('firefly.discussion.show', [$discussion->id, $discussion->slug]) }}" class="list-item-head">
                 {{ $discussion->title }}
             </a>
 
-            <div class="list-item-data">
-                <a href="#" class="list-item-author">{{ $discussion->user->name }}</a>
-                <span class="list-item-date">{{ $discussion->created_at->diffForHumans() }}</span>
-                <span class="list-item-count">3 {{ __('posts') }}</span>
+            <div class="list-item-meta">
+                {{ __('Posted by') }} <a href="#" class="author">{{ $discussion->user->name }}</a>
+                <span class="date">{{ $discussion->created_at->diffForHumans() }}</span>
+                <span class="count">3 {{ __('replies') }}</span>
             </div>
         </li>
     @endforeach
 </ul>
 
-<div class="pagination">
-    {!! $discussions->links() !!}
-</div>
+{!! $discussions->links() !!}
