@@ -8,6 +8,7 @@ use Firefly\Http\Controllers\Controller;
 use Firefly\Http\Requests\UpdateDiscussionRequest;
 use Firefly\Http\Requests\StoreDiscussionRequest;
 use Firefly\Services\DiscussionService;
+use Illuminate\Http\Request;
 
 class DiscussionController extends Controller
 {
@@ -58,5 +59,20 @@ class DiscussionController extends Controller
         $discussion->update($request->all());
 
         return response()->json($discussion->fresh());
+    }
+
+    /**
+     * Delete the specified discussion.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function delete(Request $request, Discussion $discussion)
+    {
+        $this->authorize('delete', $discussion);
+
+        $discussion->delete();
+
+        return response()->json('OK');
     }
 }

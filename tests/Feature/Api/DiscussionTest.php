@@ -59,4 +59,19 @@ class DiscussionTest extends TestCase
         $crawler->assertOk();
         $crawler->assertJsonStructure();
     }
+
+    public function test_discussion_was_soft_deleted()
+    {
+        $discussion = $this->getDiscussion();
+
+        $crawler = $this->actingAs($this->getUser(), 'api')
+            ->deleteJson('api/forum/discussions/' . $discussion->id);
+        
+        $discussion->refresh();
+
+        $this->assertFalse($discussion->exists());
+        $this->assertNotNull($discussion->deleted_at);
+
+        $crawler->assertOk();
+    }
 }
