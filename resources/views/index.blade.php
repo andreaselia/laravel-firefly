@@ -32,7 +32,7 @@
 
                     <div class="d-flex">
                         @foreach ($discussion->groups as $group)
-                            <div class="group-item rounded-circle mb-0" style="background: {{ $group->color }};"></div>
+                            <div class="group-display rounded-circle mb-0" data-toggle="tooltip" data-placement="top" title="{{ $group->name }}" style="background: {{ $group->color }};"></div>
                         @endforeach
                     </div>
                 </div>

@@ -95,12 +95,28 @@ main {
     }
 }
 
-.group-item {
+.group-display {
     width: 30px;
     height: 30px;
     border: 3px solid #fff;
+    background: $licorice;
 
     &:not(:first-of-type) {
         margin-left: -12px;
+    }
+}
+
+.group-item {
+    margin-bottom: 0;
+
+    h3 {
+        font-weight: 700;
+        font-size: 1em;
+        line-height: 1;
+    }
+
+    &-meta {
+        font-size: .75em;
+        color: rgba($licorice, .8);
     }
 }

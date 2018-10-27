@@ -11332,13 +11332,29 @@ main h1 {
   color: rgba(18, 18, 18, 0.8);
 }
 
-.group-item {
+.group-display {
   width: 30px;
   height: 30px;
   border: 3px solid #fff;
+  background: #121212;
 }
 
-.group-item:not(:first-of-type) {
+.group-display:not(:first-of-type) {
   margin-left: -12px;
+}
+
+.group-item {
+  margin-bottom: 0;
+}
+
+.group-item h3 {
+  font-weight: 700;
+  font-size: 1em;
+  line-height: 1;
+}
+
+.group-item-meta {
+  font-size: .75em;
+  color: rgba(18, 18, 18, 0.8);
 }
 
