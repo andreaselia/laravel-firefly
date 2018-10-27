@@ -41,4 +41,37 @@ class DiscussionTest extends TestCase
         $crawler->assertOk();
         $crawler->assertJsonStructure();
     }
+
+    public function test_discussion_was_updated()
+    {
+        $discussion = $this->getDiscussion();
+
+        $crawler = $this->actingAs($this->getUser(), 'api')
+            ->putJson('api/forum/discussions/' . $discussion->id, [
+                'title' => 'Bar Foo',
+            ]);
+
+        $discussion->refresh();
+
+        $this->assertEquals('Bar Foo', $discussion->title);
+        $this->assertEquals('bar-foo', $discussion->slug);
+
+        $crawler->assertOk();
+        $crawler->assertJsonStructure();
+    }
+
+    public function test_discussion_was_soft_deleted()
+    {
+        $discussion = $this->getDiscussion();
+
+        $crawler = $this->actingAs($this->getUser(), 'api')
+            ->deleteJson('api/forum/discussions/' . $discussion->id);
+        
+        $discussion->refresh();
+
+        $this->assertFalse($discussion->exists());
+        $this->assertNotNull($discussion->deleted_at);
+
+        $crawler->assertOk();
+    }
 }

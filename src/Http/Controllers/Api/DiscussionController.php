@@ -5,8 +5,10 @@ namespace Firefly\Http\Controllers\Api;
 use Firefly\Discussion;
 use Firefly\Group;
 use Firefly\Http\Controllers\Controller;
+use Firefly\Http\Requests\UpdateDiscussionRequest;
 use Firefly\Http\Requests\StoreDiscussionRequest;
 use Firefly\Services\DiscussionService;
+use Illuminate\Http\Request;
 
 class DiscussionController extends Controller
 {
@@ -31,7 +33,7 @@ class DiscussionController extends Controller
      * Store the new discussion.
      *
      * @param \Firefly\Http\Requests\StoreDiscussionRequest $request
-     * @return \Illuminate\Http\RedirectResponse
+     * @return \Illuminate\Http\Response
      */
     public function store(StoreDiscussionRequest $request)
     {
@@ -42,5 +44,35 @@ class DiscussionController extends Controller
         $discussion = $this->discussionService->make($request, $group);
 
         return response()->json($discussion);
+    }
+
+    /**
+     * Update the specified discussion.
+     *
+     * @param \Firefly\Http\Requests\UpdateDiscussionRequest $request
+     * @return \Illuminate\Http\Response
+     */
+    public function update(UpdateDiscussionRequest $request, Discussion $discussion)
+    {
+        $this->authorize('update', $discussion);
+
+        $discussion->update($request->all());
+
+        return response()->json($discussion->fresh());
+    }
+
+    /**
+     * Delete the specified discussion.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function delete(Request $request, Discussion $discussion)
+    {
+        $this->authorize('delete', $discussion);
+
+        $discussion->delete();
+
+        return response()->json('OK');
     }
 }

@@ -67,7 +67,7 @@ class DiscussionController extends Controller
     }
 
     /**
-     * Update the new discussion.
+     * Update the specified discussion.
      *
      * @param \Firefly\Http\Requests\UpdateDiscussionRequest $request
      * @return \Illuminate\Http\RedirectResponse
