@@ -4,6 +4,15 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-8">
+            <div class="text-right mb-3">
+                <form action="{{ route('firefly.discussion.delete', [$discussion->id, $discussion->slug]) }}" method="POST">
+                    @method('DELETE')
+                    @csrf
+
+                    <button class="btn btn-danger">{{ __('Delete Discussion') }}</button>
+                </form>
+            </div>
+
             @foreach ($posts as $post)
                 <div class="list-group-item list-group-item-action mb-4">
                     <p>{{ $post->user->name }} {{ $post->created_at->diffForHumans() }}</p>
