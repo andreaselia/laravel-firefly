@@ -19,6 +19,19 @@
     @endif
 
     <div class="row">
+        @if (! count($groups))
+            <div class="col">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="alert alert-yellow mb-0" role="alert">
+                            <strong>{{ __('Holy guacamole!') }}</strong><br>
+                            {{ __('There are no groups; You could be the first to create one.') }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endif
+
         @foreach ($groups as $group)
             <div class="col-12 col-sm-6 col-lg-4 mb-4">
                 <div class="card">
