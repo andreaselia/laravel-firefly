@@ -18,36 +18,39 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar">
-            <div class="container-fluid">
+        <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
+            <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     <svg width="32" height="32" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><circle stroke="#121212" stroke-width="3" cx="16" cy="16" r="14.5"/><path d="M14.554 11.033l6.79 4.514a1 1 0 0 1 .002 1.664l-6.79 4.541A1 1 0 0 1 13 20.921v-9.055a1 1 0 0 1 1.554-.833z" fill="#121212"/></g></svg>
                 </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
 
-                <div class="navbar-items">
-                    <ul>
-                        @guest
+                <div class="collapse navbar-collapse" id="navbarContent">
+                    <ul class="navbar-nav mr-auto">
+                        @auth
                             <li class="nav-item">
-                                <a href="{{ route('firefly.group.index') }}" class="nav-link">{{ __('Groups') }}</a>
+                                <a class="nav-link" href="{{ route('firefly.group.index') }}">{{ __('Groups') }}</a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ route('firefly.forum.index') }}" class="nav-link">{{ __('Discussions') }}</a>
+                                <a class="nav-link" href="{{ route('firefly.forum.index') }}">{{ __('Discussions') }}</a>
                             </li>
-                        @else
-                            <li class="nav-item">
-                                <a href="{{ route('login') }}" class="nav-link">{{ __('Login') }}</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{{ route('register') }}" class="nav-link">{{ __('Register') }}</a>
-                            </li>
-                        @endguest
+                        @endauth
                     </ul>
 
-                    <ul>
-                        @auth
+                    <ul class="navbar-nav ml-auto">
+                        @guest
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                            </li>
+                        @else
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="accountDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Hello, {{ Auth::user()->name }}
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    Hello, {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
@@ -60,13 +63,11 @@
                                     </form>
                                 </div>
                             </li>
-                        @endauth
+                        @endguest
                     </ul>
                 </div>
             </div>
         </nav>
-
-        @yield('hero')
 
         <main class="py-4">
             @yield('content')

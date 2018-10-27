@@ -1,25 +1,17 @@
 @extends('firefly::layouts.app')
 
-@section('hero')
-<header class="hero">
-    <div class="container">
-        <div class="d-flex justify-content-between align-items-center">
-            <h1>{{ __('Groups') }}</h1>
-
-            @if (Auth::check() && Auth::user()->can('create', Firefly\Group::class))
-                <button type="button" class="btn btn-yellow" @click.prevent="toggleModal('newGroup')">
-                    {{ __('Add Group') }}
-                </button>
-            @endif
-        </div>
-
-        <p>{{ __('Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quis quos aut sequi totam ducimus nihil, vitae repellendus expedita quas.') }}</p>
-    </div>
-</header>
-@endsection
-
 @section('content')
 <div class="container">
+    <div class="d-flex justify-content-between align-items-center">
+        <h1 class="mb-0">{{ __('Groups') }}</h1>
+
+        @if (Auth::check() && Auth::user()->can('create', Firefly\Group::class))
+            <button type="button" class="btn btn-yellow" @click.prevent="toggleModal('newGroup')">
+                {{ __('Add Group') }}
+            </button>
+        @endif
+    </div>
+
     @if (! count($groups))
         <div class="alert alert-yellow text-center" role="alert">
             {{ __('Uh oh, there are no groups.') }}

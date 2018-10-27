@@ -8,7 +8,6 @@
 @import '~bootstrap/scss/bootstrap';
 
 @import 'navbar';
-@import 'hero';
 @import 'alerts';
 @import 'forms';
 @import 'buttons';
@@ -51,6 +50,10 @@ a {
 
 main {
     padding: 3.75rem 0;
+
+    h1 {
+        
+    }
 }
 
 ::selection {
