@@ -11,7 +11,6 @@
 @import 'alerts';
 @import 'forms';
 @import 'buttons';
-@import 'discussions';
 @import 'groups';
 @import 'modals';
 
@@ -52,6 +51,14 @@ a {
     }
 }
 
+main {
+    h1 {
+        font-weight: 700;
+        font-size: 28px;
+        line-height: 30px;
+    }
+}
+
 .dropdown-item {
     font-size: .85em;
     font-weight: 700;
@@ -60,4 +67,9 @@ a {
     &:hover {
         color: $licorice;
     }
+}
+
+.card {
+    // box-shadow: 0 .125rem .25rem rgba(#000, .075);
+    border: 0;
 }
