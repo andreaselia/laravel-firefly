@@ -11316,6 +11316,11 @@ main h1 {
   border: 0;
 }
 
+a.card:hover {
+  -webkit-box-shadow: 0 0 15px 0 rgba(18, 18, 18, 0.05);
+          box-shadow: 0 0 15px 0 rgba(18, 18, 18, 0.05);
+}
+
 .discussion-item:not(:last-of-type) {
   margin-bottom: 1.25rem;
 }
@@ -11340,6 +11345,10 @@ main h1 {
 
 .group-display:not(:first-of-type) {
   margin-left: -12px;
+}
+
+.group-display:hover {
+  z-index: 10;
 }
 
 .group-display-clear {

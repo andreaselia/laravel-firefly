@@ -74,8 +74,13 @@ main {
 }
 
 .card {
-    // box-shadow: 0 .125rem .25rem rgba(#000, .075);
     border: 0;
+}
+
+a.card {
+    &:hover {
+        box-shadow: 0 0 15px 0 rgba($licorice, .05);
+    }
 }
 
 .discussion-item {
@@ -103,6 +108,10 @@ main {
 
     &:not(:first-of-type) {
         margin-left: -12px;
+    }
+
+    &:hover {
+        z-index: 10;
     }
 
     &-clear {

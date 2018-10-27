@@ -26,7 +26,7 @@ class GroupController extends Controller
      */
     public function create()
     {
-        //
+        return view('firefly::groups.create');
     }
 
     /**
@@ -39,12 +39,7 @@ class GroupController extends Controller
     {
         $group = Group::create($request->all());
 
-        // TODO: remove after API is complete
-        if ($request->ajax()) {
-            return $group;
-        }
-
-        return redirect()->route('firefly.forum.index');
+        return redirect()->route('firefly.group.show', $group);
     }
 
     /**
