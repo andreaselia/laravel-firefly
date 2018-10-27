@@ -10,7 +10,7 @@
             <div class="discussion-item-meta">
                 {{ $discussion->user->name }}
                 <span class="mx-2">{{ $discussion->created_at->diffForHumans() }}</span>
-                {{ count($discussion->posts) }} {{ __('replies') }}
+                {{ count($discussion->posts) . ' ' . (count($discussion->posts) > 1 ? __('replies') : __('reply')) }}
             </div>
         </div>
 
