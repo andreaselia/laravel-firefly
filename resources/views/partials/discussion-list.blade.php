@@ -15,15 +15,7 @@
         </div>
 
         <div class="d-flex">
-            @if (isset($group))
-                @php $parent = $group; @endphp
-            @endif
-
             @foreach ($discussion->groups as $group)
-                @if (isset($parent) && $parent->id == $group->id)
-                    @continue
-                @endif
-                
                 <div class="group-display rounded-circle mb-0" data-toggle="tooltip" data-placement="top" title="{{ $group->name }}" style="background: {{ $group->color }};"></div>
             @endforeach
         </div>
