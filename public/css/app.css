@@ -11342,6 +11342,10 @@ main h1 {
   margin-left: -12px;
 }
 
+.group-display-clear {
+  border-color: #eaeaea;
+}
+
 .group-item {
   margin-bottom: 0;
 }

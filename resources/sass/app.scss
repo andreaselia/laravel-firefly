@@ -104,6 +104,10 @@ main {
     &:not(:first-of-type) {
         margin-left: -12px;
     }
+
+    &-clear {
+        border-color: darken($white-smoke, 5%);
+    }
 }
 
 .group-item {
