@@ -17,14 +17,14 @@
 @import 'modals';
 
 body {
-    background-color: $grey-0;
+    background-color: $white-smoke;
     -ms-text-size-adjust: 100%;
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
 }
 
 h1, h2, h3, h4, h5, h6 {
-    color: $grey-4;
+    color: $arsenic;
 }
 
 p {
@@ -45,10 +45,14 @@ a {
     transition: color .3s ease-in-out;
 
     &:hover {
-        color: $grey-4;
+        color: rgba($arsenic, .8);
     }
 }
 
 main {
     padding: 3.75rem 0;
+}
+
+::selection {
+    background: rgba($eerie-black, .05);
 }

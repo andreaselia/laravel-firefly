@@ -1,11 +1,13 @@
+$white-smoke: #F7F7F7;
 $licorice: #121212;
+$arsenic: #444;
+$taupe-gray: #888;
+$eerie-black: #1A1B1C;
 
-$grey-0: #f9f9f9;
-$grey-1: #f5f5f5;
-$grey-2: #dddddd;
-$grey-3: #999999;
-$grey-4: #666666;
-$grey-5: #464646;
+$maximum-yellow-red: #FABC3C;
+$razzmic-berry: #88527F;
+$malachite: #0CCE6B;
+$dodger-blue: #2191FB;
 
 $red: #f64646;
 $green: #46c891;
@@ -13,7 +15,7 @@ $blue: #3081f2;
 $yellow: #ffd151;
 
 $body-bg: #fff;
-$body-color: $grey-3;
+$body-color: $licorice;
 
 $font-family-sans-serif: 'Nunito', sans-serif;
 
@@ -24,6 +26,6 @@ $theme-colors: (
     'yellow': $yellow
 );
 
-$border-radius: .3125rem;
+$border-radius: 5px;
 
 $btn-font-weight: 700;
