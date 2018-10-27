@@ -10,7 +10,6 @@
 @import 'navbar';
 @import 'alerts';
 @import 'forms';
-@import 'buttons';
 @import 'groups';
 @import 'modals';
 
@@ -47,6 +46,7 @@ a {
     transition: color .3s ease-in-out;
 
     &:hover {
+        text-decoration: none;
         color: rgba($arsenic, .8);
     }
 }
@@ -69,7 +69,33 @@ main {
     }
 }
 
+.btn:not(.btn-sm):not(.btn-lg) {
+    font-size: .85em;
+}
+
 .card {
     // box-shadow: 0 .125rem .25rem rgba(#000, .075);
     border: 0;
+}
+
+.discussion-item {
+    &:not(:last-of-type) {
+        margin-bottom: 1.25rem;
+    }
+
+    h3 {
+        font-weight: 700;
+        font-size: 1em;
+        line-height: 1;
+    }
+
+    &-meta {
+        font-size: .75em;
+        color: rgba($licorice, .8);
+    }
+}
+
+.group-item {
+    width: 30px;
+    height: 30px;
 }
