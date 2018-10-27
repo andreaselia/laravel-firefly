@@ -14,6 +14,13 @@
 
     <div class="card">
         <div class="card-body">
+            @if (! count($discussions))
+                <div class="alert alert-yellow mb-0" role="alert">
+                    <strong>{{ __('Holy guacamole!') }}</strong><br>
+                    {{ __('There are no discussions; You could be the first to create one.') }}
+                </div>
+            @endif
+
             @foreach ($discussions as $discussion)
                 <div class="discussion-item d-flex justify-content-between align-items-center">
                     <div>
