@@ -6,7 +6,7 @@
         <h1 class="mb-0">{{ __('Discussions') }}</h1>
 
         @if (Auth::check() && Auth::user()->can('create', Firefly\Discussion::class))
-            <button type="button" class="btn btn-primary" @click.prevent="toggleModal('newGroup')">
+            <button type="button" class="btn btn-primary" @click.prevent="toggleModal('newDiscussion')">
                 {{ __('New Discussion') }}
             </button>
         @endif
@@ -32,7 +32,7 @@
 
                     <div class="d-flex">
                         @foreach ($discussion->groups as $group)
-                            <div class="group-item rounded-circle mb-0 ml-2" style="background: {{ $group->color }};"></div>
+                            <div class="group-item rounded-circle mb-0" style="background: {{ $group->color }};"></div>
                         @endforeach
                     </div>
                 </div>
