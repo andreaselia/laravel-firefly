@@ -15,6 +15,10 @@
 @import 'groups';
 @import 'modals';
 
+::selection {
+    background: rgba($eerie-black, .05);
+}
+
 body {
     background-color: $white-smoke;
     -ms-text-size-adjust: 100%;
@@ -48,14 +52,12 @@ a {
     }
 }
 
-main {
-    padding: 3.75rem 0;
+.dropdown-item {
+    font-size: .85em;
+    font-weight: 700;
+    color: rgba($licorice, .5);
 
-    h1 {
-        
+    &:hover {
+        color: $licorice;
     }
-}
-
-::selection {
-    background: rgba($eerie-black, .05);
 }

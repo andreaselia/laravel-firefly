@@ -11120,7 +11120,6 @@ a.text-yellow:focus {
 
 .navbar {
   background-color: #fff;
-  padding: 1rem 0;
   -webkit-box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.075);
           box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.075);
 }
@@ -11276,6 +11275,14 @@ ul.discussion-list .list-item-meta .date {
   padding: 2rem;
 }
 
+::-moz-selection {
+  background: rgba(27, 29, 30, 0.05);
+}
+
+::selection {
+  background: rgba(27, 29, 30, 0.05);
+}
+
 body {
   background-color: #F7F7F7;
   -ms-text-size-adjust: 100%;
@@ -11315,15 +11322,13 @@ a:hover {
   color: rgba(68, 68, 68, 0.8);
 }
 
-main {
-  padding: 3.75rem 0;
+.dropdown-item {
+  font-size: .85em;
+  font-weight: 700;
+  color: rgba(18, 18, 18, 0.5);
 }
 
-::-moz-selection {
-  background: rgba(27, 29, 30, 0.05);
-}
-
-::selection {
-  background: rgba(27, 29, 30, 0.05);
+.dropdown-item:hover {
+  color: #121212;
 }
 

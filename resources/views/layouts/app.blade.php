@@ -18,7 +18,7 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
+        <nav class="navbar navbar-expand-md navbar-light py-3">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     <svg width="32" height="32" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><circle stroke="#121212" stroke-width="3" cx="16" cy="16" r="14.5"/><path d="M14.554 11.033l6.79 4.514a1 1 0 0 1 .002 1.664l-6.79 4.541A1 1 0 0 1 13 20.921v-9.055a1 1 0 0 1 1.554-.833z" fill="#121212"/></g></svg>
@@ -31,10 +31,10 @@
                     <ul class="navbar-nav mr-auto">
                         @auth
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('firefly.group.index') }}">{{ __('Groups') }}</a>
+                                <a class="nav-link{{ Route::currentRouteName() == 'firefly.forum.index' ? ' active' : '' }}" href="{{ route('firefly.forum.index') }}">{{ __('Discussions') }}</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('firefly.forum.index') }}">{{ __('Discussions') }}</a>
+                                <a class="nav-link{{ Route::currentRouteName() == 'firefly.group.index' ? ' active' : '' }}" href="{{ route('firefly.group.index') }}">{{ __('Groups') }}</a>
                             </li>
                         @endauth
                     </ul>
@@ -42,10 +42,14 @@
                     <ul class="navbar-nav ml-auto">
                         @guest
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                @if (Route::has('login'))
+                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                @endif
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                @if (Route::has('register'))
+                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                @endif
                             </li>
                         @else
                             <li class="nav-item dropdown">
