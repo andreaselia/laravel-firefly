@@ -12,6 +12,7 @@ Route::name(config('firefly.web.name'))->group(function() {
     Route::get('{group}/discussion/create', 'DiscussionController@create')->name('discussion.create');
     Route::post('{group}/discussion', 'DiscussionController@store')->name('discussion.store');
     Route::put('{discussion}-{slug}', 'DiscussionController@update')->name('discussion.update');
+    Route::get('{discussion}-{slug}/edit', 'DiscussionController@edit')->name('discussion.edit');
     Route::delete('{discussion}-{slug}', 'DiscussionController@delete')->name('discussion.delete');
     Route::patch('discussions/{discussion}/hide', 'DiscussionController@hide')->name('discussion.hide');
     Route::patch('discussions/{discussion}/unhide', 'DiscussionController@unhide')->name('discussion.unhide');

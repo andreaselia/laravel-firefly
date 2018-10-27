@@ -32,17 +32,19 @@ class DiscussionController extends Controller
     /**
      * Show the form for creating a new discussion.
      *
+     * @param \Firefly\Group $group
      * @return \Illuminate\View\View
      */
-    public function create()
+    public function create(Group $group)
     {
-        return view('firefly::discussions.create');
+        return view('firefly::discussions.create')->withGroup($group);
     }
 
     /**
      * Store the new discussion.
      *
      * @param \Firefly\Http\Requests\StoreDiscussionRequest $request
+     * @param \Firefly\Group $group
      * @return \Illuminate\Http\RedirectResponse
      */
     public function store(StoreDiscussionRequest $request, Group $group)
@@ -64,6 +66,19 @@ class DiscussionController extends Controller
     {
         return view('firefly::discussions.show')->withDiscussion($discussion)
             ->withPosts($discussion->posts()->paginate());
+    }
+
+    /**
+     * Show the form for editing a discussion.
+     *
+     * @param \Firefly\Group $group
+     * @param \Firefly\Discussion $discussion
+     * @return \Illuminate\View\View
+     */
+    public function edit(Group $group, Discussion $discussion)
+    {
+        return view('firefly::discussions.edit')->withGroup($group)
+            ->withDiscussion($discussion);
     }
 
     /**

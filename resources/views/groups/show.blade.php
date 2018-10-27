@@ -9,7 +9,7 @@
         </div>
 
         @if (Auth::check() && Auth::user()->can('create', Firefly\Discussion::class))
-            <a href="{{ route('firefly.discussion.create', $group) }}" class="btn btn-primary" @click.prevent="toggleModal('newGroup')">
+            <a href="{{ route('firefly.discussion.create', $group) }}" class="btn btn-primary">
                 {{ __('New Discussion') }}
             </a>
         @endif
@@ -28,8 +28,4 @@
         </div>
     </div>
 </div>
-@endsection
-
-@section('modals')
-@include('firefly::modals.new-discussion')
 @endsection
