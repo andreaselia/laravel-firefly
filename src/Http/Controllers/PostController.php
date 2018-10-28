@@ -39,7 +39,7 @@ class PostController extends Controller
 
         $discussion->posts()->save($post);
 
-        return response()->json($post);
+        return redirect()->route('firefly.discussion.show', [$discussion->id, $discussion->slug]);
     }
 
     /**

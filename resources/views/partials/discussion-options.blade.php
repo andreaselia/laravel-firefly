@@ -1,4 +1,4 @@
-<div class="d-flex justify-content-end mb-3">
+<div class="d-flex">
     @can ('stick', $discussion)
         <form action="{{ route('firefly.discussion.stick', [$discussion->id, $discussion->slug]) }}" method="POST">
             @method('PUT')
