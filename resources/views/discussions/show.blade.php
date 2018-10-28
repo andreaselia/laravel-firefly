@@ -12,17 +12,20 @@
         @endif
     </div>
 
-    <div class="card">
-        <div class="card-body">
-            @foreach ($posts as $post)
+    @foreach ($posts as $post)
+        <div class="card mb-3">
+            <div class="card-body">
                 <div class="post-item">
-                    <div class="post-item-meta">{{ $post->created_at->diffForHumans() }}</div>
+                    <div class="post-item-meta d-flex justify-content-between">
+                        {{ $post->created_at->diffForHumans() }}
+                        <a href="#">hide</a>
+                    </div>
 
                     <div><strong>{{ $post->user->name }}</strong> {{ $post->content }}</div>
                 </div>
-            @endforeach
+            </div>
         </div>
-    </div>
+    @endforeach
 
     <div class="card mt-4">
         <div class="card-body">
