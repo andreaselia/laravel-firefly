@@ -20,6 +20,7 @@ Route::name(config('firefly.web.name'))->group(function() {
     // Groups...
     Route::get('groups', 'GroupController@index')->name('group.index');
     Route::get('{group}', 'GroupController@show')->name('group.show');
+    Route::get('{group}/edit', 'GroupController@edit')->name('group.edit');
     Route::get('groups/create', 'GroupController@create')->name('group.create');
     Route::post('groups', 'GroupController@store')->name('group.store');
     Route::put('groups/{group}', 'GroupController@update')->name('group.update');

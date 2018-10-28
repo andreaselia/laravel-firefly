@@ -55,6 +55,19 @@ class GroupController extends Controller
     }
 
     /**
+     * Show the form for editing a group.
+     *
+     * @param \Firefly\Group $group
+     * @return \Illuminate\View\View
+     */
+    public function edit(Group $group)
+    {
+        $this->authorize('update', $group);
+
+        return view('firefly::groups.edit')->withGroup($group);
+    }
+
+    /**
      * Update the specified group.
      *
      * @param \Firefly\Http\Requests\UpdateGroupRequest $request
@@ -67,7 +80,7 @@ class GroupController extends Controller
 
         $group->update($request->only('name'));
 
-        return redirect()->route('firefly.group.show', $group->slug);
+        return redirect()->route('firefly.group.show', $group);
     }
 
     /**

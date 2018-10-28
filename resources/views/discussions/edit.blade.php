@@ -15,7 +15,6 @@
                     <input type="text" name="title" id="title" value="{{ old('title', $discussion->title) }}" class="form-control">
                 </div>
 
-                {{-- TODO: discussion content, based on post --}}
                 <div class="form-group">
                     <label for="content">{{ __('Content') }}</label>
                     <textarea name="content" id="content" class="form-control" rows="3">{{ old('content', $discussion->content) }}</textarea>
