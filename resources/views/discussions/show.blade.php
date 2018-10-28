@@ -21,9 +21,11 @@
                     <div><strong>{{ $post->user->name }}</strong> {{ $post->content }}</div>
                 </div>
             @endforeach
+        </div>
+    </div>
 
-            <hr>
-
+    <div class="card mt-4">
+        <div class="card-body">
             <form action="{{ route('firefly.post.store', [$discussion->id, $discussion->slug]) }}" method="POST">
                 @csrf
 
@@ -33,7 +35,7 @@
                 </div>
 
                 <button type="submit" class="btn btn-blue">
-                    {{ __('Submit Reply') }}
+                    {{ __('Submit') }}
                 </button>
             </form>
         </div>
