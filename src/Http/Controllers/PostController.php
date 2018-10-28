@@ -93,7 +93,7 @@ class PostController extends Controller
 
         $post->hide();
 
-        return response()->json($post);
+        return redirect()->route('firefly.discussion.show', [$post->discussion->id, $post->discussion->slug]);
     }
 
     /**
@@ -109,6 +109,6 @@ class PostController extends Controller
 
         $post->unhide();
 
-        return response()->json($post);
+        return redirect()->route('firefly.discussion.show', [$post->discussion->id, $post->discussion->slug]);
     }
 }

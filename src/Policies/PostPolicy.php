@@ -89,7 +89,7 @@ class PostPolicy
      */
     public function hide($user, Post $post)
     {
-        return true;
+        return is_null($post->hidden_at);
     }
 
     /**
@@ -101,6 +101,6 @@ class PostPolicy
      */
     public function unhide($user, Post $post)
     {
-        return true;
+        return ! is_null($post->hidden_at);
     }
 }

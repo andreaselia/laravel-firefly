@@ -18,7 +18,28 @@
                 <div class="post-item">
                     <div class="post-item-meta d-flex justify-content-between">
                         {{ $post->created_at->diffForHumans() }}
-                        <a href="#">hide</a>
+
+                        @can ('hide', $post)
+                            <a href="{{ route('firefly.post.hide', $post) }}" onclick="event.preventDefault(); document.getElementById('hide-form').submit();">
+                                {{ __('Hide') }}
+                            </a>
+
+                            <form id="hide-form" action="{{ route('firefly.post.hide', $post) }}" method="POST" style="display: none;">
+                                @method('PATCH')
+                                @csrf
+                            </form>
+                        @endcan
+
+                        @can ('unhide', $post)
+                            <a href="{{ route('firefly.post.unhide', $post) }}" onclick="event.preventDefault(); document.getElementById('unhide-form').submit();">
+                                {{ __('Unhide') }}
+                            </a>
+
+                            <form id="unhide-form" action="{{ route('firefly.post.unhide', $post) }}" method="POST" style="display: none;">
+                                @method('PATCH')
+                                @csrf
+                            </form>
+                        @endcan
                     </div>
 
                     <div><strong>{{ $post->user->name }}</strong> {{ $post->content }}</div>
