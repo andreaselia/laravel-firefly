@@ -41,7 +41,7 @@ class DiscussionPolicy
      */
     public function update($user, Discussion $discussion)
     {
-        return true;
+        return $user->id == $discussion->user_id;
     }
 
     /**
@@ -53,7 +53,7 @@ class DiscussionPolicy
      */
     public function delete($user, Discussion $discussion)
     {
-        return true;
+        return $user->id == $discussion->user_id;
     }
 
     /**
@@ -89,7 +89,7 @@ class DiscussionPolicy
      */
     public function lock($user, Discussion $discussion)
     {
-        return true;
+        return is_null($discussion->locked_at);
     }
 
     /**
@@ -101,7 +101,7 @@ class DiscussionPolicy
      */
     public function unlock($user, Discussion $discussion)
     {
-        return true;
+        return ! is_null($discussion->locked_at);
     }
 
     /**
@@ -113,7 +113,7 @@ class DiscussionPolicy
      */
     public function stick($user, Discussion $discussion)
     {
-        return true;
+        return is_null($discussion->stickied_at);
     }
 
     /**
@@ -125,7 +125,7 @@ class DiscussionPolicy
      */
     public function unstick($user, Discussion $discussion)
     {
-        return true;
+        return ! is_null($discussion->stickied_at);
     }
 
     /**

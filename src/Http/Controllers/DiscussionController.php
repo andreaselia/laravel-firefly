@@ -37,6 +37,8 @@ class DiscussionController extends Controller
      */
     public function create(Group $group)
     {
+        $this->authorize('create', Discussion::class);
+        
         return view('firefly::discussions.create')->withGroup($group);
     }
 
@@ -77,6 +79,8 @@ class DiscussionController extends Controller
      */
     public function edit(Group $group, Discussion $discussion)
     {
+        $this->authorize('update', $discussion);
+
         return view('firefly::discussions.edit')->withGroup($group)
             ->withDiscussion($discussion);
     }

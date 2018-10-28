@@ -37,9 +37,9 @@ class DiscussionController extends Controller
      */
     public function store(StoreDiscussionRequest $request)
     {
-        $group = Group::findOrFail($request->group_id);
-
         $this->authorize('create', Discussion::class);
+
+        $group = Group::findOrFail($request->group_id);
 
         $discussion = $this->discussionService->make($request, $group);
 
