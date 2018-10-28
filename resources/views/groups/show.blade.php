@@ -10,12 +10,12 @@
 
         @if (Auth::check() && Auth::user()->can('create', Firefly\Discussion::class))
             <div class="d-flex">
-                <a href="{{ route('firefly.discussion.create', $group) }}" class="btn btn-primary mr-3">
+                <a href="{{ route('firefly.discussion.create', $group) }}" class="btn btn-sm btn-primary mr-3">
                     {{ __('New Discussion') }}
                 </a>
 
                 @can ('update', $group)
-                    <a href="{{ route('firefly.group.edit', $group) }}" class="btn btn-info mr-3">{{ __('Edit') }}</a>
+                    <a href="{{ route('firefly.group.edit', $group) }}" class="btn btn-sm btn-info mr-3">{{ __('Edit') }}</a>
                 @endcan
 
                 @can ('delete', $group)
@@ -23,7 +23,7 @@
                         @method('DELETE')
                         @csrf
 
-                        <button class="btn btn-danger">{{ __('Delete') }}</button>
+                        <button class="btn btn-sm btn-danger">{{ __('Delete') }}</button>
                     </form>
                 @endcan
             </div>

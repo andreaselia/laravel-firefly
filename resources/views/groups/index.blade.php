@@ -6,7 +6,7 @@
         <h1 class="mb-0">{{ __('Groups') }}</h1>
 
         @if (Auth::check() && Auth::user()->can('create', Firefly\Group::class))
-            <a href="{{ route('firefly.group.create') }}" class="btn btn-primary">
+            <a href="{{ route('firefly.group.create') }}" class="btn btn-sm btn-primary">
                 {{ __('New Group') }}
             </a>
         @endif

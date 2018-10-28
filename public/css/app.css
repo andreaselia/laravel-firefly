@@ -2395,7 +2395,7 @@ select.form-control:focus::-ms-value {
 
 .form-control-sm {
   height: calc(1.8125rem + 2px);
-  padding: 0.25rem 0.5rem;
+  padding: 0.25rem 0.75rem;
   font-size: 0.875rem;
   line-height: 1.5;
   border-radius: 0.2rem;
@@ -3878,10 +3878,10 @@ fieldset:disabled a.btn {
 
 .btn-sm,
 .btn-group-sm > .btn {
-  padding: 0.25rem 0.5rem;
+  padding: 0.25rem 0.75rem;
   font-size: 0.875rem;
   line-height: 1.5;
-  border-radius: 0.2rem;
+  border-radius: 30px;
 }
 
 .btn-block {
@@ -4234,8 +4234,8 @@ input[type="button"].btn-block {
 
 .btn-sm + .dropdown-toggle-split,
 .btn-group-sm > .btn + .dropdown-toggle-split {
-  padding-right: 0.375rem;
-  padding-left: 0.375rem;
+  padding-right: 0.5625rem;
+  padding-left: 0.5625rem;
 }
 
 .btn-lg + .dropdown-toggle-split,
@@ -4449,7 +4449,7 @@ input[type="button"].btn-block {
 .input-group-sm > .input-group-prepend > .btn,
 .input-group-sm > .input-group-append > .btn {
   height: calc(1.8125rem + 2px);
-  padding: 0.25rem 0.5rem;
+  padding: 0.25rem 0.75rem;
   font-size: 0.875rem;
   line-height: 1.5;
   border-radius: 0.2rem;

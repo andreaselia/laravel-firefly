@@ -4,7 +4,7 @@
             @method('PUT')
             @csrf
 
-            <button class="btn btn-success mr-3">{{ __('Stick') }}</button>
+            <button class="btn btn-sm btn-success mr-3">{{ __('Stick') }}</button>
         </form>
     @endcan
 
@@ -13,7 +13,7 @@
             @method('PUT')
             @csrf
 
-            <button class="btn btn-success mr-3">{{ __('Unstick') }}</button>
+            <button class="btn btn-sm btn-success mr-3">{{ __('Unstick') }}</button>
         </form>
     @endcan
 
@@ -22,7 +22,7 @@
             @method('PUT')
             @csrf
 
-            <button class="btn btn-success mr-3">{{ __('Lock') }}</button>
+            <button class="btn btn-sm btn-success mr-3">{{ __('Lock') }}</button>
         </form>
     @endcan
 
@@ -31,12 +31,12 @@
             @method('PUT')
             @csrf
 
-            <button class="btn btn-success mr-3">{{ __('Unlock') }}</button>
+            <button class="btn btn-sm btn-success mr-3">{{ __('Unlock') }}</button>
         </form>
     @endcan
 
     @can ('update', $discussion)
-        <a href="{{ route('firefly.discussion.edit', [$discussion->id, $discussion->slug]) }}" class="btn btn-info mr-3">{{ __('Edit') }}</a>
+        <a href="{{ route('firefly.discussion.edit', [$discussion->id, $discussion->slug]) }}" class="btn btn-sm btn-info mr-3">{{ __('Edit') }}</a>
     @endcan
 
     @can ('delete', $discussion)
@@ -44,7 +44,7 @@
             @method('DELETE')
             @csrf
 
-            <button class="btn btn-danger">{{ __('Delete') }}</button>
+            <button class="btn btn-sm btn-danger">{{ __('Delete') }}</button>
         </form>
     @endcan
 </div>
