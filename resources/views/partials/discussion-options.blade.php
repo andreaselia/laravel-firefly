@@ -1,50 +1,59 @@
 <div class="d-flex">
-    @can ('stick', $discussion)
-        <form action="{{ route('firefly.discussion.stick', [$discussion->id, $discussion->slug]) }}" method="POST">
-            @method('PUT')
-            @csrf
+    <div class="dropdown">
+        <button class="btn btn-sm btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            {{ __('Manage Discussion') }}
+        </button>
 
-            <button class="btn btn-sm btn-success mr-3">{{ __('Stick') }}</button>
-        </form>
-    @endcan
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            @can ('stick', $discussion)
+                <a class="dropdown-item" href="{{ route('firefly.discussion.stick', [$discussion->id, $discussion->slug]) }}" onclick="event.preventDefault(); document.getElementById('stick-discussion-form').submit();">{{ __('Stick') }}</a>
 
-    @can ('unstick', $discussion)
-        <form action="{{ route('firefly.discussion.unstick', [$discussion->id, $discussion->slug]) }}" method="POST">
-            @method('PUT')
-            @csrf
+                <form id="stick-discussion-form" action="{{ route('firefly.discussion.stick', [$discussion->id, $discussion->slug]) }}" method="POST" style="display: none;">
+                    @method('PUT')
+                    @csrf
+                </form>
+            @endcan
 
-            <button class="btn btn-sm btn-success mr-3">{{ __('Unstick') }}</button>
-        </form>
-    @endcan
+            @can ('unstick', $discussion)
+                <a class="dropdown-item" href="{{ route('firefly.discussion.unstick', [$discussion->id, $discussion->slug]) }}" onclick="event.preventDefault(); document.getElementById('unstick-discussion-form').submit();">{{ __('Unstick') }}</a>
 
-    @can ('lock', $discussion)
-        <form action="{{ route('firefly.discussion.lock', [$discussion->id, $discussion->slug]) }}" method="POST">
-            @method('PUT')
-            @csrf
+                <form id="unstick-discussion-form" action="{{ route('firefly.discussion.unstick', [$discussion->id, $discussion->slug]) }}" method="POST" style="display: none;">
+                    @method('PUT')
+                    @csrf
+                </form>
+            @endcan
 
-            <button class="btn btn-sm btn-success mr-3">{{ __('Lock') }}</button>
-        </form>
-    @endcan
+            @can ('lock', $discussion)
+                <a class="dropdown-item" href="{{ route('firefly.discussion.lock', [$discussion->id, $discussion->slug]) }}" onclick="event.preventDefault(); document.getElementById('lock-discussion-form').submit();">{{ __('Lock') }}</a>
 
-    @can ('unlock', $discussion)
-        <form action="{{ route('firefly.discussion.unlock', [$discussion->id, $discussion->slug]) }}" method="POST">
-            @method('PUT')
-            @csrf
+                <form id="lock-discussion-form" action="{{ route('firefly.discussion.lock', [$discussion->id, $discussion->slug]) }}" method="POST" style="display: none;">
+                    @method('PUT')
+                    @csrf
+                </form>
+            @endcan
 
-            <button class="btn btn-sm btn-success mr-3">{{ __('Unlock') }}</button>
-        </form>
-    @endcan
+            @can ('unlock', $discussion)
+                <a class="dropdown-item" href="{{ route('firefly.discussion.unlock', [$discussion->id, $discussion->slug]) }}" onclick="event.preventDefault(); document.getElementById('unlock-discussion-form').submit();">{{ __('Unlock') }}</a>
 
-    @can ('update', $discussion)
-        <a href="{{ route('firefly.discussion.edit', [$discussion->id, $discussion->slug]) }}" class="btn btn-sm btn-info mr-3">{{ __('Edit') }}</a>
-    @endcan
+                <form id="unlock-discussion-form" action="{{ route('firefly.discussion.unlock', [$discussion->id, $discussion->slug]) }}" method="POST" style="display: none;">
+                    @method('PUT')
+                    @csrf
+                </form>
+            @endcan
 
-    @can ('delete', $discussion)
-        <form action="{{ route('firefly.discussion.delete', [$discussion->id, $discussion->slug]) }}" method="POST">
-            @method('DELETE')
-            @csrf
+            @can ('update', $discussion)
+                <a class="dropdown-item" href="{{ route('firefly.discussion.edit', [$discussion->id, $discussion->slug]) }}">{{ __('Edit') }}</a>
+            @endcan
 
-            <button class="btn btn-sm btn-danger">{{ __('Delete') }}</button>
-        </form>
-    @endcan
+            @can ('delete', $discussion)
+                <a class="dropdown-item" href="{{ route('firefly.discussion.delete', [$discussion->id, $discussion->slug]) }}" onclick="event.preventDefault(); document.getElementById('delete-discussion-form').submit();">{{ __('Delete') }}</a>
+
+                <form id="delete-discussion-form" action="{{ route('firefly.discussion.delete', [$discussion->id, $discussion->slug]) }}" method="POST" style="display: none;">
+                    @method('DELETE')
+                    @csrf
+                </form>
+            @endcan
+        </div>
+    </div>
+
 </div>
