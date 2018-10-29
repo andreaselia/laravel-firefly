@@ -11203,6 +11203,44 @@ textarea.form-control {
   font-weight: 600;
 }
 
+.pagination .page-item {
+  border-radius: 5px;
+  margin: 0 .25rem;
+}
+
+.pagination .page-item a {
+  -webkit-transition: none;
+  transition: none;
+}
+
+.pagination .page-item:hover:not(.disabled):not(.active) {
+  background: #6279DB;
+}
+
+.pagination .page-item:hover:not(.disabled):not(.active) .page-link {
+  color: #fff;
+}
+
+.pagination .page-item.active {
+  background: rgba(136, 136, 136, 0.2);
+}
+
+.pagination .page-item.active span {
+  color: #888;
+}
+
+.pagination .page-item .page-link {
+  background: transparent;
+  border: 0;
+  font-size: .75rem;
+  font-weight: 700;
+  color: #121212;
+}
+
+.pagination .page-item.disabled span {
+  color: #888;
+}
+
 ::-moz-selection {
   background: rgba(27, 29, 30, 0.05);
 }

@@ -53,6 +53,6 @@
         @endforeach
     </div>
 
-    {!! $groups->links() !!}
+    {!! $groups->links(config('firefly.pagination.view')) !!}
 </div>
 @endsection

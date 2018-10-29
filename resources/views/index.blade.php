@@ -17,8 +17,6 @@
 
     @include('firefly::partials.discussion-list')
 
-    <div class="mt-3">
-        {!! $discussions->links() !!}
-    </div>
+    {!! $discussions->links(config('firefly.pagination.view')) !!}
 </div>
 @endsection
