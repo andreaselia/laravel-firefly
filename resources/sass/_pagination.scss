@@ -7,11 +7,6 @@
             transition: none;
         }
 
-        &:first-of-type,
-        &:last-of-type {
-
-        }
-
         &:hover {
             &:not(.disabled):not(.active) {
                 background: $blue;
@@ -36,6 +31,7 @@
             font-size: .75rem;
             font-weight: 700;
             color: $licorice;
+            border-radius: $border-radius;
         }
 
         &.disabled {

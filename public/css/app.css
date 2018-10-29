@@ -11235,6 +11235,7 @@ textarea.form-control {
   font-size: .75rem;
   font-weight: 700;
   color: #121212;
+  border-radius: 5px;
 }
 
 .pagination .page-item.disabled span {
