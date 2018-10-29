@@ -51,7 +51,7 @@ class GroupController extends Controller
     public function show(Group $group)
     {
         return view('firefly::groups.show')->withGroup($group)
-            ->withDiscussions($group->discussions()->paginate());
+            ->withDiscussions($group->discussions()->paginate(config('firefly.pagination.discussions')));
     }
 
     /**
