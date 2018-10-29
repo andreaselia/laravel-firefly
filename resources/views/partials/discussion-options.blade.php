@@ -45,7 +45,7 @@
         @endcan
 
         @can ('delete', $discussion)
-            <a class="dropdown-item" href="{{ route('firefly.discussion.delete', [$discussion->id, $discussion->slug]) }}" onclick="event.preventDefault(); document.getElementById('delete-discussion-form').submit();">{{ __('Delete') }}</a>
+            <a class="dropdown-item text-danger" href="{{ route('firefly.discussion.delete', [$discussion->id, $discussion->slug]) }}" onclick="event.preventDefault(); document.getElementById('delete-discussion-form').submit();">{{ __('Delete') }}</a>
 
             <form id="delete-discussion-form" action="{{ route('firefly.discussion.delete', [$discussion->id, $discussion->slug]) }}" method="POST" style="display: none;">
                 @method('DELETE')

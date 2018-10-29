@@ -25,7 +25,7 @@
                         @endcan
 
                         @can ('delete', $group)
-                            <a class="dropdown-item" href="{{ route('firefly.group.delete', $group) }}" onclick="event.preventDefault(); document.getElementById('delete-group-form').submit();">Delete</a>
+                            <a class="dropdown-item text-danger" href="{{ route('firefly.group.delete', $group) }}" onclick="event.preventDefault(); document.getElementById('delete-group-form').submit();">Delete</a>
 
                             <form id="delete-group-form" action="{{ route('firefly.group.delete', $group) }}" method="POST" style="display: none;">
                                 @method('DELETE')
