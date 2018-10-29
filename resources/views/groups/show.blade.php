@@ -14,18 +14,26 @@
                     {{ __('New Discussion') }}
                 </a>
 
-                @can ('update', $group)
-                    <a href="{{ route('firefly.group.edit', $group) }}" class="btn btn-sm btn-info mr-3">{{ __('Edit') }}</a>
-                @endcan
+                <div class="dropdown">
+                    <button class="btn btn-sm btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        {{ __('Manage Group') }}
+                    </button>
 
-                @can ('delete', $group)
-                    <form action="{{ route('firefly.group.delete', $group) }}" method="POST">
-                        @method('DELETE')
-                        @csrf
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        @can ('update', $group)
+                            <a class="dropdown-item" href="{{ route('firefly.group.edit', $group) }}">{{ __('Edit') }}</a>
+                        @endcan
 
-                        <button class="btn btn-sm btn-danger">{{ __('Delete') }}</button>
-                    </form>
-                @endcan
+                        @can ('delete', $group)
+                            <a class="dropdown-item" href="{{ route('firefly.group.delete', $group) }}" onclick="event.preventDefault(); document.getElementById('delete-group-form').submit();">Delete</a>
+
+                            <form id="delete-group-form" action="{{ route('firefly.group.delete', $group) }}" method="POST" style="display: none;">
+                                @method('DELETE')
+                                @csrf
+                            </form>
+                        @endcan
+                    </div>
+                </div>                    
             </div>
         @endif
     </div>
