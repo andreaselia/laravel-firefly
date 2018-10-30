@@ -11306,6 +11306,11 @@ main h1 {
   color: #121212;
 }
 
+.dropdown-toggle::after {
+  top: 1px;
+  position: relative;
+}
+
 .btn:not(.btn-sm):not(.btn-lg) {
   font-size: .85em;
 }

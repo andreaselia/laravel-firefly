@@ -59,7 +59,6 @@ main {
     }
 }
 
-// TODO: vertical align dropdown icon, a little too high (matches top of text, not middle)
 .dropdown-item {
     font-size: .85em;
     font-weight: 700;
@@ -67,6 +66,13 @@ main {
 
     &:hover {
         color: $licorice;
+    }
+}
+
+.dropdown-toggle {
+    &::after {
+        top: 1px;
+        position: relative;
     }
 }
 
