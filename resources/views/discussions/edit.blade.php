@@ -2,7 +2,15 @@
 
 @section('content')
 <div class="container">
-    <h1 class="mb-4">{{ __('Edit Discussion') }}</h1>
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div class="d-flex">
+            <h1 class="mb-0">{{ __('Edit Discussion') }}</h1>
+        </div>
+
+        @if (Auth::check())
+            <a class="btn btn-sm btn-secondary" href="{{ route('firefly.discussion.show', [$discussion->id, $discussion->slug]) }}">{{ __('Back to Discussion') }}</a>
+        @endif
+    </div>
 
     <div class="card">
         <div class="card-body">
