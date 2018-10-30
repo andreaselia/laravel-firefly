@@ -64,6 +64,11 @@ main {
     font-weight: 700;
     color: rgba($licorice, .5);
 
+    &:active,
+    &.active {
+        color: #fff !important;
+    }
+
     &:hover {
         color: $licorice;
     }
