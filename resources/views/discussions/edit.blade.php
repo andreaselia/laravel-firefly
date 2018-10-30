@@ -21,17 +21,6 @@
                     @endif
                 </div>
 
-                <div class="form-group">
-                    <label for="content">{{ __('Content') }}</label>
-                    <textarea name="content" id="content" class="form-control{{ $errors->has('content') ? ' is-invalid' : '' }}" rows="3" required>{{ old('content', $discussion->content) }}</textarea>
-
-                    @if ($errors->has('content'))
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $errors->first('content') }}</strong>
-                        </span>
-                    @endif
-                </div>
-
                 <button type="submit" class="btn btn-primary">
                     {{ __('Submit') }}
                 </button>

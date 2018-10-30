@@ -43,6 +43,20 @@ class PostController extends Controller
     }
 
     /**
+     * Show the form for editing a post.
+     *
+     * @param \Firefly\Group $group
+     * @param \Firefly\Post $post
+     * @return \Illuminate\View\View
+     */
+    public function edit(Post $post)
+    {
+        $this->authorize('update', $post);
+
+        return view('firefly::posts.edit')->withPost($post);
+    }
+
+    /**
      * Update the specified post.
      *
      * @param \Firefly\Http\Requests\UpdatePostRequest $request
@@ -59,7 +73,7 @@ class PostController extends Controller
             $request->only('content')
         );
 
-        return response()->json($post);
+        return redirect()->route('firefly.discussion.show', [$discussion->id, $discussion->slug]);
     }
 
     /**

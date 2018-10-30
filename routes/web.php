@@ -30,6 +30,7 @@ Route::name(config('firefly.web.name'))->group(function() {
     Route::post('{discussion}-{slug}', 'PostController@store')->name('post.store');
     Route::put('{discussion}-{slug}/{post}', 'PostController@update')->name('post.update');
     Route::delete('{discussion}-{slug}/{post}', 'PostController@delete')->name('post.delete');
+    Route::get('posts/{post}/edit', 'PostController@edit')->name('post.edit');
     Route::patch('posts/{post}/hide', 'PostController@hide')->name('post.hide');
     Route::patch('posts/{post}/unhide', 'PostController@unhide')->name('post.unhide');
 });
