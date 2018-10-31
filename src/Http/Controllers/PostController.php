@@ -83,36 +83,4 @@ class PostController extends Controller
 
         return response()->json($post);
     }
-
-    /**
-     * Hide the specified post.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @param \Firefly\Post $post
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function hide(Request $request, Post $post)
-    {
-        $this->authorize('hide', $post);
-
-        $post->hide();
-
-        return redirect()->route('firefly.discussion.show', [$post->discussion->id, $post->discussion->slug]);
-    }
-
-    /**
-     * Unhide the specified post.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @param \Firefly\Post $post
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function unhide(Request $request, Post $post)
-    {
-        $this->authorize('unhide', $post);
-
-        $post->unhide();
-
-        return redirect()->route('firefly.discussion.show', [$post->discussion->id, $post->discussion->slug]);
-    }
 }

@@ -14,26 +14,8 @@
                     {{ __('New Discussion') }}
                 </a>
 
-                <div class="dropdown">
-                    <button class="btn btn-sm btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        {{ __('Manage Group') }}
-                    </button>
-
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        @can ('update', $group)
-                            <a class="dropdown-item" href="{{ route('firefly.group.edit', $group) }}">{{ __('Edit') }}</a>
-                        @endcan
-
-                        @can ('delete', $group)
-                            <a class="dropdown-item text-danger" href="{{ route('firefly.group.delete', $group) }}" onclick="event.preventDefault(); document.getElementById('delete-group-form').submit();">Delete</a>
-
-                            <form id="delete-group-form" action="{{ route('firefly.group.delete', $group) }}" method="POST" style="display: none;">
-                                @method('DELETE')
-                                @csrf
-                            </form>
-                        @endcan
-                    </div>
-                </div>
+                <a href="#" class="btn btn-sm btn-outline-primary mr-3">Edit</a>
+                <a href="#" class="btn btn-sm btn-outline-danger">Delete</a>
             </div>
         @endif
     </div>

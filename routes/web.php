@@ -14,8 +14,6 @@ Route::name(config('firefly.web.name'))->group(function() {
     Route::put('{discussion}-{slug}', 'DiscussionController@update')->name('discussion.update');
     Route::get('{discussion}-{slug}/edit', 'DiscussionController@edit')->name('discussion.edit');
     Route::delete('{discussion}-{slug}', 'DiscussionController@delete')->name('discussion.delete');
-    Route::patch('discussions/{discussion}/hide', 'DiscussionController@hide')->name('discussion.hide');
-    Route::patch('discussions/{discussion}/unhide', 'DiscussionController@unhide')->name('discussion.unhide');
 
     // Groups...
     Route::get('groups', 'GroupController@index')->name('group.index');
@@ -31,6 +29,4 @@ Route::name(config('firefly.web.name'))->group(function() {
     Route::put('{discussion}-{slug}/{post}', 'PostController@update')->name('post.update');
     Route::delete('{discussion}-{slug}/{post}', 'PostController@delete')->name('post.delete');
     Route::get('posts/{post}/edit', 'PostController@edit')->name('post.edit');
-    Route::patch('posts/{post}/hide', 'PostController@hide')->name('post.hide');
-    Route::patch('posts/{post}/unhide', 'PostController@unhide')->name('post.unhide');
 });

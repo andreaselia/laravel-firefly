@@ -178,36 +178,4 @@ class DiscussionController extends Controller
 
         return redirect()->route('firefly.discussion.show', [$discussion->id, $discussion->slug]);
     }
-
-    /**
-     * Hide the specified discussion.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @param \Firefly\Discussion $discussion
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function hide(Request $request, Discussion $discussion)
-    {
-        $this->authorize('hide', $discussion);
-
-        $discussion->hide();
-
-        return response()->json($discussion);
-    }
-
-    /**
-     * Unhide the specified discussion.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @param \Firefly\Discussion $discussion
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function unhide(Request $request, Discussion $discussion)
-    {
-        $this->authorize('hide', $discussion);
-
-        $discussion->unhide();
-
-        return response()->json($discussion);
-    }
 }

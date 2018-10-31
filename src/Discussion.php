@@ -9,7 +9,7 @@ use Spatie\Sluggable\SlugOptions;
 
 class Discussion extends Model
 {
-    use HasSlug, Hideable, SoftDeletes;
+    use HasSlug, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
