@@ -2,7 +2,15 @@
 
 @section('content')
 <div class="container">
-    <h1 class="mb-4">{{ __('Edit Group') }}</h1>
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div class="d-flex">
+            <h1 class="mb-0">{{ __('Edit Group') }}</h1>
+        </div>
+
+        @if (Auth::check())
+            <a class="btn btn-sm btn-secondary" href="{{ route('firefly.group.show', $group) }}">{{ __('Back to Group') }}</a>
+        @endif
+    </div>
 
     <div class="card">
         <div class="card-body">

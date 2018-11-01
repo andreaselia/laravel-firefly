@@ -79,28 +79,4 @@ class PostPolicy
     {
         return true;
     }
-
-    /**
-     * Determine whether the user can hide the post.
-     *
-     * @param  $user
-     * @param  \Firefly\Post  $post
-     * @return mixed
-     */
-    public function hide($user, Post $post)
-    {
-        return is_null($post->hidden_at);
-    }
-
-    /**
-     * Determine whether the user can unhide the post.
-     *
-     * @param  $user
-     * @param  \Firefly\Post  $post
-     * @return mixed
-     */
-    public function unhide($user, Post $post)
-    {
-        return ! is_null($post->hidden_at);
-    }
 }

@@ -127,28 +127,4 @@ class DiscussionPolicy
     {
         return ! is_null($discussion->stickied_at);
     }
-
-    /**
-     * Determine whether the user can hide the discussion.
-     *
-     * @param  $user
-     * @param  \Firefly\Discussion  $discussion
-     * @return mixed
-     */
-    public function hide($user, Discussion $discussion)
-    {
-        return true;
-    }
-
-    /**
-     * Determine whether the user can unhide the discussion.
-     *
-     * @param  $user
-     * @param  \Firefly\Discussion  $discussion
-     * @return mixed
-     */
-    public function unhide($user, Discussion $discussion)
-    {
-        return true;
-    }
 }

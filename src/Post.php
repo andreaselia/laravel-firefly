@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Post extends Model
 {
-    use Hideable, SoftDeletes;
+    use SoftDeletes;
 
     /**
      * The attributes that are mass assignable.

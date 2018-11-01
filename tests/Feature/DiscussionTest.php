@@ -136,38 +136,6 @@ class DiscussionTest extends TestCase
         $crawler->assertLocation('forum/' . $discussion->uri);
     }
 
-    public function test_discussion_was_hidden_successfully()
-    {
-        $discussion = $this->getDiscussion();
-
-        $crawler = $this->actingAs($this->getUser())
-            ->patch('forum/discussions/' . $discussion->id . '/hide');
-
-        $discussion->refresh();
-
-        $crawler->assertOk();
-        $crawler->assertJsonStructure();
-
-        $this->assertNotNull($discussion->hidden_at);
-        $this->assertInstanceOf(Carbon::class, $discussion->hidden_at);
-    }
-
-    public function test_discussion_was_unhidden_successfully()
-    {
-        $discussion = $this->getDiscussion();
-
-        $crawler = $this->actingAs($this->getUser())
-            ->patch('forum/discussions/' . $discussion->id . '/unhide');
-
-        $discussion->refresh();
-
-        $crawler->assertOk();
-        $crawler->assertJsonStructure();
-
-        $this->assertNull($discussion->hidden_at);
-        $this->assertNotInstanceOf(Carbon::class, $discussion->hidden_at);
-    }
-
     public function test_title_is_required()
     {
         $title = '';

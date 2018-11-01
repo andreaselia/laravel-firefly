@@ -11302,8 +11302,18 @@ main h1 {
   color: rgba(18, 18, 18, 0.5);
 }
 
+.dropdown-item:active,
+.dropdown-item.active {
+  color: #fff !important;
+}
+
 .dropdown-item:hover {
   color: #121212;
+}
+
+.dropdown-toggle::after {
+  top: 1px;
+  position: relative;
 }
 
 .btn:not(.btn-sm):not(.btn-lg) {
