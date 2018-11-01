@@ -27,10 +27,8 @@ class PostTest extends TestCase
             'content' => 'Foo Bar',
         ]);
 
-        $crawler->assertOk();
-        $crawler->assertJson([
-            'content' => 'Foo Bar',
-        ]);
+        $crawler->assertRedirect();
+        $crawler->assertLocation('forum/' . $discussion->uri);
     }
 
     public function test_post_was_updated()
@@ -78,24 +76,24 @@ class PostTest extends TestCase
 
         $post->refresh();
 
-        $crawler->assertOk();
-        $crawler->assertJsonStructure();
-
+        $crawler->assertRedirect();
+        $crawler->assertLocation('forum/' . $post->discussion->uri);
+        
         $this->assertNotNull($post->hidden_at);
         $this->assertInstanceOf(Carbon::class, $post->hidden_at);
     }
 
     public function test_post_was_unhidden_successfully()
     {
-        $post = $this->getPost();
+        $post = $this->getPost()->hide();
 
         $crawler = $this->actingAs($this->getUser())
             ->patchJson('forum/posts/' . $post->id . '/unhide');
-
+        
         $post->refresh();
 
-        $crawler->assertOk();
-        $crawler->assertJsonStructure();
+        $crawler->assertRedirect();
+        $crawler->assertLocation('forum/' . $post->discussion->uri);
 
         $this->assertNull($post->hidden_at);
         $this->assertNotInstanceOf(Carbon::class, $post->hidden_at);

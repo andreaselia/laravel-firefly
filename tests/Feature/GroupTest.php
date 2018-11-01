@@ -13,10 +13,10 @@ class GroupTest extends TestCase
         Group::truncate();
 
         $crawler = $this->actingAs($this->getUser())
-            ->post('forum/groups', [
+            ->postJson('forum/groups', [
                 'name' => 'Foo Bar',
             ]);
-
+        
         $groups = Group::all();
 
         $this->assertTrue($groups->count() == 1);
@@ -28,7 +28,7 @@ class GroupTest extends TestCase
         $group = Group::first();
 
         $crawler->assertRedirect();
-        $crawler->assertLocation('forum/' . $group->uri);
+        $crawler->assertLocation('forum/' . $group->slug);
     }
 
     public function test_discussion_was_updated()

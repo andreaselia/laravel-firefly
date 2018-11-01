@@ -123,7 +123,7 @@ class DiscussionTest extends TestCase
 
     public function test_discussion_gets_unstickied()
     {
-        $discussion = $this->getDiscussion()->lock();
+        $discussion = $this->getDiscussion()->stick();
 
         $crawler = $this->actingAs($this->getUser())
             ->put('forum/' . $discussion->uri . '/unstick');
