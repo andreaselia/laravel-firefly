@@ -14,7 +14,7 @@ class GroupTest extends TestCase
 
         $crawler = $this->actingAs($this->getUser(), 'api')
             ->postJson('api/forum/groups', [
-                'title' => 'Foo Bar',
+                'name' => 'Foo Bar',
                 'color' => '#444',
             ]);
 
@@ -22,7 +22,7 @@ class GroupTest extends TestCase
 
         $this->assertTrue($groups->count() == 1);
         $this->assertDatabaseHas('groups', [
-            'title' => 'Foo Bar',
+            'name' => 'Foo Bar',
             'color' => '#444',
         ]);
 
