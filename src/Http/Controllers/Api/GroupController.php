@@ -44,7 +44,7 @@ class GroupController extends Controller
      * Delete the specified group.
      *
      * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\RedirectResponse
+     * @return \Illuminate\Http\Response
      */
     public function delete(Request $request, Group $group)
     {

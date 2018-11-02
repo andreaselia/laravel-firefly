@@ -74,4 +74,32 @@ class DiscussionTest extends TestCase
 
         $crawler->assertOk();
     }
+
+    public function test_discussion_was_locked()
+    {
+        $discussion = $this->getDiscussion();
+
+        $crawler = $this->actingAs($this->getUser(), 'api')
+            ->putJson('api/forum/' . $discussion->uri . '/lock');
+
+        $discussion->refresh();
+
+        $this->assertNotNull($discussion->locked_at);
+
+        $crawler->assertOk();
+    }
+
+    public function test_discussion_was_unlocked()
+    {
+        $discussion = $this->getDiscussion()->lock();
+
+        $crawler = $this->actingAs($this->getUser(), 'api')
+            ->putJson('api/forum/' . $discussion->uri . '/unlock');
+
+        $discussion->refresh();
+
+        $this->assertNull($discussion->locked_at);
+
+        $crawler->assertOk();
+    }
 }
