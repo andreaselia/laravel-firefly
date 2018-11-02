@@ -13,3 +13,8 @@ Route::put('{discussion}-{slug}/unstick', 'DiscussionController@unstick')->where
 Route::post('groups', 'GroupController@store');
 Route::put('groups/{group}', 'GroupController@update');
 Route::delete('groups/{group}', 'GroupController@delete');
+
+// Posts...
+Route::post('{discussion}-{slug}', 'PostController@store');
+Route::put('{discussion}-{slug}/{post}', 'PostController@update');
+Route::delete('{discussion}-{slug}/{post}', 'PostController@delete');
