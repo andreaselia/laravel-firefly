@@ -4,7 +4,7 @@ Route::name(config('firefly.web.name'))->group(function() {
     Route::get('/', 'ForumController@index')->name('forum.index');
 
     // Discussions...
-    Route::get('{discussion}-{slug}', 'DiscussionController@show')->name('discussion.show');
+    Route::get('{discussion}-{slug}', 'DiscussionController@show')->name('discussion.show')->where(['discussion' => '[0-9]+']);
     Route::put('{discussion}-{slug}/lock', 'DiscussionController@lock')->name('discussion.lock');
     Route::put('{discussion}-{slug}/unlock', 'DiscussionController@unlock')->name('discussion.unlock');
     Route::put('{discussion}-{slug}/stick', 'DiscussionController@stick')->name('discussion.stick');
