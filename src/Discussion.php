@@ -148,4 +148,16 @@ class Discussion extends Model
 
         return $this;
     }
+
+    /**
+     * Get the reply count and convert it to a readable string.
+     * 
+     * @return null|string
+     */
+    public function getReplyCountAttribute()
+    {
+        $count = $this->posts->count() - 1;
+
+        return $count > 0 ? $count . ' ' . str_plural('reply', $count) : null;
+    }
 }
