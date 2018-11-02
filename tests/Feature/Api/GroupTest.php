@@ -29,4 +29,37 @@ class GroupTest extends TestCase
         $crawler->assertOk();
         $crawler->assertJsonStructure();
     }
+
+    public function test_group_was_updated()
+    {
+        $group = $this->getGroup();
+
+        $crawler = $this->actingAs($this->getUser(), 'api')
+            ->putJson('api/forum/groups/' . $group->slug, [
+                'name' => 'Bar Foo',
+            ]);
+
+        $group->refresh();
+
+        $this->assertEquals('Bar Foo', $group->name);
+        $this->assertEquals('bar-foo', $group->slug);
+
+        $crawler->assertOk();
+        $crawler->assertJsonStructure();
+    }
+
+    public function test_group_was_soft_deleted()
+    {
+        $group = $this->getGroup();
+
+        $crawler = $this->actingAs($this->getUser(), 'api')
+            ->deleteJson('api/forum/groups/' . $group->slug);
+        
+        $group->refresh();
+
+        $this->assertFalse($group->exists());
+        $this->assertNotNull($group->deleted_at);
+
+        $crawler->assertOk();
+    }
 }
