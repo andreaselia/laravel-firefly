@@ -12,12 +12,6 @@
         @endif
     </div>
 
-    @if (! count($groups))
-        <div class="alert alert-yellow text-center" role="alert">
-            {{ __('Uh oh, there are no groups.') }}
-        </div>
-    @endif
-
     <div class="row">
         @if (! count($groups))
             <div class="col">
