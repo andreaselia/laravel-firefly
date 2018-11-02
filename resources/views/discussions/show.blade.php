@@ -3,8 +3,16 @@
 @section('content')
 <div class="container">
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <div class="d-flex">
+        <div class="d-flex align-items-center">
             <h1 class="mb-0">{{ $discussion->title }}</h1>
+
+            @if ($discussion->stickied_at)
+                <i class="icon icon-stuck ml-2" data-toggle="tooltip" title="{{ __('Stickied') }}"></i>
+            @endif
+
+            @if ($discussion->locked_at)
+                <i class="icon icon-locked ml-2" data-toggle="tooltip" title="{{ __('Locked') }}"></i>
+            @endif
         </div>
 
         @if (Auth::check())
