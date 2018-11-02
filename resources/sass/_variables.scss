@@ -31,7 +31,13 @@ $theme-colors: (
     'yellow': $yellow
 );
 
+$link-color: $licorice;
+$link-hover-color: lighten($link-color, 30%);
+$link-hover-decoration: none;
+
 $border-radius: 5px;
+
+$input-border-color: $gray;
 
 $input-btn-padding-x: 1.75rem;
 $input-btn-padding-y: .75rem;
@@ -42,3 +48,5 @@ $input-btn-padding-y-sm: .35rem;
 $btn-font-weight: 700;
 $btn-border-radius: 30px;
 $btn-border-radius-sm: 30px;
+
+$dropdown-link-active-bg: $blue;

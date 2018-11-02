@@ -19,7 +19,7 @@ class PostController extends Controller
      */
     public function store(StorePostRequest $request, Discussion $discussion)
     {
-        $this->authorize('create', Post::class);
+        $this->authorize('reply', $discussion);
 
         $user = $request->user();
 
@@ -81,6 +81,6 @@ class PostController extends Controller
 
         $post->delete();
 
-        return response()->json($post);
+        return redirect()->route('firefly.discussion.show', [$discussion->id, $discussion->slug]);
     }
 }

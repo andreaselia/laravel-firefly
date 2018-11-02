@@ -1,4 +1,3 @@
-
 window._ = require('lodash');
 window.Popper = require('popper.js').default;
 
@@ -9,5 +8,7 @@ try {
 } catch (e) {}
 
 $(function () {
-    $('[data-toggle="tooltip"]').tooltip()
+    $('[data-toggle="tooltip"]').tooltip({
+        container: 'body'
+    })
 });

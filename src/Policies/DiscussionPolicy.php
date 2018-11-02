@@ -127,4 +127,16 @@ class DiscussionPolicy
     {
         return ! is_null($discussion->stickied_at);
     }
+
+    /**
+     * Determine whether the user can reply the discussion.
+     *
+     * @param  $user
+     * @param  \Firefly\Discussion  $discussion
+     * @return mixed
+     */
+    public function reply($user, Discussion $discussion)
+    {
+        return is_null($discussion->locked_at);
+    }
 }

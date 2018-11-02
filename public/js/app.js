@@ -13014,7 +13014,6 @@ module.exports = __webpack_require__(8);
 /* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
-
 window._ = __webpack_require__(5);
 window.Popper = __webpack_require__(1).default;
 
@@ -13025,7 +13024,9 @@ try {
 } catch (e) {}
 
 $(function () {
-    $('[data-toggle="tooltip"]').tooltip();
+    $('[data-toggle="tooltip"]').tooltip({
+        container: 'body'
+    });
 });
 
 /***/ }),

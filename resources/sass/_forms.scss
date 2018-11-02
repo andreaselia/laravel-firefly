@@ -9,20 +9,11 @@
 }
 
 .form-control {
-    // background-color: $grey-1;
-    // border: 1px solid $grey-2;
     border-radius: 5px;
     width: 100%;
     padding: 0 15px;
     line-height: 1.2;
-    // color: $grey-4;
-
-    &:focus {
-        background-color: #fff;
-        border-color: $primary;
-        box-shadow: 0 0 0 3px rgba($primary, .25);
-        outline: none;
-    }
+    color: $gray;
 }
 
 input {
