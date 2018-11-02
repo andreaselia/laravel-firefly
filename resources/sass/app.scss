@@ -1,0 +1,164 @@
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito:400,600,700');
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
+@import 'navbar';
+@import 'alerts';
+@import 'forms';
+@import 'groups';
+@import 'pagination';
+
+::selection {
+    background: rgba($eerie-black, .05);
+}
+
+body {
+    background-color: $white-smoke;
+    -ms-text-size-adjust: 100%;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: $arsenic;
+}
+
+p {
+    line-height: 1;
+
+    &:last-of-type {
+        margin-bottom: 0;
+    }
+}
+
+ul {
+    margin: 0;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+    transition: color .3s ease-in-out;
+
+    &:hover {
+        text-decoration: none;
+        color: rgba($arsenic, .8);
+    }
+}
+
+main {
+    h1 {
+        font-weight: 700;
+        font-size: 28px;
+        line-height: 30px;
+    }
+}
+
+.dropdown-item {
+    font-size: .85em;
+    font-weight: 700;
+    color: rgba($licorice, .5);
+
+    &:active,
+    &.active {
+        color: #fff !important;
+    }
+
+    &:hover {
+        color: $licorice;
+    }
+}
+
+.dropdown-toggle {
+    &::after {
+        top: 1px;
+        position: relative;
+    }
+}
+
+.btn:not(.btn-sm):not(.btn-lg) {
+    font-size: .85em;
+}
+
+.card {
+    border: 0;
+}
+
+a.card {
+    &:hover {
+        box-shadow: 0 0 15px 0 rgba($licorice, .05);
+    }
+}
+
+.discussion-item {
+    &:not(:last-of-type) {
+        margin-bottom: 1.25rem;
+    }
+
+    h3 {
+        font-weight: 700;
+        font-size: 1em;
+        line-height: 1;
+    }
+
+    &-meta {
+        font-size: .75em;
+        color: rgba($licorice, .8);
+    }
+}
+
+.group-display {
+    width: 30px;
+    height: 30px;
+    border: 3px solid #fff;
+    background: $licorice;
+
+    &:not(:first-of-type) {
+        margin-left: -12px;
+    }
+
+    &:hover {
+        z-index: 10;
+    }
+
+    &-clear {
+        border-color: darken($white-smoke, 5%);
+    }
+}
+
+.group-item {
+    margin-bottom: 0;
+
+    h3 {
+        font-weight: 700;
+        font-size: 1em;
+        line-height: 1;
+    }
+
+    &-meta {
+        font-size: .75em;
+        color: rgba($licorice, .8);
+    }
+}
+
+.post-item {
+    &:not(:last-of-type) {
+        margin-bottom: 1.25rem;
+    }
+
+    h3 {
+        font-weight: 700;
+        font-size: 1em;
+        line-height: 1;
+    }
+
+    &-meta {
+        font-size: .75em;
+        color: rgba($licorice, .8);
+    }
+}

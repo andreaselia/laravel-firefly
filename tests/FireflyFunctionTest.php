@@ -1,6 +1,6 @@
 <?php
 
-namespace AndreasElia\Firefly\Test;
+namespace Firefly\Test;
 
 class FireflyFunctionTest extends TestCase
 {

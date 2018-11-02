@@ -1,0 +1,43 @@
+.pagination {
+    .page-item {
+        border-radius: $border-radius;
+        margin: 0 .25rem;
+
+        a {
+            transition: none;
+        }
+
+        &:hover {
+            &:not(.disabled):not(.active) {
+                background: $blue;
+
+                .page-link {
+                    color: #fff;
+                }
+            }
+        }
+
+        &.active {
+            background: rgba($gray, .2);
+
+            span {
+                color: $gray;
+            }
+        }
+
+        .page-link {
+            background: transparent;
+            border: 0;
+            font-size: .75rem;
+            font-weight: 700;
+            color: $licorice;
+            border-radius: $border-radius;
+        }
+
+        &.disabled {
+            span {
+                color: $gray;
+            }
+        }
+    }   
+}
