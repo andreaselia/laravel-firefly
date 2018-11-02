@@ -1,14 +1,15 @@
 .group-item {
-    margin-bottom: 25px;
+    margin-bottom: 0;
 
-    a {
-        display: block;
-        font-size: 1.25em;
+    h3 {
         font-weight: 700;
+        font-size: 1em;
         line-height: 1;
-        color: $licorice;
-        text-decoration: none;
-        font-size: 1.125rem;
+    }
+
+    &-meta {
+        font-size: .75em;
+        color: rgba($licorice, .8);
     }
 }
 
@@ -22,4 +23,23 @@
     text-align: center;
     border-radius: 3px;
     font-weight: 600;
+}
+
+.group-display {
+    width: 30px;
+    height: 30px;
+    border: 3px solid #fff;
+    background: $licorice;
+
+    &:not(:first-of-type) {
+        margin-left: -12px;
+    }
+
+    &:hover {
+        z-index: 10;
+    }
+
+    &-clear {
+        border-color: darken($white-smoke, 5%);
+    }
 }

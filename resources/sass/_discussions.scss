@@ -1,0 +1,33 @@
+.discussion-item {
+    &:not(:last-of-type) {
+        margin-bottom: 1.25rem;
+    }
+
+    h3 {
+        font-weight: 700;
+        font-size: 1em;
+        line-height: 1;
+    }
+
+    &-meta {
+        font-size: .75em;
+        color: rgba($licorice, .8);
+    }
+}
+
+.post-item {
+    &:not(:last-of-type) {
+        margin-bottom: 1.25rem;
+    }
+
+    h3 {
+        font-weight: 700;
+        font-size: 1em;
+        line-height: 1;
+    }
+
+    &-meta {
+        font-size: .75em;
+        color: rgba($licorice, .8);
+    }
+}
