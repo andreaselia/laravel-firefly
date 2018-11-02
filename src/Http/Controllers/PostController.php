@@ -19,7 +19,7 @@ class PostController extends Controller
      */
     public function store(StorePostRequest $request, Discussion $discussion)
     {
-        $this->authorize('create', Post::class);
+        $this->authorize('reply', $discussion);
 
         $user = $request->user();
 

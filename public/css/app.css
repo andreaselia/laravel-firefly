@@ -182,15 +182,15 @@ sup {
 }
 
 a {
-  color: #6279DB;
+  color: #121212;
   text-decoration: none;
   background-color: transparent;
   -webkit-text-decoration-skip: objects;
 }
 
 a:hover {
-  color: #2d4ac4;
-  text-decoration: underline;
+  color: #5f5e5e;
+  text-decoration: none;
 }
 
 a:not([href]):not([tabindex]) {
@@ -3843,20 +3843,20 @@ fieldset:disabled a.btn {
 
 .btn-link {
   font-weight: 400;
-  color: #6279DB;
+  color: #121212;
   background-color: transparent;
 }
 
 .btn-link:hover {
-  color: #2d4ac4;
-  text-decoration: underline;
+  color: #5f5e5e;
+  text-decoration: none;
   background-color: transparent;
   border-color: transparent;
 }
 
 .btn-link:focus,
 .btn-link.focus {
-  text-decoration: underline;
+  text-decoration: none;
   border-color: transparent;
   -webkit-box-shadow: none;
           box-shadow: none;
@@ -5815,14 +5815,14 @@ input[type="button"].btn-block {
   padding: 0.5rem 0.75rem;
   margin-left: -1px;
   line-height: 1.25;
-  color: #6279DB;
+  color: #121212;
   background-color: #fff;
   border: 1px solid #dee2e6;
 }
 
 .page-link:hover {
   z-index: 2;
-  color: #2d4ac4;
+  color: #5f5e5e;
   text-decoration: none;
   background-color: #e9ecef;
   border-color: #dee2e6;
@@ -11315,16 +11315,8 @@ a.card:hover {
 .dropdown-item {
   font-size: .85em;
   font-weight: 700;
-  color: rgba(18, 18, 18, 0.5);
-}
-
-.dropdown-item:active,
-.dropdown-item.active {
-  color: #fff !important;
-}
-
-.dropdown-item:hover {
-  color: #121212;
+  -webkit-transition: none;
+  transition: none;
 }
 
 .dropdown-toggle::after {
@@ -11369,15 +11361,8 @@ ul {
 }
 
 a {
-  color: inherit;
-  text-decoration: none;
   -webkit-transition: color .3s ease-in-out;
   transition: color .3s ease-in-out;
-}
-
-a:hover {
-  text-decoration: none;
-  color: rgba(68, 68, 68, 0.8);
 }
 
 main h1 {

@@ -51,7 +51,7 @@
         </div>
     @endforeach
 
-    @can ('create', Firefly\Post::class)
+    @can ('reply', $discussion)
         <div class="card mt-4">
             <div class="card-body">
                 <form action="{{ route('firefly.post.store', [$discussion->id, $discussion->slug]) }}" method="POST">
@@ -59,7 +59,13 @@
 
                     <div class="form-group">
                         <label for="content">{{ __('Content') }}</label>
-                        <textarea name="content" id="content" class="form-control" rows="3">{{ old('content') }}</textarea>
+                        <textarea name="content" id="content" class="form-control{{ $errors->has('content') ? ' is-invalid' : '' }}" rows="3">{{ old('content') }}</textarea>
+
+                        @if ($errors->has('content'))
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $errors->first('content') }}</strong>
+                            </span>
+                        @endif
                     </div>
 
                     <button type="submit" class="btn btn-blue">
