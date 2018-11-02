@@ -102,4 +102,32 @@ class DiscussionTest extends TestCase
 
         $crawler->assertOk();
     }
+
+    public function test_discussion_was_stickied()
+    {
+        $discussion = $this->getDiscussion();
+
+        $crawler = $this->actingAs($this->getUser(), 'api')
+            ->putJson('api/forum/' . $discussion->uri . '/stick');
+
+        $discussion->refresh();
+
+        $this->assertNotNull($discussion->stickied_at);
+
+        $crawler->assertOk();
+    }
+
+    public function test_discussion_was_unstickied()
+    {
+        $discussion = $this->getDiscussion()->stick();
+
+        $crawler = $this->actingAs($this->getUser(), 'api')
+            ->putJson('api/forum/' . $discussion->uri . '/unstick');
+
+        $discussion->refresh();
+
+        $this->assertNull($discussion->stickied_at);
+
+        $crawler->assertOk();
+    }
 }

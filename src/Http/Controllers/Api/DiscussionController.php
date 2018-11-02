@@ -107,4 +107,36 @@ class DiscussionController extends Controller
 
         return response()->json('OK');
     }
+
+    /**
+     * Stick the specified discussion.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param \Firefly\Discussion $discussion
+     * @return \Illuminate\Http\Response
+     */
+    public function stick(Request $request, Discussion $discussion)
+    {
+        $this->authorize('stick', $discussion);
+
+        $discussion->stick();
+
+        return response()->json('OK');
+    }
+
+    /**
+     * Unstick the specified discussion.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param \Firefly\Discussion $discussion
+     * @return \Illuminate\Http\Response
+     */
+    public function unstick(Request $request, Discussion $discussion)
+    {
+        $this->authorize('unstick', $discussion);
+
+        $discussion->unstick();
+
+        return response()->json('OK');
+    }
 }
