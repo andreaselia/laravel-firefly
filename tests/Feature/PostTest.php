@@ -62,7 +62,8 @@ class PostTest extends TestCase
         $this->assertFalse($post->exists());
         $this->assertNotNull($post->deleted_at);
 
-        $crawler->assertOk();
+        $crawler->assertRedirect();
+        $crawler->assertLocation('forum/' . $post->discussion->uri);
     }
 
     public function test_content_is_required()
