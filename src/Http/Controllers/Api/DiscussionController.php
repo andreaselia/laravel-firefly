@@ -65,13 +65,77 @@ class DiscussionController extends Controller
      * Delete the specified discussion.
      *
      * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\RedirectResponse
+     * @return \Illuminate\Http\Response
      */
     public function delete(Request $request, Discussion $discussion)
     {
         $this->authorize('delete', $discussion);
 
         $discussion->delete();
+
+        return response()->json('OK');
+    }
+
+    /**
+     * Lock the specified discussion.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param \Firefly\Discussion $discussion
+     * @return \Illuminate\Http\Response
+     */
+    public function lock(Request $request, Discussion $discussion)
+    {
+        $this->authorize('lock', $discussion);
+
+        $discussion->lock();
+
+        return response()->json('OK');
+    }
+
+    /**
+     * Unlock the specified discussion.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param \Firefly\Discussion $discussion
+     * @return \Illuminate\Http\Response
+     */
+    public function unlock(Request $request, Discussion $discussion)
+    {
+        $this->authorize('unlock', $discussion);
+
+        $discussion->unlock();
+
+        return response()->json('OK');
+    }
+
+    /**
+     * Stick the specified discussion.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param \Firefly\Discussion $discussion
+     * @return \Illuminate\Http\Response
+     */
+    public function stick(Request $request, Discussion $discussion)
+    {
+        $this->authorize('stick', $discussion);
+
+        $discussion->stick();
+
+        return response()->json('OK');
+    }
+
+    /**
+     * Unstick the specified discussion.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param \Firefly\Discussion $discussion
+     * @return \Illuminate\Http\Response
+     */
+    public function unstick(Request $request, Discussion $discussion)
+    {
+        $this->authorize('unstick', $discussion);
+
+        $discussion->unstick();
 
         return response()->json('OK');
     }
