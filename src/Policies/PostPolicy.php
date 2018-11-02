@@ -41,7 +41,7 @@ class PostPolicy
      */
     public function update($user, Post $post)
     {
-        return true;
+        return $user->id == $post->user_id;
     }
 
     /**
@@ -53,7 +53,7 @@ class PostPolicy
      */
     public function delete($user, Post $post)
     {
-        return true;
+        return $user->id == $post->user_id;
     }
 
     /**

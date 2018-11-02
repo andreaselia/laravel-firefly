@@ -27,13 +27,22 @@
                     <div class="post-item-meta d-flex justify-content-between">
                         {{ $post->created_at->diffForHumans() }}
 
-                        @can ('update', $post)
-                            <div>
+                        <div>
+                            @can ('update', $post)
                                 <a href="{{ route('firefly.post.edit', $post) }}">
                                     {{ __('Edit') }}
                                 </a>
-                            </div>
-                        @endcan
+                            @endcan
+
+                            @can ('delete', $post)
+                                <a class="ml-2" href="{{ route('firefly.post.delete', [$discussion->id, $discussion->slug, $post]) }}" onclick="event.preventDefault(); document.getElementById('delete-post-{{ $post->id }}-form').submit();">{{ __('Delete') }}</a>
+
+                                <form id="delete-post-{{ $post->id }}-form" action="{{ route('firefly.post.delete', [$discussion->id, $discussion->slug, $post]) }}" method="POST" style="display: none;">
+                                    @method('DELETE')
+                                    @csrf
+                                </form>
+                            @endcan
+                        </div>
                     </div>
 
                     <div><strong>{{ $post->user->name }}</strong> {{ $post->content }}</div>
@@ -42,21 +51,23 @@
         </div>
     @endforeach
 
-    <div class="card mt-4">
-        <div class="card-body">
-            <form action="{{ route('firefly.post.store', [$discussion->id, $discussion->slug]) }}" method="POST">
-                @csrf
+    @can ('create', Firefly\Post::class)
+        <div class="card mt-4">
+            <div class="card-body">
+                <form action="{{ route('firefly.post.store', [$discussion->id, $discussion->slug]) }}" method="POST">
+                    @csrf
 
-                <div class="form-group">
-                    <label for="content">{{ __('Content') }}</label>
-                    <textarea name="content" id="content" class="form-control" rows="3">{{ old('content') }}</textarea>
-                </div>
+                    <div class="form-group">
+                        <label for="content">{{ __('Content') }}</label>
+                        <textarea name="content" id="content" class="form-control" rows="3">{{ old('content') }}</textarea>
+                    </div>
 
-                <button type="submit" class="btn btn-blue">
-                    {{ __('Submit') }}
-                </button>
-            </form>
+                    <button type="submit" class="btn btn-blue">
+                        {{ __('Submit') }}
+                    </button>
+                </form>
+            </div>
         </div>
-    </div>
+    @endcan
 </div>
 @endsection

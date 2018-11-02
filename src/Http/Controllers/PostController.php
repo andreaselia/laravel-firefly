@@ -81,6 +81,6 @@ class PostController extends Controller
 
         $post->delete();
 
-        return response()->json($post);
+        return redirect()->route('firefly.discussion.show', [$discussion->id, $discussion->slug]);
     }
 }
