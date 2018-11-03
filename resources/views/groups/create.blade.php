@@ -34,7 +34,7 @@
                 @if (config('firefly.private_groups'))
                     <div class="form-group">
                         <div class="custom-control custom-checkbox">
-                            <input type="checkbox" id="is_private" value="1" name="is_private" class="custom-control-input">
+                            <input class="custom-control-input" type="checkbox" name="is_private" id="is_private"{{ old('is_private') ? ' checked' : '' }}>
                             <label class="custom-control-label" for="is_private">Is Private?</label>
                         </div>
                     </div>

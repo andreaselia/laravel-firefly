@@ -13,7 +13,7 @@ use Firefly\Services\PostService;
 class PostController extends Controller
 {
     /**
-     * Instance of the discussion service.
+     * Instance of the post service.
      *
      * @var \Firefly\Services\PostService
      */
