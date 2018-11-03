@@ -78,7 +78,7 @@ class GroupController extends Controller
     {
         $this->authorize('update', $group);
 
-        $group->update($request->only('name', 'color'));
+        $group->update($request->all());
 
         return redirect()->route('firefly.group.show', $group);
     }
