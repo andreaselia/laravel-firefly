@@ -59,7 +59,7 @@
 
                     <div class="form-group">
                         <label for="content">{{ __('Content') }}</label>
-                        <textarea name="content" id="content" class="form-control{{ $errors->has('content') ? ' is-invalid' : '' }}" rows="3">{{ old('content') }}</textarea>
+                        <textarea name="content" id="content" class="form-control{{ $errors->has('content') ? ' is-invalid' : '' }}" rows="3" required>{{ old('content') }}</textarea>
 
                         @if ($errors->has('content'))
                             <span class="invalid-feedback" role="alert">
