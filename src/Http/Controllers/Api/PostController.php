@@ -8,9 +8,27 @@ use Firefly\Http\Requests\StorePostRequest;
 use Firefly\Http\Requests\UpdatePostRequest;
 use Firefly\Post;
 use Illuminate\Http\Request;
+use Firefly\Services\PostService;
 
 class PostController extends Controller
 {
+    /**
+     * Instance of the discussion service.
+     *
+     * @var \Firefly\Services\PostService
+     */
+    public $postService;
+
+    /**
+     * Create a new instance of the controller.
+     *
+     * @param \Firefly\Services\PostService $service
+     */
+    public function __construct(PostService $postService)
+    {
+        $this->postService = $postService;
+    }
+
     /**
      * Store the new post.
      *
@@ -22,13 +40,7 @@ class PostController extends Controller
     {
         $this->authorize('reply', $discussion);
 
-        $user = $request->user();
-
-        $post = $user->posts()->make(
-            $request->only('content')
-        );
-
-        $discussion->posts()->save($post);
+        $post = $this->postService->make($request, $discussion);
 
         return response()->json($post);
     }
@@ -46,9 +58,7 @@ class PostController extends Controller
     {
         $this->authorize('update', $post);
 
-        $post->update(
-            $request->only('content')
-        );
+        $post->update($request->all());
 
         return response()->json($post->fresh());
     }
