@@ -37,7 +37,8 @@ $link-hover-decoration: none;
 
 $border-radius: 5px;
 
-$input-border-color: $gray;
+$input-border-color: lighten($gray, 20%);
+$input-btn-focus-box-shadow:  0 0 0 .2rem lighten($input-border-color, 15%);
 
 $input-btn-padding-x: 1.75rem;
 $input-btn-padding-y: .75rem;

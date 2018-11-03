@@ -2291,7 +2291,7 @@ pre code {
   color: #495057;
   background-color: #fff;
   background-clip: padding-box;
-  border: 1px solid #888;
+  border: 1px solid #bbbbbb;
   border-radius: 5px;
   -webkit-transition: border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
   transition: border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
@@ -2316,8 +2316,8 @@ pre code {
   background-color: #fff;
   border-color: #cad2f3;
   outline: 0;
-  -webkit-box-shadow: 0 0 0 0.2rem rgba(98, 121, 219, 0.25);
-          box-shadow: 0 0 0 0.2rem rgba(98, 121, 219, 0.25);
+  -webkit-box-shadow: 0 0 0 0.2rem #e1e1e1;
+          box-shadow: 0 0 0 0.2rem #e1e1e1;
 }
 
 .form-control::-webkit-input-placeholder {
@@ -2863,8 +2863,8 @@ textarea.form-control {
 .btn:focus,
 .btn.focus {
   outline: 0;
-  -webkit-box-shadow: 0 0 0 0.2rem rgba(98, 121, 219, 0.25);
-          box-shadow: 0 0 0 0.2rem rgba(98, 121, 219, 0.25);
+  -webkit-box-shadow: 0 0 0 0.2rem #e1e1e1;
+          box-shadow: 0 0 0 0.2rem #e1e1e1;
 }
 
 .btn.disabled,
@@ -4422,7 +4422,7 @@ input[type="button"].btn-block {
   text-align: center;
   white-space: nowrap;
   background-color: #e9ecef;
-  border: 1px solid #888;
+  border: 1px solid #bbbbbb;
   border-radius: 5px;
 }
 
@@ -4501,8 +4501,8 @@ input[type="button"].btn-block {
 }
 
 .custom-control-input:focus ~ .custom-control-label::before {
-  -webkit-box-shadow: 0 0 0 1px #fff, 0 0 0 0.2rem rgba(98, 121, 219, 0.25);
-          box-shadow: 0 0 0 1px #fff, 0 0 0 0.2rem rgba(98, 121, 219, 0.25);
+  -webkit-box-shadow: 0 0 0 1px #fff, 0 0 0 0.2rem #e1e1e1;
+          box-shadow: 0 0 0 1px #fff, 0 0 0 0.2rem #e1e1e1;
 }
 
 .custom-control-input:active ~ .custom-control-label::before {
@@ -4606,7 +4606,7 @@ input[type="button"].btn-block {
   vertical-align: middle;
   background: #fff url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3E%3Cpath fill='%23343a40' d='M2 0L0 2h4zm0 5L0 3h4z'/%3E%3C/svg%3E") no-repeat right 0.75rem center;
   background-size: 8px 10px;
-  border: 1px solid #888;
+  border: 1px solid #bbbbbb;
   border-radius: 5px;
   -webkit-appearance: none;
      -moz-appearance: none;
@@ -4674,8 +4674,8 @@ input[type="button"].btn-block {
 
 .custom-file-input:focus ~ .custom-file-label {
   border-color: #cad2f3;
-  -webkit-box-shadow: 0 0 0 0.2rem rgba(98, 121, 219, 0.25);
-          box-shadow: 0 0 0 0.2rem rgba(98, 121, 219, 0.25);
+  -webkit-box-shadow: 0 0 0 0.2rem #e1e1e1;
+          box-shadow: 0 0 0 0.2rem #e1e1e1;
 }
 
 .custom-file-input:focus ~ .custom-file-label::after {
@@ -4701,7 +4701,7 @@ input[type="button"].btn-block {
   line-height: 1.5;
   color: #495057;
   background-color: #fff;
-  border: 1px solid #888;
+  border: 1px solid #bbbbbb;
   border-radius: 5px;
 }
 
@@ -4718,7 +4718,7 @@ input[type="button"].btn-block {
   color: #495057;
   content: "Browse";
   background-color: #e9ecef;
-  border-left: 1px solid #888;
+  border-left: 1px solid #bbbbbb;
   border-radius: 0 5px 5px 0;
 }
 
@@ -4736,16 +4736,16 @@ input[type="button"].btn-block {
 }
 
 .custom-range:focus::-webkit-slider-thumb {
-  -webkit-box-shadow: 0 0 0 1px #fff, 0 0 0 0.2rem rgba(98, 121, 219, 0.25);
-          box-shadow: 0 0 0 1px #fff, 0 0 0 0.2rem rgba(98, 121, 219, 0.25);
+  -webkit-box-shadow: 0 0 0 1px #fff, 0 0 0 0.2rem #e1e1e1;
+          box-shadow: 0 0 0 1px #fff, 0 0 0 0.2rem #e1e1e1;
 }
 
 .custom-range:focus::-moz-range-thumb {
-  box-shadow: 0 0 0 1px #fff, 0 0 0 0.2rem rgba(98, 121, 219, 0.25);
+  box-shadow: 0 0 0 1px #fff, 0 0 0 0.2rem #e1e1e1;
 }
 
 .custom-range:focus::-ms-thumb {
-  box-shadow: 0 0 0 1px #fff, 0 0 0 0.2rem rgba(98, 121, 219, 0.25);
+  box-shadow: 0 0 0 1px #fff, 0 0 0 0.2rem #e1e1e1;
 }
 
 .custom-range::-moz-focus-outer {
@@ -5831,8 +5831,8 @@ input[type="button"].btn-block {
 .page-link:focus {
   z-index: 2;
   outline: 0;
-  -webkit-box-shadow: 0 0 0 0.2rem rgba(98, 121, 219, 0.25);
-          box-shadow: 0 0 0 0.2rem rgba(98, 121, 219, 0.25);
+  -webkit-box-shadow: 0 0 0 0.2rem #e1e1e1;
+          box-shadow: 0 0 0 0.2rem #e1e1e1;
 }
 
 .page-link:not(:disabled):not(.disabled) {

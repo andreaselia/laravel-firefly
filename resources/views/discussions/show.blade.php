@@ -6,6 +6,10 @@
         <div class="d-flex align-items-center">
             <h1 class="mb-0">{{ $discussion->title }}</h1>
 
+            @foreach ($discussion->groups as $group)
+                <div class="group-display rounded-circle ml-2 mb-0" data-toggle="tooltip" title="{{ $group->name }}" style="background: {{ $group->color }};"></div>
+            @endforeach
+
             @if ($discussion->stickied_at)
                 <i class="icon icon-stuck ml-2" data-toggle="tooltip" title="{{ __('Stickied') }}"></i>
             @endif
