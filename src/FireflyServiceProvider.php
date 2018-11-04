@@ -82,8 +82,8 @@ class FireflyServiceProvider extends ServiceProvider
      */
     protected function registerRoutes()
     {
-        $this->registerApiRoutes();
         $this->registerWebRoutes();
+        $this->registerApiRoutes();
     }
 
     /**

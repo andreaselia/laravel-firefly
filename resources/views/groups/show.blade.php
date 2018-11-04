@@ -3,9 +3,14 @@
 @section('content')
 <div class="container">
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <div class="d-flex">
+        <div class="d-flex align-items-center">
             <h1 class="mb-0">{{ $group->name }}</h1>
+
             <div class="group-display group-display-clear rounded-circle mb-0 ml-3" style="background: {{ $group->color }};"></div>
+
+            @if ($group->is_private)
+                <i class="icon icon-private ml-2" data-toggle="tooltip" title="{{ __('Private') }}"></i>
+            @endif
         </div>
 
         @if (Auth::check() && Auth::user()->can('create', Firefly\Discussion::class))

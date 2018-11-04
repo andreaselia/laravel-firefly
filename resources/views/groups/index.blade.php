@@ -39,7 +39,13 @@
                                 </div>
                             </div>
 
-                            <div class="group-display rounded-circle mb-0" style="background: {{ $group->color }};"></div>
+                            <div class="d-flex align-items-center">
+                                @if ($group->is_private)
+                                    <i class="icon icon-private mr-2" data-toggle="tooltip" title="{{ __('Private') }}"></i>
+                                @endif
+
+                                <div class="group-display rounded-circle mb-0" style="background: {{ $group->color }};"></div>
+                            </div>
                         </div>
                     </div>
                 </a>

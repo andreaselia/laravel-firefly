@@ -31,6 +31,15 @@
                     @endif
                 </div>
 
+                @if (config('firefly.private_groups'))
+                    <div class="form-group">
+                        <div class="custom-control custom-checkbox">
+                            <input class="custom-control-input" type="checkbox" name="is_private" id="is_private"{{ old('is_private') ? ' checked' : '' }}>
+                            <label class="custom-control-label" for="is_private">Is Private?</label>
+                        </div>
+                    </div>
+                @endif
+
                 <button type="submit" class="btn btn-primary">
                     {{ __('Submit') }}
                 </button>

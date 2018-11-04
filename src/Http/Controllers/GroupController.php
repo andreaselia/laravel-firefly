@@ -37,7 +37,9 @@ class GroupController extends Controller
      */
     public function store(StoreGroupRequest $request)
     {
-        $group = Group::create($request->all());
+        $group = Group::create($request->except('is_private') + [
+            'is_private' => $request->has('is_private'),
+        ]);
 
         return redirect()->route('firefly.group.show', $group);
     }
@@ -78,7 +80,9 @@ class GroupController extends Controller
     {
         $this->authorize('update', $group);
 
-        $group->update($request->only('name', 'color'));
+        $group->update($request->except('is_private') + [
+            'is_private' => $request->has('is_private'),
+        ]);
 
         return redirect()->route('firefly.group.show', $group);
     }
