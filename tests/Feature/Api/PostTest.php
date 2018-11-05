@@ -15,7 +15,7 @@ class PostTest extends TestCase
         $discussion = $this->getDiscussion();
 
         $crawler = $this->actingAs($this->getUser(), 'api')
-            ->postJson('api/forum/' . $discussion->uri, [
+            ->postJson('api/forum/d/' . $discussion->uri, [
                 'content' => 'Foo Bar',
             ]);
 
@@ -36,7 +36,7 @@ class PostTest extends TestCase
         $post = $this->getPost();
 
         $crawler = $this->actingAs($this->getUser(), 'api')
-            ->putJson('api/forum/' . $discussion->uri . '/' . $post->id, [
+            ->putJson('api/forum/d/' . $discussion->uri . '/p/' . $post->id, [
                 'content' => 'Bar Foo',
             ]);
 
@@ -54,7 +54,7 @@ class PostTest extends TestCase
         $post = $this->getPost();
 
         $crawler = $this->actingAs($this->getUser(), 'api')
-            ->deleteJson('api/forum/' . $discussion->uri . '/' . $post->id);
+            ->deleteJson('api/forum/d/' . $discussion->uri . '/p/' . $post->id);
 
         $post->refresh();
 
@@ -79,7 +79,7 @@ class PostTest extends TestCase
         $discussion = $this->getDiscussion();
 
         $crawler = $this->actingAs($this->getUser(), 'api')
-            ->postJson('api/forum/' . $discussion->uri, [
+            ->postJson('api/forum/d/' . $discussion->uri, [
                 'content' => $content,
             ]);
 
@@ -92,7 +92,7 @@ class PostTest extends TestCase
         $post = $this->getPost();
 
         $crawler = $this->actingAs($this->getUser(), 'api')
-            ->putJson('api/forum/' . $discussion->uri . '/' . $post->id, [
+            ->putJson('api/forum/d/' . $discussion->uri . '/p/' . $post->id, [
                 'content' => $content,
             ]);
 

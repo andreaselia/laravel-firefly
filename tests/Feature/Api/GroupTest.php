@@ -13,7 +13,7 @@ class GroupTest extends TestCase
         Group::truncate();
 
         $crawler = $this->actingAs($this->getUser(), 'api')
-            ->postJson('api/forum/groups', [
+            ->postJson('api/forum/g', [
                 'name' => 'Foo Bar',
                 'color' => '#444',
             ]);
@@ -35,7 +35,7 @@ class GroupTest extends TestCase
         $group = $this->getGroup();
 
         $crawler = $this->actingAs($this->getUser(), 'api')
-            ->putJson('api/forum/groups/' . $group->slug, [
+            ->putJson('api/forum/g/' . $group->slug, [
                 'name' => 'Bar Foo',
                 'color' => '#444',
             ]);
@@ -54,7 +54,7 @@ class GroupTest extends TestCase
         $group = $this->getGroup();
 
         $crawler = $this->actingAs($this->getUser(), 'api')
-            ->deleteJson('api/forum/groups/' . $group->slug);
+            ->deleteJson('api/forum/g/' . $group->slug);
         
         $group->refresh();
 
