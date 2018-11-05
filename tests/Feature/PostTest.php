@@ -16,7 +16,7 @@ class PostTest extends TestCase
         $discussion = $this->getDiscussion();
 
         $crawler = $this->actingAs($this->getUser())
-            ->post('forum/' . $discussion->uri, [
+            ->postJson('forum/d/' . $discussion->uri, [
                 'content' => 'Foo Bar',
             ]);
 
@@ -28,7 +28,7 @@ class PostTest extends TestCase
         ]);
 
         $crawler->assertRedirect();
-        $crawler->assertLocation('forum/' . $discussion->uri);
+        $crawler->assertLocation('forum/d/' . $discussion->uri);
     }
 
     public function test_post_was_updated()
@@ -37,7 +37,7 @@ class PostTest extends TestCase
         $post = $this->getPost();
 
         $crawler = $this->actingAs($this->getUser())
-            ->put('forum/' . $discussion->uri . '/' . $post->id, [
+            ->put('forum/d/' . $discussion->uri . '/p/' . $post->id, [
                 'content' => 'Bar Foo',
             ]);
 
@@ -46,7 +46,7 @@ class PostTest extends TestCase
         $this->assertEquals('Bar Foo', $post->content);
 
         $crawler->assertRedirect();
-        $crawler->assertLocation('forum/' . $post->discussion->uri);
+        $crawler->assertLocation('forum/d/' . $post->discussion->uri);
     }
 
     public function test_post_was_soft_deleted()
@@ -55,7 +55,7 @@ class PostTest extends TestCase
         $post = $this->getPost();
 
         $crawler = $this->actingAs($this->getUser())
-            ->delete('forum/' . $discussion->uri . '/' . $post->id);
+            ->delete('forum/d/' . $discussion->uri . '/p/' . $post->id);
 
         $post->refresh();
 
@@ -63,7 +63,7 @@ class PostTest extends TestCase
         $this->assertNotNull($post->deleted_at);
 
         $crawler->assertRedirect();
-        $crawler->assertLocation('forum/' . $post->discussion->uri);
+        $crawler->assertLocation('forum/d/' . $post->discussion->uri);
     }
 
     public function test_content_is_required()
@@ -81,7 +81,7 @@ class PostTest extends TestCase
         $discussion = $this->getDiscussion();
 
         $crawler = $this->actingAs($this->getUser())
-            ->postJson('forum/' . $discussion->uri, [
+            ->postJson('forum/d/' . $discussion->uri, [
                 'content' => $content,
             ]);
 
@@ -94,7 +94,7 @@ class PostTest extends TestCase
         $post = $this->getPost();
 
         $crawler = $this->actingAs($this->getUser())
-            ->putJson('forum/' . $discussion->uri . '/' . $post->id, [
+            ->putJson('forum/d/' . $discussion->uri . '/p/' . $post->id, [
                 'content' => $content,
             ]);
 
