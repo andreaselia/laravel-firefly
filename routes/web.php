@@ -1,7 +1,7 @@
 <?php
 
 Route::name(config('firefly.web.name'))->group(function() {
-    Route::get('/', 'ForumController@index')->name('forum.index');
+    Route::get('/', 'ForumController@index')->name('index');
 
     // Discussions...
     Route::get('{discussion}-{slug}', 'DiscussionController@show')->name('discussion.show')->where(['discussion' => '[0-9]+']);
