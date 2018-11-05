@@ -15,6 +15,6 @@ class ForumController extends Controller
     public function index()
     {
         return view('firefly::index')->withGroups(Group::all())
-            ->withDiscussions(Discussion::paginate(config('firefly.pagination.discussions')));
+            ->withDiscussions(Discussion::orderBy('created_at', 'desc')->paginate(config('firefly.pagination.discussions')));
     }
 }
