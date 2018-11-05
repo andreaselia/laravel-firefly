@@ -15,6 +15,7 @@ class GroupTest extends TestCase
         $crawler = $this->actingAs($this->getUser())
             ->postJson('forum/groups', [
                 'name' => 'Foo Bar',
+                'color' => '#444',
             ]);
         
         $groups = Group::all();
@@ -31,13 +32,14 @@ class GroupTest extends TestCase
         $crawler->assertLocation('forum/' . $group->slug);
     }
 
-    public function test_discussion_was_updated()
+    public function test_group_was_updated()
     {
         $group = $this->getGroup();
 
         $crawler = $this->actingAs($this->getUser())
             ->put('forum/groups/' . $group->slug, [
                 'name' => 'Bar Foo',
+                'color' => '#444',
             ]);
 
         $group->refresh();

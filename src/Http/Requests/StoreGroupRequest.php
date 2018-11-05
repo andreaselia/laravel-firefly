@@ -2,6 +2,7 @@
 
 namespace Firefly\Http\Requests;
 
+use Firefly\Rules\Hex;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreGroupRequest extends FormRequest
@@ -25,7 +26,7 @@ class StoreGroupRequest extends FormRequest
     {
         return [
             'name' => 'required|min:5|max:255',
-            'color' => 'required|regex:/#([a-f0-9]{3}){1,2}\b/i',
+            'color' => ['required', new Hex],
         ];
     }
 }

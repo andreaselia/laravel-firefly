@@ -16,7 +16,7 @@ class GroupController extends Controller
      */
     public function index()
     {
-        $groups = Group::orderBy('title', 'desc')
+        $groups = Group::orderBy('name', 'desc')
             ->paginate(config('firefly.pagination.groups'));
 
         return view('firefly::groups.index')->withGroups($groups);
