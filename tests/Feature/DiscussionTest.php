@@ -16,7 +16,7 @@ class DiscussionTest extends TestCase
         Post::truncate();
 
         $crawler = $this->actingAs($this->getUser())
-            ->post('forum/example-group/discussion', [
+            ->postJson('forum/g/example-group/d', [
                 'title' => 'Foo Bar',
                 'content' => 'Lorem Ipsum',
             ]);
@@ -39,7 +39,7 @@ class DiscussionTest extends TestCase
         $discussion = Discussion::first();
 
         $crawler->assertRedirect();
-        $crawler->assertLocation('forum/' . $discussion->uri);
+        $crawler->assertLocation('forum/d/' . $discussion->uri);
     }
 
     public function test_discussion_was_updated()
@@ -47,7 +47,7 @@ class DiscussionTest extends TestCase
         $discussion = $this->getDiscussion();
 
         $crawler = $this->actingAs($this->getUser())
-            ->put('forum/' . $discussion->uri, [
+            ->put('forum/d/' . $discussion->uri, [
                 'title' => 'Bar Foo',
             ]);
 
@@ -57,7 +57,7 @@ class DiscussionTest extends TestCase
         $this->assertEquals('bar-foo', $discussion->slug);
 
         $crawler->assertRedirect();
-        $crawler->assertLocation('forum/' . $discussion->uri);
+        $crawler->assertLocation('forum/d/' . $discussion->uri);
     }
 
     public function test_discussion_was_soft_deleted()
@@ -65,7 +65,7 @@ class DiscussionTest extends TestCase
         $discussion = $this->getDiscussion();
 
         $crawler = $this->actingAs($this->getUser())
-            ->delete('forum/' . $discussion->uri);
+            ->delete('forum/d/' . $discussion->uri);
 
         $discussion->refresh();
 
@@ -81,14 +81,14 @@ class DiscussionTest extends TestCase
         $discussion = $this->getDiscussion();
 
         $crawler = $this->actingAs($this->getUser())
-            ->put('forum/' . $discussion->uri . '/lock');
+            ->put('forum/d/' . $discussion->uri . '/lock');
 
         $discussion->refresh();
 
         $this->assertNotNull($discussion->locked_at);
 
         $crawler->assertRedirect();
-        $crawler->assertLocation('forum/' . $discussion->uri);
+        $crawler->assertLocation('forum/d/' . $discussion->uri);
     }
 
     public function test_discussion_gets_unlocked()
@@ -96,14 +96,14 @@ class DiscussionTest extends TestCase
         $discussion = $this->getDiscussion()->lock();
 
         $crawler = $this->actingAs($this->getUser())
-            ->put('forum/' . $discussion->uri . '/unlock');
+            ->put('forum/d/' . $discussion->uri . '/unlock');
 
         $discussion->refresh();
 
         $this->assertNull($discussion->locked_at);
 
         $crawler->assertRedirect();
-        $crawler->assertLocation('forum/' . $discussion->uri);
+        $crawler->assertLocation('forum/d/' . $discussion->uri);
     }
 
     public function test_discussion_gets_pinned()
@@ -111,14 +111,14 @@ class DiscussionTest extends TestCase
         $discussion = $this->getDiscussion();
 
         $crawler = $this->actingAs($this->getUser())
-            ->put('forum/' . $discussion->uri . '/pin');
+            ->put('forum/d/' . $discussion->uri . '/pin');
 
         $discussion->refresh();
 
         $this->assertNotNull($discussion->pinned_at);
 
         $crawler->assertRedirect();
-        $crawler->assertLocation('forum/' . $discussion->uri);
+        $crawler->assertLocation('forum/d/' . $discussion->uri);
     }
 
     public function test_discussion_gets_unpinned()
@@ -126,14 +126,14 @@ class DiscussionTest extends TestCase
         $discussion = $this->getDiscussion()->pin();
 
         $crawler = $this->actingAs($this->getUser())
-            ->put('forum/' . $discussion->uri . '/unpin');
+            ->put('forum/d/' . $discussion->uri . '/unpin');
 
         $discussion->refresh();
 
         $this->assertNull($discussion->pinned_at);
 
         $crawler->assertRedirect();
-        $crawler->assertLocation('forum/' . $discussion->uri);
+        $crawler->assertLocation('forum/d/' . $discussion->uri);
     }
 
     public function test_title_is_required()
@@ -149,7 +149,7 @@ class DiscussionTest extends TestCase
 
         // Create
         $crawler = $this->actingAs($this->getUser())
-            ->postJson('forum/example-group/discussion', [
+            ->postJson('forum/g/example-group/d', [
                 'title' => $title,
             ]);
 
@@ -161,7 +161,7 @@ class DiscussionTest extends TestCase
         $discussion = $this->getDiscussion();
 
         $crawler = $this->actingAs($this->getUser())
-            ->putJson('forum/' . $discussion->uri, [
+            ->putJson('forum/d/' . $discussion->uri, [
                 'title' => $title,
             ]);
 
@@ -183,7 +183,7 @@ class DiscussionTest extends TestCase
 
         // Create
         $crawler = $this->actingAs($this->getUser())
-            ->postJson('forum/example-group/discussion', [
+            ->postJson('forum/g/example-group/d', [
                 'title' => $title,
             ]);
 
@@ -195,7 +195,7 @@ class DiscussionTest extends TestCase
         $discussion = $this->getDiscussion();
 
         $crawler = $this->actingAs($this->getUser())
-            ->putJson('forum/' . $discussion->uri, [
+            ->putJson('forum/d/' . $discussion->uri, [
                 'title' => $title,
             ]);
 

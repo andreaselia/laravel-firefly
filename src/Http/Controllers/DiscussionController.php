@@ -81,8 +81,7 @@ class DiscussionController extends Controller
     {
         $this->authorize('update', $discussion);
 
-        return view('firefly::discussions.edit')->withGroup($group)
-            ->withDiscussion($discussion);
+        return view('firefly::discussions.edit')->with(compact('group', 'discussion'));
     }
 
     /**

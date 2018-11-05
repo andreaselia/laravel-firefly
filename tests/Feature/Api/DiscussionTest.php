@@ -15,7 +15,7 @@ class DiscussionTest extends TestCase
         Post::truncate();
 
         $crawler = $this->actingAs($this->getUser(), 'api')
-            ->postJson('api/forum/discussions', [
+            ->postJson('api/forum/d', [
                 'group_id' => $this->getGroup()->id,
                 'title' => 'Foo Bar',
                 'content' => 'Lorem Ipsum',
@@ -47,7 +47,7 @@ class DiscussionTest extends TestCase
         $discussion = $this->getDiscussion();
 
         $crawler = $this->actingAs($this->getUser(), 'api')
-            ->putJson('api/forum/discussions/' . $discussion->id, [
+            ->putJson('api/forum/d/' . $discussion->id, [
                 'title' => 'Bar Foo',
             ]);
 
@@ -65,7 +65,7 @@ class DiscussionTest extends TestCase
         $discussion = $this->getDiscussion();
 
         $crawler = $this->actingAs($this->getUser(), 'api')
-            ->deleteJson('api/forum/discussions/' . $discussion->id);
+            ->deleteJson('api/forum/d/' . $discussion->id);
         
         $discussion->refresh();
 
@@ -80,7 +80,7 @@ class DiscussionTest extends TestCase
         $discussion = $this->getDiscussion();
 
         $crawler = $this->actingAs($this->getUser(), 'api')
-            ->putJson('api/forum/' . $discussion->uri . '/lock');
+            ->putJson('api/forum/d/' . $discussion->uri . '/lock');
 
         $discussion->refresh();
 
@@ -94,7 +94,7 @@ class DiscussionTest extends TestCase
         $discussion = $this->getDiscussion()->lock();
 
         $crawler = $this->actingAs($this->getUser(), 'api')
-            ->putJson('api/forum/' . $discussion->uri . '/unlock');
+            ->putJson('api/forum/d/' . $discussion->uri . '/unlock');
 
         $discussion->refresh();
 
@@ -108,7 +108,7 @@ class DiscussionTest extends TestCase
         $discussion = $this->getDiscussion();
 
         $crawler = $this->actingAs($this->getUser(), 'api')
-            ->putJson('api/forum/' . $discussion->uri . '/pin');
+            ->putJson('api/forum/d/' . $discussion->uri . '/pin');
 
         $discussion->refresh();
 
@@ -122,7 +122,7 @@ class DiscussionTest extends TestCase
         $discussion = $this->getDiscussion()->pin();
 
         $crawler = $this->actingAs($this->getUser(), 'api')
-            ->putJson('api/forum/' . $discussion->uri . '/unpin');
+            ->putJson('api/forum/d/' . $discussion->uri . '/unpin');
 
         $discussion->refresh();
 

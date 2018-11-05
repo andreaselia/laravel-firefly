@@ -13,7 +13,7 @@ class GroupTest extends TestCase
         Group::truncate();
 
         $crawler = $this->actingAs($this->getUser())
-            ->postJson('forum/groups', [
+            ->postJson('forum/g', [
                 'name' => 'Foo Bar',
                 'color' => '#444',
             ]);
@@ -29,7 +29,7 @@ class GroupTest extends TestCase
         $group = Group::first();
 
         $crawler->assertRedirect();
-        $crawler->assertLocation('forum/' . $group->slug);
+        $crawler->assertLocation('forum/g/' . $group->slug);
     }
 
     public function test_group_was_updated()
@@ -37,7 +37,7 @@ class GroupTest extends TestCase
         $group = $this->getGroup();
 
         $crawler = $this->actingAs($this->getUser())
-            ->put('forum/groups/' . $group->slug, [
+            ->put('forum/g/' . $group->slug, [
                 'name' => 'Bar Foo',
                 'color' => '#444',
             ]);
@@ -48,7 +48,7 @@ class GroupTest extends TestCase
         $this->assertEquals('bar-foo', $group->slug);
 
         $crawler->assertRedirect();
-        $crawler->assertLocation('forum/' . $group->slug);
+        $crawler->assertLocation('forum/g/' . $group->slug);
     }
 
     public function test_group_was_soft_deleted()
@@ -56,7 +56,7 @@ class GroupTest extends TestCase
         $group = $this->getGroup();
 
         $crawler = $this->actingAs($this->getUser())
-            ->delete('forum/groups/' . $group->slug);
+            ->delete('forum/g/' . $group->slug);
 
         $group->refresh();
 
@@ -80,7 +80,7 @@ class GroupTest extends TestCase
 
         // Create
         $crawler = $this->actingAs($this->getUser())
-            ->postJson('forum/groups', [
+            ->postJson('forum/g', [
                 'name' => $name,
             ]);
 
@@ -92,7 +92,7 @@ class GroupTest extends TestCase
         $group = $this->getGroup();
 
         $crawler = $this->actingAs($this->getUser())
-            ->putJson('forum/groups/' . $group->slug, [
+            ->putJson('forum/g/' . $group->slug, [
                 'name' => $name,
             ]);
 
@@ -114,7 +114,7 @@ class GroupTest extends TestCase
 
         // Create
         $crawler = $this->actingAs($this->getUser())
-            ->postJson('forum/groups', [
+            ->postJson('forum/g', [
                 'name' => $name,
             ]);
 
@@ -126,7 +126,7 @@ class GroupTest extends TestCase
         $group = $this->getGroup();
 
         $crawler = $this->actingAs($this->getUser())
-            ->putJson('forum/groups/' . $group->slug, [
+            ->putJson('forum/g/' . $group->slug, [
                 'name' => $name,
             ]);
 
