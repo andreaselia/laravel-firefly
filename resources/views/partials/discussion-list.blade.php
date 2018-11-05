@@ -13,8 +13,8 @@
                 </div>
 
                 <div class="d-flex">
-                    @if ($discussion->stickied_at)
-                        <i class="icon icon-stuck mr-2" data-toggle="tooltip" title="{{ __('Pinned') }}"></i>
+                    @if ($discussion->pinned_at)
+                        <i class="icon icon-pinned mr-2" data-toggle="tooltip" title="{{ __('Pinned') }}"></i>
                     @endif
 
                     @if ($discussion->locked_at)

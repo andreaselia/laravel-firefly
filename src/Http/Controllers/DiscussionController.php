@@ -148,33 +148,33 @@ class DiscussionController extends Controller
     }
 
     /**
-     * Stick the specified discussion.
+     * Pin the specified discussion.
      *
      * @param \Illuminate\Http\Request $request
      * @param \Firefly\Discussion $discussion
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function stick(Request $request, Discussion $discussion)
+    public function pin(Request $request, Discussion $discussion)
     {
-        $this->authorize('stick', $discussion);
+        $this->authorize('pin', $discussion);
 
-        $discussion->stick();
+        $discussion->pin();
 
         return redirect()->route('firefly.discussion.show', [$discussion->id, $discussion->slug]);
     }
 
     /**
-     * Unstick the specified discussion.
+     * Unpin the specified discussion.
      *
      * @param \Illuminate\Http\Request $request
      * @param \Firefly\Discussion $discussion
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function unstick(Request $request, Discussion $discussion)
+    public function unpin(Request $request, Discussion $discussion)
     {
-        $this->authorize('unstick', $discussion);
+        $this->authorize('unpin', $discussion);
 
-        $discussion->unstick();
+        $discussion->unpin();
 
         return redirect()->route('firefly.discussion.show', [$discussion->id, $discussion->slug]);
     }

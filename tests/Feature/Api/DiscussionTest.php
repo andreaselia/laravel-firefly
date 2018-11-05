@@ -103,30 +103,30 @@ class DiscussionTest extends TestCase
         $crawler->assertOk();
     }
 
-    public function test_discussion_was_stickied()
+    public function test_discussion_was_pinned()
     {
         $discussion = $this->getDiscussion();
 
         $crawler = $this->actingAs($this->getUser(), 'api')
-            ->putJson('api/forum/' . $discussion->uri . '/stick');
+            ->putJson('api/forum/' . $discussion->uri . '/pin');
 
         $discussion->refresh();
 
-        $this->assertNotNull($discussion->stickied_at);
+        $this->assertNotNull($discussion->pinned_at);
 
         $crawler->assertOk();
     }
 
-    public function test_discussion_was_unstickied()
+    public function test_discussion_was_unpinned()
     {
-        $discussion = $this->getDiscussion()->stick();
+        $discussion = $this->getDiscussion()->pin();
 
         $crawler = $this->actingAs($this->getUser(), 'api')
-            ->putJson('api/forum/' . $discussion->uri . '/unstick');
+            ->putJson('api/forum/' . $discussion->uri . '/unpin');
 
         $discussion->refresh();
 
-        $this->assertNull($discussion->stickied_at);
+        $this->assertNull($discussion->pinned_at);
 
         $crawler->assertOk();
     }
