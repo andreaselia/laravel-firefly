@@ -25,7 +25,7 @@ class StoreGroupRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|alpha_dash|max:255',
+            'name' => 'required|max:255',
             'color' => ['required', new Hex],
         ];
     }

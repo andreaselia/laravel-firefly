@@ -24,7 +24,7 @@ class UpdateDiscussionRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required|alpha_dash|max:255',
+            'title' => 'required|max:255',
         ];
     }
 }
