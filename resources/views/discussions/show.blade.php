@@ -49,7 +49,7 @@
                         </div>
                     </div>
 
-                    <div><strong>{{ $post->user->name }}</strong> {{ $post->content }}</div>
+                    <div><strong>{{ $post->user->name }}</strong> {!! nl2br($post->content) !!}</div>
                 </div>
             </div>
         </div>
