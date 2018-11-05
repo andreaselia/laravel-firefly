@@ -5,7 +5,7 @@
 
     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
         @can ('stick', $discussion)
-            <a class="dropdown-item" href="{{ route('firefly.discussion.stick', [$discussion->id, $discussion->slug]) }}" onclick="event.preventDefault(); document.getElementById('stick-discussion-form').submit();">{{ __('Stick') }}</a>
+            <a class="dropdown-item" href="{{ route('firefly.discussion.stick', [$discussion->id, $discussion->slug]) }}" onclick="event.preventDefault(); document.getElementById('stick-discussion-form').submit();">{{ __('Pin') }}</a>
 
             <form id="stick-discussion-form" action="{{ route('firefly.discussion.stick', [$discussion->id, $discussion->slug]) }}" method="POST" style="display: none;">
                 @method('PUT')
@@ -14,7 +14,7 @@
         @endcan
 
         @can ('unstick', $discussion)
-            <a class="dropdown-item" href="{{ route('firefly.discussion.unstick', [$discussion->id, $discussion->slug]) }}" onclick="event.preventDefault(); document.getElementById('unstick-discussion-form').submit();">{{ __('Unstick') }}</a>
+            <a class="dropdown-item" href="{{ route('firefly.discussion.unstick', [$discussion->id, $discussion->slug]) }}" onclick="event.preventDefault(); document.getElementById('unstick-discussion-form').submit();">{{ __('Unpin') }}</a>
 
             <form id="unstick-discussion-form" action="{{ route('firefly.discussion.unstick', [$discussion->id, $discussion->slug]) }}" method="POST" style="display: none;">
                 @method('PUT')
