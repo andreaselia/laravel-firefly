@@ -170,40 +170,6 @@ class DiscussionTest extends TestCase
         $crawler->assertJson($validJson);
     }
 
-    public function test_title_has_at_least_5_characters()
-    {
-        $title = 'Foo';
-        $validJson = [
-            'errors' => [
-                'title' => [
-                    'The title must be at least 5 characters.',
-                ]
-            ]
-        ];
-
-        // Create
-        $crawler = $this->actingAs($this->getUser())
-            ->postJson('forum/example-group/discussion', [
-                'title' => $title,
-            ]);
-
-        $crawler->assertStatus(422);
-        $crawler->assertJsonValidationErrors('title');
-        $crawler->assertJson($validJson);
-
-        // Update
-        $discussion = $this->getDiscussion();
-
-        $crawler = $this->actingAs($this->getUser())
-            ->putJson('forum/' . $discussion->uri, [
-                'title' => $title,
-            ]);
-
-        $crawler->assertStatus(422);
-        $crawler->assertJsonValidationErrors('title');
-        $crawler->assertJson($validJson);
-    }
-
     public function test_title_has_a_max_of_255_characters()
     {
         $title = str_random(256);
