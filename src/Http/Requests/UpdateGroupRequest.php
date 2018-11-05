@@ -2,6 +2,7 @@
 
 namespace Firefly\Http\Requests;
 
+use Firefly\Rules\Hex;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateGroupRequest extends FormRequest
@@ -24,7 +25,8 @@ class UpdateGroupRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|min:5|max:255',
+            'name' => 'required|max:255',
+            'color' => ['required', new Hex],
         ];
     }
 }

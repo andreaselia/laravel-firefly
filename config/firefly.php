@@ -36,6 +36,7 @@ return [
 
     'pagination' => [
         'view'        => 'firefly::pagination.default',
+        'groups'      => 12,
         'discussions' => 20,
         'posts'       => 15,
     ],

@@ -13,6 +13,14 @@
                 </div>
 
                 <div class="d-flex">
+                    @if ($discussion->pinned_at)
+                        <i class="icon icon-pinned mr-2" data-toggle="tooltip" title="{{ __('Pinned') }}"></i>
+                    @endif
+
+                    @if ($discussion->locked_at)
+                        <i class="icon icon-locked mr-2" data-toggle="tooltip" title="{{ __('Locked') }}"></i>
+                    @endif
+
                     @foreach ($discussion->groups as $group)
                         <div class="group-display rounded-circle mb-0" data-toggle="tooltip" title="{{ $group->name }}" style="background: {{ $group->color }};"></div>
                     @endforeach

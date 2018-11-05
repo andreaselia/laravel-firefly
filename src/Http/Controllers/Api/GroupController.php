@@ -20,7 +20,9 @@ class GroupController extends Controller
     {
         $this->authorize('create', Group::class);
 
-        $group = Group::create($request->all());
+        $group = Group::create($request->except('is_private') + [
+            'is_private' => $request->has('is_private'),
+        ]);
 
         return response()->json($group);
     }
@@ -35,7 +37,9 @@ class GroupController extends Controller
     {
         $this->authorize('update', $group);
 
-        $group->update($request->all());
+        $group->update($request->except('is_private') + [
+            'is_private' => $request->has('is_private'),
+        ]);
 
         return response()->json($group->fresh());
     }

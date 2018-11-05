@@ -24,8 +24,8 @@ class StoreDiscussionRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required|min:5|max:255',
-            'content' => 'required',
+            'title' => 'required|max:255',
+            'content' => 'required|max:5000',
         ];
     }
 }

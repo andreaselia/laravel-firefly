@@ -4,19 +4,19 @@
     </button>
 
     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        @can ('stick', $discussion)
-            <a class="dropdown-item" href="{{ route('firefly.discussion.stick', [$discussion->id, $discussion->slug]) }}" onclick="event.preventDefault(); document.getElementById('stick-discussion-form').submit();">{{ __('Stick') }}</a>
+        @can ('pin', $discussion)
+            <a class="dropdown-item" href="{{ route('firefly.discussion.pin', [$discussion->id, $discussion->slug]) }}" onclick="event.preventDefault(); document.getElementById('pin-discussion-form').submit();">{{ __('Pin') }}</a>
 
-            <form id="stick-discussion-form" action="{{ route('firefly.discussion.stick', [$discussion->id, $discussion->slug]) }}" method="POST" style="display: none;">
+            <form id="pin-discussion-form" action="{{ route('firefly.discussion.pin', [$discussion->id, $discussion->slug]) }}" method="POST" style="display: none;">
                 @method('PUT')
                 @csrf
             </form>
         @endcan
 
-        @can ('unstick', $discussion)
-            <a class="dropdown-item" href="{{ route('firefly.discussion.unstick', [$discussion->id, $discussion->slug]) }}" onclick="event.preventDefault(); document.getElementById('unstick-discussion-form').submit();">{{ __('Unstick') }}</a>
+        @can ('unpin', $discussion)
+            <a class="dropdown-item" href="{{ route('firefly.discussion.unpin', [$discussion->id, $discussion->slug]) }}" onclick="event.preventDefault(); document.getElementById('unpin-discussion-form').submit();">{{ __('Unpin') }}</a>
 
-            <form id="unstick-discussion-form" action="{{ route('firefly.discussion.unstick', [$discussion->id, $discussion->slug]) }}" method="POST" style="display: none;">
+            <form id="unpin-discussion-form" action="{{ route('firefly.discussion.unpin', [$discussion->id, $discussion->slug]) }}" method="POST" style="display: none;">
                 @method('PUT')
                 @csrf
             </form>

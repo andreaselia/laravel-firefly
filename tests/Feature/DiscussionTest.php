@@ -20,7 +20,7 @@ class DiscussionTest extends TestCase
                 'title' => 'Foo Bar',
                 'content' => 'Lorem Ipsum',
             ]);
-        
+
         $discussions = Discussion::all();
 
         $this->assertTrue($discussions->count() == 1);
@@ -106,31 +106,31 @@ class DiscussionTest extends TestCase
         $crawler->assertLocation('forum/d/' . $discussion->uri);
     }
 
-    public function test_discussion_gets_stickied()
+    public function test_discussion_gets_pinned()
     {
         $discussion = $this->getDiscussion();
 
         $crawler = $this->actingAs($this->getUser())
-            ->put('forum/d/' . $discussion->uri . '/stick');
+            ->put('forum/d/' . $discussion->uri . '/pin');
 
         $discussion->refresh();
 
-        $this->assertNotNull($discussion->stickied_at);
+        $this->assertNotNull($discussion->pinned_at);
 
         $crawler->assertRedirect();
         $crawler->assertLocation('forum/d/' . $discussion->uri);
     }
 
-    public function test_discussion_gets_unstickied()
+    public function test_discussion_gets_unpinned()
     {
-        $discussion = $this->getDiscussion()->stick();
+        $discussion = $this->getDiscussion()->pin();
 
         $crawler = $this->actingAs($this->getUser())
-            ->put('forum/d/' . $discussion->uri . '/unstick');
+            ->put('forum/d/' . $discussion->uri . '/unpin');
 
         $discussion->refresh();
 
-        $this->assertNull($discussion->stickied_at);
+        $this->assertNull($discussion->pinned_at);
 
         $crawler->assertRedirect();
         $crawler->assertLocation('forum/d/' . $discussion->uri);

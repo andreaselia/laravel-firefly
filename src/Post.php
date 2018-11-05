@@ -15,7 +15,7 @@ class Post extends Model
      * @var array
      */
     protected $fillable = [
-        'content', 'hidden_at',
+        'content',
     ];
 
     /**
@@ -24,7 +24,7 @@ class Post extends Model
      * @var array
      */
     protected $dates = [
-        'deleted_at', 'hidden_at',
+        'deleted_at',
     ];
 
     /**

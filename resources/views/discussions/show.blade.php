@@ -6,8 +6,12 @@
         <div class="d-flex align-items-center">
             <h1 class="mb-0">{{ $discussion->title }}</h1>
 
-            @if ($discussion->stickied_at)
-                <i class="icon icon-stuck ml-2" data-toggle="tooltip" title="{{ __('Stickied') }}"></i>
+            @foreach ($discussion->groups as $group)
+                <div class="group-display rounded-circle ml-2 mb-0" data-toggle="tooltip" title="{{ $group->name }}" style="background: {{ $group->color }};"></div>
+            @endforeach
+
+            @if ($discussion->pinned_at)
+                <i class="icon icon-pinned ml-2" data-toggle="tooltip" title="{{ __('Pinned') }}"></i>
             @endif
 
             @if ($discussion->locked_at)
@@ -45,7 +49,7 @@
                         </div>
                     </div>
 
-                    <div><strong>{{ $post->user->name }}</strong> {{ $post->content }}</div>
+                    <div><strong>{{ $post->user->name }}</strong> {!! nl2br(e($post->content)) !!}</div>
                 </div>
             </div>
         </div>
@@ -59,7 +63,7 @@
 
                     <div class="form-group">
                         <label for="content">{{ __('Content') }}</label>
-                        <textarea name="content" id="content" class="form-control{{ $errors->has('content') ? ' is-invalid' : '' }}" rows="3">{{ old('content') }}</textarea>
+                        <textarea name="content" id="content" class="form-control{{ $errors->has('content') ? ' is-invalid' : '' }}" rows="3" required>{{ old('content') }}</textarea>
 
                         @if ($errors->has('content'))
                             <span class="invalid-feedback" role="alert">

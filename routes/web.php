@@ -1,7 +1,7 @@
 <?php
 
 Route::name(config('firefly.web.name'))->group(function() {
-    Route::get('/', 'ForumController@index')->name('forum.index');
+    Route::get('/', 'ForumController@index')->name('index');
 
     // Discussions...
     Route::group(['prefix' => config('firefly.prefix.discussion')], function () {

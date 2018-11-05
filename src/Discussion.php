@@ -17,7 +17,7 @@ class Discussion extends Model
      * @var array
      */
     protected $fillable = [
-        'title', 'locked_at', 'stickied_at', 'hidden_at',
+        'title', 'locked_at', 'pinned_at',
     ];
 
     /**
@@ -26,7 +26,7 @@ class Discussion extends Model
      * @var array
      */
     protected $dates = [
-        'locked_at', 'stickied_at', 'hidden_at', 'deleted_at',
+        'locked_at', 'pinned_at', 'deleted_at',
     ];
 
     /**
@@ -122,28 +122,28 @@ class Discussion extends Model
     }
 
     /**
-     * Stick the discussion.
+     * Pin the discussion.
      *
      * @return $this
      */
-    public function stick()
+    public function pin()
     {
         $this->update([
-            'stickied_at' => now(),
+            'pinned_at' => now(),
         ]);
 
         return $this;
     }
 
     /**
-     * Unstick the discussion.
+     * Unpin the discussion.
      *
      * @return $this
      */
-    public function unstick()
+    public function unpin()
     {
         $this->update([
-            'stickied_at' => null,
+            'pinned_at' => null,
         ]);
 
         return $this;

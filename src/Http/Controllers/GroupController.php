@@ -16,7 +16,10 @@ class GroupController extends Controller
      */
     public function index()
     {
-        return view('firefly::groups.index')->withGroups(Group::paginate());
+        $groups = Group::orderBy('name', 'asc')
+            ->paginate(config('firefly.pagination.groups'));
+
+        return view('firefly::groups.index')->withGroups($groups);
     }
 
     /**
@@ -37,7 +40,9 @@ class GroupController extends Controller
      */
     public function store(StoreGroupRequest $request)
     {
-        $group = Group::create($request->all());
+        $group = Group::create($request->except('is_private') + [
+            'is_private' => $request->has('is_private'),
+        ]);
 
         return redirect()->route('firefly.group.show', $group);
     }
@@ -50,8 +55,12 @@ class GroupController extends Controller
      */
     public function show(Group $group)
     {
-        return view('firefly::groups.show')->withGroup($group)
-            ->withDiscussions($group->discussions()->paginate(config('firefly.pagination.discussions')));
+        $discussions = $group->discussions()
+            ->orderBy('created_at', 'desc')
+            ->orderBy('pinned_at', 'asc')
+            ->paginate(config('firefly.pagination.discussions'));
+
+        return view('firefly::groups.show')->with(compact('group', 'discussions'));
     }
 
     /**
@@ -78,7 +87,9 @@ class GroupController extends Controller
     {
         $this->authorize('update', $group);
 
-        $group->update($request->only('name', 'color'));
+        $group->update($request->except('is_private') + [
+            'is_private' => $request->has('is_private'),
+        ]);
 
         return redirect()->route('firefly.group.show', $group);
     }
@@ -94,6 +105,6 @@ class GroupController extends Controller
     {
         $group->delete();
 
-        return redirect()->route('firefly.forum.index');
+        return redirect()->route('firefly.index');
     }
 }

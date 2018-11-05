@@ -37,6 +37,7 @@ class GroupTest extends TestCase
         $crawler = $this->actingAs($this->getUser(), 'api')
             ->putJson('api/forum/groups/' . $group->slug, [
                 'name' => 'Bar Foo',
+                'color' => '#444',
             ]);
 
         $group->refresh();
