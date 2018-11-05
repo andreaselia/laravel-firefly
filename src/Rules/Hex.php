@@ -15,6 +15,7 @@ class Hex implements Rule
      */
     public function passes($attribute, $value)
     {
+        $value = preg_replace('/#+/', '#', $value);
         $value = ltrim($value, '#');
 
         return ctype_xdigit($value) && (strlen($value) == 6 || strlen($value) == 3);
