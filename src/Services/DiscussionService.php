@@ -2,6 +2,7 @@
 
 namespace Firefly\Services;
 
+use Firefly\Discussion;
 use Firefly\Group;
 use Illuminate\Http\Request;
 
@@ -12,7 +13,7 @@ class DiscussionService
      *
      * @param \Illuminate\Http\Request $request
      * @param \Firefly\Group $group
-     * @return mixed
+     * @return \Firefly\Discussion
      */
     public function make(Request $request, Group $group)
     {
@@ -32,6 +33,20 @@ class DiscussionService
 
         $discussion->posts()->save($post);
 
+        return $discussion->refresh();
+    }
+
+    /**
+     * Update the discussion instance.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param \Firefly\Discussion $discussion
+     * @return \Firefly\Discussion
+     */
+    public function update(Request $request, Discussion $discussion)
+    {
+        $discussion->update($request->all());
+        
         return $discussion->refresh();
     }
 }
