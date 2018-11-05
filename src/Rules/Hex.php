@@ -15,9 +15,10 @@ class Hex implements Rule
      */
     public function passes($attribute, $value)
     {
+        $hash_count = substr_count($value, '#');
         $value = ltrim($value, '#');
 
-        return ctype_xdigit($value) && (strlen($value) == 6 || strlen($value) == 3);
+        return $hash_count == 1 && ctype_xdigit($value) && (strlen($value) == 6 || strlen($value) == 3);
     }
 
     /**
