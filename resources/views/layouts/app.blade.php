@@ -31,7 +31,7 @@
                     <ul class="navbar-nav mr-auto">
                         @auth
                             <li class="nav-item">
-                                <a class="nav-link{{ Route::currentRouteName() == 'firefly.forum.index' ? ' active' : '' }}" href="{{ route('firefly.forum.index') }}">{{ __('Discussions') }}</a>
+                                <a class="nav-link{{ Route::currentRouteName() == 'firefly.index' ? ' active' : '' }}" href="{{ route('firefly.index') }}">{{ __('Discussions') }}</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link{{ Route::currentRouteName() == 'firefly.group.index' ? ' active' : '' }}" href="{{ route('firefly.group.index') }}">{{ __('Groups') }}</a>

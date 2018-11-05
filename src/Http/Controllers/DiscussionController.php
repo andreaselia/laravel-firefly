@@ -112,7 +112,7 @@ class DiscussionController extends Controller
 
         $discussion->delete();
 
-        return redirect()->route('firefly.forum.index');
+        return redirect()->route('firefly.index');
     }
 
     /**

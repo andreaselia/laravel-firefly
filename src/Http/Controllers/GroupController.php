@@ -102,6 +102,6 @@ class GroupController extends Controller
     {
         $group->delete();
 
-        return redirect()->route('firefly.forum.index');
+        return redirect()->route('firefly.index');
     }
 }
