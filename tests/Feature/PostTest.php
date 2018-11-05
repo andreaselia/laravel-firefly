@@ -102,41 +102,4 @@ class PostTest extends TestCase
         $crawler->assertJsonValidationErrors('content');
         $crawler->assertJson($validJson);
     }
-
-    public function test_title_has_at_least_5_characters()
-    {
-        $content = 'Foo';
-        $validJson = [
-            'errors' => [
-                'content' => [
-                    'The content must be at least 5 characters.',
-                ]
-            ]
-        ];
-
-        // Create
-        $discussion = $this->getDiscussion();
-
-        $crawler = $this->actingAs($this->getUser())
-            ->postJson('forum/d/' . $discussion->uri, [
-                'content' => $content,
-            ]);
-
-        $crawler->assertStatus(422);
-        $crawler->assertJsonValidationErrors('content');
-        $crawler->assertJson($validJson);
-
-        // Update
-        $discussion = $this->getDiscussion();
-        $post = $this->getPost();
-
-        $crawler = $this->actingAs($this->getUser())
-            ->putJson('forum/d/' . $discussion->uri . '/p/' . $post->id, [
-                'content' => $content,
-            ]);
-
-        $crawler->assertStatus(422);
-        $crawler->assertJsonValidationErrors('content');
-        $crawler->assertJson($validJson);
-    }
 }

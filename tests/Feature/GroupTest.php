@@ -101,40 +101,6 @@ class GroupTest extends TestCase
         $crawler->assertJson($validJson);
     }
 
-    public function test_name_has_at_least_5_characters()
-    {
-        $name = 'Foo';
-        $validJson = [
-            'errors' => [
-                'name' => [
-                    'The name must be at least 5 characters.',
-                ]
-            ]
-        ];
-
-        // Create
-        $crawler = $this->actingAs($this->getUser())
-            ->postJson('forum/g', [
-                'name' => $name,
-            ]);
-
-        $crawler->assertStatus(422);
-        $crawler->assertJsonValidationErrors('name');
-        $crawler->assertJson($validJson);
-
-        // Update
-        $group = $this->getGroup();
-
-        $crawler = $this->actingAs($this->getUser())
-            ->putJson('forum/g/' . $group->slug, [
-                'name' => $name,
-            ]);
-
-        $crawler->assertStatus(422);
-        $crawler->assertJsonValidationErrors('name');
-        $crawler->assertJson($validJson);
-    }
-
     public function test_name_has_a_max_of_255_characters()
     {
         $name = str_random(256);
