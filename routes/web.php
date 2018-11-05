@@ -1,14 +1,14 @@
 <?php
 
 Route::name(config('firefly.web.name'))->group(function() {
-    Route::get('/', 'ForumController@index')->name('forum.index');
+    Route::get('/', 'ForumController@index')->name('index');
 
     // Discussions...
     Route::get('{discussion}-{slug}', 'DiscussionController@show')->name('discussion.show')->where(['discussion' => '[0-9]+']);
     Route::put('{discussion}-{slug}/lock', 'DiscussionController@lock')->name('discussion.lock')->where(['discussion' => '[0-9]+']);
     Route::put('{discussion}-{slug}/unlock', 'DiscussionController@unlock')->name('discussion.unlock')->where(['discussion' => '[0-9]+']);
-    Route::put('{discussion}-{slug}/stick', 'DiscussionController@stick')->name('discussion.stick')->where(['discussion' => '[0-9]+']);
-    Route::put('{discussion}-{slug}/unstick', 'DiscussionController@unstick')->name('discussion.unstick')->where(['discussion' => '[0-9]+']);
+    Route::put('{discussion}-{slug}/pin', 'DiscussionController@pin')->name('discussion.pin')->where(['discussion' => '[0-9]+']);
+    Route::put('{discussion}-{slug}/unpin', 'DiscussionController@unpin')->name('discussion.unpin')->where(['discussion' => '[0-9]+']);
     Route::get('{group}/discussion/create', 'DiscussionController@create')->name('discussion.create');
     Route::post('{group}/discussion', 'DiscussionController@store')->name('discussion.store');
     Route::put('{discussion}-{slug}', 'DiscussionController@update')->name('discussion.update')->where(['discussion' => '[0-9]+']);

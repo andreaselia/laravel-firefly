@@ -52,8 +52,12 @@ class GroupController extends Controller
      */
     public function show(Group $group)
     {
-        return view('firefly::groups.show')->withGroup($group)
-            ->withDiscussions($group->discussions()->paginate(config('firefly.pagination.discussions')));
+        $discussions = $group->discussions()
+            ->orderBy('created_at', 'desc')
+            ->orderBy('pinned_at')
+            ->paginate(config('firefly.pagination.discussions'));
+
+        return view('firefly::groups.show')->with(compact('group', 'discussions'));
     }
 
     /**
@@ -98,6 +102,6 @@ class GroupController extends Controller
     {
         $group->delete();
 
-        return redirect()->route('firefly.forum.index');
+        return redirect()->route('firefly.index');
     }
 }

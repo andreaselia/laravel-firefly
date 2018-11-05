@@ -105,27 +105,27 @@ class DiscussionPolicy
     }
 
     /**
-     * Determine whether the user can stick the discussion.
+     * Determine whether the user can pin the discussion.
      *
      * @param  $user
      * @param  \Firefly\Discussion  $discussion
      * @return mixed
      */
-    public function stick($user, Discussion $discussion)
+    public function pin($user, Discussion $discussion)
     {
-        return is_null($discussion->stickied_at);
+        return is_null($discussion->pinned_at);
     }
 
     /**
-     * Determine whether the user can unstick the discussion.
+     * Determine whether the user can unpin the discussion.
      *
      * @param  $user
      * @param  \Firefly\Discussion  $discussion
      * @return mixed
      */
-    public function unstick($user, Discussion $discussion)
+    public function unpin($user, Discussion $discussion)
     {
-        return ! is_null($discussion->stickied_at);
+        return ! is_null($discussion->pinned_at);
     }
 
     /**

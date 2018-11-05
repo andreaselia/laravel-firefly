@@ -10,8 +10,8 @@
                 <div class="group-display rounded-circle ml-2 mb-0" data-toggle="tooltip" title="{{ $group->name }}" style="background: {{ $group->color }};"></div>
             @endforeach
 
-            @if ($discussion->stickied_at)
-                <i class="icon icon-stuck ml-2" data-toggle="tooltip" title="{{ __('Pinned') }}"></i>
+            @if ($discussion->pinned_at)
+                <i class="icon icon-pinned ml-2" data-toggle="tooltip" title="{{ __('Pinned') }}"></i>
             @endif
 
             @if ($discussion->locked_at)
@@ -49,7 +49,7 @@
                         </div>
                     </div>
 
-                    <div><strong>{{ $post->user->name }}</strong> {{ $post->content }}</div>
+                    <div><strong>{{ $post->user->name }}</strong> {!! nl2br($post->content) !!}</div>
                 </div>
             </div>
         </div>
