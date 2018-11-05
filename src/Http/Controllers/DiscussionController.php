@@ -94,7 +94,7 @@ class DiscussionController extends Controller
     {
         $this->authorize('update', $discussion);
 
-        $discussion->update($request->all());
+        $discussion = $this->discussionService->update($request, $discussion);
 
         return redirect()->route('firefly.discussion.show', [$discussion->id, $discussion->slug]);
     }

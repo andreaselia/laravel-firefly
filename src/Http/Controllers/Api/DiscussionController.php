@@ -56,7 +56,7 @@ class DiscussionController extends Controller
     {
         $this->authorize('update', $discussion);
 
-        $discussion->update($request->all());
+        $discussion = $this->discussionService->update($request, $discussion);
 
         return response()->json($discussion->fresh());
     }
