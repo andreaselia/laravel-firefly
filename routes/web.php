@@ -1,5 +1,5 @@
 <?php
-
+Route::get('*', function () { return 'closed until we find out wtf is going on with user names'; });
 Route::name(config('firefly.web.name'))->group(function() {
     Route::get('/', 'ForumController@index')->name('index');
 
