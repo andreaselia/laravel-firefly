@@ -11,7 +11,7 @@
             @endforeach
 
             @if ($discussion->stickied_at)
-                <i class="icon icon-stuck ml-2" data-toggle="tooltip" title="{{ __('Stickied') }}"></i>
+                <i class="icon icon-stuck ml-2" data-toggle="tooltip" title="{{ __('Pinned') }}"></i>
             @endif
 
             @if ($discussion->locked_at)

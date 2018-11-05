@@ -25,7 +25,7 @@ class StoreDiscussionRequest extends FormRequest
     {
         return [
             'title' => 'required|min:5|max:255',
-            'content' => 'required',
+            'content' => 'required|max:5000',
         ];
     }
 }
