@@ -56,8 +56,8 @@ class GroupController extends Controller
     public function show(Group $group)
     {
         $discussions = $group->discussions()
-            ->orderBy('created_at', 'desc')
             ->orderBy('pinned_at', 'asc')
+            ->orderBy('created_at', 'desc')
             ->paginate(config('firefly.pagination.discussions'));
 
         return view('firefly::groups.show')->with(compact('group', 'discussions'));
