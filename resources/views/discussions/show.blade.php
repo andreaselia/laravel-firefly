@@ -7,7 +7,7 @@
             <h1 class="mb-0">{{ $discussion->title }}</h1>
 
             @foreach ($discussion->groups as $group)
-                <div class="group-display rounded-circle ml-2 mb-0" data-toggle="tooltip" title="{{ $group->name }}" style="background: {{ $group->color }};"></div>
+                <a href="{{ route('firefly.group.show', $group) }}" class="group-display rounded-circle ml-2 mb-0" data-toggle="tooltip" title="{{ $group->name }}" style="background: {{ $group->color }};"></a>
             @endforeach
 
             @if ($discussion->pinned_at)
