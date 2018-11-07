@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class DiscussionService
 {
     /**
-     * Make a new discussion instance.
+     * Make a new discussion.
      *
      * @param \Illuminate\Http\Request $request
      * @param \Firefly\Group $group
@@ -37,7 +37,7 @@ class DiscussionService
     }
 
     /**
-     * Update the discussion instance.
+     * Update the discussion.
      *
      * @param \Illuminate\Http\Request $request
      * @param \Firefly\Discussion $discussion
@@ -46,7 +46,34 @@ class DiscussionService
     public function update(Request $request, Discussion $discussion)
     {
         $discussion->update($request->all());
-        
+
         return $discussion->refresh();
+    }
+
+    /**
+     * Delete the discussion.
+     *
+     * @param \Firefly\Discussion $discussion
+     * @return bool|null
+     * @throws \Exception
+     */
+    public function delete(Discussion $discussion)
+    {
+        return $discussion->delete();
+    }
+
+    /**
+     * Update the status of the discussion.
+     *
+     * @param Discussion $discussion
+     * @param $type
+     */
+    public function updateState(Discussion $discussion, $type)
+    {
+        if (!method_exists($discussion, $type)) {
+            throw new \BadMethodCallException("Method {$type} not found.");
+        }
+
+        return $discussion->{$type}();
     }
 }
