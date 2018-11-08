@@ -15,8 +15,6 @@ class GroupService
      */
     public function make(Request $request)
     {
-        $this->authorize('create', Group::class);
-
         $request->merge(['is_private' => $request->has('is_private')]);
 
         return Group::create($request->all());
@@ -31,11 +29,11 @@ class GroupService
      */
     public function update(Request $request, Group $group)
     {
-        $this->authorize('update', $group);
-
         $request->merge(['is_private' => $request->has('is_private')]);
         
-        return $group->update($request->all())->refresh();
+        $group->update($request->all());
+
+        return $group->refresh();
     }
 
     /**
@@ -47,8 +45,6 @@ class GroupService
      */
     public function delete(Group $group)
     {
-        $this->authorize('delete', $group);
-
         return $group->delete();
     }
 }

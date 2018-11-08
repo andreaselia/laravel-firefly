@@ -58,6 +58,8 @@ class GroupController extends Controller
      */
     public function store(StoreGroupRequest $request)
     {
+        $this->authorize('create', Group::class);
+        
         $group = $this->groupService->make($request);
 
         return redirect()->route('firefly.group.show', $group);
@@ -101,6 +103,8 @@ class GroupController extends Controller
      */
     public function update(UpdateGroupRequest $request, Group $group)
     {
+        $this->authorize('update', $group);
+
         $group = $this->groupService->update($request, $group);
 
         return redirect()->route('firefly.group.show', $group);
@@ -115,6 +119,8 @@ class GroupController extends Controller
      */
     public function delete(Request $request, Group $group)
     {
+        $this->authorize('delete', $group);
+        
         $this->groupService->delete($group);
 
         return redirect()->route('firefly.index');
