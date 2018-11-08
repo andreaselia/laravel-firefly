@@ -45,7 +45,9 @@ class DiscussionService
      */
     public function update(Request $request, Discussion $discussion)
     {
-        return $discussion->update($request->all())->refresh();
+        $discussion->update($request->all());
+
+        return $discussion->refresh();
     }
 
     /**
