@@ -37,7 +37,7 @@ class DiscussionService
     }
 
     /**
-     * Update the discussion.
+     * Update the specified discussion.
      *
      * @param \Illuminate\Http\Request $request
      * @param \Firefly\Discussion $discussion
@@ -45,13 +45,11 @@ class DiscussionService
      */
     public function update(Request $request, Discussion $discussion)
     {
-        $discussion->update($request->all());
-
-        return $discussion->refresh();
+        return $discussion->update($request->all())->refresh();
     }
 
     /**
-     * Delete the discussion.
+     * Delete the specified discussion.
      *
      * @param \Firefly\Discussion $discussion
      * @return bool|null
@@ -63,7 +61,7 @@ class DiscussionService
     }
 
     /**
-     * Update the status of the discussion.
+     * Update a status of the specified discussion.
      *
      * @param Discussion $discussion
      * @param $type
