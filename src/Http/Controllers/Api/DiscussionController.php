@@ -71,7 +71,7 @@ class DiscussionController extends Controller
     {
         $this->authorize('delete', $discussion);
 
-        $discussion->delete();
+        $this->discussionService->delete($discussion);
 
         return response()->json('OK');
     }
@@ -87,7 +87,7 @@ class DiscussionController extends Controller
     {
         $this->authorize('lock', $discussion);
 
-        $discussion->lock();
+        $this->discussionService->updateState($discussion, 'lock');
 
         return response()->json('OK');
     }
@@ -103,7 +103,7 @@ class DiscussionController extends Controller
     {
         $this->authorize('unlock', $discussion);
 
-        $discussion->unlock();
+        $this->discussionService->updateState($discussion, 'unlock');
 
         return response()->json('OK');
     }
@@ -119,7 +119,7 @@ class DiscussionController extends Controller
     {
         $this->authorize('pin', $discussion);
 
-        $discussion->pin();
+        $this->discussionService->updateState($discussion, 'pin');
 
         return response()->json('OK');
     }
@@ -135,7 +135,7 @@ class DiscussionController extends Controller
     {
         $this->authorize('unpin', $discussion);
 
-        $discussion->unpin();
+        $this->discussionService->updateState($discussion, 'unpin');
 
         return response()->json('OK');
     }

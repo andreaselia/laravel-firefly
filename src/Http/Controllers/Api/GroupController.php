@@ -6,10 +6,28 @@ use Firefly\Group;
 use Firefly\Http\Controllers\Controller;
 use Firefly\Http\Requests\StoreGroupRequest;
 use Firefly\Http\Requests\UpdateGroupRequest;
+use Firefly\Services\GroupService;
 use Illuminate\Http\Request;
 
 class GroupController extends Controller
 {
+    /**
+     * Instance of the group service.
+     *
+     * @var \Firefly\Services\GroupService
+     */
+    public $groupService;
+
+    /**
+     * Create a new instance of the controller.
+     *
+     * @param \Firefly\Services\GroupService $service
+     */
+    public function __construct(GroupService $groupService)
+    {
+        $this->groupService = $groupService;
+    }
+    
     /**
      * Store the new group.
      *
@@ -20,9 +38,7 @@ class GroupController extends Controller
     {
         $this->authorize('create', Group::class);
 
-        $group = Group::create($request->except('is_private') + [
-            'is_private' => $request->has('is_private'),
-        ]);
+        $group = $this->groupService->make($request);
 
         return response()->json($group);
     }
@@ -37,11 +53,9 @@ class GroupController extends Controller
     {
         $this->authorize('update', $group);
 
-        $group->update($request->except('is_private') + [
-            'is_private' => $request->has('is_private'),
-        ]);
+        $group = $this->groupService->update($request, $group);
 
-        return response()->json($group->fresh());
+        return response()->json($group);
     }
 
     /**

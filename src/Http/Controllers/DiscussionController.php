@@ -109,8 +109,8 @@ class DiscussionController extends Controller
     {
         $this->authorize('delete', $discussion);
 
-        $discussion->delete();
-
+        $this->discussionService->delete($discussion);
+        
         return redirect()->route('firefly.index');
     }
 
@@ -125,7 +125,7 @@ class DiscussionController extends Controller
     {
         $this->authorize('lock', $discussion);
 
-        $discussion->lock();
+        $this->discussionService->updateState($discussion, 'lock');
 
         return redirect()->route('firefly.discussion.show', [$discussion->id, $discussion->slug]);
     }
@@ -141,7 +141,7 @@ class DiscussionController extends Controller
     {
         $this->authorize('unlock', $discussion);
 
-        $discussion->unlock();
+        $this->discussionService->updateState($discussion, 'unlock');
 
         return redirect()->route('firefly.discussion.show', [$discussion->id, $discussion->slug]);
     }
@@ -157,7 +157,7 @@ class DiscussionController extends Controller
     {
         $this->authorize('pin', $discussion);
 
-        $discussion->pin();
+        $this->discussionService->updateState($discussion, 'pin');
 
         return redirect()->route('firefly.discussion.show', [$discussion->id, $discussion->slug]);
     }
@@ -173,7 +173,7 @@ class DiscussionController extends Controller
     {
         $this->authorize('unpin', $discussion);
 
-        $discussion->unpin();
+        $this->discussionService->updateState($discussion, 'unpin');
 
         return redirect()->route('firefly.discussion.show', [$discussion->id, $discussion->slug]);
     }
