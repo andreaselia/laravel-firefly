@@ -26,6 +26,8 @@ class DiscussionController extends Controller
      */
     public function __construct(DiscussionService $discussionService)
     {
+        $this->middleware('auth')->except('show');
+
         $this->discussionService = $discussionService;
     }
 
