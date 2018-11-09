@@ -24,6 +24,8 @@ class GroupController extends Controller
      */
     public function __construct(GroupService $groupService)
     {
+        $this->middleware('auth')->except(['index', 'show']);
+
         $this->groupService = $groupService;
     }
     
