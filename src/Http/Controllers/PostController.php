@@ -73,7 +73,7 @@ class PostController extends Controller
     {
         $this->authorize('update', $post);
 
-        $post->update($request->all());
+        $this->postService->update($request, $post);
 
         return redirect()->route('firefly.discussion.show', [$discussion->id, $discussion->slug]);
     }
@@ -91,7 +91,7 @@ class PostController extends Controller
     {
         $this->authorize('delete', $post);
 
-        $post->delete();
+        $this->postService->delete($post);
 
         return redirect()->route('firefly.discussion.show', [$discussion->id, $discussion->slug]);
     }

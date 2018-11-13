@@ -58,7 +58,7 @@ class PostController extends Controller
     {
         $this->authorize('update', $post);
 
-        $post->update($request->all());
+        $this->postService->update($request, $post);
 
         return response()->json($post->fresh());
     }
@@ -76,7 +76,7 @@ class PostController extends Controller
     {
         $this->authorize('delete', $post);
 
-        $post->delete();
+        $this->postService->delete($post);
 
         return response()->json('OK');
     }
