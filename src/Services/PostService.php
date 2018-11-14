@@ -6,7 +6,7 @@ use Firefly\Discussion;
 use Firefly\Post;
 use Illuminate\Http\Request;
 
-class PostService
+class PostService extends BaseService
 {
     /**
      * Make a new Post instance and attach it to the user.
@@ -17,6 +17,8 @@ class PostService
      */
     public function make(Request $request, Discussion $discussion)
     {
+        $this->user->can('reply', $discussion);
+        
         $user = $request->user();
 
         $post = $user->posts()->make($request->all());
@@ -35,6 +37,8 @@ class PostService
      */
     public function update(Request $request, Post $post)
     {
+        $this->user->can('update', $post);
+        
         $post->update($request->all());
         
         return $post->refresh();
@@ -49,6 +53,8 @@ class PostService
      */
     public function delete(Post $post)
     {
+        $this->user->can('delete', $post);
+        
         return $post->delete();
     }
 }
