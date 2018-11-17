@@ -16,7 +16,7 @@ class DiscussionTest extends TestCase
         Post::truncate();
 
         $crawler = $this->actingAs($this->getUser())
-            ->postJson('forum/g/example-group/d', [
+            ->post('forum/g/example-group/d', [
                 'title' => 'Foo Bar',
                 'content' => 'Lorem Ipsum',
             ]);

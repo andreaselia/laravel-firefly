@@ -37,8 +37,6 @@ class DiscussionController extends Controller
      */
     public function store(StoreDiscussionRequest $request)
     {
-        $this->authorize('create', Discussion::class);
-
         $group = Group::findOrFail($request->group_id);
 
         $discussion = $this->discussionService->make($request, $group);
@@ -54,8 +52,6 @@ class DiscussionController extends Controller
      */
     public function update(UpdateDiscussionRequest $request, Discussion $discussion)
     {
-        $this->authorize('update', $discussion);
-
         $discussion = $this->discussionService->update($request, $discussion);
 
         return response()->json($discussion->fresh());
@@ -69,8 +65,6 @@ class DiscussionController extends Controller
      */
     public function delete(Request $request, Discussion $discussion)
     {
-        $this->authorize('delete', $discussion);
-
         $this->discussionService->delete($discussion);
 
         return response()->json('OK');
@@ -85,8 +79,6 @@ class DiscussionController extends Controller
      */
     public function lock(Request $request, Discussion $discussion)
     {
-        $this->authorize('lock', $discussion);
-
         $this->discussionService->updateState($discussion, 'lock');
 
         return response()->json('OK');
@@ -101,8 +93,6 @@ class DiscussionController extends Controller
      */
     public function unlock(Request $request, Discussion $discussion)
     {
-        $this->authorize('unlock', $discussion);
-
         $this->discussionService->updateState($discussion, 'unlock');
 
         return response()->json('OK');
@@ -117,8 +107,6 @@ class DiscussionController extends Controller
      */
     public function pin(Request $request, Discussion $discussion)
     {
-        $this->authorize('pin', $discussion);
-
         $this->discussionService->updateState($discussion, 'pin');
 
         return response()->json('OK');
@@ -133,8 +121,6 @@ class DiscussionController extends Controller
      */
     public function unpin(Request $request, Discussion $discussion)
     {
-        $this->authorize('unpin', $discussion);
-
         $this->discussionService->updateState($discussion, 'unpin');
 
         return response()->json('OK');

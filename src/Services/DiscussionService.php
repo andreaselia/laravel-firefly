@@ -6,7 +6,7 @@ use Firefly\Discussion;
 use Firefly\Group;
 use Illuminate\Http\Request;
 
-class DiscussionService
+class DiscussionService extends BaseService
 {
     /**
      * Make a new discussion.
@@ -17,6 +17,8 @@ class DiscussionService
      */
     public function make(Request $request, Group $group)
     {
+        $this->user->can('create', Discussion::class);
+        
         $user = $request->user();
 
         // Make the discussion and attach it to the user
@@ -45,6 +47,8 @@ class DiscussionService
      */
     public function update(Request $request, Discussion $discussion)
     {
+        $this->user->can('update', $discussion);
+        
         $discussion->update($request->all());
 
         return $discussion->refresh();
@@ -59,6 +63,8 @@ class DiscussionService
      */
     public function delete(Discussion $discussion)
     {
+        $this->user->can('delete', $discussion);
+        
         return $discussion->delete();
     }
 
@@ -70,6 +76,8 @@ class DiscussionService
      */
     public function updateState(Discussion $discussion, $type)
     {
+        $this->user->can($type, $discussion);
+        
         if (!method_exists($discussion, $type)) {
             throw new \BadMethodCallException("Method {$type} not found.");
         }
