@@ -39,6 +39,8 @@ class PostController extends Controller
      */
     public function store(StorePostRequest $request, Discussion $discussion)
     {
+        $this->authorize('reply', $discussion);
+
         $post = $this->postService->make($request, $discussion);
 
         return redirect()->route('firefly.discussion.show', [$discussion->id, $discussion->slug]);
@@ -69,6 +71,8 @@ class PostController extends Controller
      */
     public function update(UpdatePostRequest $request, Discussion $discussion, $slug, Post $post)
     {
+        $this->authorize('update', $post);
+
         $this->postService->update($request, $post);
 
         return redirect()->route('firefly.discussion.show', [$discussion->id, $discussion->slug]);
@@ -85,6 +89,8 @@ class PostController extends Controller
      */
     public function delete(Request $request, Discussion $discussion, $slug, Post $post)
     {
+        $this->authorize('delete', $post);
+
         $this->postService->delete($post);
 
         return redirect()->route('firefly.discussion.show', [$discussion->id, $discussion->slug]);

@@ -5,7 +5,7 @@ namespace Firefly\Services;
 use Firefly\Group;
 use Illuminate\Http\Request;
 
-class GroupService extends BaseService
+class GroupService
 {
     /**
      * Make a new group.
@@ -15,8 +15,6 @@ class GroupService extends BaseService
      */
     public function make(Request $request)
     {
-        $this->user->can('create', Group::class);
-        
         $request->merge(['is_private' => $request->has('is_private')]);
 
         return Group::create($request->all());
@@ -31,8 +29,6 @@ class GroupService extends BaseService
      */
     public function update(Request $request, Group $group)
     {
-        $this->user->can('update', $group);
-        
         $request->merge(['is_private' => $request->has('is_private')]);
         
         $group->update($request->all());
@@ -49,8 +45,6 @@ class GroupService extends BaseService
      */
     public function delete(Group $group)
     {
-        $this->user->can('delete', $group);
-        
         return $group->delete();
     }
 }
