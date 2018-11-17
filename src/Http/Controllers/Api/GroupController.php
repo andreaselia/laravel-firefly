@@ -36,6 +36,8 @@ class GroupController extends Controller
      */
     public function store(StoreGroupRequest $request)
     {
+        $this->authorize('create', Group::class);
+
         $group = $this->groupService->make($request);
 
         return response()->json($group);
@@ -49,6 +51,8 @@ class GroupController extends Controller
      */
     public function update(UpdateGroupRequest $request, Group $group)
     {
+        $this->authorize('update', $group);
+
         $group = $this->groupService->update($request, $group);
 
         return response()->json($group);
@@ -62,7 +66,9 @@ class GroupController extends Controller
      */
     public function delete(Request $request, Group $group)
     {
-        $this->groupService->delete($group);
+        $this->authorize('delete', $group);
+
+        $group->delete();
 
         return response()->json('OK');
     }
