@@ -42,6 +42,26 @@ class DiscussionTest extends TestCase
         $crawler->assertJsonStructure();
     }
 
+    public function test_discussions_were_listed()
+    {
+        $crawler = $this->actingAs($this->getUser(), 'api')
+            ->getJson('api/forum/d');
+
+        $crawler->assertOk();
+        $crawler->assertJsonStructure();
+    }
+
+    public function test_discussion_was_listed()
+    {
+        $discussion = $this->getDiscussion();
+
+        $crawler = $this->actingAs($this->getUser(), 'api')
+            ->getJson('api/forum/d/' . $discussion->id);
+
+        $crawler->assertOk();
+        $crawler->assertJsonStructure();
+    }
+
     public function test_discussion_was_updated()
     {
         $discussion = $this->getDiscussion();
