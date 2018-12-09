@@ -30,6 +30,26 @@ class GroupTest extends TestCase
         $crawler->assertJsonStructure();
     }
 
+    public function test_groups_were_listed()
+    {
+        $crawler = $this->actingAs($this->getUser(), 'api')
+            ->getJson('api/forum/g');
+
+        $crawler->assertOk();
+        $crawler->assertJsonStructure();
+    }
+
+    public function test_group_was_listed()
+    {
+        $group = $this->getGroup();
+
+        $crawler = $this->actingAs($this->getUser(), 'api')
+            ->getJson('api/forum/g/' . $group->slug);
+
+        $crawler->assertOk();
+        $crawler->assertJsonStructure();
+    }
+
     public function test_group_was_updated()
     {
         $group = $this->getGroup();
