@@ -28,6 +28,20 @@ class GroupController extends Controller
         $this->groupService = $groupService;
     }
     
+    
+    /**
+     * Show the groups index.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        $groups = Group::orderBy('name', 'asc')
+            ->paginate(config('firefly.pagination.groups'));
+
+        return $groups;
+    }
+
     /**
      * Store the new group.
      *
@@ -41,6 +55,22 @@ class GroupController extends Controller
         $group = $this->groupService->make($request);
 
         return response()->json($group);
+    }
+
+    /**
+     * Show the discussions for the specified group.
+     *
+     * @param \Firefly\Group $group
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Group $group)
+    {
+        $discussions = $group->discussions()
+            ->orderBy('pinned_at', 'asc')
+            ->orderBy('created_at', 'desc')
+            ->paginate(config('firefly.pagination.discussions'));
+
+        return compact('group', 'discussions');
     }
 
     /**
