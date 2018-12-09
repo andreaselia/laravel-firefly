@@ -2,7 +2,9 @@
 
 // Discussions...
 Route::group(['prefix' => config('firefly.prefix.discussion')], function () {
+    Route::get('/', 'DiscussionController@index');
     Route::post('/', 'DiscussionController@store');
+    Route::get('/{discussion}', 'DiscussionController@show');
     Route::put('/{discussion}', 'DiscussionController@update');
     Route::delete('/{discussion}', 'DiscussionController@delete');
     Route::put('{discussion}-{slug}/lock', 'DiscussionController@lock')->where(['discussion' => '[0-9]+']);
@@ -17,7 +19,9 @@ Route::group(['prefix' => config('firefly.prefix.discussion')], function () {
 
 // Groups...
 Route::group(['prefix' => config('firefly.prefix.group')], function () {
+    Route::get('/', 'GroupController@index');
     Route::post('/', 'GroupController@store');
+    Route::get('{group}', 'GroupController@show');
     Route::put('{group}', 'GroupController@update');
     Route::delete('{group}', 'GroupController@delete');
 });

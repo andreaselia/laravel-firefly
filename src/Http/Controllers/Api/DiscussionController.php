@@ -30,6 +30,21 @@ class DiscussionController extends Controller
     }
 
     /**
+     * Show the discussions index.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        $groups = Group::all();
+
+        $discussions = Discussion::orderBy('created_at', 'desc')
+            ->paginate(config('firefly.pagination.discussions'));
+
+        return compact('groups', 'discussions');
+    }
+
+    /**
      * Store the new discussion.
      *
      * @param \Firefly\Http\Requests\StoreDiscussionRequest $request
@@ -44,6 +59,20 @@ class DiscussionController extends Controller
         $discussion = $this->discussionService->make($request, $group);
 
         return response()->json($discussion);
+    }
+
+    /**
+     * Show the specified discussion.
+     *
+     * @param \Firefly\Discussion $discussion
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Discussion $discussion)
+    {
+        return response()->json([
+            'discussion' => $discussion,
+            'posts' => $discussion->posts()->paginate(config('firefly.pagination.posts')),
+        ]);
     }
 
     /**
