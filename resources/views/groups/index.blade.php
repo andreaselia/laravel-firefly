@@ -5,25 +5,21 @@
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h1 class="mb-0">{{ __('Groups') }}</h1>
 
-        @if (Auth::check() && Auth::user()->can('create', Firefly\Models\Group::class))
-            <a href="{{ route('firefly.group.create') }}" class="btn btn-sm btn-primary">
-                {{ __('New Group') }}
+        @if (Auth::check() && Auth::user()->can('create', \Firefly\Models\Group::class))
+            <a href="{{ route('firefly.group.create') }}">
+                <x-button type="button">
+                    {{ __('New Group') }}
+                </x-button>
             </a>
         @endif
     </div>
 
     <div class="row">
         @if (! count($groups))
-            <div class="col">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="alert alert-yellow mb-0" role="alert">
-                            <strong>{{ __('Holy guacamole!') }}</strong><br>
-                            {{ __('There are no groups; You could be the first to create one.') }}
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <x-alert>
+                <strong>{{ __('Holy guacamole!') }}</strong><br>
+                {{ __('There are no groups; You could be the first to create one.') }}
+            </x-alert>
         @endif
 
         @foreach ($groups as $group)

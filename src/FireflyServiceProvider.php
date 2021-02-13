@@ -3,6 +3,7 @@
 namespace Firefly;
 
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 
@@ -57,6 +58,16 @@ class FireflyServiceProvider extends ServiceProvider
     protected function loadViews()
     {
         $this->loadViewsFrom(__DIR__.'/../resources/views', 'firefly');
+
+        Blade::component('firefly::components.button', 'button');
+        Blade::component('firefly::components.input', 'input');
+        Blade::component('firefly::components.textarea', 'textarea');
+        Blade::component('firefly::components.label', 'label');
+        Blade::component('firefly::components.card', 'card');
+        Blade::component('firefly::components.alert', 'alert');
+        Blade::component('firefly::components.validation-errors', 'validation-errors');
+        Blade::component('firefly::components.pin-icon', 'pin-icon');
+        Blade::component('firefly::components.lock-icon', 'lock-icon');
     }
 
     /**

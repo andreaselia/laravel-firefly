@@ -2,6 +2,8 @@
 
 namespace Firefly\Traits;
 
+use Firefly\Models\Post;
+use Firefly\Models\Discussion;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 trait FireflyUser

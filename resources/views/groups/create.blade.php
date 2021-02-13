@@ -1,50 +1,45 @@
 @extends('firefly::layouts.app')
 
 @section('content')
-<div class="container">
-    <h1 class="mb-4">{{ __('New Group') }}</h1>
+<x-card>
+    <x-slot name="title">
+        {{ __('New Group') }}
+    </x-slot>
 
-    <div class="card">
-        <div class="card-body">
-            <form action="{{ route('firefly.group.store') }}" method="POST">
-                @csrf
-                
-                <div class="form-group">
-                    <label for="title">{{ __('Name') }}</label>
-                    <input type="text" name="name" id="name" value="{{ old('name') }}" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" required autofocus>
+    <x-validation-errors class="mb-4" :errors="$errors" />
 
-                    @if ($errors->has('name'))
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $errors->first('name') }}</strong>
-                        </span>
-                    @endif
-                </div>
+    <form method="POST" action="{{ route('firefly.group.store') }}">
+        @csrf
 
-                <div class="form-group">
-                    <label for="color">{{ __('Color') }}</label>
-                    <input type="text" name="color" id="color" value="{{ old('color') }}" class="form-control{{ $errors->has('color') ? ' is-invalid' : '' }}" required>
+        <!-- Name -->
+        <div>
+            <x-label for="name" :value="__('Name')" />
 
-                    @if ($errors->has('color'))
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $errors->first('color') }}</strong>
-                        </span>
-                    @endif
-                </div>
-
-                @if (config('firefly.private_groups'))
-                    <div class="form-group">
-                        <div class="custom-control custom-checkbox">
-                            <input class="custom-control-input" type="checkbox" name="is_private" id="is_private"{{ old('is_private') ? ' checked' : '' }}>
-                            <label class="custom-control-label" for="is_private">Is Private?</label>
-                        </div>
-                    </div>
-                @endif
-
-                <button type="submit" class="btn btn-primary">
-                    {{ __('Submit') }}
-                </button>
-            </form>
+            <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus />
         </div>
-    </div>
-</div>
+
+        <!-- Color -->
+        <div class="mt-4">
+            <x-label for="color" :value="__('Color')" />
+
+            <x-input id="color" class="block mt-1 w-full" type="text" name="color" :value="old('color')" required />
+        </div>
+
+        @if (config('firefly.private_groups'))
+            <!-- Is Private? -->
+            <div class="block mt-4">
+                <label for="is_private" class="inline-flex items-center">
+                    <input id="is_private" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" name="is_private">
+                    <span class="ml-2 text-sm text-gray-600">{{ __('Is Private?') }}</span>
+                </label>
+            </div>
+        @endif
+
+        <div class="mt-4">
+            <x-button>
+                {{ __('Submit') }}
+            </x-button>
+        </div>
+    </form>
+</x-card>
 @endsection

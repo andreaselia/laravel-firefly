@@ -1,9 +1,9 @@
 @extends('firefly::layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <div class="d-flex align-items-center">
+<div class="container mx-auto">
+    <div class="flex justify-between items-center mb-4">
+        <div class="flex items-center">
             <h1 class="mb-0">{{ $discussion->title }}</h1>
 
             @foreach ($discussion->groups as $group)
@@ -11,11 +11,11 @@
             @endforeach
 
             @if ($discussion->pinned_at)
-                <i class="icon icon-pinned ml-2" data-toggle="tooltip" title="{{ __('Pinned') }}"></i>
+                <x-pin-icon />
             @endif
 
             @if ($discussion->locked_at)
-                <i class="icon icon-locked ml-2" data-toggle="tooltip" title="{{ __('Locked') }}"></i>
+                <x-lock-icon />
             @endif
         </div>
 
@@ -31,15 +31,19 @@
                     <div class="post-item-meta d-flex justify-content-between">
                         {{ $post->created_at->diffForHumans() }}
 
-                        <div>
+                        <div class="flex space-x-1">
                             @can ('update', $post)
                                 <a href="{{ route('firefly.post.edit', $post) }}">
-                                    {{ __('Edit') }}
+                                    <x-button>
+                                        {{ __('Edit') }}
+                                    </x-button>
                                 </a>
                             @endcan
 
                             @can ('delete', $post)
-                                <a class="ml-2" href="{{ route('firefly.post.delete', [$discussion->id, $discussion->slug, $post]) }}" onclick="event.preventDefault(); document.getElementById('delete-post-{{ $post->id }}-form').submit();">{{ __('Delete') }}</a>
+                                <x-button onclick="event.preventDefault(); document.getElementById('delete-post-{{ $post->id }}-form').submit();">
+                                    {{ __('Delete') }}
+                                </x-button>
 
                                 <form id="delete-post-{{ $post->id }}-form" action="{{ route('firefly.post.delete', [$discussion->id, $discussion->slug, $post]) }}" method="POST" style="display: none;">
                                     @method('DELETE')

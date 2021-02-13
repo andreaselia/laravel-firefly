@@ -13,7 +13,7 @@
             @endif
         </div>
 
-        @if (Auth::check() && Auth::user()->can('create', Firefly\Models\Discussion::class))
+        @if (Auth::check() && Auth::user()->can('create', \Firefly\Models\Discussion::class))
             <div class="d-flex">
                 <a href="{{ route('firefly.discussion.create', $group) }}" class="btn btn-sm btn-primary mr-3">
                     {{ __('New Discussion') }}

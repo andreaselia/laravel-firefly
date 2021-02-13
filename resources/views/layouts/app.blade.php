@@ -10,71 +10,57 @@
     <title>{{ config('app.name', 'Firefly') }}</title>
 
     <!-- Tailwind -->
+    <link href="https://tailwindcss-forms.vercel.app/dist/forms.min.css" rel="stylesheet">
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
 </head>
-<body>
-    <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light py-4">
-            <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    <svg width="32" height="32" transform="rotate(45)" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><circle stroke="#121212" stroke-width="3" cx="16" cy="16" r="14.5"/><path d="M14.554 11.033l6.79 4.514a1 1 0 0 1 .002 1.664l-6.79 4.541A1 1 0 0 1 13 20.921v-9.055a1 1 0 0 1 1.554-.833z" fill="#121212"/></g></svg>
-                </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+<body class="bg-gray-100">
+    <nav class="bg-white shadow-md py-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <a class="text-xl font-bold" href="{{ route(config('firefly.web.name').'index') }}">
+                Firefly
+            </a>
 
-                <div class="collapse navbar-collapse" id="navbarContent">
-                    <ul class="navbar-nav mr-auto">
-                        @auth
-                            <li class="nav-item">
-                                <a class="nav-link{{ Route::currentRouteName() == 'firefly.index' ? ' active' : '' }}" href="{{ route('firefly.index') }}">{{ __('Discussions') }}</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link{{ Route::currentRouteName() == 'firefly.group.index' ? ' active' : '' }}" href="{{ route('firefly.group.index') }}">{{ __('Groups') }}</a>
-                            </li>
-                        @endauth
-                    </ul>
+            <div>
+                <ul class="flex items-center space-x-5">
+                    @guest
+                        <li>
+                            @if (Route::has('login'))
+                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                            @endif
+                        </li>
+                        <li>
+                            @if (Route::has('register'))
+                                <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                            @endif
+                        </li>
+                    @else
+                        <li>
+                            <a class="{{ Route::currentRouteName() == 'firefly.index' ? ' active' : '' }}" href="{{ route('firefly.index') }}">
+                                {{ __('Discussions') }}
+                            </a>
+                        </li>
+                        <li>
+                            <a class="{{ Route::currentRouteName() == 'firefly.group.index' ? ' active' : '' }}" href="{{ route('firefly.group.index') }}">
+                                {{ __('Groups') }}
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                {{ __('Logout') }}
+                            </a>
 
-                    <ul class="navbar-nav ml-auto">
-                        @guest
-                            <li class="nav-item">
-                                @if (Route::has('login'))
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                                @endif
-                            </li>
-                            <li class="nav-item">
-                                @if (Route::has('register'))
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                @endif
-                            </li>
-                        @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    Hello, {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
-
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                        @endguest
-                    </ul>
-                </div>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                @csrf
+                            </form>
+                        </li>
+                    @endguest
+                </ul>
             </div>
-        </nav>
+        </div>
+    </nav>
 
-        <main class="pt-4 pb-5">
-            @yield('content')
-        </main>
-    </div>
-
-    <!-- Scripts -->
-    <script src="{{ asset('/vendor/firefly/js/app.js') }}" defer></script>
+    <main class="py-8">
+        @yield('content')
+    </main>
 </body>
 </html>
