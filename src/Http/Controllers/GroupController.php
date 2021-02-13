@@ -2,7 +2,7 @@
 
 namespace Firefly\Http\Controllers;
 
-use Firefly\Group;
+use Firefly\Models\Group;
 use Firefly\Http\Requests\StoreGroupRequest;
 use Firefly\Http\Requests\UpdateGroupRequest;
 use Firefly\Services\GroupService;
@@ -28,7 +28,7 @@ class GroupController extends Controller
 
         $this->groupService = $groupService;
     }
-    
+
     /**
      * Show the groups index.
      *
@@ -61,7 +61,7 @@ class GroupController extends Controller
     public function store(StoreGroupRequest $request)
     {
         $this->authorize('create', Group::class);
-        
+
         $group = $this->groupService->make($request);
 
         return redirect()->route('firefly.group.show', $group);
@@ -122,7 +122,7 @@ class GroupController extends Controller
     public function delete(Request $request, Group $group)
     {
         $this->authorize('delete', $group);
-        
+
         $this->groupService->delete($group);
 
         return redirect()->route('firefly.index');

@@ -2,16 +2,15 @@
 
 namespace Firefly\Test\Fixtures;
 
-use Firefly\Group as Model;
+use Firefly\Models\Group as Model;
 
 class Group extends Model
 {
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
+    /** @var array */
     protected $fillable = [
-        'name', 'slug', 'color', 'is_private',
+        'name',
+        'slug',
+        'color',
+        'is_private',
     ];
 }

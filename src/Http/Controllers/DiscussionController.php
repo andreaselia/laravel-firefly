@@ -2,8 +2,8 @@
 
 namespace Firefly\Http\Controllers;
 
-use Firefly\Discussion;
-use Firefly\Group;
+use Firefly\Models\Discussion;
+use Firefly\Models\Group;
 use Firefly\Http\Requests\StoreDiscussionRequest;
 use Firefly\Http\Requests\UpdateDiscussionRequest;
 use Firefly\Services\DiscussionService;
@@ -40,7 +40,7 @@ class DiscussionController extends Controller
     public function create(Group $group)
     {
         $this->authorize('create', Discussion::class);
-        
+
         return view('firefly::discussions.create')->withGroup($group);
     }
 
@@ -112,7 +112,7 @@ class DiscussionController extends Controller
         $this->authorize('delete', $discussion);
 
         $this->discussionService->delete($discussion);
-        
+
         return redirect()->route('firefly.index');
     }
 

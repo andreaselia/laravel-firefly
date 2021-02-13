@@ -2,8 +2,8 @@
 
 namespace Firefly\Http\Controllers\Api;
 
-use Firefly\Discussion;
-use Firefly\Group;
+use Firefly\Models\Discussion;
+use Firefly\Models\Group;
 use Firefly\Http\Controllers\Controller;
 use Firefly\Http\Requests\UpdateDiscussionRequest;
 use Firefly\Http\Requests\StoreDiscussionRequest;

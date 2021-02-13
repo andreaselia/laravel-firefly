@@ -2,11 +2,11 @@
 
 namespace Firefly\Http\Controllers\Api;
 
-use Firefly\Discussion;
+use Firefly\Models\Discussion;
 use Firefly\Http\Controllers\Controller;
 use Firefly\Http\Requests\StorePostRequest;
 use Firefly\Http\Requests\UpdatePostRequest;
-use Firefly\Post;
+use Firefly\Models\Post;
 use Illuminate\Http\Request;
 use Firefly\Services\PostService;
 

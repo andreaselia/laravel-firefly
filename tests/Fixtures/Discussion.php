@@ -2,16 +2,16 @@
 
 namespace Firefly\Test\Fixtures;
 
-use Firefly\Discussion as Model;
+use Firefly\Models\Discussion as Model;
 
 class Discussion extends Model
 {
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
+    /** @var array */
     protected $fillable = [
-        'title', 'slug', 'user_id', 'locked_at', 'pinned_at',
+        'title',
+        'slug',
+        'user_id',
+        'locked_at',
+        'pinned_at',
     ];
 }

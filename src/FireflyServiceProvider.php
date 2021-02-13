@@ -8,11 +8,7 @@ use Illuminate\Support\ServiceProvider;
 
 class FireflyServiceProvider extends ServiceProvider
 {
-    /**
-     * The policy mappings for the package.
-     *
-     * @var array
-     */
+    /** @var array */
     protected $policies = [
         'Firefly\Discussion' => 'Firefly\Policies\DiscussionPolicy',
         'Firefly\Group' => 'Firefly\Policies\GroupPolicy',

@@ -2,10 +2,10 @@
 
 namespace Firefly\Http\Controllers;
 
-use Firefly\Discussion;
+use Firefly\Models\Discussion;
 use Firefly\Http\Requests\StorePostRequest;
 use Firefly\Http\Requests\UpdatePostRequest;
-use Firefly\Post;
+use Firefly\Models\Post;
 use Illuminate\Http\Request;
 use Firefly\Services\PostService;
 
