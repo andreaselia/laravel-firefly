@@ -17,8 +17,8 @@
     <x-validation-errors class="mb-4" :errors="$errors" />
 
     <form method="POST" action="{{ route('firefly.discussion.update', [$discussion->id, $discussion->slug]) }}">
-        @csrf
         @method('PUT')
+        @csrf
 
         <!-- Title -->
         <div>

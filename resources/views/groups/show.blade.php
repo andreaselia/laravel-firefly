@@ -1,44 +1,48 @@
 @extends('firefly::layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container mx-auto">
     <div class="flex justify-between items-center mb-4">
-        <div class="d-flex align-items-center">
-            <h1>{{ $group->name }}</h1>
+        <div class="flex items-center space-x-5">
+            <div class="text-2xl font-bold">{{ $group->name }}</div>
 
-            <div class="group-display group-display-clear rounded-circle mb-0 ml-3" style="background: {{ $group->color }};"></div>
+            <div class="rounded-full text-white font-medium text-xs px-2 py-1" style="background-color: {{ $group->color }};">
+                {{ $group->name }}
+            </div>
 
             @if ($group->is_private)
-                <i class="icon icon-private ml-2" data-toggle="tooltip" title="{{ __('Private') }}"></i>
+                <x-private-icon />
             @endif
         </div>
 
         @if (Auth::check() && Auth::user()->can('create', \Firefly\Models\Discussion::class))
-            <div class="d-flex">
-                <a href="{{ route('firefly.discussion.create', $group) }}" class="btn btn-sm btn-primary mr-3">
-                    {{ __('New Discussion') }}
+            <div class="flex space-x-1">
+                <a href="{{ route('firefly.discussion.create', $group) }}">
+                    <x-button>
+                        {{ __('New Discussion') }}
+                    </x-button>
                 </a>
 
-                <div class="dropdown">
-                    <button class="btn btn-sm btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        {{ __('Manage Group') }}
-                    </button>
+                @can ('update', $group)
+                    <a href="{{ route('firefly.group.edit', $group) }}">
+                        <x-button>
+                            {{ __('Edit') }}
+                        </x-button>
+                    </a>
+                @endcan
 
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        @can ('update', $group)
-                            <a class="dropdown-item" href="{{ route('firefly.group.edit', $group) }}">{{ __('Edit') }}</a>
-                        @endcan
+                @can ('delete', $group)
+                    <a href="{{ route('firefly.group.delete', $group) }}" onclick="event.preventDefault(); document.getElementById('delete-group-form').submit();">
+                        <x-button>
+                            {{ __('Delete') }}
+                        </x-button>
+                    </a>
 
-                        @can ('delete', $group)
-                            <a class="dropdown-item text-danger" href="{{ route('firefly.group.delete', $group) }}" onclick="event.preventDefault(); document.getElementById('delete-group-form').submit();">Delete</a>
-
-                            <form id="delete-group-form" action="{{ route('firefly.group.delete', $group) }}" method="POST" style="display: none;">
-                                @method('DELETE')
-                                @csrf
-                            </form>
-                        @endcan
-                    </div>
-                </div>
+                    <form id="delete-group-form" action="{{ route('firefly.group.delete', $group) }}" method="POST" style="display: none;">
+                        @method('DELETE')
+                        @csrf
+                    </form>
+                @endcan
             </div>
         @endif
     </div>

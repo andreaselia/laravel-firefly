@@ -3,7 +3,7 @@
 @section('content')
 <div class="container mx-auto">
     <div class="flex justify-between items-center mb-4">
-        <h1>{{ __('Groups') }}</h1>
+        <div class="text-2xl font-bold">{{ __('Groups') }}</div>
 
         @if (Auth::check() && Auth::user()->can('create', \Firefly\Models\Group::class))
             <a href="{{ route('firefly.group.create') }}">
@@ -14,17 +14,17 @@
         @endif
     </div>
 
-    <div class="row">
-        @if (! count($groups))
-            <x-alert>
-                <strong>{{ __('Holy guacamole!') }}</strong><br>
-                {{ __('There are no groups; You could be the first to create one.') }}
-            </x-alert>
-        @endif
+    @if (! count($groups))
+        <x-alert>
+            <strong>{{ __('Holy guacamole!') }}</strong><br>
+            {{ __('There are no groups; You could be the first to create one.') }}
+        </x-alert>
+    @endif
 
-        @foreach ($groups as $group)
-            <div class="col-12 col-sm-6 col-lg-4 mb-4">
-                <a href="{{ route('firefly.group.show', $group) }}" class="flex bg-white shadow-md rounded-lg p-5">
+    @foreach ($groups as $group)
+        <a href="{{ route('firefly.group.show', $group) }}">
+            <x-card max-width="sm:max-w-none">
+                <div class="flex">
                     <div class="flex-1">
                         <div class="font-medium">{{ $group->name }}</div>
 
@@ -42,10 +42,10 @@
                             {{ $group->name }}
                         </div>
                     </div>
-                </a>
-            </div>
-        @endforeach
-    </div>
+                </div>
+            </x-card>
+        </a>
+    @endforeach
 
     {!! $groups->links(config('firefly.pagination.view')) !!}
 </div>

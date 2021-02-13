@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container mx-auto">
-    <h1 class="text-2xl font-bold mb-4">{{ __('Discussions') }}</h1>
+    <div class="text-2xl font-bold">{{ __('Discussions') }}</div>
 
     @if (! $discussions->count())
         <div class="flex flex-col text-sm bg-blue-50 border border-blue-500 rounded-lg px-3 py-2">
