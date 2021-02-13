@@ -1,9 +1,9 @@
 @extends('firefly::layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <h1 class="mb-0">{{ __('Groups') }}</h1>
+<div class="container mx-auto">
+    <div class="flex justify-between items-center mb-4">
+        <h1>{{ __('Groups') }}</h1>
 
         @if (Auth::check() && Auth::user()->can('create', \Firefly\Models\Group::class))
             <a href="{{ route('firefly.group.create') }}">
@@ -24,24 +24,22 @@
 
         @foreach ($groups as $group)
             <div class="col-12 col-sm-6 col-lg-4 mb-4">
-                <a href="{{ route('firefly.group.show', $group) }}" class="card">
-                    <div class="card-body">
-                        <div class="group-item d-flex align-items-center justify-content-between">
-                            <div>
-                                <h3 class="mb-0">{{ $group->name }}</h3>
+                <a href="{{ route('firefly.group.show', $group) }}" class="flex bg-white shadow-md rounded-lg p-5">
+                    <div class="flex-1">
+                        <div class="font-medium">{{ $group->name }}</div>
 
-                                <div class="group-item-meta">
-                                    {{ count($group->discussions) }} {{ __('discussions') }}
-                                </div>
-                            </div>
+                        <div class="text-sm">
+                            {{ count($group->discussions) }} {{ __('discussions') }}
+                        </div>
+                    </div>
 
-                            <div class="d-flex align-items-center">
-                                @if ($group->is_private)
-                                    <i class="icon icon-private mr-2" data-toggle="tooltip" title="{{ __('Private') }}"></i>
-                                @endif
+                    <div class="flex items-center">
+                        @if ($group->is_private)
+                            <x-private-icon />
+                        @endif
 
-                                <div class="group-display rounded-circle mb-0" style="background: {{ $group->color }};"></div>
-                            </div>
+                        <div class="rounded-full text-white font-medium text-xs px-2 py-1" style="background-color: {{ $group->color }};">
+                            {{ $group->name }}
                         </div>
                     </div>
                 </a>

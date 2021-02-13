@@ -2,9 +2,9 @@
 
 @section('content')
 <div class="container">
-    <div class="d-flex justify-content-between align-items-center mb-4">
+    <div class="flex justify-between items-center mb-4">
         <div class="d-flex">
-            <h1 class="mb-0">{{ __('Edit Post') }}</h1>
+            <h1>{{ __('Edit Post') }}</h1>
         </div>
 
         @if (Auth::check())

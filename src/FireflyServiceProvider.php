@@ -68,6 +68,7 @@ class FireflyServiceProvider extends ServiceProvider
         Blade::component('firefly::components.validation-errors', 'validation-errors');
         Blade::component('firefly::components.pin-icon', 'pin-icon');
         Blade::component('firefly::components.lock-icon', 'lock-icon');
+        Blade::component('firefly::components.private-icon', 'private-icon');
     }
 
     /**

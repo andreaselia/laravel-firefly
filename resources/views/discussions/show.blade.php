@@ -4,7 +4,7 @@
 <div class="container mx-auto">
     <div class="flex justify-between items-center mb-4">
         <div class="flex items-center">
-            <h1 class="mb-0">{{ $discussion->title }}</h1>
+            <h1>{{ $discussion->title }}</h1>
 
             @foreach ($discussion->groups as $group)
                 <a href="{{ route('firefly.group.show', $group) }}" class="group-display rounded-circle ml-2 mb-0" data-toggle="tooltip" title="{{ $group->name }}" style="background: {{ $group->color }};"></a>

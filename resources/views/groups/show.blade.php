@@ -2,9 +2,9 @@
 
 @section('content')
 <div class="container">
-    <div class="d-flex justify-content-between align-items-center mb-4">
+    <div class="flex justify-between items-center mb-4">
         <div class="d-flex align-items-center">
-            <h1 class="mb-0">{{ $group->name }}</h1>
+            <h1>{{ $group->name }}</h1>
 
             <div class="group-display group-display-clear rounded-circle mb-0 ml-3" style="background: {{ $group->color }};"></div>
 
