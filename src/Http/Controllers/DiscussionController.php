@@ -34,7 +34,7 @@ class DiscussionController extends Controller
     /**
      * Show the form for creating a new discussion.
      *
-     * @param \Firefly\Group $group
+     * @param \Firefly\Models\Group $group
      * @return \Illuminate\View\View
      */
     public function create(Group $group)
@@ -48,7 +48,7 @@ class DiscussionController extends Controller
      * Store the new discussion.
      *
      * @param \Firefly\Http\Requests\StoreDiscussionRequest $request
-     * @param \Firefly\Group $group
+     * @param \Firefly\Models\Group $group
      * @return \Illuminate\Http\RedirectResponse
      */
     public function store(StoreDiscussionRequest $request, Group $group)
@@ -63,7 +63,7 @@ class DiscussionController extends Controller
     /**
      * Show the specified discussion.
      *
-     * @param \Firefly\Discussion $discussion
+     * @param \Firefly\Models\Discussion $discussion
      * @return \Illuminate\View\View
      */
     public function show(Discussion $discussion)
@@ -75,8 +75,8 @@ class DiscussionController extends Controller
     /**
      * Show the form for editing a discussion.
      *
-     * @param \Firefly\Group $group
-     * @param \Firefly\Discussion $discussion
+     * @param \Firefly\Models\Group $group
+     * @param \Firefly\Models\Discussion $discussion
      * @return \Illuminate\View\View
      */
     public function edit(Group $group, Discussion $discussion)
@@ -120,7 +120,7 @@ class DiscussionController extends Controller
      * Lock the specified discussion.
      *
      * @param \Illuminate\Http\Request $request
-     * @param \Firefly\Discussion $discussion
+     * @param \Firefly\Models\Discussion $discussion
      * @return \Illuminate\Http\RedirectResponse
      */
     public function lock(Request $request, Discussion $discussion)
@@ -136,7 +136,7 @@ class DiscussionController extends Controller
      * Unlock the specified discussion.
      *
      * @param \Illuminate\Http\Request $request
-     * @param \Firefly\Discussion $discussion
+     * @param \Firefly\Models\Discussion $discussion
      * @return \Illuminate\Http\RedirectResponse
      */
     public function unlock(Request $request, Discussion $discussion)
@@ -152,7 +152,7 @@ class DiscussionController extends Controller
      * Pin the specified discussion.
      *
      * @param \Illuminate\Http\Request $request
-     * @param \Firefly\Discussion $discussion
+     * @param \Firefly\Models\Discussion $discussion
      * @return \Illuminate\Http\RedirectResponse
      */
     public function pin(Request $request, Discussion $discussion)
@@ -168,7 +168,7 @@ class DiscussionController extends Controller
      * Unpin the specified discussion.
      *
      * @param \Illuminate\Http\Request $request
-     * @param \Firefly\Discussion $discussion
+     * @param \Firefly\Models\Discussion $discussion
      * @return \Illuminate\Http\RedirectResponse
      */
     public function unpin(Request $request, Discussion $discussion)

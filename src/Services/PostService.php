@@ -2,8 +2,8 @@
 
 namespace Firefly\Services;
 
-use Firefly\Discussion;
-use Firefly\Post;
+use Firefly\Models\Discussion;
+use Firefly\Models\Post;
 use Illuminate\Http\Request;
 
 class PostService
@@ -12,7 +12,7 @@ class PostService
      * Make a new Post instance and attach it to the user.
      *
      * @param \Illuminate\Http\Request $request
-     * @param \Firefly\Discussion $discussion
+     * @param \Firefly\Models\Discussion $discussion
      * @return mixed
      */
     public function make(Request $request, Discussion $discussion)
@@ -28,7 +28,7 @@ class PostService
 
     /**
      * Update the specified post.
-     * 
+     *
      * @param Request $request
      * @param Post $post
      * @return Post
@@ -36,13 +36,13 @@ class PostService
     public function update(Request $request, Post $post)
     {
         $post->update($request->all());
-        
+
         return $post->refresh();
     }
 
     /**
      * Delete the specified post.
-     * 
+     *
      * @param Post $post
      * @return bool|null
      * @throws \Exception

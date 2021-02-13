@@ -10,9 +10,9 @@ class FireflyServiceProvider extends ServiceProvider
 {
     /** @var array */
     protected $policies = [
-        'Firefly\Discussion' => 'Firefly\Policies\DiscussionPolicy',
-        'Firefly\Group' => 'Firefly\Policies\GroupPolicy',
-        'Firefly\Post' => 'Firefly\Policies\PostPolicy',
+        'Firefly\Models\Discussion' => 'Firefly\Policies\DiscussionPolicy',
+        'Firefly\Models\Group' => 'Firefly\Policies\GroupPolicy',
+        'Firefly\Models\Post' => 'Firefly\Policies\PostPolicy',
     ];
 
     /**

@@ -60,7 +60,7 @@ class GroupController extends Controller
     /**
      * Show the discussions for the specified group.
      *
-     * @param \Firefly\Group $group
+     * @param \Firefly\Models\Group $group
      * @return \Illuminate\Http\Response
      */
     public function show(Group $group)

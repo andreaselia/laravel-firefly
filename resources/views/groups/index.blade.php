@@ -5,7 +5,7 @@
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h1 class="mb-0">{{ __('Groups') }}</h1>
 
-        @if (Auth::check() && Auth::user()->can('create', Firefly\Group::class))
+        @if (Auth::check() && Auth::user()->can('create', Firefly\Models\Group::class))
             <a href="{{ route('firefly.group.create') }}" class="btn btn-sm btn-primary">
                 {{ __('New Group') }}
             </a>

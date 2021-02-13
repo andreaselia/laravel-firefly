@@ -70,7 +70,7 @@ class GroupController extends Controller
     /**
      * Show the discussions for the specified group.
      *
-     * @param \Firefly\Group $group
+     * @param \Firefly\Models\Group $group
      * @return \Illuminate\View\View
      */
     public function show(Group $group)
@@ -86,7 +86,7 @@ class GroupController extends Controller
     /**
      * Show the form for editing a group.
      *
-     * @param \Firefly\Group $group
+     * @param \Firefly\Models\Group $group
      * @return \Illuminate\View\View
      */
     public function edit(Group $group)
@@ -100,7 +100,7 @@ class GroupController extends Controller
      * Update the specified group.
      *
      * @param \Firefly\Http\Requests\UpdateGroupRequest $request
-     * @param \Firefly\Group $group
+     * @param \Firefly\Models\Group $group
      * @return \Illuminate\Http\RedirectResponse
      */
     public function update(UpdateGroupRequest $request, Group $group)
@@ -116,7 +116,7 @@ class GroupController extends Controller
      * Delete the specified group.
      *
      * @param \Illuminate\Http\Request $request
-     * @param \Firefly\Group $group
+     * @param \Firefly\Models\Group $group
      * @return \Illuminate\Http\RedirectResponse
      */
     public function delete(Request $request, Group $group)

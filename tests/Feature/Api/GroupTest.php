@@ -12,7 +12,7 @@ class GroupTest extends TestCase
         // Clear all previous groups
         Group::truncate();
 
-        $crawler = $this->actingAs($this->getUser(), 'api')
+        $response = $this->actingAs($this->getUser(), 'api')
             ->postJson('api/forum/g', [
                 'name' => 'Foo Bar',
                 'color' => '#444',
@@ -26,35 +26,35 @@ class GroupTest extends TestCase
             'color' => '#444',
         ]);
 
-        $crawler->assertOk();
-        $crawler->assertJsonStructure();
+        $response->assertOk();
+        $response->assertJsonStructure();
     }
 
     public function test_groups_were_listed()
     {
-        $crawler = $this->actingAs($this->getUser(), 'api')
+        $response = $this->actingAs($this->getUser(), 'api')
             ->getJson('api/forum/g');
 
-        $crawler->assertOk();
-        $crawler->assertJsonStructure();
+        $response->assertOk();
+        $response->assertJsonStructure();
     }
 
     public function test_group_was_listed()
     {
         $group = $this->getGroup();
 
-        $crawler = $this->actingAs($this->getUser(), 'api')
+        $response = $this->actingAs($this->getUser(), 'api')
             ->getJson('api/forum/g/' . $group->slug);
 
-        $crawler->assertOk();
-        $crawler->assertJsonStructure();
+        $response->assertOk();
+        $response->assertJsonStructure();
     }
 
     public function test_group_was_updated()
     {
         $group = $this->getGroup();
 
-        $crawler = $this->actingAs($this->getUser(), 'api')
+        $response = $this->actingAs($this->getUser(), 'api')
             ->putJson('api/forum/g/' . $group->slug, [
                 'name' => 'Bar Foo',
                 'color' => '#444',
@@ -65,22 +65,22 @@ class GroupTest extends TestCase
         $this->assertEquals('Bar Foo', $group->name);
         $this->assertEquals('bar-foo', $group->slug);
 
-        $crawler->assertOk();
-        $crawler->assertJsonStructure();
+        $response->assertOk();
+        $response->assertJsonStructure();
     }
 
     public function test_group_was_soft_deleted()
     {
         $group = $this->getGroup();
 
-        $crawler = $this->actingAs($this->getUser(), 'api')
+        $response = $this->actingAs($this->getUser(), 'api')
             ->deleteJson('api/forum/g/' . $group->slug);
-        
+
         $group->refresh();
 
         $this->assertFalse($group->exists());
         $this->assertNotNull($group->deleted_at);
 
-        $crawler->assertOk();
+        $response->assertOk();
     }
 }

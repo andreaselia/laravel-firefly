@@ -15,7 +15,7 @@ class PostTest extends TestCase
 
         $discussion = $this->getDiscussion();
 
-        $crawler = $this->actingAs($this->getUser())
+        $response = $this->actingAs($this->getUser())
             ->postJson('forum/d/' . $discussion->uri, [
                 'content' => 'Foo Bar',
             ]);
@@ -27,8 +27,8 @@ class PostTest extends TestCase
             'content' => 'Foo Bar',
         ]);
 
-        $crawler->assertRedirect();
-        $crawler->assertLocation('forum/d/' . $discussion->uri);
+        $response->assertRedirect();
+        $response->assertLocation('forum/d/' . $discussion->uri);
     }
 
     public function test_post_was_updated()
@@ -36,7 +36,7 @@ class PostTest extends TestCase
         $discussion = $this->getDiscussion();
         $post = $this->getPost();
 
-        $crawler = $this->actingAs($this->getUser())
+        $response = $this->actingAs($this->getUser())
             ->put('forum/d/' . $discussion->uri . '/p/' . $post->id, [
                 'content' => 'Bar Foo',
             ]);
@@ -45,8 +45,8 @@ class PostTest extends TestCase
 
         $this->assertEquals('Bar Foo', $post->content);
 
-        $crawler->assertRedirect();
-        $crawler->assertLocation('forum/d/' . $post->discussion->uri);
+        $response->assertRedirect();
+        $response->assertLocation('forum/d/' . $post->discussion->uri);
     }
 
     public function test_post_was_soft_deleted()
@@ -54,7 +54,7 @@ class PostTest extends TestCase
         $discussion = $this->getDiscussion();
         $post = $this->getPost();
 
-        $crawler = $this->actingAs($this->getUser())
+        $response = $this->actingAs($this->getUser())
             ->delete('forum/d/' . $discussion->uri . '/p/' . $post->id);
 
         $post->refresh();
@@ -62,8 +62,8 @@ class PostTest extends TestCase
         $this->assertFalse($post->exists());
         $this->assertNotNull($post->deleted_at);
 
-        $crawler->assertRedirect();
-        $crawler->assertLocation('forum/d/' . $post->discussion->uri);
+        $response->assertRedirect();
+        $response->assertLocation('forum/d/' . $post->discussion->uri);
     }
 
     public function test_content_is_required()
@@ -80,26 +80,26 @@ class PostTest extends TestCase
         // Create
         $discussion = $this->getDiscussion();
 
-        $crawler = $this->actingAs($this->getUser())
+        $response = $this->actingAs($this->getUser())
             ->postJson('forum/d/' . $discussion->uri, [
                 'content' => $content,
             ]);
 
-        $crawler->assertStatus(422);
-        $crawler->assertJsonValidationErrors('content');
-        $crawler->assertJson($validJson);
+        $response->assertStatus(422);
+        $response->assertJsonValidationErrors('content');
+        $response->assertJson($validJson);
 
         // Update
         $discussion = $this->getDiscussion();
         $post = $this->getPost();
 
-        $crawler = $this->actingAs($this->getUser())
+        $response = $this->actingAs($this->getUser())
             ->putJson('forum/d/' . $discussion->uri . '/p/' . $post->id, [
                 'content' => $content,
             ]);
 
-        $crawler->assertStatus(422);
-        $crawler->assertJsonValidationErrors('content');
-        $crawler->assertJson($validJson);
+        $response->assertStatus(422);
+        $response->assertJsonValidationErrors('content');
+        $response->assertJson($validJson);
     }
 }

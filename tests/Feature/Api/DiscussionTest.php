@@ -14,7 +14,7 @@ class DiscussionTest extends TestCase
         Discussion::truncate();
         Post::truncate();
 
-        $crawler = $this->actingAs($this->getUser(), 'api')
+        $response = $this->actingAs($this->getUser(), 'api')
             ->postJson('api/forum/d', [
                 'group_id' => $this->getGroup()->id,
                 'title' => 'Foo Bar',
@@ -38,35 +38,35 @@ class DiscussionTest extends TestCase
 
         $discussion = Discussion::first();
 
-        $crawler->assertOk();
-        $crawler->assertJsonStructure();
+        $response->assertOk();
+        $response->assertJsonStructure();
     }
 
     public function test_discussions_were_listed()
     {
-        $crawler = $this->actingAs($this->getUser(), 'api')
+        $response = $this->actingAs($this->getUser(), 'api')
             ->getJson('api/forum/d');
 
-        $crawler->assertOk();
-        $crawler->assertJsonStructure();
+        $response->assertOk();
+        $response->assertJsonStructure();
     }
 
     public function test_discussion_was_listed()
     {
         $discussion = $this->getDiscussion();
 
-        $crawler = $this->actingAs($this->getUser(), 'api')
+        $response = $this->actingAs($this->getUser(), 'api')
             ->getJson('api/forum/d/' . $discussion->id);
 
-        $crawler->assertOk();
-        $crawler->assertJsonStructure();
+        $response->assertOk();
+        $response->assertJsonStructure();
     }
 
     public function test_discussion_was_updated()
     {
         $discussion = $this->getDiscussion();
 
-        $crawler = $this->actingAs($this->getUser(), 'api')
+        $response = $this->actingAs($this->getUser(), 'api')
             ->putJson('api/forum/d/' . $discussion->id, [
                 'title' => 'Bar Foo',
             ]);
@@ -76,78 +76,78 @@ class DiscussionTest extends TestCase
         $this->assertEquals('Bar Foo', $discussion->title);
         $this->assertEquals('bar-foo', $discussion->slug);
 
-        $crawler->assertOk();
-        $crawler->assertJsonStructure();
+        $response->assertOk();
+        $response->assertJsonStructure();
     }
 
     public function test_discussion_was_soft_deleted()
     {
         $discussion = $this->getDiscussion();
 
-        $crawler = $this->actingAs($this->getUser(), 'api')
+        $response = $this->actingAs($this->getUser(), 'api')
             ->deleteJson('api/forum/d/' . $discussion->id);
-        
+
         $discussion->refresh();
 
         $this->assertFalse($discussion->exists());
         $this->assertNotNull($discussion->deleted_at);
 
-        $crawler->assertOk();
+        $response->assertOk();
     }
 
     public function test_discussion_was_locked()
     {
         $discussion = $this->getDiscussion();
 
-        $crawler = $this->actingAs($this->getUser(), 'api')
+        $response = $this->actingAs($this->getUser(), 'api')
             ->putJson('api/forum/d/' . $discussion->uri . '/lock');
 
         $discussion->refresh();
 
         $this->assertNotNull($discussion->locked_at);
 
-        $crawler->assertOk();
+        $response->assertOk();
     }
 
     public function test_discussion_was_unlocked()
     {
         $discussion = $this->getDiscussion()->lock();
 
-        $crawler = $this->actingAs($this->getUser(), 'api')
+        $response = $this->actingAs($this->getUser(), 'api')
             ->putJson('api/forum/d/' . $discussion->uri . '/unlock');
 
         $discussion->refresh();
 
         $this->assertNull($discussion->locked_at);
 
-        $crawler->assertOk();
+        $response->assertOk();
     }
 
     public function test_discussion_was_pinned()
     {
         $discussion = $this->getDiscussion();
 
-        $crawler = $this->actingAs($this->getUser(), 'api')
+        $response = $this->actingAs($this->getUser(), 'api')
             ->putJson('api/forum/d/' . $discussion->uri . '/pin');
 
         $discussion->refresh();
 
         $this->assertNotNull($discussion->pinned_at);
 
-        $crawler->assertOk();
+        $response->assertOk();
     }
 
     public function test_discussion_was_unpinned()
     {
         $discussion = $this->getDiscussion()->pin();
 
-        $crawler = $this->actingAs($this->getUser(), 'api')
+        $response = $this->actingAs($this->getUser(), 'api')
             ->putJson('api/forum/d/' . $discussion->uri . '/unpin');
 
         $discussion->refresh();
 
         $this->assertNull($discussion->pinned_at);
 
-        $crawler->assertOk();
+        $response->assertOk();
     }
 }

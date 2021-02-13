@@ -2,8 +2,9 @@
 
 namespace Firefly\Test\Feature;
 
-use Firefly\Test\Fixtures\Group;
 use Firefly\Test\TestCase;
+use Illuminate\Support\Str;
+use Firefly\Test\Fixtures\Group;
 
 class GroupTest extends TestCase
 {
@@ -12,12 +13,12 @@ class GroupTest extends TestCase
         // Clear all previous groups
         Group::truncate();
 
-        $crawler = $this->actingAs($this->getUser())
+        $response = $this->actingAs($this->getUser())
             ->postJson('forum/g', [
                 'name' => 'Foo Bar',
                 'color' => '#444',
             ]);
-        
+
         $groups = Group::all();
 
         $this->assertTrue($groups->count() == 1);
@@ -28,15 +29,15 @@ class GroupTest extends TestCase
 
         $group = Group::first();
 
-        $crawler->assertRedirect();
-        $crawler->assertLocation('forum/g/' . $group->slug);
+        $response->assertRedirect();
+        $response->assertLocation('forum/g/' . $group->slug);
     }
 
     public function test_group_was_updated()
     {
         $group = $this->getGroup();
 
-        $crawler = $this->actingAs($this->getUser())
+        $response = $this->actingAs($this->getUser())
             ->put('forum/g/' . $group->slug, [
                 'name' => 'Bar Foo',
                 'color' => '#444',
@@ -47,15 +48,15 @@ class GroupTest extends TestCase
         $this->assertEquals('Bar Foo', $group->name);
         $this->assertEquals('bar-foo', $group->slug);
 
-        $crawler->assertRedirect();
-        $crawler->assertLocation('forum/g/' . $group->slug);
+        $response->assertRedirect();
+        $response->assertLocation('forum/g/' . $group->slug);
     }
 
     public function test_group_was_soft_deleted()
     {
         $group = $this->getGroup();
 
-        $crawler = $this->actingAs($this->getUser())
+        $response = $this->actingAs($this->getUser())
             ->delete('forum/g/' . $group->slug);
 
         $group->refresh();
@@ -63,8 +64,8 @@ class GroupTest extends TestCase
         $this->assertFalse($group->exists());
         $this->assertNotNull($group->deleted_at);
 
-        $crawler->assertRedirect();
-        $crawler->assertLocation('forum');
+        $response->assertRedirect();
+        $response->assertLocation('forum');
     }
 
     public function test_name_is_required()
@@ -79,31 +80,31 @@ class GroupTest extends TestCase
         ];
 
         // Create
-        $crawler = $this->actingAs($this->getUser())
+        $response = $this->actingAs($this->getUser())
             ->postJson('forum/g', [
                 'name' => $name,
             ]);
 
-        $crawler->assertStatus(422);
-        $crawler->assertJsonValidationErrors('name');
-        $crawler->assertJson($validJson);
+        $response->assertStatus(422);
+        $response->assertJsonValidationErrors('name');
+        $response->assertJson($validJson);
 
         // Update
         $group = $this->getGroup();
 
-        $crawler = $this->actingAs($this->getUser())
+        $response = $this->actingAs($this->getUser())
             ->putJson('forum/g/' . $group->slug, [
                 'name' => $name,
             ]);
 
-        $crawler->assertStatus(422);
-        $crawler->assertJsonValidationErrors('name');
-        $crawler->assertJson($validJson);
+        $response->assertStatus(422);
+        $response->assertJsonValidationErrors('name');
+        $response->assertJson($validJson);
     }
 
     public function test_name_has_a_max_of_255_characters()
     {
-        $name = str_random(256);
+        $name = Str::random(256);
         $validJson = [
             'errors' => [
                 'name' => [
@@ -113,25 +114,25 @@ class GroupTest extends TestCase
         ];
 
         // Create
-        $crawler = $this->actingAs($this->getUser())
+        $response = $this->actingAs($this->getUser())
             ->postJson('forum/g', [
                 'name' => $name,
             ]);
 
-        $crawler->assertStatus(422);
-        $crawler->assertJsonValidationErrors('name');
-        $crawler->assertJson($validJson);
+        $response->assertStatus(422);
+        $response->assertJsonValidationErrors('name');
+        $response->assertJson($validJson);
 
         // Update
         $group = $this->getGroup();
 
-        $crawler = $this->actingAs($this->getUser())
+        $response = $this->actingAs($this->getUser())
             ->putJson('forum/g/' . $group->slug, [
                 'name' => $name,
             ]);
 
-        $crawler->assertStatus(422);
-        $crawler->assertJsonValidationErrors('name');
-        $crawler->assertJson($validJson);
+        $response->assertStatus(422);
+        $response->assertJsonValidationErrors('name');
+        $response->assertJson($validJson);
     }
 }
