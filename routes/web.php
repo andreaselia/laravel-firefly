@@ -1,6 +1,6 @@
 <?php
 
-Route::name(config('firefly.web.name'))->group(function() {
+Route::name(config('firefly.web.name'))->group(function () {
     Route::get('/', 'ForumController@index')->name('index');
 
     // Discussions...
@@ -15,14 +15,14 @@ Route::name(config('firefly.web.name'))->group(function() {
         Route::delete('{discussion}-{slug}', 'DiscussionController@delete')->name('discussion.delete')->where(['discussion' => '[0-9]+']);
 
         Route::post('{discussion}-{slug}', 'PostController@store')->name('post.store');
-        Route::put('{discussion}-{slug}/' . config('firefly.prefix.post') . '/{post}', 'PostController@update')->name('post.update');
-        Route::delete('{discussion}-{slug}/' . config('firefly.prefix.post') . '/{post}', 'PostController@delete')->name('post.delete');
+        Route::put('{discussion}-{slug}/'.config('firefly.prefix.post').'/{post}', 'PostController@update')->name('post.update');
+        Route::delete('{discussion}-{slug}/'.config('firefly.prefix.post').'/{post}', 'PostController@delete')->name('post.delete');
     });
 
     // Groups...
     Route::group(['prefix' => config('firefly.prefix.group')], function () {
-        Route::get('{group}/' . config('firefly.prefix.discussion') . '/create', 'DiscussionController@create')->name('discussion.create');
-        Route::post('{group}/' . config('firefly.prefix.discussion'), 'DiscussionController@store')->name('discussion.store');
+        Route::get('{group}/'.config('firefly.prefix.discussion').'/create', 'DiscussionController@create')->name('discussion.create');
+        Route::post('{group}/'.config('firefly.prefix.discussion'), 'DiscussionController@store')->name('discussion.store');
         Route::get('/', 'GroupController@index')->name('group.index');
         Route::post('/', 'GroupController@store')->name('group.store');
         Route::get('create', 'GroupController@create')->name('group.create');

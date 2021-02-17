@@ -2,8 +2,8 @@
 
 namespace Firefly\Test\Feature\Api;
 
-use Firefly\Test\TestCase;
 use Firefly\Test\Fixtures\Group;
+use Firefly\Test\TestCase;
 
 class GroupTest extends TestCase
 {
@@ -44,7 +44,7 @@ class GroupTest extends TestCase
         $group = $this->getGroup();
 
         $response = $this->actingAs($this->getUser(), 'api')
-            ->getJson('api/forum/g/' . $group->slug);
+            ->getJson('api/forum/g/'.$group->slug);
 
         $response->assertOk();
         $response->assertJsonStructure();
@@ -55,7 +55,7 @@ class GroupTest extends TestCase
         $group = $this->getGroup();
 
         $response = $this->actingAs($this->getUser(), 'api')
-            ->putJson('api/forum/g/' . $group->slug, [
+            ->putJson('api/forum/g/'.$group->slug, [
                 'name' => 'Bar Foo',
                 'color' => '#444',
             ]);
@@ -74,7 +74,7 @@ class GroupTest extends TestCase
         $group = $this->getGroup();
 
         $response = $this->actingAs($this->getUser(), 'api')
-            ->deleteJson('api/forum/g/' . $group->slug);
+            ->deleteJson('api/forum/g/'.$group->slug);
 
         $group->refresh();
 

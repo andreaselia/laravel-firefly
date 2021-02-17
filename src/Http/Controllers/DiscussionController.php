@@ -2,12 +2,11 @@
 
 namespace Firefly\Http\Controllers;
 
-use Firefly\Models\Discussion;
-use Firefly\Models\Group;
 use Firefly\Http\Requests\StoreDiscussionRequest;
 use Firefly\Http\Requests\UpdateDiscussionRequest;
+use Firefly\Models\Discussion;
+use Firefly\Models\Group;
 use Firefly\Services\DiscussionService;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class DiscussionController extends Controller

@@ -2,8 +2,8 @@
 
 namespace Firefly\Http\Controllers;
 
-use Firefly\Models\Group;
 use Firefly\Models\Discussion;
+use Firefly\Models\Group;
 
 class ForumController extends Controller
 {

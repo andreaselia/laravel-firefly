@@ -2,13 +2,13 @@
 
 namespace Firefly\Http\Controllers\Api;
 
-use Firefly\Models\Discussion;
 use Firefly\Http\Controllers\Controller;
 use Firefly\Http\Requests\StorePostRequest;
 use Firefly\Http\Requests\UpdatePostRequest;
+use Firefly\Models\Discussion;
 use Firefly\Models\Post;
-use Illuminate\Http\Request;
 use Firefly\Services\PostService;
+use Illuminate\Http\Request;
 
 class PostController extends Controller
 {

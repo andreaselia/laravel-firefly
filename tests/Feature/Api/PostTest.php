@@ -2,8 +2,8 @@
 
 namespace Firefly\Test\Feature\Api;
 
-use Firefly\Test\TestCase;
 use Firefly\Test\Fixtures\Post;
+use Firefly\Test\TestCase;
 
 class PostTest extends TestCase
 {
@@ -15,7 +15,7 @@ class PostTest extends TestCase
         $discussion = $this->getDiscussion();
 
         $response = $this->actingAs($this->getUser(), 'api')
-            ->postJson('api/forum/d/' . $discussion->uri, [
+            ->postJson('api/forum/d/'.$discussion->uri, [
                 'content' => 'Foo Bar',
             ]);
 
@@ -36,7 +36,7 @@ class PostTest extends TestCase
         $post = $this->getPost();
 
         $response = $this->actingAs($this->getUser(), 'api')
-            ->putJson('api/forum/d/' . $discussion->uri . '/p/' . $post->id, [
+            ->putJson('api/forum/d/'.$discussion->uri.'/p/'.$post->id, [
                 'content' => 'Bar Foo',
             ]);
 
@@ -54,7 +54,7 @@ class PostTest extends TestCase
         $post = $this->getPost();
 
         $response = $this->actingAs($this->getUser(), 'api')
-            ->deleteJson('api/forum/d/' . $discussion->uri . '/p/' . $post->id);
+            ->deleteJson('api/forum/d/'.$discussion->uri.'/p/'.$post->id);
 
         $post->refresh();
 
@@ -71,15 +71,15 @@ class PostTest extends TestCase
             'errors' => [
                 'content' => [
                     'The content field is required.',
-                ]
-            ]
+                ],
+            ],
         ];
 
         // Create
         $discussion = $this->getDiscussion();
 
         $response = $this->actingAs($this->getUser(), 'api')
-            ->postJson('api/forum/d/' . $discussion->uri, [
+            ->postJson('api/forum/d/'.$discussion->uri, [
                 'content' => $content,
             ]);
 
@@ -92,7 +92,7 @@ class PostTest extends TestCase
         $post = $this->getPost();
 
         $response = $this->actingAs($this->getUser(), 'api')
-            ->putJson('api/forum/d/' . $discussion->uri . '/p/' . $post->id, [
+            ->putJson('api/forum/d/'.$discussion->uri.'/p/'.$post->id, [
                 'content' => $content,
             ]);
 

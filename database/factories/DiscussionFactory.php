@@ -4,8 +4,8 @@ namespace Firefly\Factories;
 
 use App\Models\User;
 use Firefly\Models\Discussion;
-use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
 class DiscussionFactory extends Factory
 {
