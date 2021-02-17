@@ -1,6 +1,4 @@
-[![Build Status](https://travis-ci.org/AndreasElia/laravel-firefly.svg?branch=master)](https://travis-ci.org/AndreasElia/laravel-firefly)
-
-# Firefly
+# Laravel Firefly
 
 Firefly is a simple forum package for Laravel, created for ease of use and expansion.
 
@@ -12,7 +10,7 @@ Install the package:
 composer require andreaselia/laravel-firefly
 ```
 
-Publish files:
+Publish package files:
 
 ```bash
 php artisan vendor:publish --provider="Firefly\FireflyServiceProvider"
@@ -23,3 +21,7 @@ Run the migrations:
 ```bash
 php artisan migrate
 ```
+
+## Contributing
+
+You're more than welcome to submit a pull request, or if you're not feeling up to it - create an issue so someone else can pick it up.

@@ -2,10 +2,10 @@
 
 namespace Firefly\Http\Controllers;
 
-use Firefly\Discussion;
+use Firefly\Models\Discussion;
 use Firefly\Http\Requests\StorePostRequest;
 use Firefly\Http\Requests\UpdatePostRequest;
-use Firefly\Post;
+use Firefly\Models\Post;
 use Illuminate\Http\Request;
 use Firefly\Services\PostService;
 
@@ -34,7 +34,7 @@ class PostController extends Controller
      * Store the new post.
      *
      * @param \Firefly\Http\Requests\StorePostRequest $request
-     * @param \Firefly\Discussion $discussion
+     * @param \Firefly\Models\Discussion $discussion
      * @return \Illuminate\Http\Response
      */
     public function store(StorePostRequest $request, Discussion $discussion)
@@ -49,8 +49,8 @@ class PostController extends Controller
     /**
      * Show the form for editing a post.
      *
-     * @param \Firefly\Group $group
-     * @param \Firefly\Post $post
+     * @param \Firefly\Models\Group $group
+     * @param \Firefly\Models\Post $post
      * @return \Illuminate\View\View
      */
     public function edit(Post $post)
@@ -64,9 +64,9 @@ class PostController extends Controller
      * Update the specified post.
      *
      * @param \Firefly\Http\Requests\UpdatePostRequest $request
-     * @param \Firefly\Discussion $discussion
+     * @param \Firefly\Models\Discussion $discussion
      * @param $slug
-     * @param \Firefly\Post $post
+     * @param \Firefly\Models\Post $post
      * @return \Illuminate\Http\Response
      */
     public function update(UpdatePostRequest $request, Discussion $discussion, $slug, Post $post)
@@ -82,9 +82,9 @@ class PostController extends Controller
      * Delete the specified post.
      *
      * @param \Illuminate\Http\Request $request
-     * @param \Firefly\Discussion $discussion
+     * @param \Firefly\Models\Discussion $discussion
      * @param $slug
-     * @param \Firefly\Post $post
+     * @param \Firefly\Models\Post $post
      * @return \Illuminate\Http\Response
      */
     public function delete(Request $request, Discussion $discussion, $slug, Post $post)

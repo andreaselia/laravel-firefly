@@ -2,7 +2,7 @@
 
 namespace Firefly\Policies;
 
-use Firefly\Discussion;
+use Firefly\Models\Discussion;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class DiscussionPolicy
@@ -13,7 +13,7 @@ class DiscussionPolicy
      * Determine whether the user can view the discussion.
      *
      * @param  $user
-     * @param  \Firefly\Discussion  $discussion
+     * @param  \Firefly\Models\Discussion  $discussion
      * @return mixed
      */
     public function view($user, Discussion $discussion)
@@ -36,7 +36,7 @@ class DiscussionPolicy
      * Determine whether the user can update the discussion.
      *
      * @param  $user
-     * @param  \Firefly\Discussion  $discussion
+     * @param  \Firefly\Models\Discussion  $discussion
      * @return mixed
      */
     public function update($user, Discussion $discussion)
@@ -48,7 +48,7 @@ class DiscussionPolicy
      * Determine whether the user can delete the discussion.
      *
      * @param  $user
-     * @param  \Firefly\Discussion  $discussion
+     * @param  \Firefly\Models\Discussion  $discussion
      * @return mixed
      */
     public function delete($user, Discussion $discussion)
@@ -60,7 +60,7 @@ class DiscussionPolicy
      * Determine whether the user can restore the discussion.
      *
      * @param  $user
-     * @param  \Firefly\Discussion  $discussion
+     * @param  \Firefly\Models\Discussion  $discussion
      * @return mixed
      */
     public function restore($user, Discussion $discussion)
@@ -72,7 +72,7 @@ class DiscussionPolicy
      * Determine whether the user can permanently delete the discussion.
      *
      * @param  $user
-     * @param  \Firefly\Discussion  $discussion
+     * @param  \Firefly\Models\Discussion  $discussion
      * @return mixed
      */
     public function forceDelete($user, Discussion $discussion)
@@ -84,7 +84,7 @@ class DiscussionPolicy
      * Determine whether the user can lock the discussion.
      *
      * @param  $user
-     * @param  \Firefly\Discussion  $discussion
+     * @param  \Firefly\Models\Discussion  $discussion
      * @return mixed
      */
     public function lock($user, Discussion $discussion)
@@ -96,7 +96,7 @@ class DiscussionPolicy
      * Determine whether the user can unlock the discussion.
      *
      * @param  $user
-     * @param  \Firefly\Discussion  $discussion
+     * @param  \Firefly\Models\Discussion  $discussion
      * @return mixed
      */
     public function unlock($user, Discussion $discussion)
@@ -108,7 +108,7 @@ class DiscussionPolicy
      * Determine whether the user can pin the discussion.
      *
      * @param  $user
-     * @param  \Firefly\Discussion  $discussion
+     * @param  \Firefly\Models\Discussion  $discussion
      * @return mixed
      */
     public function pin($user, Discussion $discussion)
@@ -120,7 +120,7 @@ class DiscussionPolicy
      * Determine whether the user can unpin the discussion.
      *
      * @param  $user
-     * @param  \Firefly\Discussion  $discussion
+     * @param  \Firefly\Models\Discussion  $discussion
      * @return mixed
      */
     public function unpin($user, Discussion $discussion)
@@ -132,7 +132,7 @@ class DiscussionPolicy
      * Determine whether the user can reply the discussion.
      *
      * @param  $user
-     * @param  \Firefly\Discussion  $discussion
+     * @param  \Firefly\Models\Discussion  $discussion
      * @return mixed
      */
     public function reply($user, Discussion $discussion)

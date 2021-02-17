@@ -14,12 +14,8 @@ class CreateDiscussionGroupTable extends Migration
     public function up()
     {
         Schema::create('discussion_group', function (Blueprint $table) {
-            $table->increments('id');
-            $table->unsignedInteger('group_id');
-            $table->unsignedInteger('discussion_id');
-
-            $table->foreign('group_id')->references('id')->on('groups');
-            $table->foreign('discussion_id')->references('id')->on('discussions');
+            $table->foreignId('group_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('discussion_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

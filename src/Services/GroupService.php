@@ -2,14 +2,14 @@
 
 namespace Firefly\Services;
 
-use Firefly\Group;
+use Firefly\Models\Group;
 use Illuminate\Http\Request;
 
 class GroupService
 {
     /**
      * Make a new group.
-     * 
+     *
      * @param Request $request
      * @return mixed
      */
@@ -22,7 +22,7 @@ class GroupService
 
     /**
      * Update the specified group.
-     * 
+     *
      * @param Request $request
      * @param Group $group
      * @return bool
@@ -30,7 +30,7 @@ class GroupService
     public function update(Request $request, Group $group)
     {
         $request->merge(['is_private' => $request->has('is_private')]);
-        
+
         $group->update($request->all());
 
         return $group->refresh();
@@ -38,7 +38,7 @@ class GroupService
 
     /**
      * Delete the speficied group.
-     * 
+     *
      * @param Group $group
      * @return bool|null
      * @throws \Exception

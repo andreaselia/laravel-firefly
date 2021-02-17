@@ -2,8 +2,8 @@
 
 namespace Firefly\Services;
 
-use Firefly\Discussion;
-use Firefly\Group;
+use Firefly\Models\Discussion;
+use Firefly\Models\Group;
 use Illuminate\Http\Request;
 
 class DiscussionService
@@ -12,8 +12,8 @@ class DiscussionService
      * Make a new discussion.
      *
      * @param \Illuminate\Http\Request $request
-     * @param \Firefly\Group $group
-     * @return \Firefly\Discussion
+     * @param \Firefly\Models\Group $group
+     * @return \Firefly\Models\Discussion
      */
     public function make(Request $request, Group $group)
     {
@@ -40,8 +40,8 @@ class DiscussionService
      * Update the specified discussion.
      *
      * @param \Illuminate\Http\Request $request
-     * @param \Firefly\Discussion $discussion
-     * @return \Firefly\Discussion
+     * @param \Firefly\Models\Discussion $discussion
+     * @return \Firefly\Models\Discussion
      */
     public function update(Request $request, Discussion $discussion)
     {
@@ -53,7 +53,7 @@ class DiscussionService
     /**
      * Delete the specified discussion.
      *
-     * @param \Firefly\Discussion $discussion
+     * @param \Firefly\Models\Discussion $discussion
      * @return bool|null
      * @throws \Exception
      */

@@ -14,7 +14,7 @@ class PostTest extends TestCase
 
         $discussion = $this->getDiscussion();
 
-        $crawler = $this->actingAs($this->getUser(), 'api')
+        $response = $this->actingAs($this->getUser(), 'api')
             ->postJson('api/forum/d/' . $discussion->uri, [
                 'content' => 'Foo Bar',
             ]);
@@ -26,8 +26,8 @@ class PostTest extends TestCase
             'content' => 'Foo Bar',
         ]);
 
-        $crawler->assertOk();
-        $crawler->assertJsonStructure();
+        $response->assertOk();
+        $response->assertJsonStructure();
     }
 
     public function test_post_was_updated()
@@ -35,7 +35,7 @@ class PostTest extends TestCase
         $discussion = $this->getDiscussion();
         $post = $this->getPost();
 
-        $crawler = $this->actingAs($this->getUser(), 'api')
+        $response = $this->actingAs($this->getUser(), 'api')
             ->putJson('api/forum/d/' . $discussion->uri . '/p/' . $post->id, [
                 'content' => 'Bar Foo',
             ]);
@@ -44,8 +44,8 @@ class PostTest extends TestCase
 
         $this->assertEquals('Bar Foo', $post->content);
 
-        $crawler->assertOk();
-        $crawler->assertJsonStructure();
+        $response->assertOk();
+        $response->assertJsonStructure();
     }
 
     public function test_post_was_soft_deleted()
@@ -53,7 +53,7 @@ class PostTest extends TestCase
         $discussion = $this->getDiscussion();
         $post = $this->getPost();
 
-        $crawler = $this->actingAs($this->getUser(), 'api')
+        $response = $this->actingAs($this->getUser(), 'api')
             ->deleteJson('api/forum/d/' . $discussion->uri . '/p/' . $post->id);
 
         $post->refresh();
@@ -61,7 +61,7 @@ class PostTest extends TestCase
         $this->assertFalse($post->exists());
         $this->assertNotNull($post->deleted_at);
 
-        $crawler->assertOk();
+        $response->assertOk();
     }
 
     public function test_content_is_required()
@@ -78,26 +78,26 @@ class PostTest extends TestCase
         // Create
         $discussion = $this->getDiscussion();
 
-        $crawler = $this->actingAs($this->getUser(), 'api')
+        $response = $this->actingAs($this->getUser(), 'api')
             ->postJson('api/forum/d/' . $discussion->uri, [
                 'content' => $content,
             ]);
 
-        $crawler->assertStatus(422);
-        $crawler->assertJsonValidationErrors('content');
-        $crawler->assertJson($validJson);
+        $response->assertStatus(422);
+        $response->assertJsonValidationErrors('content');
+        $response->assertJson($validJson);
 
         // Update
         $discussion = $this->getDiscussion();
         $post = $this->getPost();
 
-        $crawler = $this->actingAs($this->getUser(), 'api')
+        $response = $this->actingAs($this->getUser(), 'api')
             ->putJson('api/forum/d/' . $discussion->uri . '/p/' . $post->id, [
                 'content' => $content,
             ]);
 
-        $crawler->assertStatus(422);
-        $crawler->assertJsonValidationErrors('content');
-        $crawler->assertJson($validJson);
+        $response->assertStatus(422);
+        $response->assertJsonValidationErrors('content');
+        $response->assertJson($validJson);
     }
 }

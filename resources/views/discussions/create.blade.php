@@ -1,41 +1,35 @@
 @extends('firefly::layouts.app')
 
 @section('content')
-<div class="container">
-    <h1 class="mb-4">{{ __('New Discussion') }}</h1>
+<x-card>
+    <x-slot name="title">
+        {{ __('New Discussion') }}
+    </x-slot>
 
-    <div class="card">
-        <div class="card-body">
-            <form action="{{ route('firefly.discussion.store', $group) }}" method="POST">
-                @csrf
-                
-                <div class="form-group">
-                    <label for="title">{{ __('Title') }}</label>
-                    <input type="text" name="title" id="title" value="{{ old('title') }}" class="form-control{{ $errors->has('title') ? ' is-invalid' : '' }}" required autofocus>
+    <x-validation-errors class="mb-4" :errors="$errors" />
 
-                    @if ($errors->has('title'))
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $errors->first('title') }}</strong>
-                        </span>
-                    @endif
-                </div>
+    <form method="POST" action="{{ route('firefly.discussion.store', $group) }}">
+        @csrf
 
-                <div class="form-group">
-                    <label for="content">{{ __('Content') }}</label>
-                    <textarea name="content" id="content" class="form-control{{ $errors->has('content') ? ' is-invalid' : '' }}" rows="3" required>{{ old('content') }}</textarea>
+        <!-- Title -->
+        <div>
+            <x-label for="title" :value="__('Title')" />
 
-                    @if ($errors->has('content'))
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $errors->first('content') }}</strong>
-                        </span>
-                    @endif
-                </div>
-
-                <button type="submit" class="btn btn-primary">
-                    {{ __('Submit') }}
-                </button>
-            </form>
+            <x-input id="title" class="block mt-1 w-full" type="text" name="title" :value="old('title')" required autofocus />
         </div>
-    </div>
-</div>
+
+        <!-- Content -->
+        <div class="mt-4">
+            <x-label for="content" :value="__('Content')" />
+
+            <x-textarea id="content" class="block mt-1 w-full" type="text" name="content" required>{{ old('content') }}</x-textarea>
+        </div>
+
+        <div class="mt-4">
+            <x-button>
+                {{ __('Submit') }}
+            </x-button>
+        </div>
+    </form>
+</x-card>
 @endsection

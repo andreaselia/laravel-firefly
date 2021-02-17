@@ -1,59 +1,54 @@
 @extends('firefly::layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <div class="d-flex">
-            <h1 class="mb-0">{{ __('Edit Group') }}</h1>
+@if (Auth::check())
+    <div class="container mx-auto">
+        <a href="{{ route('firefly.group.show', $group) }}">
+            {{ __('Back to Group') }}
+        </a>
+    </div>
+@endif
+
+<x-card>
+    <x-slot name="title">
+        {{ __('Edit Group') }}
+    </x-slot>
+
+    <x-validation-errors class="mb-4" :errors="$errors" />
+
+    <form method="POST" action="{{ route('firefly.group.update', $group) }}">
+        @method('PUT')
+        @csrf
+
+        <!-- Name -->
+        <div>
+            <x-label for="name" :value="__('Name')" />
+
+            <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name', $group->name)" required autofocus />
         </div>
 
-        @if (Auth::check())
-            <a class="btn btn-sm btn-secondary" href="{{ route('firefly.group.show', $group) }}">{{ __('Back to Group') }}</a>
+        <!-- Color -->
+        <div class="mt-4">
+            <x-label for="color" :value="__('Color')" />
+
+            <x-input id="color" class="block mt-1 w-full" type="text" name="color" :value="old('color', $group->color)" required />
+        </div>
+
+        @if (config('firefly.private_groups'))
+            <!-- Is Private? -->
+            <div class="block mt-4">
+                <label for="is_private" class="inline-flex items-center">
+                    <input id="is_private" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" name="is_private">
+                    <span class="ml-2 text-sm text-gray-600">{{ __('Is Private?') }}</span>
+                </label>
+            </div>
         @endif
-    </div>
 
-    <div class="card">
-        <div class="card-body">
-            <form action="{{ route('firefly.group.update', $group) }}" method="POST">
-                @method('PUT')
-                @csrf
-                
-                <div class="form-group">
-                    <label for="title">{{ __('Name') }}</label>
-                    <input type="text" name="name" id="name" value="{{ old('name', $group->name) }}" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" required autofocus>
-
-                    @if ($errors->has('name'))
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $errors->first('name') }}</strong>
-                        </span>
-                    @endif
-                </div>
-
-                <div class="form-group">
-                    <label for="title">{{ __('Color') }}</label>
-                    <input type="text" name="color" id="color" value="{{ old('color', $group->color) }}" class="form-control{{ $errors->has('color') ? ' is-invalid' : '' }}" required>
-
-                    @if ($errors->has('color'))
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $errors->first('color') }}</strong>
-                        </span>
-                    @endif
-                </div>
-
-                @if (config('firefly.private_groups'))
-                    <div class="form-group">
-                        <div class="custom-control custom-checkbox">
-                            <input class="custom-control-input" type="checkbox" name="is_private" id="is_private"{{ old('is_private', $group->is_private) ? ' checked' : '' }}>
-                            <label class="custom-control-label" for="is_private">Is Private?</label>
-                        </div>
-                    </div>
-                @endif
-
-                <button type="submit" class="btn btn-primary">
-                    {{ __('Submit') }}
-                </button>
-            </form>
+        <div class="mt-4">
+            <x-button>
+                {{ __('Submit') }}
+            </x-button>
         </div>
-    </div>
-</div>
+    </form>
+</x-card>
 @endsection

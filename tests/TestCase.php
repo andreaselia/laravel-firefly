@@ -7,9 +7,8 @@ use Firefly\Test\Fixtures\Post;
 use Firefly\Test\Fixtures\Discussion;
 use Firefly\Test\Fixtures\Group;
 use Firefly\Test\Fixtures\User;
-use Orchestra\Testbench\TestCase as OrchestraTestCase;
 
-class TestCase extends OrchestraTestCase
+class TestCase extends \Orchestra\Testbench\TestCase
 {
     use FakeModels;
 
@@ -18,13 +17,11 @@ class TestCase extends OrchestraTestCase
      *
      * @return void
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 
         $this->loadLaravelMigrations();
-
-        $this->withFactories(__DIR__.'/../database/factories');
 
         $this->artisan('migrate')->run();
 

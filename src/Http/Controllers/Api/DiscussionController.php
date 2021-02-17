@@ -2,8 +2,8 @@
 
 namespace Firefly\Http\Controllers\Api;
 
-use Firefly\Discussion;
-use Firefly\Group;
+use Firefly\Models\Discussion;
+use Firefly\Models\Group;
 use Firefly\Http\Controllers\Controller;
 use Firefly\Http\Requests\UpdateDiscussionRequest;
 use Firefly\Http\Requests\StoreDiscussionRequest;
@@ -64,7 +64,7 @@ class DiscussionController extends Controller
     /**
      * Show the specified discussion.
      *
-     * @param \Firefly\Discussion $discussion
+     * @param \Firefly\Models\Discussion $discussion
      * @return \Illuminate\Http\Response
      */
     public function show(Discussion $discussion)
@@ -109,7 +109,7 @@ class DiscussionController extends Controller
      * Lock the specified discussion.
      *
      * @param \Illuminate\Http\Request $request
-     * @param \Firefly\Discussion $discussion
+     * @param \Firefly\Models\Discussion $discussion
      * @return \Illuminate\Http\Response
      */
     public function lock(Request $request, Discussion $discussion)
@@ -125,7 +125,7 @@ class DiscussionController extends Controller
      * Unlock the specified discussion.
      *
      * @param \Illuminate\Http\Request $request
-     * @param \Firefly\Discussion $discussion
+     * @param \Firefly\Models\Discussion $discussion
      * @return \Illuminate\Http\Response
      */
     public function unlock(Request $request, Discussion $discussion)
@@ -141,7 +141,7 @@ class DiscussionController extends Controller
      * Pin the specified discussion.
      *
      * @param \Illuminate\Http\Request $request
-     * @param \Firefly\Discussion $discussion
+     * @param \Firefly\Models\Discussion $discussion
      * @return \Illuminate\Http\Response
      */
     public function pin(Request $request, Discussion $discussion)
@@ -157,7 +157,7 @@ class DiscussionController extends Controller
      * Unpin the specified discussion.
      *
      * @param \Illuminate\Http\Request $request
-     * @param \Firefly\Discussion $discussion
+     * @param \Firefly\Models\Discussion $discussion
      * @return \Illuminate\Http\Response
      */
     public function unpin(Request $request, Discussion $discussion)
