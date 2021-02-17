@@ -2,9 +2,9 @@
 
 namespace Firefly\Test\Feature\Api;
 
+use Firefly\Test\Fixtures\Discussion;
 use Firefly\Test\Fixtures\Post;
 use Firefly\Test\TestCase;
-use Firefly\Test\Fixtures\Discussion;
 
 class DiscussionTest extends TestCase
 {
@@ -56,7 +56,7 @@ class DiscussionTest extends TestCase
         $discussion = $this->getDiscussion();
 
         $response = $this->actingAs($this->getUser(), 'api')
-            ->getJson('api/forum/d/' . $discussion->id);
+            ->getJson('api/forum/d/'.$discussion->id);
 
         $response->assertOk();
         $response->assertJsonStructure();
@@ -67,7 +67,7 @@ class DiscussionTest extends TestCase
         $discussion = $this->getDiscussion();
 
         $response = $this->actingAs($this->getUser(), 'api')
-            ->putJson('api/forum/d/' . $discussion->id, [
+            ->putJson('api/forum/d/'.$discussion->id, [
                 'title' => 'Bar Foo',
             ]);
 
@@ -85,7 +85,7 @@ class DiscussionTest extends TestCase
         $discussion = $this->getDiscussion();
 
         $response = $this->actingAs($this->getUser(), 'api')
-            ->deleteJson('api/forum/d/' . $discussion->id);
+            ->deleteJson('api/forum/d/'.$discussion->id);
 
         $discussion->refresh();
 
@@ -100,7 +100,7 @@ class DiscussionTest extends TestCase
         $discussion = $this->getDiscussion();
 
         $response = $this->actingAs($this->getUser(), 'api')
-            ->putJson('api/forum/d/' . $discussion->uri . '/lock');
+            ->putJson('api/forum/d/'.$discussion->uri.'/lock');
 
         $discussion->refresh();
 
@@ -114,7 +114,7 @@ class DiscussionTest extends TestCase
         $discussion = $this->getDiscussion()->lock();
 
         $response = $this->actingAs($this->getUser(), 'api')
-            ->putJson('api/forum/d/' . $discussion->uri . '/unlock');
+            ->putJson('api/forum/d/'.$discussion->uri.'/unlock');
 
         $discussion->refresh();
 
@@ -128,7 +128,7 @@ class DiscussionTest extends TestCase
         $discussion = $this->getDiscussion();
 
         $response = $this->actingAs($this->getUser(), 'api')
-            ->putJson('api/forum/d/' . $discussion->uri . '/pin');
+            ->putJson('api/forum/d/'.$discussion->uri.'/pin');
 
         $discussion->refresh();
 
@@ -142,7 +142,7 @@ class DiscussionTest extends TestCase
         $discussion = $this->getDiscussion()->pin();
 
         $response = $this->actingAs($this->getUser(), 'api')
-            ->putJson('api/forum/d/' . $discussion->uri . '/unpin');
+            ->putJson('api/forum/d/'.$discussion->uri.'/unpin');
 
         $discussion->refresh();
 

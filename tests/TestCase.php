@@ -3,9 +3,9 @@
 namespace Firefly\Test;
 
 use Firefly\FireflyServiceProvider;
-use Firefly\Test\Fixtures\Post;
 use Firefly\Test\Fixtures\Discussion;
 use Firefly\Test\Fixtures\Group;
+use Firefly\Test\Fixtures\Post;
 use Firefly\Test\Fixtures\User;
 
 class TestCase extends \Orchestra\Testbench\TestCase

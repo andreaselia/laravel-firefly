@@ -3,8 +3,8 @@
 namespace Firefly\Factories;
 
 use Firefly\Models\Group;
-use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
 class GroupFactory extends Factory
 {

@@ -2,8 +2,8 @@
 
 namespace Firefly;
 
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 

@@ -2,9 +2,9 @@
 
 namespace Firefly\Http\Controllers;
 
-use Firefly\Models\Group;
 use Firefly\Http\Requests\StoreGroupRequest;
 use Firefly\Http\Requests\UpdateGroupRequest;
+use Firefly\Models\Group;
 use Firefly\Services\GroupService;
 use Illuminate\Http\Request;
 

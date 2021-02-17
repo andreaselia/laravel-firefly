@@ -2,11 +2,11 @@
 
 namespace Firefly\Http\Controllers\Api;
 
+use Firefly\Http\Controllers\Controller;
+use Firefly\Http\Requests\StoreDiscussionRequest;
+use Firefly\Http\Requests\UpdateDiscussionRequest;
 use Firefly\Models\Discussion;
 use Firefly\Models\Group;
-use Firefly\Http\Controllers\Controller;
-use Firefly\Http\Requests\UpdateDiscussionRequest;
-use Firefly\Http\Requests\StoreDiscussionRequest;
 use Firefly\Services\DiscussionService;
 use Illuminate\Http\Request;
 

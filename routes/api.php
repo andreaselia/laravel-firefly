@@ -13,8 +13,8 @@ Route::group(['prefix' => config('firefly.prefix.discussion')], function () {
     Route::put('{discussion}-{slug}/unpin', 'DiscussionController@unpin')->where(['discussion' => '[0-9]+']);
 
     Route::post('{discussion}-{slug}', 'PostController@store');
-    Route::put('{discussion}-{slug}/' . config('firefly.prefix.post') . '/{post}', 'PostController@update');
-    Route::delete('{discussion}-{slug}/' . config('firefly.prefix.post') . '/{post}', 'PostController@delete');
+    Route::put('{discussion}-{slug}/'.config('firefly.prefix.post').'/{post}', 'PostController@update');
+    Route::delete('{discussion}-{slug}/'.config('firefly.prefix.post').'/{post}', 'PostController@delete');
 });
 
 // Groups...

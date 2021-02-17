@@ -2,9 +2,9 @@
 
 namespace Firefly\Test\Feature;
 
+use Firefly\Test\Fixtures\Group;
 use Firefly\Test\TestCase;
 use Illuminate\Support\Str;
-use Firefly\Test\Fixtures\Group;
 
 class GroupTest extends TestCase
 {
@@ -30,7 +30,7 @@ class GroupTest extends TestCase
         $group = Group::first();
 
         $response->assertRedirect();
-        $response->assertLocation('forum/g/' . $group->slug);
+        $response->assertLocation('forum/g/'.$group->slug);
     }
 
     public function test_group_was_updated()
@@ -38,7 +38,7 @@ class GroupTest extends TestCase
         $group = $this->getGroup();
 
         $response = $this->actingAs($this->getUser())
-            ->put('forum/g/' . $group->slug, [
+            ->put('forum/g/'.$group->slug, [
                 'name' => 'Bar Foo',
                 'color' => '#444',
             ]);
@@ -49,7 +49,7 @@ class GroupTest extends TestCase
         $this->assertEquals('bar-foo', $group->slug);
 
         $response->assertRedirect();
-        $response->assertLocation('forum/g/' . $group->slug);
+        $response->assertLocation('forum/g/'.$group->slug);
     }
 
     public function test_group_was_soft_deleted()
@@ -57,7 +57,7 @@ class GroupTest extends TestCase
         $group = $this->getGroup();
 
         $response = $this->actingAs($this->getUser())
-            ->delete('forum/g/' . $group->slug);
+            ->delete('forum/g/'.$group->slug);
 
         $group->refresh();
 
@@ -75,8 +75,8 @@ class GroupTest extends TestCase
             'errors' => [
                 'name' => [
                     'The name field is required.',
-                ]
-            ]
+                ],
+            ],
         ];
 
         // Create
@@ -93,7 +93,7 @@ class GroupTest extends TestCase
         $group = $this->getGroup();
 
         $response = $this->actingAs($this->getUser())
-            ->putJson('forum/g/' . $group->slug, [
+            ->putJson('forum/g/'.$group->slug, [
                 'name' => $name,
             ]);
 
@@ -109,8 +109,8 @@ class GroupTest extends TestCase
             'errors' => [
                 'name' => [
                     'The name may not be greater than 255 characters.',
-                ]
-            ]
+                ],
+            ],
         ];
 
         // Create
@@ -127,7 +127,7 @@ class GroupTest extends TestCase
         $group = $this->getGroup();
 
         $response = $this->actingAs($this->getUser())
-            ->putJson('forum/g/' . $group->slug, [
+            ->putJson('forum/g/'.$group->slug, [
                 'name' => $name,
             ]);
 

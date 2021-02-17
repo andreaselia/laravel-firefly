@@ -2,10 +2,10 @@
 
 namespace Firefly\Http\Controllers\Api;
 
-use Firefly\Models\Group;
 use Firefly\Http\Controllers\Controller;
 use Firefly\Http\Requests\StoreGroupRequest;
 use Firefly\Http\Requests\UpdateGroupRequest;
+use Firefly\Models\Group;
 use Firefly\Services\GroupService;
 use Illuminate\Http\Request;
 
@@ -27,7 +27,6 @@ class GroupController extends Controller
     {
         $this->groupService = $groupService;
     }
-
 
     /**
      * Show the groups index.

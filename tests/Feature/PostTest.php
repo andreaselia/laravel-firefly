@@ -2,9 +2,7 @@
 
 namespace Firefly\Test;
 
-use Carbon\Carbon;
 use Firefly\Test\Fixtures\Post;
-use Firefly\Test\TestCase;
 
 class PostTest extends TestCase
 {
@@ -16,7 +14,7 @@ class PostTest extends TestCase
         $discussion = $this->getDiscussion();
 
         $response = $this->actingAs($this->getUser())
-            ->postJson('forum/d/' . $discussion->uri, [
+            ->postJson('forum/d/'.$discussion->uri, [
                 'content' => 'Foo Bar',
             ]);
 
@@ -28,7 +26,7 @@ class PostTest extends TestCase
         ]);
 
         $response->assertRedirect();
-        $response->assertLocation('forum/d/' . $discussion->uri);
+        $response->assertLocation('forum/d/'.$discussion->uri);
     }
 
     public function test_post_was_updated()
@@ -37,7 +35,7 @@ class PostTest extends TestCase
         $post = $this->getPost();
 
         $response = $this->actingAs($this->getUser())
-            ->put('forum/d/' . $discussion->uri . '/p/' . $post->id, [
+            ->put('forum/d/'.$discussion->uri.'/p/'.$post->id, [
                 'content' => 'Bar Foo',
             ]);
 
@@ -46,7 +44,7 @@ class PostTest extends TestCase
         $this->assertEquals('Bar Foo', $post->content);
 
         $response->assertRedirect();
-        $response->assertLocation('forum/d/' . $post->discussion->uri);
+        $response->assertLocation('forum/d/'.$post->discussion->uri);
     }
 
     public function test_post_was_soft_deleted()
@@ -55,7 +53,7 @@ class PostTest extends TestCase
         $post = $this->getPost();
 
         $response = $this->actingAs($this->getUser())
-            ->delete('forum/d/' . $discussion->uri . '/p/' . $post->id);
+            ->delete('forum/d/'.$discussion->uri.'/p/'.$post->id);
 
         $post->refresh();
 
@@ -63,7 +61,7 @@ class PostTest extends TestCase
         $this->assertNotNull($post->deleted_at);
 
         $response->assertRedirect();
-        $response->assertLocation('forum/d/' . $post->discussion->uri);
+        $response->assertLocation('forum/d/'.$post->discussion->uri);
     }
 
     public function test_content_is_required()
@@ -73,15 +71,15 @@ class PostTest extends TestCase
             'errors' => [
                 'content' => [
                     'The content field is required.',
-                ]
-            ]
+                ],
+            ],
         ];
 
         // Create
         $discussion = $this->getDiscussion();
 
         $response = $this->actingAs($this->getUser())
-            ->postJson('forum/d/' . $discussion->uri, [
+            ->postJson('forum/d/'.$discussion->uri, [
                 'content' => $content,
             ]);
 
@@ -94,7 +92,7 @@ class PostTest extends TestCase
         $post = $this->getPost();
 
         $response = $this->actingAs($this->getUser())
-            ->putJson('forum/d/' . $discussion->uri . '/p/' . $post->id, [
+            ->putJson('forum/d/'.$discussion->uri.'/p/'.$post->id, [
                 'content' => $content,
             ]);
 

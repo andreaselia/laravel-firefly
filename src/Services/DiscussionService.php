@@ -70,7 +70,7 @@ class DiscussionService
      */
     public function updateState(Discussion $discussion, $type)
     {
-        if (!method_exists($discussion, $type)) {
+        if (! method_exists($discussion, $type)) {
             throw new \BadMethodCallException("Method {$type} not found.");
         }
 

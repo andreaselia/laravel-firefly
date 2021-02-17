@@ -3,8 +3,8 @@
 namespace Firefly\Factories;
 
 use App\Models\User;
-use Firefly\Models\Post;
 use Firefly\Models\Discussion;
+use Firefly\Models\Post;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class PostFactory extends Factory
