@@ -54,9 +54,9 @@ class Discussion extends Model
 
     public function getReplyCountAttribute()
     {
-        return $this->posts->count() > 1
-            ? $this->posts->count() - 1
-            : $this->posts->count();
+        $replyCount = $this->posts->count();
+
+        return $replyCount > 1 ? $replyCount - 1 : $replyCount;
     }
 
     public function user(): BelongsTo
