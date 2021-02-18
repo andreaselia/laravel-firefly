@@ -13,6 +13,10 @@
             @endforeach
 
             <div class="flex space-x-1">
+                @if ($discussion->is_private)
+                    <x-icon name="private" />
+                @endif
+
                 @if ($discussion->pinned_at)
                     <x-icon name="pin" />
                 @endif
@@ -30,38 +34,7 @@
 
     <div class="space-y-5">
         @foreach ($posts as $post)
-            <x-card max-width="sm:max-w-none">
-                <div class="flex justify-between items-center">
-                    <div class="text-sm">
-                        {{ __('Posted by') }} {{ $post->user->name }} &#8226; {{ $post->created_at->diffForHumans() }}
-                    </div>
-
-                    <div class="flex space-x-1">
-                        @can ('update', $post)
-                            <a href="{{ route('firefly.post.edit', $post) }}">
-                                <x-button>
-                                    {{ __('Edit') }}
-                                </x-button>
-                            </a>
-                        @endcan
-
-                        @can ('delete', $post)
-                            <x-button onclick="event.preventDefault(); document.getElementById('delete-post-{{ $post->id }}-form').submit();">
-                                {{ __('Delete') }}
-                            </x-button>
-
-                            <form id="delete-post-{{ $post->id }}-form" action="{{ route('firefly.post.delete', [$discussion->id, $discussion->slug, $post]) }}" method="POST" style="display: none;">
-                                @method('DELETE')
-                                @csrf
-                            </form>
-                        @endcan
-                    </div>
-                </div>
-
-                <div class="mt-2">
-                    {!! nl2br(e($post->content)) !!}
-                </div>
-            </x-card>
+            <x-post-item :post="$post" />
         @endforeach
     </div>
 

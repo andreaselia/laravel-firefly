@@ -23,26 +23,7 @@
                     </x-button>
                 </a>
 
-                @can ('update', $group)
-                    <a href="{{ route('firefly.group.edit', $group) }}">
-                        <x-button>
-                            {{ __('Edit') }}
-                        </x-button>
-                    </a>
-                @endcan
-
-                @can ('delete', $group)
-                    <a href="{{ route('firefly.group.delete', $group) }}" onclick="event.preventDefault(); document.getElementById('delete-group-form').submit();">
-                        <x-button>
-                            {{ __('Delete') }}
-                        </x-button>
-                    </a>
-
-                    <form id="delete-group-form" action="{{ route('firefly.group.delete', $group) }}" method="POST" style="display: none;">
-                        @method('DELETE')
-                        @csrf
-                    </form>
-                @endcan
+                <x-group-options :group="$group" />
             </div>
         @endif
     </div>

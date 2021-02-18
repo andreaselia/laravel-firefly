@@ -71,7 +71,9 @@ class FireflyServiceProvider extends ServiceProvider
         Blade::component('firefly::components.header', 'header');
         Blade::component('firefly::components.discussion-item', 'discussion-item');
         Blade::component('firefly::components.discussion-options', 'discussion-options');
+        Blade::component('firefly::components.group-options', 'group-options');
         Blade::component('firefly::components.group-item', 'group-item');
+        Blade::component('firefly::components.post-item', 'post-item');
     }
 
     /**

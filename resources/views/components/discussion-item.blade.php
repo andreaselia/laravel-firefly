@@ -12,6 +12,10 @@
             </div>
 
             <div class="mt-2 sm:mt-0 flex space-x-2 text-sm">
+                @if ($discussion->is_private)
+                    <x-icon name="private" />
+                @endif
+
                 @if ($discussion->pinned_at)
                     <x-icon name="pin" />
                 @endif

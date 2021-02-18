@@ -32,6 +32,7 @@ class Discussion extends Model
 
     /** @var array */
     protected $appended = [
+        'is_private',
         'reply_count',
     ];
 
@@ -40,6 +41,15 @@ class Discussion extends Model
         return SlugOptions::create()
             ->generateSlugsFrom('title')
             ->saveSlugsTo('slug');
+    }
+
+    public function getIsPrivateAttribute()
+    {
+        if (! config('firefly.private_groups')) {
+            return false;
+        }
+
+        return $this->groups->contains('is_private', true);
     }
 
     public function getReplyCountAttribute()

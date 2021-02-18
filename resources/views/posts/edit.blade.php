@@ -2,11 +2,12 @@
 
 @section('content')
 @if (Auth::check())
-    <div class="container mx-auto">
-        <a href="{{ route('firefly.discussion.show', [$post->discussion->id, $post->discussion->slug]) }}">
-            {{ __('Back to Discussion') }}
-        </a>
-    </div>
+    <a class="flex items-center font-medium text-sm" href="{{ route('firefly.discussion.show', [$post->discussion->id, $post->discussion->slug]) }}">
+        <svg class="mr-2 w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+            <path fill-rule="evenodd" d="M7.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l2.293 2.293a1 1 0 010 1.414z" clip-rule="evenodd" />
+        </svg>
+        {{ __('Back to Discussion') }}
+    </a>
 @endif
 
 <x-card>
