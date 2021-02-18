@@ -30,11 +30,24 @@ class Discussion extends Model
         'deleted_at',
     ];
 
+    /** @var array */
+    protected $appended = [
+        'post_count',
+    ];
+
     public function getSlugOptions(): SlugOptions
     {
         return SlugOptions::create()
             ->generateSlugsFrom('title')
             ->saveSlugsTo('slug');
+    }
+
+    public function getPostCountAttribute(): string
+    {
+        $replyCount = $this->posts->count() - 1;
+        $appendedText = $replyCount > 1 ? __('replies') : __('reply');
+
+        return sprintf('%s %s', $replyCount, $appendedText);
     }
 
     public function user(): BelongsTo

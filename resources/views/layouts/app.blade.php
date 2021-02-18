@@ -15,7 +15,7 @@
     <!-- Scripts -->
     <script src="{{ asset('vendor/firefly/js/app.js') }}" defer></script>
 </head>
-<body class="bg-white font-sans antialiased text-gray-900">
+<body class="bg-gray-100 font-sans antialiased text-gray-900">
     <nav class="container mx-auto mt-10 flex justify-between items-center">
         <a href="{{ route(config('firefly.web.name').'index') }}">
             <img class="w-32" src="{{ config('firefly.logo') }}" alt="Firefly">
