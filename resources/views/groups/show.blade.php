@@ -60,7 +60,7 @@
 
     <div class="space-y-5">
         @foreach ($discussions as $discussion)
-            <x-discussion-item :discussion="$discussion" show-tag="false" />
+            <x-discussion-item :discussion="$discussion" :show-tag="false" />
         @endforeach
     </div>
 </div>
