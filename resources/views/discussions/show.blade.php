@@ -33,6 +33,12 @@
     </div>
 
     <div class="space-y-5">
+        @if (! $posts->count())
+            <x-no-results>
+                {{ __('There are no posts; You could be the first to create one.') }}
+            </x-no-results>
+        @endif
+
         @foreach ($posts as $post)
             <x-post-item :post="$post" />
         @endforeach

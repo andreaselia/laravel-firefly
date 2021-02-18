@@ -64,7 +64,7 @@ class FireflyServiceProvider extends ServiceProvider
         Blade::component('firefly::components.textarea', 'textarea');
         Blade::component('firefly::components.label', 'label');
         Blade::component('firefly::components.card', 'card');
-        Blade::component('firefly::components.alert', 'alert');
+        Blade::component('firefly::components.no-results', 'no-results');
         Blade::component('firefly::components.validation-errors', 'validation-errors');
         Blade::component('firefly::components.icon', 'icon');
         Blade::component('firefly::components.tag', 'tag');

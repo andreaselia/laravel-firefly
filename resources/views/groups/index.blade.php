@@ -16,11 +16,10 @@
         @endif
     </div>
 
-    @if (! count($groups))
-        <x-alert>
-            <strong>{{ __('Holy guacamole!') }}</strong><br>
+    @if (! $groups->count())
+        <x-no-results>
             {{ __('There are no groups; You could be the first to create one.') }}
-        </x-alert>
+        </x-no-results>
     @endif
 
     <div class="mt-4 grid gap-5 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">

@@ -28,15 +28,10 @@
         @endif
     </div>
 
-    @if (! count($discussions))
-        <div class="card">
-            <div class="card-body">
-                <div class="alert alert-yellow mb-0" role="alert">
-                    <strong>{{ __('Holy guacamole!') }}</strong><br>
-                    {{ __('There are no discussions; You could be the first to create one.') }}
-                </div>
-            </div>
-        </div>
+    @if (! $discussions->count())
+        <x-no-results>
+            {{ __('There are no discussions; You could be the first to create one.') }}
+        </x-no-results>
     @endif
 
     <div class="space-y-5">
