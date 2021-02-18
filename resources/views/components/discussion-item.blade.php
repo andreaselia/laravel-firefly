@@ -2,7 +2,7 @@
 
 <a class="block" href="{{ route('firefly.discussion.show', [$discussion->id, $discussion->slug]) }}">
     <x-card max-width="sm:max-w-none">
-        <div class="flex flex-grow justify-between items-center">
+        <div class="flex flex-col sm:flex-row flex-grow justify-between sm:items-center">
             <div>
                 <h3 class="text-lg leading-6 font-medium text-gray-900">{{ $discussion->title }}</h3>
 
@@ -11,7 +11,7 @@
                 </div>
             </div>
 
-            <div class="flex space-x-2 text-sm">
+            <div class="mt-2 sm:mt-0 flex space-x-2 text-sm">
                 @if ($discussion->pinned_at)
                     <x-icon name="pin" />
                 @endif
