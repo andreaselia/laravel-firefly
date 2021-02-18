@@ -3,7 +3,9 @@
 @section('content')
 <div class="container mx-auto">
     <div class="flex justify-between items-center mb-4">
-        <div class="text-3xl font-bold">{{ __('Groups') }}</div>
+        <h2 class="text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:truncate">
+            {{ __('Groups') }}
+        </h2>
 
         @if (Auth::check() && Auth::user()->can('create', \Firefly\Models\Group::class))
             <a href="{{ route('firefly.group.create') }}">
@@ -21,7 +23,7 @@
         </x-alert>
     @endif
 
-    <div class="space-y-5">
+    <div class="mt-4 grid gap-5 grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
         @foreach ($groups as $group)
             <x-group-item :group="$group" />
         @endforeach

@@ -32,7 +32,7 @@ class Discussion extends Model
 
     /** @var array */
     protected $appended = [
-        'post_count',
+        'reply_count',
     ];
 
     public function getSlugOptions(): SlugOptions
@@ -42,12 +42,9 @@ class Discussion extends Model
             ->saveSlugsTo('slug');
     }
 
-    public function getPostCountAttribute(): string
+    public function getReplyCountAttribute()
     {
-        $replyCount = $this->posts->count() - 1;
-        $appendedText = $replyCount > 1 ? __('replies') : __('reply');
-
-        return sprintf('%s %s', $replyCount, $appendedText);
+        return $this->posts->count() - 1;
     }
 
     public function user(): BelongsTo
@@ -115,19 +112,5 @@ class Discussion extends Model
         ]);
 
         return $this;
-    }
-
-    public function getReplyCountAttribute(): string
-    {
-        $count = $this->posts->count() - 1;
-
-        if ($count <= 0) {
-            return '';
-        }
-
-        return sprintf(
-            '%s %s',
-            $count, Str::plural('reply', $count)
-        );
     }
 }

@@ -67,6 +67,8 @@ class FireflyServiceProvider extends ServiceProvider
         Blade::component('firefly::components.alert', 'alert');
         Blade::component('firefly::components.validation-errors', 'validation-errors');
         Blade::component('firefly::components.icon', 'icon');
+        Blade::component('firefly::components.tag', 'tag');
+        Blade::component('firefly::components.header', 'header');
         Blade::component('firefly::components.discussion-item', 'discussion-item');
         Blade::component('firefly::components.discussion-options', 'discussion-options');
         Blade::component('firefly::components.group-item', 'group-item');

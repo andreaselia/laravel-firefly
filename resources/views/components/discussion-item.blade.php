@@ -1,12 +1,12 @@
 @props(['discussion', 'showGroups' => true])
 
-<a href="{{ route('firefly.discussion.show', [$discussion->id, $discussion->slug]) }}">
+<a class="block" href="{{ route('firefly.discussion.show', [$discussion->id, $discussion->slug]) }}">
     <x-card max-width="sm:max-w-none">
         <div class="flex flex-grow justify-between items-center">
             <div>
-                <div class="text-xl font-semibold">{{ $discussion->title }}</div>
+                <h3 class="text-lg leading-6 font-medium text-gray-900">{{ $discussion->title }}</h3>
 
-                <div class="mt-1 text-xs text-gray-500">
+                <div class="mt-2 max-w-xl text-sm text-gray-500">
                     {{ __('Posted by') }} {{ $discussion->user->name }} &#8226; {{ $discussion->created_at->diffForHumans() }}
                 </div>
             </div>
@@ -22,15 +22,13 @@
 
                 @if ($showGroups)
                     @foreach ($discussion->groups as $group)
-                        <div class="rounded-full text-white font-medium text-xs px-3 py-1" style="background-color: {{ $group->color }};">
-                            {{ $group->name }}
-                        </div>
+                        <x-tag :group="$group" />
                     @endforeach
                 @endif
 
-                <div class="rounded-full text-gray-500 font-medium text-xs px-3 py-1 bg-white border">
-                    {{ $discussion->post_count }}
-                </div>
+                <span class="inline-flex items-center px-2.5 py-1 rounded-full border text-xs font-medium bg-white text-gray-700">
+                    {{ $discussion->reply_count }} {{ $discussion->reply_count > 1 ? __('replies') : __('reply') }}
+                </span>
             </div>
         </div>
     </x-card>

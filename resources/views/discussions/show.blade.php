@@ -32,7 +32,7 @@
         <x-card max-width="sm:max-w-none">
             <div class="flex justify-between items-center">
                 <div class="text-sm">
-                    {{ __('Posted by') }} <span class="font-semibold">{{ $post->user->name }}</span> - {{ $post->created_at->diffForHumans() }}
+                    {{ __('Posted by') }} {{ $post->user->name }} &#8226; {{ $post->created_at->diffForHumans() }}
                 </div>
 
                 <div class="flex space-x-1">
@@ -57,7 +57,7 @@
                 </div>
             </div>
 
-            <div>
+            <div class="mt-2">
                 {!! nl2br(e($post->content)) !!}
             </div>
         </x-card>
