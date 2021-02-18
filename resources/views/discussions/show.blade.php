@@ -28,61 +28,65 @@
         @endif
     </div>
 
-    @foreach ($posts as $post)
-        <x-card max-width="sm:max-w-none">
-            <div class="flex justify-between items-center">
-                <div class="text-sm">
-                    {{ __('Posted by') }} {{ $post->user->name }} &#8226; {{ $post->created_at->diffForHumans() }}
-                </div>
+    <div class="space-y-5">
+        @foreach ($posts as $post)
+            <x-card max-width="sm:max-w-none">
+                <div class="flex justify-between items-center">
+                    <div class="text-sm">
+                        {{ __('Posted by') }} {{ $post->user->name }} &#8226; {{ $post->created_at->diffForHumans() }}
+                    </div>
 
-                <div class="flex space-x-1">
-                    @can ('update', $post)
-                        <a href="{{ route('firefly.post.edit', $post) }}">
-                            <x-button>
-                                {{ __('Edit') }}
+                    <div class="flex space-x-1">
+                        @can ('update', $post)
+                            <a href="{{ route('firefly.post.edit', $post) }}">
+                                <x-button>
+                                    {{ __('Edit') }}
+                                </x-button>
+                            </a>
+                        @endcan
+
+                        @can ('delete', $post)
+                            <x-button onclick="event.preventDefault(); document.getElementById('delete-post-{{ $post->id }}-form').submit();">
+                                {{ __('Delete') }}
                             </x-button>
-                        </a>
-                    @endcan
 
-                    @can ('delete', $post)
-                        <x-button onclick="event.preventDefault(); document.getElementById('delete-post-{{ $post->id }}-form').submit();">
-                            {{ __('Delete') }}
-                        </x-button>
-
-                        <form id="delete-post-{{ $post->id }}-form" action="{{ route('firefly.post.delete', [$discussion->id, $discussion->slug, $post]) }}" method="POST" style="display: none;">
-                            @method('DELETE')
-                            @csrf
-                        </form>
-                    @endcan
+                            <form id="delete-post-{{ $post->id }}-form" action="{{ route('firefly.post.delete', [$discussion->id, $discussion->slug, $post]) }}" method="POST" style="display: none;">
+                                @method('DELETE')
+                                @csrf
+                            </form>
+                        @endcan
+                    </div>
                 </div>
-            </div>
 
-            <div class="mt-2">
-                {!! nl2br(e($post->content)) !!}
-            </div>
-        </x-card>
-    @endforeach
+                <div class="mt-2">
+                    {!! nl2br(e($post->content)) !!}
+                </div>
+            </x-card>
+        @endforeach
+    </div>
 
     @can ('reply', $discussion)
-        <x-card max-width="sm:max-w-none">
-            <x-validation-errors class="mb-4" :errors="$errors" />
+        <div class="mt-5">
+            <x-card max-width="sm:max-w-none">
+                <x-validation-errors class="mb-4" :errors="$errors" />
 
-            <form action="{{ route('firefly.post.store', [$discussion->id, $discussion->slug]) }}" method="POST">
-                @csrf
+                <form action="{{ route('firefly.post.store', [$discussion->id, $discussion->slug]) }}" method="POST">
+                    @csrf
 
-                <div>
-                    <x-label for="content" :value="__('Content')" />
+                    <div>
+                        <x-label for="content" :value="__('Content')" />
 
-                    <x-textarea id="content" class="block mt-1 w-full" type="text" name="content" required>{{ old('content') }}</x-textarea>
-                </div>
+                        <x-textarea id="content" class="block mt-1 w-full" type="text" name="content" required>{{ old('content') }}</x-textarea>
+                    </div>
 
-                <div class="mt-4">
-                    <x-button>
-                        {{ __('Submit') }}
-                    </x-button>
-                </div>
-            </form>
-        </x-card>
+                    <div class="mt-4">
+                        <x-button>
+                            {{ __('Submit') }}
+                        </x-button>
+                    </div>
+                </form>
+            </x-card>
+        </div>
     @endcan
 </div>
 @endsection
