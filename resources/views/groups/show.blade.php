@@ -1,7 +1,7 @@
 @extends('firefly::layouts.app')
 
 @section('content')
-<div class="container mx-auto">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex justify-between items-center mb-4">
         <div class="flex items-center space-x-5">
             <div class="text-3xl font-bold">{{ $group->name }}</div>

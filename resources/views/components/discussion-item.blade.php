@@ -31,7 +31,7 @@
                 @endif
 
                 <span class="inline-flex items-center px-2.5 py-1 rounded-full border text-xs font-medium bg-white text-gray-700">
-                    {{ $discussion->reply_count }} {{ $discussion->reply_count > 1 ? __('replies') : __('reply') }}
+                    {{ $discussion->reply_count }} {{ $discussion->reply_count === 1 ? __('reply') : __('replies') }}
                 </span>
             </div>
         </div>
