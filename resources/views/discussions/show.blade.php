@@ -4,7 +4,7 @@
 <div class="container mx-auto">
     <div class="flex justify-between items-center mb-4">
         <div class="flex items-center space-x-2">
-            <div class="text-2xl font-bold">{{ $discussion->title }}</div>
+            <div class="text-3xl font-bold">{{ $discussion->title }}</div>
 
             @foreach ($discussion->groups as $group)
                 <a href="{{ route('firefly.group.show', $group) }}" class="rounded-full text-white font-medium text-xs px-2 py-1" style="background-color: {{ $group->color }};">
@@ -14,17 +14,17 @@
 
             <div class="flex space-x-1">
                 @if ($discussion->pinned_at)
-                    <x-pin-icon />
+                    <x-icon name="pin" />
                 @endif
 
                 @if ($discussion->locked_at)
-                    <x-lock-icon />
+                    <x-icon name="lock" />
                 @endif
             </div>
         </div>
 
         @if (Auth::check())
-            @include('firefly::partials.discussion-options')
+            <x-discussion-options :discussion="$discussion" />
         @endif
     </div>
 

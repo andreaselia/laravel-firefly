@@ -9,43 +9,49 @@
 
     <title>{{ config('app.name', 'Firefly') }}</title>
 
-    <!-- Tailwind -->
-    <link href="https://tailwindcss-forms.vercel.app/dist/forms.min.css" rel="stylesheet">
-    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
-</head>
-<body class="bg-gray-100">
-    <nav class="bg-white shadow-md py-4">
-        <div class="container mx-auto flex justify-between items-center">
-            <a class="text-xl font-bold" href="{{ route(config('firefly.web.name').'index') }}">
-                Firefly
-            </a>
+    <!-- Styles -->
+    <link rel="stylesheet" href="{{ asset('vendor/firefly/css/app.css') }}">
 
-            <div>
-                <ul class="flex items-center space-x-5">
-                    @guest
+    <!-- Scripts -->
+    <script src="{{ asset('vendor/firefly/js/app.js') }}" defer></script>
+</head>
+<body class="bg-white font-sans antialiased text-gray-900">
+    <nav class="container mx-auto mt-10 flex justify-between items-center">
+        <a href="{{ route(config('firefly.web.name').'index') }}">
+            <img class="w-32" src="{{ config('firefly.logo') }}" alt="Firefly">
+        </a>
+
+        <div>
+            <ul class="flex items-center space-x-8">
+                @guest
+                    @if (Route::has('login'))
                         <li>
-                            @if (Route::has('login'))
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                            @endif
-                        </li>
-                        <li>
-                            @if (Route::has('register'))
-                                <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                            @endif
-                        </li>
-                    @else
-                        <li>
-                            <a class="{{ Route::currentRouteName() == 'firefly.index' ? ' active' : '' }}" href="{{ route('firefly.index') }}">
-                                {{ __('Discussions') }}
+                            <a class="font-semibold hover:text-gray-600" href="{{ route('login') }}">
+                                {{ __('Login') }}
                             </a>
                         </li>
+                    @endif
+                    @if (Route::has('register'))
                         <li>
-                            <a class="{{ Route::currentRouteName() == 'firefly.group.index' ? ' active' : '' }}" href="{{ route('firefly.group.index') }}">
-                                {{ __('Groups') }}
+                            <a class="font-semibold hover:text-gray-600" href="{{ route('register') }}">
+                                {{ __('Register') }}
                             </a>
                         </li>
+                    @endif
+                @else
+                    <li>
+                        <a class="font-semibold hover:text-gray-600" href="{{ route('firefly.index') }}">
+                            {{ __('Discussions') }}
+                        </a>
+                    </li>
+                    <li>
+                        <a class="font-semibold hover:text-gray-600" href="{{ route('firefly.group.index') }}">
+                            {{ __('Groups') }}
+                        </a>
+                    </li>
+                    @if (Route::has('logout'))
                         <li>
-                            <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            <a class="font-semibold hover:text-gray-600" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                 {{ __('Logout') }}
                             </a>
 
@@ -53,9 +59,9 @@
                                 @csrf
                             </form>
                         </li>
-                    @endguest
-                </ul>
-            </div>
+                    @endif
+                @endguest
+            </ul>
         </div>
     </nav>
 

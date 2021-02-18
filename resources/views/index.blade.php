@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container mx-auto">
-    <div class="text-2xl font-bold">{{ __('Discussions') }}</div>
+    <div class="text-3xl font-bold">{{ __('Discussions') }}</div>
 
     @if (! $discussions->count())
         <div class="flex flex-col text-sm bg-blue-50 border border-blue-500 rounded-lg px-3 py-2">
@@ -11,7 +11,11 @@
         </div>
     @endif
 
-    @include('firefly::partials.discussion-list')
+    <div class="space-y-5">
+        @foreach ($discussions as $discussion)
+            <x-discussion-item :discussion="$discussion" />
+        @endforeach
+    </div>
 
     {!! $discussions->links(config('firefly.pagination.view')) !!}
 </div>

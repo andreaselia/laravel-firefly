@@ -66,9 +66,10 @@ class FireflyServiceProvider extends ServiceProvider
         Blade::component('firefly::components.card', 'card');
         Blade::component('firefly::components.alert', 'alert');
         Blade::component('firefly::components.validation-errors', 'validation-errors');
-        Blade::component('firefly::components.pin-icon', 'pin-icon');
-        Blade::component('firefly::components.lock-icon', 'lock-icon');
-        Blade::component('firefly::components.private-icon', 'private-icon');
+        Blade::component('firefly::components.icon', 'icon');
+        Blade::component('firefly::components.discussion-item', 'discussion-item');
+        Blade::component('firefly::components.discussion-options', 'discussion-options');
+        Blade::component('firefly::components.group-item', 'group-item');
     }
 
     /**

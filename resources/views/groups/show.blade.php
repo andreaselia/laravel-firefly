@@ -4,14 +4,14 @@
 <div class="container mx-auto">
     <div class="flex justify-between items-center mb-4">
         <div class="flex items-center space-x-5">
-            <div class="text-2xl font-bold">{{ $group->name }}</div>
+            <div class="text-3xl font-bold">{{ $group->name }}</div>
 
             <div class="rounded-full text-white font-medium text-xs px-2 py-1" style="background-color: {{ $group->color }};">
                 {{ $group->name }}
             </div>
 
             @if ($group->is_private)
-                <x-private-icon />
+                <x-icon name="private" />
             @endif
         </div>
 
@@ -58,6 +58,10 @@
         </div>
     @endif
 
-    @include('firefly::partials.discussion-list')
+    <div class="space-y-5">
+        @foreach ($discussions as $discussion)
+            <x-discussion-item :discussion="$discussion" show-tag="false" />
+        @endforeach
+    </div>
 </div>
 @endsection

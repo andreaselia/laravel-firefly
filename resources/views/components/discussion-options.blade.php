@@ -1,3 +1,5 @@
+@props(['discussion'])
+
 <div class="flex space-x-1">
     @can ('pin', $discussion)
         <x-button onclick="event.preventDefault(); document.getElementById('pin-discussion-form').submit();">
