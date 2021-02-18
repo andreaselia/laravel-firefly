@@ -10,11 +10,11 @@
     </a>
 @endif
 
-<x-card>
-    <x-slot name="title">
-        {{ __('Edit Post') }}
-    </x-slot>
+<h2 class="text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:truncate">
+    {{ __('Edit Post') }}
+</h2>
 
+<x-card>
     <x-validation-errors class="mb-4" :errors="$errors" />
 
     <form method="POST" action="{{ route('firefly.post.update', [$post->discussion->id, $post->discussion->slug, $post]) }}">

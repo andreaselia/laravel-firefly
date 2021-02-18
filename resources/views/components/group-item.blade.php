@@ -1,7 +1,7 @@
 @props(['group'])
 
 <a class="block" href="{{ route('firefly.group.show', $group) }}">
-    <x-card max-width="sm:max-w-none">
+    <x-card>
         <div class="flex flex-col sm:flex-row flex-grow justify-between sm:items-center">
             <div class="flex-1">
                 <h3 class="text-lg leading-6 font-medium text-gray-900">{{ $group->name }}</h3>

@@ -1,6 +1,6 @@
 @props(['post'])
 
-<x-card max-width="sm:max-w-none">
+<x-card>
     <div class="flex justify-between items-center">
         <div class="text-sm">
             {{ __('Posted by') }} {{ $post->user->name }} &#8226; {{ $post->created_at->diffForHumans() }}

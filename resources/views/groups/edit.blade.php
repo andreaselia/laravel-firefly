@@ -10,11 +10,11 @@
     </a>
 @endif
 
-<x-card>
-    <x-slot name="title">
-        {{ __('Edit Group') }}
-    </x-slot>
+<h2 class="mt-5 text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:truncate">
+    {{ __('Edit Group') }}
+</h2>
 
+<x-card class="mt-4">
     <x-validation-errors class="mb-4" :errors="$errors" />
 
     <form method="POST" action="{{ route('firefly.group.update', $group) }}">

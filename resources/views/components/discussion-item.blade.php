@@ -1,7 +1,7 @@
 @props(['discussion', 'showGroups' => true])
 
 <a class="block" href="{{ route('firefly.discussion.show', [$discussion->id, $discussion->slug]) }}">
-    <x-card max-width="sm:max-w-none">
+    <x-card>
         <div class="flex flex-col sm:flex-row flex-grow justify-between sm:items-center">
             <div>
                 <h3 class="text-lg leading-6 font-medium text-gray-900">{{ $discussion->title }}</h3>

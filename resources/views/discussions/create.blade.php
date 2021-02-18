@@ -1,11 +1,11 @@
 @extends('firefly::layouts.app')
 
 @section('content')
-<x-card>
-    <x-slot name="title">
-        {{ __('New Discussion') }}
-    </x-slot>
+<h2 class="text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:truncate">
+    {{ __('New Discussion') }}
+</h2>
 
+<x-card class="mt-4">
     <x-validation-errors class="mb-4" :errors="$errors" />
 
     <form method="POST" action="{{ route('firefly.discussion.store', $group) }}">
