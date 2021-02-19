@@ -3,6 +3,8 @@
 [![License](https://img.shields.io/packagist/l/AndreasElia/laravel-firefly.svg)](https://packagist.org/packages/AndreasElia/laravel-firefly)
 [![StyleCI](https://github.styleci.io/repos/149909240/shield?branch=master)](https://github.styleci.io/repos/149909240?branch=master)
 
+![Laravel Firefly Logo](/logo.png?raw=true "Laravel Firefly Logo")
+
 # Laravel Firefly
 
 Firefly is a simple forum package for Laravel, created for ease of use and expansion.
