@@ -29,6 +29,24 @@ Run the migrations:
 php artisan migrate
 ```
 
+Add the FireflyUser trait to your User model:
+
+```php
+<?php
+
+namespace App\Models;
+
+use Firefly\Traits\FireflyUser;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+
+class User extends Authenticatable
+{
+    use HasFactory, Notifiable, FireflyUser;
+}
+```
+
 ## Contributing
 
 You're more than welcome to submit a pull request, or if you're not feeling up to it - create an issue so someone else can pick it up.
