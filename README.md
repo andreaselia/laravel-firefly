@@ -9,6 +9,8 @@
 
 Firefly is a simple forum package for Laravel, created for ease of use and expansion.
 
+The package ships with a frontend included, but by publishing the packages assets you have the flexibility to customize the available templates and make them match your current applications templates, should you so desire.
+
 ## Installation
 
 Install the package:
