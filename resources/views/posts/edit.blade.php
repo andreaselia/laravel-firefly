@@ -10,11 +10,11 @@
     </a>
 @endif
 
-<h2 class="text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:truncate">
+<h2 class="mt-5 text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:truncate">
     {{ __('Edit Post') }}
 </h2>
 
-<x-card>
+<x-card class="mt-4">
     <x-validation-errors class="mb-4" :errors="$errors" />
 
     <form method="POST" action="{{ route('firefly.post.update', [$post->discussion->id, $post->discussion->slug, $post]) }}">
