@@ -1,7 +1,7 @@
 @extends('firefly::layouts.app')
 
 @section('content')
-<h2 class="text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:truncate">
+<h2 class="mb-4 text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:truncate">
     {{ __('Discussions') }}
 </h2>
 
