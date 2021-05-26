@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Foundation\Auth\User;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 
@@ -123,5 +124,10 @@ class Discussion extends Model
         ]);
 
         return $this;
+    }
+
+    public function watchers(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class);
     }
 }

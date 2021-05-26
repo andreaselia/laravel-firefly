@@ -62,9 +62,9 @@ return [
     */
 
     'prefix' => [
-        'group' => 'g',
+        'group'      => 'g',
         'discussion' => 'd',
-        'post' => 'p',
+        'post'       => 'p',
     ],
 
     /*
@@ -91,4 +91,7 @@ return [
         'middleware' => 'web',
     ],
 
+    'features' => [
+        'watchers' => false,
+    ],
 ];

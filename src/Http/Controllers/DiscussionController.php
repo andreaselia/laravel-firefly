@@ -8,6 +8,7 @@ use Firefly\Models\Discussion;
 use Firefly\Models\Group;
 use Firefly\Services\DiscussionService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DiscussionController extends Controller
 {
@@ -175,6 +176,38 @@ class DiscussionController extends Controller
         $this->authorize('unpin', $discussion);
 
         $this->discussionService->updateState($discussion, 'unpin');
+
+        return redirect()->route('firefly.discussion.show', [$discussion->id, $discussion->slug]);
+    }
+
+    /**
+     * Watch the specified discussion.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param \Firefly\Models\Discussion $discussion
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function watch(Request $request, Discussion $discussion)
+    {
+        $this->authorize('watch', $discussion);
+
+        $this->discussionService->watch($discussion, Auth::user());
+
+        return redirect()->route('firefly.discussion.show', [$discussion->id, $discussion->slug]);
+    }
+
+    /**
+     * Unwatch the specified discussion.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param \Firefly\Models\Discussion $discussion
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function unwatch(Request $request, Discussion $discussion)
+    {
+        $this->authorize('watch', $discussion);
+
+        $this->discussionService->unwatch($discussion, Auth::user());
 
         return redirect()->route('firefly.discussion.show', [$discussion->id, $discussion->slug]);
     }

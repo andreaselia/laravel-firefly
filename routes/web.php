@@ -13,6 +13,8 @@ Route::name(config('firefly.web.name'))->group(function () {
         Route::put('{discussion}-{slug}', 'DiscussionController@update')->name('discussion.update')->where(['discussion' => '[0-9]+']);
         Route::get('{discussion}-{slug}/edit', 'DiscussionController@edit')->name('discussion.edit')->where(['discussion' => '[0-9]+']);
         Route::delete('{discussion}-{slug}', 'DiscussionController@delete')->name('discussion.delete')->where(['discussion' => '[0-9]+']);
+        Route::put('{discussion}-{slug}/watch', 'DiscussionController@watch')->name('discussion.watch')->where(['discussion' => '[0-9]+']);
+        Route::put('{discussion}-{slug}/unwatch', 'DiscussionController@unwatch')->name('discussion.unwatch')->where(['discussion' => '[0-9]+']);
 
         Route::post('{discussion}-{slug}', 'PostController@store')->name('post.store');
         Route::put('{discussion}-{slug}/'.config('firefly.prefix.post').'/{post}', 'PostController@update')->name('post.update');
