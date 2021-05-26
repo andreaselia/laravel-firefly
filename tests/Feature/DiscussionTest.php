@@ -39,7 +39,7 @@ class DiscussionTest extends TestCase
         $discussion = Discussion::first();
 
         $response->assertRedirect();
-        $response->assertLocation('forum/d/' . $discussion->uri);
+        $response->assertLocation('forum/d/'.$discussion->uri);
     }
 
     public function test_discussion_was_updated()
@@ -47,7 +47,7 @@ class DiscussionTest extends TestCase
         $discussion = $this->getDiscussion();
 
         $response = $this->actingAs($this->getUser())
-            ->put('forum/d/' . $discussion->uri, [
+            ->put('forum/d/'.$discussion->uri, [
                 'title' => 'Bar Foo',
             ]);
 
@@ -57,7 +57,7 @@ class DiscussionTest extends TestCase
         $this->assertEquals('bar-foo', $discussion->slug);
 
         $response->assertRedirect();
-        $response->assertLocation('forum/d/' . $discussion->uri);
+        $response->assertLocation('forum/d/'.$discussion->uri);
     }
 
     public function test_discussion_was_soft_deleted()
@@ -65,7 +65,7 @@ class DiscussionTest extends TestCase
         $discussion = $this->getDiscussion();
 
         $response = $this->actingAs($this->getUser())
-            ->delete('forum/d/' . $discussion->uri);
+            ->delete('forum/d/'.$discussion->uri);
 
         $discussion->refresh();
 
@@ -81,14 +81,14 @@ class DiscussionTest extends TestCase
         $discussion = $this->getDiscussion();
 
         $response = $this->actingAs($this->getUser())
-            ->put('forum/d/' . $discussion->uri . '/lock');
+            ->put('forum/d/'.$discussion->uri.'/lock');
 
         $discussion->refresh();
 
         $this->assertNotNull($discussion->locked_at);
 
         $response->assertRedirect();
-        $response->assertLocation('forum/d/' . $discussion->uri);
+        $response->assertLocation('forum/d/'.$discussion->uri);
     }
 
     public function test_discussion_gets_unlocked()
@@ -96,14 +96,14 @@ class DiscussionTest extends TestCase
         $discussion = $this->getDiscussion()->lock();
 
         $response = $this->actingAs($this->getUser())
-            ->put('forum/d/' . $discussion->uri . '/unlock');
+            ->put('forum/d/'.$discussion->uri.'/unlock');
 
         $discussion->refresh();
 
         $this->assertNull($discussion->locked_at);
 
         $response->assertRedirect();
-        $response->assertLocation('forum/d/' . $discussion->uri);
+        $response->assertLocation('forum/d/'.$discussion->uri);
     }
 
     public function test_discussion_gets_pinned()
@@ -111,14 +111,14 @@ class DiscussionTest extends TestCase
         $discussion = $this->getDiscussion();
 
         $response = $this->actingAs($this->getUser())
-            ->put('forum/d/' . $discussion->uri . '/pin');
+            ->put('forum/d/'.$discussion->uri.'/pin');
 
         $discussion->refresh();
 
         $this->assertNotNull($discussion->pinned_at);
 
         $response->assertRedirect();
-        $response->assertLocation('forum/d/' . $discussion->uri);
+        $response->assertLocation('forum/d/'.$discussion->uri);
     }
 
     public function test_discussion_gets_unpinned()
@@ -126,14 +126,14 @@ class DiscussionTest extends TestCase
         $discussion = $this->getDiscussion()->pin();
 
         $response = $this->actingAs($this->getUser())
-            ->put('forum/d/' . $discussion->uri . '/unpin');
+            ->put('forum/d/'.$discussion->uri.'/unpin');
 
         $discussion->refresh();
 
         $this->assertNull($discussion->pinned_at);
 
         $response->assertRedirect();
-        $response->assertLocation('forum/d/' . $discussion->uri);
+        $response->assertLocation('forum/d/'.$discussion->uri);
     }
 
     public function test_title_is_required()
@@ -161,7 +161,7 @@ class DiscussionTest extends TestCase
         $discussion = $this->getDiscussion();
 
         $response = $this->actingAs($this->getUser())
-            ->putJson('forum/d/' . $discussion->uri, [
+            ->putJson('forum/d/'.$discussion->uri, [
                 'title' => $title,
             ]);
 
@@ -174,7 +174,7 @@ class DiscussionTest extends TestCase
     {
         $title = Str::random(256);
         $validJson = [
-            'errors'  => [
+            'errors' => [
                 'title' => [
                     'The title must not be greater than 255 characters.',
                 ],
@@ -184,7 +184,7 @@ class DiscussionTest extends TestCase
         // Create
         $response = $this->actingAs($this->getUser())
             ->postJson('forum/g/example-group/d', [
-                'title'   => $title
+                'title' => $title,
             ]);
 
         $response->assertStatus(422);
@@ -195,7 +195,7 @@ class DiscussionTest extends TestCase
         $discussion = $this->getDiscussion();
 
         $response = $this->actingAs($this->getUser())
-            ->putJson('forum/d/' . $discussion->uri, [
+            ->putJson('forum/d/'.$discussion->uri, [
                 'title' => $title,
             ]);
 
@@ -209,14 +209,14 @@ class DiscussionTest extends TestCase
         $discussion = $this->getDiscussion();
 
         $response = $this->actingAs($this->getUser())
-            ->put('forum/d/' . $discussion->uri . '/watch');
+            ->put('forum/d/'.$discussion->uri.'/watch');
 
         $discussion->refresh();
 
         $this->assertEquals(1, $discussion->watchers()->count());
 
         $response->assertRedirect();
-        $response->assertLocation('forum/d/' . $discussion->uri);
+        $response->assertLocation('forum/d/'.$discussion->uri);
     }
 
     public function test_discussion_can_be_unwatched()
@@ -227,13 +227,13 @@ class DiscussionTest extends TestCase
         $this->assertEquals(1, $discussion->watchers()->count());
 
         $response = $this->actingAs($this->getUser())
-            ->put('forum/d/' . $discussion->uri . '/unwatch');
+            ->put('forum/d/'.$discussion->uri.'/unwatch');
 
         $discussion->refresh();
 
         $this->assertEquals(0, $discussion->watchers()->count());
 
         $response->assertRedirect();
-        $response->assertLocation('forum/d/' . $discussion->uri);
+        $response->assertLocation('forum/d/'.$discussion->uri);
     }
 }

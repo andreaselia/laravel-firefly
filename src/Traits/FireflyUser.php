@@ -6,7 +6,6 @@ use Firefly\Models\Discussion;
 use Firefly\Models\Post;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Foundation\Auth\User;
 
 trait FireflyUser
 {

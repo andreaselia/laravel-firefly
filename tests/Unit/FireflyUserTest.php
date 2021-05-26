@@ -2,10 +2,6 @@
 
 namespace Firefly\Test\Unit;
 
-use Firefly\Models\Discussion;
-use Firefly\Traits\FireflyUser;
-use Illuminate\Foundation\Auth\User as Model;
-
 use Firefly\Test\TestCase;
 
 class FireflyUserTest extends TestCase
