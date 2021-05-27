@@ -9,7 +9,6 @@ use Firefly\Models\Discussion;
 use Firefly\Models\Group;
 use Firefly\Services\DiscussionService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class DiscussionController extends Controller
 {
@@ -166,38 +165,6 @@ class DiscussionController extends Controller
         $this->authorize('unpin', $discussion);
 
         $this->discussionService->updateState($discussion, 'unpin');
-
-        return response()->json('OK');
-    }
-
-    /**
-     * Watch the specified discussion.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @param \Firefly\Models\Discussion $discussion
-     * @return \Illuminate\Http\Response
-     */
-    public function watch(Request $request, Discussion $discussion)
-    {
-        $this->authorize('watch', $discussion);
-
-        $this->discussionService->watch($discussion, Auth::user());
-
-        return response()->json('OK');
-    }
-
-    /**
-     * Unwatch the specified discussion.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @param \Firefly\Models\Discussion $discussion
-     * @return \Illuminate\Http\Response
-     */
-    public function unwatch(Request $request, Discussion $discussion)
-    {
-        $this->authorize('unwatch', $discussion);
-
-        $this->discussionService->unwatch($discussion, Auth::user());
 
         return response()->json('OK');
     }

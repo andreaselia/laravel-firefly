@@ -156,7 +156,7 @@ class DiscussionTest extends TestCase
         $discussion = $this->getDiscussion();
 
         $response = $this->actingAs($this->getUser(), 'api')
-            ->putJson('api/forum/d/'.$discussion->uri.'/watch');
+            ->postJson('api/forum/d/'.$discussion->uri.'/watch');
 
         $discussion->refresh();
 
@@ -173,7 +173,7 @@ class DiscussionTest extends TestCase
         $this->assertEquals(1, $discussion->watchers()->count());
 
         $response = $this->actingAs($this->getUser(), 'api')
-            ->putJson('api/forum/d/'.$discussion->uri.'/unwatch');
+            ->deleteJson('api/forum/d/'.$discussion->uri.'/watch');
 
         $discussion->refresh();
 

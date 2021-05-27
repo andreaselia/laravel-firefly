@@ -26,12 +26,9 @@ trait FireflyUser
 
     public function isWatching(Discussion $discussion): bool
     {
-        $watching = $this
+        return $this
             ->watching()
-            ->select('discussion_id')
-            ->get()
-            ->pluck('discussion_id');
-
-        return $watching->contains($discussion->id);
+            ->where('discussion_id', $discussion->id)
+            ->exists();
     }
 }

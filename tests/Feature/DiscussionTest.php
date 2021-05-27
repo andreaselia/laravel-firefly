@@ -209,7 +209,7 @@ class DiscussionTest extends TestCase
         $discussion = $this->getDiscussion();
 
         $response = $this->actingAs($this->getUser())
-            ->put('forum/d/'.$discussion->uri.'/watch');
+            ->post('forum/d/'.$discussion->uri.'/watch');
 
         $discussion->refresh();
 
@@ -227,7 +227,7 @@ class DiscussionTest extends TestCase
         $this->assertEquals(1, $discussion->watchers()->count());
 
         $response = $this->actingAs($this->getUser())
-            ->put('forum/d/'.$discussion->uri.'/unwatch');
+            ->delete('forum/d/'.$discussion->uri.'/watch');
 
         $discussion->refresh();
 
