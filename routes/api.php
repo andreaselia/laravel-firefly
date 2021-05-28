@@ -11,6 +11,8 @@ Route::group(['prefix' => config('firefly.prefix.discussion')], function () {
     Route::put('{discussion}-{slug}/unlock', 'DiscussionController@unlock')->where(['discussion' => '[0-9]+']);
     Route::put('{discussion}-{slug}/pin', 'DiscussionController@pin')->where(['discussion' => '[0-9]+']);
     Route::put('{discussion}-{slug}/unpin', 'DiscussionController@unpin')->where(['discussion' => '[0-9]+']);
+    Route::post('{discussion}-{slug}/watch', 'DiscussionWatchController@store')->where(['discussion' => '[0-9]+']);
+    Route::delete('{discussion}-{slug}/watch', 'DiscussionWatchController@delete')->where(['discussion' => '[0-9]+']);
 
     Route::post('{discussion}-{slug}', 'PostController@store');
     Route::put('{discussion}-{slug}/'.config('firefly.prefix.post').'/{post}', 'PostController@update');

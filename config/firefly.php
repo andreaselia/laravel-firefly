@@ -91,4 +91,7 @@ return [
         'middleware' => 'web',
     ],
 
+    'features' => [
+        'watchers' => false,
+    ],
 ];

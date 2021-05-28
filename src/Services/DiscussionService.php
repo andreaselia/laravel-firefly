@@ -4,6 +4,7 @@ namespace Firefly\Services;
 
 use Firefly\Models\Discussion;
 use Firefly\Models\Group;
+use Illuminate\Foundation\Auth\User;
 use Illuminate\Http\Request;
 
 class DiscussionService
@@ -75,5 +76,33 @@ class DiscussionService
         }
 
         return $discussion->{$type}();
+    }
+
+    /**
+     * Watch the specified discussion.
+     *
+     * @param \Firefly\Models\Discussion $discussion
+     * @param Illuminate\Foundation\Auth\User $user
+     *
+     * @return bool|null
+     * @throws \Exception
+     */
+    public function watch(Discussion $discussion, User $user)
+    {
+        return $discussion->watchers()->syncWithoutDetaching([$user->id]);
+    }
+
+    /**
+     * Unwatch the specified discussion.
+     *
+     * @param \Firefly\Models\Discussion $discussion
+     * @param Illuminate\Foundation\Auth\User $user
+     *
+     * @return bool|null
+     * @throws \Exception
+     */
+    public function unwatch(Discussion $discussion, User $user)
+    {
+        return $discussion->watchers()->detach($user->id);
     }
 }

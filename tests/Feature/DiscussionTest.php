@@ -17,7 +17,7 @@ class DiscussionTest extends TestCase
 
         $response = $this->actingAs($this->getUser())
             ->post('forum/g/example-group/d', [
-                'title' => 'Foo Bar',
+                'title'   => 'Foo Bar',
                 'content' => 'Lorem Ipsum',
             ]);
 
@@ -26,7 +26,7 @@ class DiscussionTest extends TestCase
         $this->assertTrue($discussions->count() == 1);
         $this->assertDatabaseHas('discussions', [
             'title' => 'Foo Bar',
-            'slug' => 'foo-bar',
+            'slug'  => 'foo-bar',
         ]);
 
         $posts = Post::all();
@@ -176,7 +176,7 @@ class DiscussionTest extends TestCase
         $validJson = [
             'errors' => [
                 'title' => [
-                    'The title may not be greater than 255 characters.',
+                    'The title must not be greater than 255 characters.',
                 ],
             ],
         ];
@@ -202,5 +202,38 @@ class DiscussionTest extends TestCase
         $response->assertStatus(422);
         $response->assertJsonValidationErrors('title');
         $response->assertJson($validJson);
+    }
+
+    public function test_discussion_can_be_watched()
+    {
+        $discussion = $this->getDiscussion();
+
+        $response = $this->actingAs($this->getUser())
+            ->post('forum/d/'.$discussion->uri.'/watch');
+
+        $discussion->refresh();
+
+        $this->assertEquals(1, $discussion->watchers()->count());
+
+        $response->assertRedirect();
+        $response->assertLocation('forum/d/'.$discussion->uri);
+    }
+
+    public function test_discussion_can_be_unwatched()
+    {
+        $discussion = $this->getDiscussion();
+        $discussion->watchers()->save($this->getUser());
+
+        $this->assertEquals(1, $discussion->watchers()->count());
+
+        $response = $this->actingAs($this->getUser())
+            ->delete('forum/d/'.$discussion->uri.'/watch');
+
+        $discussion->refresh();
+
+        $this->assertEquals(0, $discussion->watchers()->count());
+
+        $response->assertRedirect();
+        $response->assertLocation('forum/d/'.$discussion->uri);
     }
 }

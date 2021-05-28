@@ -139,4 +139,28 @@ class DiscussionPolicy
     {
         return is_null($discussion->locked_at);
     }
+
+    /**
+     * Determine whether the user can watch the discussion.
+     *
+     * @param  $user
+     * @param  \Firefly\Models\Discussion  $discussion
+     * @return mixed
+     */
+    public function watch($user, Discussion $discussion)
+    {
+        return true;
+    }
+
+    /**
+     * Determine whether the user can unwatch the discussion.
+     *
+     * @param  $user
+     * @param  \Firefly\Models\Discussion  $discussion
+     * @return mixed
+     */
+    public function unwatch($user, Discussion $discussion)
+    {
+        return true;
+    }
 }
