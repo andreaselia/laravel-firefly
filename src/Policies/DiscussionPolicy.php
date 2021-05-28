@@ -149,7 +149,7 @@ class DiscussionPolicy
      */
     public function watch($user, Discussion $discussion)
     {
-        return true;
+        return config('firefly.features.watchers') && ! $user->isWatching($discussion);
     }
 
     /**
@@ -161,6 +161,6 @@ class DiscussionPolicy
      */
     public function unwatch($user, Discussion $discussion)
     {
-        return true;
+        return config('firefly.features.watchers') && $user->isWatching($discussion);
     }
 }

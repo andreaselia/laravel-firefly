@@ -6,6 +6,9 @@ use Firefly\Test\TestCase;
 
 class DiscussionWatchTest extends TestCase
 {
+    /**
+     * @define-env usesWatchers
+     */
     public function test_discussion_can_be_watched()
     {
         $discussion = $this->getDiscussion();
@@ -20,6 +23,9 @@ class DiscussionWatchTest extends TestCase
         $response->assertOk();
     }
 
+    /**
+     * @define-env usesWatchers
+     */
     public function test_discussion_can_be_unwatched()
     {
         $discussion = $this->getDiscussion();
