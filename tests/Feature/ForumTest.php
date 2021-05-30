@@ -18,11 +18,10 @@ class ForumTest extends TestCase
         $this->assertEquals($this->getDiscussion()->id, $discussions->first()->id);
     }
 
-    /**
-     * @define-env usesWatchers
-     */
     public function test_can_get_discussion_list_with_empty_is_being_watched()
     {
+        $this->enableWatchersFeature();
+
         $response = $this->actingAs($this->getUser())
             ->get('forum/');
 
@@ -36,11 +35,10 @@ class ForumTest extends TestCase
         $this->assertNull($discussions->first()->is_being_watched);
     }
 
-    /**
-     * @define-env usesWatchers
-     */
     public function test_can_get_discussion_list_with_full_is_being_watched()
     {
+        $this->enableWatchersFeature();
+
         $this->getDiscussion()->watchers()->save($this->getUser());
 
         $response = $this->actingAs($this->getUser())

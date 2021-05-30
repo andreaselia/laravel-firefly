@@ -6,11 +6,10 @@ use Firefly\Test\TestCase;
 
 class DiscussionWatchTest extends TestCase
 {
-    /**
-     * @define-env usesWatchers
-     */
     public function test_discussion_can_be_watched()
     {
+        $this->enableWatchersFeature();
+
         $discussion = $this->getDiscussion();
 
         $response = $this->actingAs($this->getUser())->get('forum/d/'.$discussion->uri);
@@ -28,11 +27,10 @@ class DiscussionWatchTest extends TestCase
         $response->assertLocation('forum/d/'.$discussion->uri);
     }
 
-    /**
-     * @define-env usesWatchers
-     */
     public function test_discussion_can_be_unwatched()
     {
+        $this->enableWatchersFeature();
+
         $discussion = $this->getDiscussion();
         $discussion->watchers()->save($this->getUser());
 

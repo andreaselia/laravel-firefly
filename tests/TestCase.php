@@ -41,11 +41,19 @@ class TestCase extends \Orchestra\Testbench\TestCase
     }
 
     /**
-     * Define environment for testing watchers.
+     * Enable watchers feature in the app config.
      */
-    protected function usesWatchers($app)
+    public function enableWatchersFeature()
     {
-        $app->config->set('firefly.features.watchers', true);
+        $this->app->config->set('firefly.features.watchers', true);
+    }
+
+    /**
+     * Enable app debug.
+     */
+    public function enableDebug()
+    {
+        $this->app->config->set('app.debug', true);
     }
 
     /**

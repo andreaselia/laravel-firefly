@@ -2,12 +2,14 @@
 
 namespace Firefly\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Query\JoinClause;
 use Illuminate\Foundation\Auth\User;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
@@ -129,5 +131,18 @@ class Discussion extends Model
     public function watchers(): BelongsToMany
     {
         return $this->belongsToMany(User::class);
+    }
+
+    public function scopeWithIsBeingWatched(Builder $builder, $user)
+    {
+        $builder->when(config('firefly.features.watchers') && $user, function ($query) use ($user) {
+            $query->leftJoin('discussion_user', function (JoinClause $join) use ($user) {
+                $join->on('discussion_user.discussion_id', '=', 'discussions.id')
+                    ->where('discussion_user.user_id', $user->id);
+            })->select([
+                'discussions.*',
+                'discussion_user.user_id as is_being_watched',
+            ]);
+        });
     }
 }
