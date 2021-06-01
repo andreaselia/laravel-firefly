@@ -34,7 +34,7 @@
                     {{ $discussion->reply_count }} {{ $discussion->reply_count === 1 ? __('reply') : __('replies') }}
                 </span>
 
-                @if(config('firefly.features.watchers'))
+                @if (config('firefly.features.watchers'))
                     <x-discussion-watch-icon :discussion="$discussion" />
                 @endif
             </div>
