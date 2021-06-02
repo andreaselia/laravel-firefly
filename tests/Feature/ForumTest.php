@@ -18,7 +18,7 @@ class ForumTest extends TestCase
         $this->assertEquals($this->getDiscussion()->id, $discussions->first()->id);
     }
 
-    public function test_can_get_discussion_list_with_empty_is_being_watched()
+    public function test_can_get_discussion_list_with_false_is_being_watched()
     {
         $this->enableWatchersFeature();
 
@@ -32,7 +32,7 @@ class ForumTest extends TestCase
         $this->assertEquals($this->getDiscussion()->id, $discussions->first()->id);
 
         $this->assertTrue(array_key_exists('is_being_watched', $discussions->first()->attributesToArray()));
-        $this->assertNull($discussions->first()->is_being_watched);
+        $this->assertFalse($discussions->first()->is_being_watched);
     }
 
     public function test_can_get_discussion_list_with_full_is_being_watched()

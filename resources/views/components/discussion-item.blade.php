@@ -24,6 +24,10 @@
                     <x-icon name="lock" />
                 @endif
 
+                @if (config('firefly.features.watchers') && $discussion->is_being_watched)
+                    <x-icon name="watching" />
+                @endif
+
                 @if ($showGroups)
                     @foreach ($discussion->groups as $group)
                         <x-tag :group="$group" />
@@ -33,10 +37,6 @@
                 <span class="inline-flex items-center px-2.5 py-1 rounded-full border text-xs font-medium bg-white text-gray-700">
                     {{ $discussion->reply_count }} {{ $discussion->reply_count === 1 ? __('reply') : __('replies') }}
                 </span>
-
-                @if (config('firefly.features.watchers'))
-                    <x-discussion-watch-icon :discussion="$discussion" />
-                @endif
             </div>
         </div>
     </x-card>

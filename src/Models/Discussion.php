@@ -9,7 +9,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Database\Query\JoinClause;
 use Illuminate\Foundation\Auth\User;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
@@ -135,14 +134,8 @@ class Discussion extends Model
 
     public function scopeWithIsBeingWatched(Builder $builder, $user)
     {
-        $builder->when(config('firefly.features.watchers') && $user, function ($query) use ($user) {
-            $query->leftJoin('discussion_user', function (JoinClause $join) use ($user) {
-                $join->on('discussion_user.discussion_id', '=', 'discussions.id')
-                    ->where('discussion_user.user_id', $user->id);
-            })->select([
-                'discussions.*',
-                'discussion_user.user_id as is_being_watched',
-            ]);
+        $builder->when(config('firefly.features.watchers'), function ($query) use ($user) {
+            $query->withExists(['watchers as is_being_watched' => fn ($query) => $query->where('user_id', $user->id)]);
         });
     }
 }
