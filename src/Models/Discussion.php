@@ -135,7 +135,9 @@ class Discussion extends Model
     public function scopeWithIsBeingWatched(Builder $builder, $user)
     {
         $builder->when(config('firefly.features.watchers'), function ($query) use ($user) {
-            $query->withExists(['watchers as is_being_watched' => fn ($query) => $query->where('user_id', $user->id)]);
+            if ($user) {
+                $query->withExists(['watchers as is_being_watched' => fn ($query) => $query->where('user_id', $user->id)]);
+            }
         });
     }
 }
