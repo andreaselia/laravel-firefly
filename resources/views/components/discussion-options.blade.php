@@ -86,6 +86,33 @@
                 </form>
             @endcan
 
+            @can ('watch', $discussion)
+                <button
+                    class="block w-full text-left rounded-md px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" role="menuitem"
+                    onclick="event.preventDefault(); document.getElementById('watch-discussion-form').submit();"
+                >
+                    {{ __('Watch') }}
+                </button>
+
+                <form id="watch-discussion-form" action="{{ route('firefly.discussion.watch', [$discussion->id, $discussion->slug]) }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
+            @endcan
+
+            @can ('unwatch', $discussion)
+                <button
+                    class="block w-full text-left rounded-md px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" role="menuitem"
+                    onclick="event.preventDefault(); document.getElementById('unwatch-discussion-form').submit();"
+                >
+                    {{ __('Unwatch') }}
+                </button>
+
+                <form id="unwatch-discussion-form" action="{{ route('firefly.discussion.unwatch', [$discussion->id, $discussion->slug]) }}" method="POST" style="display: none;">
+                    @method('DELETE')
+                    @csrf
+                </form>
+            @endcan
+
             @can ('delete', $discussion)
                 <button
                     class="block w-full text-left rounded-md px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" role="menuitem"

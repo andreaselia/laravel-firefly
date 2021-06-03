@@ -2,6 +2,7 @@
 
 namespace Firefly\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -129,5 +130,14 @@ class Discussion extends Model
     public function watchers(): BelongsToMany
     {
         return $this->belongsToMany(User::class);
+    }
+
+    public function scopeWithIsBeingWatched(Builder $builder, $user)
+    {
+        $builder->when(config('firefly.features.watchers'), function ($query) use ($user) {
+            if ($user) {
+                $query->withExists(['watchers as is_being_watched' => fn ($query) => $query->where('user_id', $user->id)]);
+            }
+        });
     }
 }

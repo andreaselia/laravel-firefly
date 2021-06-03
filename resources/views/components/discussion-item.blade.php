@@ -24,6 +24,10 @@
                     <x-icon name="lock" />
                 @endif
 
+                @if (config('firefly.features.watchers') && $discussion->is_being_watched)
+                    <x-icon name="watching" />
+                @endif
+
                 @if ($showGroups)
                     @foreach ($discussion->groups as $group)
                         <x-tag :group="$group" />

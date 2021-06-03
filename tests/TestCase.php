@@ -37,6 +37,23 @@ class TestCase extends \Orchestra\Testbench\TestCase
     protected function getEnvironmentSetUp($app)
     {
         $app['config']->set('firefly.api.enabled', true);
+        $app['config']->set('firefly.user', User::class);
+    }
+
+    /**
+     * Enable watchers feature in the app config.
+     */
+    public function enableWatchersFeature()
+    {
+        $this->app->config->set('firefly.features.watchers', true);
+    }
+
+    /**
+     * Enable app debug.
+     */
+    public function enableDebug()
+    {
+        $this->app->config->set('app.debug', true);
     }
 
     /**

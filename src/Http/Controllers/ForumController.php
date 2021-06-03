@@ -4,6 +4,7 @@ namespace Firefly\Http\Controllers;
 
 use Firefly\Models\Discussion;
 use Firefly\Models\Group;
+use Illuminate\Http\Request;
 
 class ForumController extends Controller
 {
@@ -12,11 +13,13 @@ class ForumController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function index()
+    public function index(Request $request)
     {
         $groups = Group::all();
 
-        $discussions = Discussion::orderBy('created_at', 'desc')
+        $discussions = Discussion::query()
+            ->withIsBeingWatched($request->user())
+            ->orderBy('created_at', 'desc')
             ->paginate(config('firefly.pagination.discussions'));
 
         return view('firefly::index')->with(compact('groups', 'discussions'));
