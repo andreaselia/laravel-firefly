@@ -93,5 +93,6 @@ return [
 
     'features' => [
         'watchers' => false,
+        'wysiwyg' => false,
     ],
 ];

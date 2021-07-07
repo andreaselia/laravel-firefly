@@ -14,6 +14,7 @@ class Post extends Model
     /** @var array */
     protected $fillable = [
         'content',
+        'formatting',
     ];
 
     /** @var array */

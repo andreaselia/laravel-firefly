@@ -34,6 +34,10 @@
     </div>
 
     <div class="mt-2">
+        @if ($post->formatting == 'rich')
+        {!! $post->content !!}
+        @else
         {!! nl2br(e($post->content)) !!}
+        @endif
     </div>
 </x-card>
