@@ -88,13 +88,14 @@ class TestCase extends \Orchestra\Testbench\TestCase
 
         $this->discussion = Discussion::create([
             'user_id' => $this->user->id,
-            'title' => 'Example Discsussion',
+            'title' => 'Example Discussion',
         ]);
 
         $this->post = Post::create([
             'discussion_id' => $this->discussion->id,
             'user_id' => $this->user->id,
             'content' => 'Lorem ipsum',
+            'is_correct' => false
         ]);
     }
 }

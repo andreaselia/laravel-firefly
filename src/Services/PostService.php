@@ -51,4 +51,30 @@ class PostService
     {
         return $post->delete();
     }
+
+    /**
+     * Mark the specified post as correct
+     *
+     * @param Post $post
+     * @return Post
+     */
+    public function setCorrect(Post $post)
+    {
+        $post->update(['is_correct'=>true]);
+
+        return $post;
+    }
+
+    /**
+     * Mark the specified post as not correct
+     *
+     * @param Post $post
+     * @return Post
+     */
+    public function unsetCorrect(Post $post)
+    {
+        $post->update(['is_correct'=>false]);
+
+        return $post;
+    }
 }

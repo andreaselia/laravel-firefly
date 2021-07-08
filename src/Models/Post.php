@@ -14,11 +14,17 @@ class Post extends Model
     /** @var array */
     protected $fillable = [
         'content',
+        'is_correct'
     ];
 
     /** @var array */
     protected $dates = [
         'deleted_at',
+    ];
+
+    /** @var array */
+    protected $casts = [
+        'is_correct' => 'boolean'
     ];
 
     public function user(): BelongsTo

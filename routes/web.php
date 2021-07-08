@@ -19,6 +19,9 @@ Route::name(config('firefly.web.name'))->group(function () {
         Route::post('{discussion}-{slug}', 'PostController@store')->name('post.store');
         Route::put('{discussion}-{slug}/'.config('firefly.prefix.post').'/{post}', 'PostController@update')->name('post.update');
         Route::delete('{discussion}-{slug}/'.config('firefly.prefix.post').'/{post}', 'PostController@delete')->name('post.delete');
+
+        Route::post('{discussion}-{slug}/'.config('firefly.prefix.post').'/{post}/correct', 'CorrectPostController@store')->name('post.correct');
+        Route::delete('{discussion}-{slug}/'.config('firefly.prefix.post').'/{post}/correct', 'CorrectPostController@delete')->name('post.incorrect');
     });
 
     // Groups...
