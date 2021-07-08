@@ -93,6 +93,6 @@ return [
 
     'features' => [
         'watchers' => false,
-        'correct_posts' => false
+        'correct_posts' => false,
     ],
 ];

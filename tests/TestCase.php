@@ -95,7 +95,7 @@ class TestCase extends \Orchestra\Testbench\TestCase
             'discussion_id' => $this->discussion->id,
             'user_id' => $this->user->id,
             'content' => 'Lorem ipsum',
-            'is_correct' => false
+            'is_correct' => false,
         ]);
     }
 }

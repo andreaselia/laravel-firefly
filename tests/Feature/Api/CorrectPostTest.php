@@ -15,7 +15,7 @@ class CorrectPostTest extends TestCase
         $this->assertFalse($post->is_correct);
 
         $response = $this->actingAs($this->getUser(), 'api')
-            ->post('api/forum/d/' . $discussion->uri . '/p/' . $post->id . '/correct');
+            ->post('api/forum/p/'.$post->id.'/correct');
         $post->refresh();
 
         $this->assertTrue($post->is_correct);
@@ -34,7 +34,7 @@ class CorrectPostTest extends TestCase
         $this->assertTrue($post->is_correct);
 
         $response = $this->actingAs($this->getUser(), 'api')
-            ->delete('api/forum/d/' . $discussion->uri . '/p/' . $post->id . '/correct');
+            ->delete('api/forum/p/'.$post->id.'/correct');
 
         $post->refresh();
 

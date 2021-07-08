@@ -53,20 +53,23 @@ class PostService
     }
 
     /**
-     * Mark the specified post as correct
+     * Mark the specified post as correct.
      *
      * @param Post $post
      * @return Post
      */
     public function setCorrect(Post $post)
     {
+        Post::where('discussion_id', $post->discussion_id)
+            ->where('is_correct', true)
+            ->update(['is_correct'=>false]);
         $post->update(['is_correct'=>true]);
 
         return $post;
     }
 
     /**
-     * Mark the specified post as not correct
+     * Mark the specified post as not correct.
      *
      * @param Post $post
      * @return Post

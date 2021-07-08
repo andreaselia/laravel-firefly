@@ -81,7 +81,7 @@ class PostPolicy
     }
 
     /**
-     * Determine whether the user can mark the post correct
+     * Determine whether the user can mark the post correct.
      *
      * @param  $user
      * @param  \Firefly\Models\Post  $post
@@ -93,7 +93,7 @@ class PostPolicy
     }
 
     /**
-     * Determine whether the user can unmark the post correct
+     * Determine whether the user can unmark the post correct.
      *
      * @param  $user
      * @param  \Firefly\Models\Post  $post

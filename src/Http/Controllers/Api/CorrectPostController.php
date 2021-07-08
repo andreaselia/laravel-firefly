@@ -3,7 +3,6 @@
 namespace Firefly\Http\Controllers\Api;
 
 use Firefly\Http\Controllers\Controller;
-use Firefly\Models\Discussion;
 use Firefly\Models\Post;
 use Firefly\Services\PostService;
 use Illuminate\Http\Request;
@@ -28,7 +27,7 @@ class CorrectPostController extends Controller
     }
 
     /**
-     * Mark the post as "correct"
+     * Mark the post as "correct".
      *
      * @param \Illuminate\Http\Request   $request
      * @param \Firefly\Models\Discussion $discussion
@@ -37,7 +36,7 @@ class CorrectPostController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function store(Request $request, Discussion $discussion, $slug, Post $post)
+    public function store(Request $request, Post $post)
     {
         $this->authorize('mark', $post);
 
@@ -47,7 +46,7 @@ class CorrectPostController extends Controller
     }
 
     /**
-     * Unmark the post as correct
+     * Unmark the post as correct.
      *
      * @param \Illuminate\Http\Request   $request
      * @param \Firefly\Models\Discussion $discussion
@@ -56,7 +55,7 @@ class CorrectPostController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function delete(Request $request, Discussion $discussion, $slug, Post $post)
+    public function delete(Request $request, Post $post)
     {
         $this->authorize('unmark', $post);
 

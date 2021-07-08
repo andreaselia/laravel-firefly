@@ -17,9 +17,6 @@ Route::group(['prefix' => config('firefly.prefix.discussion')], function () {
     Route::post('{discussion}-{slug}', 'PostController@store');
     Route::put('{discussion}-{slug}/'.config('firefly.prefix.post').'/{post}', 'PostController@update');
     Route::delete('{discussion}-{slug}/'.config('firefly.prefix.post').'/{post}', 'PostController@delete');
-
-    Route::post('{discussion}-{slug}/'.config('firefly.prefix.post').'/{post}/correct', 'CorrectPostController@store');
-    Route::delete('{discussion}-{slug}/'.config('firefly.prefix.post').'/{post}/correct', 'CorrectPostController@delete');
 });
 
 // Groups...
@@ -32,3 +29,7 @@ Route::group(['prefix' => config('firefly.prefix.group')], function () {
 });
 
 // Posts...
+Route::group(['prefix' => config('firefly.prefix.post')], function () {
+    Route::post('{post}/correct', 'CorrectPostController@store');
+    Route::delete('{post}/correct', 'CorrectPostController@delete');
+});

@@ -14,7 +14,7 @@ class Post extends Model
     /** @var array */
     protected $fillable = [
         'content',
-        'is_correct'
+        'is_correct',
     ];
 
     /** @var array */
@@ -24,7 +24,7 @@ class Post extends Model
 
     /** @var array */
     protected $casts = [
-        'is_correct' => 'boolean'
+        'is_correct' => 'boolean',
     ];
 
     public function user(): BelongsTo

@@ -15,14 +15,14 @@ class CorrectPostTest extends TestCase
         $this->assertFalse($post->is_correct);
 
         $response = $this->actingAs($this->getUser())
-            ->post('forum/d/' . $discussion->uri . '/p/' . $post->id . '/correct');
+            ->post('forum/p/'.$post->id.'/correct');
 
         $post->refresh();
 
         $this->assertTrue($post->is_correct);
 
         $response->assertRedirect();
-        $response->assertLocation('forum/d/' . $post->discussion->uri);
+        $response->assertLocation('forum/d/'.$post->discussion->uri);
     }
 
     public function test_post_was_unmarked_as_correct()
@@ -35,13 +35,13 @@ class CorrectPostTest extends TestCase
         $this->assertTrue($post->is_correct);
 
         $response = $this->actingAs($this->getUser())
-            ->delete('forum/d/' . $discussion->uri . '/p/' . $post->id . '/correct');
+            ->delete('forum/p/'.$post->id.'/correct');
 
         $post->refresh();
 
         $this->assertFalse($post->is_correct);
 
         $response->assertRedirect();
-        $response->assertLocation('forum/d/' . $post->discussion->uri);
+        $response->assertLocation('forum/d/'.$post->discussion->uri);
     }
 }

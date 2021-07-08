@@ -2,7 +2,6 @@
 
 namespace Firefly\Http\Controllers;
 
-use Firefly\Models\Discussion;
 use Firefly\Models\Post;
 use Firefly\Services\PostService;
 use Illuminate\Http\Request;
@@ -29,7 +28,7 @@ class CorrectPostController extends Controller
     }
 
     /**
-     * Mark the post as "correct"
+     * Mark the post as "correct".
      *
      * @param \Illuminate\Http\Request   $request
      * @param \Firefly\Models\Discussion $discussion
@@ -38,17 +37,17 @@ class CorrectPostController extends Controller
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request, Discussion $discussion, $slug, Post $post)
+    public function store(Request $request, Post $post)
     {
         $this->authorize('mark', $post);
 
         $this->postService->setCorrect($post);
 
-        return redirect()->route('firefly.discussion.show', [$discussion->id, $discussion->slug]);
+        return redirect()->route('firefly.discussion.show', [$post->discussion->id, $post->discussion->slug]);
     }
 
     /**
-     * Unmark the post as correct
+     * Unmark the post as correct.
      *
      * @param \Illuminate\Http\Request   $request
      * @param \Firefly\Models\Discussion $discussion
@@ -57,12 +56,12 @@ class CorrectPostController extends Controller
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function delete(Request $request, Discussion $discussion, $slug, Post $post)
+    public function delete(Request $request, Post $post)
     {
         $this->authorize('unmark', $post);
 
         $this->postService->unsetCorrect($post);
 
-        return redirect()->route('firefly.discussion.show', [$discussion->id, $discussion->slug]);
+        return redirect()->route('firefly.discussion.show', [$post->discussion->id, $post->discussion->slug]);
     }
 }

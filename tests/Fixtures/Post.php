@@ -11,11 +11,11 @@ class Post extends Model
         'content',
         'user_id',
         'discussion_id',
-        'is_correct'
+        'is_correct',
     ];
 
     /** @var array */
     protected $casts = [
-        'is_correct' => 'boolean'
+        'is_correct' => 'boolean',
     ];
 }
