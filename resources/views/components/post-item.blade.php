@@ -34,10 +34,6 @@
     </div>
 
     <div class="mt-2">
-        @if ($post->formatting == 'rich')
-        {!! $post->content !!}
-        @else
-        {!! nl2br(e($post->content)) !!}
-        @endif
+        {!! $post->isRichlyFormatted ? $post->content : nl2br(e($post->content)) !!}
     </div>
 </x-card>

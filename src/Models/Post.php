@@ -39,4 +39,9 @@ class Post extends Model
     {
         return $this->belongsTo(Discussion::class);
     }
+
+    public function getIsRichlyFormattedAttribute(): bool
+    {
+        return $this->formatting === 'rich';
+    }
 }
