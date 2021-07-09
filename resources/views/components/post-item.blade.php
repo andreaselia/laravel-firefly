@@ -34,6 +34,6 @@
     </div>
 
     <div class="mt-2 unreset">
-        {!! $post->isRichlyFormatted ? $post->content : nl2br(e($post->content)) !!}
+        {!! $post->formatted_content !!}
     </div>
 </x-card>
