@@ -4,10 +4,13 @@ namespace Firefly\Services;
 
 use Firefly\Models\Discussion;
 use Firefly\Models\Post;
+use Firefly\Traits\SanitizesPosts;
 use Illuminate\Http\Request;
 
 class PostService
 {
+    use SanitizesPosts;
+
     /**
      * Make a new Post instance and attach it to the user.
      *
@@ -19,7 +22,7 @@ class PostService
     {
         $user = $request->user();
 
-        $post = $user->posts()->make($request->all());
+        $post = $user->posts()->make($this->getSanitizedPostData($request->all()));
 
         $discussion->posts()->save($post);
 
@@ -35,7 +38,7 @@ class PostService
      */
     public function update(Request $request, Post $post)
     {
-        $post->update($request->all());
+        $post->update($this->getSanitizedPostData($request->all()));
 
         return $post->refresh();
     }
