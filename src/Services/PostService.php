@@ -23,6 +23,10 @@ class PostService
 
         $discussion->posts()->save($post);
 
+        if(config('firefly.feature.watchers')) {
+            $discussion->watchers()->syncWithoutDetaching([$user->id]);
+        }
+
         return $discussion->refresh();
     }
 
