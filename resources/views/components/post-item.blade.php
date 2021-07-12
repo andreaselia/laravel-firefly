@@ -64,7 +64,7 @@
         </div>
     </div>
 
-    <div class="mt-2">
-        {!! nl2br(e($post->content)) !!}
+    <div class="mt-2 unreset">
+        {!! $post->formatted_content !!}
     </div>
 </x-card>

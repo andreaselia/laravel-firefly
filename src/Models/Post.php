@@ -14,6 +14,7 @@ class Post extends Model
     /** @var array */
     protected $fillable = [
         'content',
+        'formatting',
         'is_correct',
     ];
 
@@ -43,5 +44,15 @@ class Post extends Model
     public function discussion(): BelongsTo
     {
         return $this->belongsTo(Discussion::class);
+    }
+
+    public function getFormattedContentAttribute(): string
+    {
+        return $this->isRichlyFormatted ? $this->content : nl2br(e($this->content));
+    }
+
+    public function getIsRichlyFormattedAttribute(): bool
+    {
+        return $this->formatting === 'rich';
     }
 }
