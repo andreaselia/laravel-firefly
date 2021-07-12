@@ -93,5 +93,14 @@ return [
 
     'features' => [
         'watchers' => false,
+        'wysiwyg' => [
+            'enabled' => false,
+            'theme' => 'snow', // More about themes at https://quilljs.com/docs/themes/
+            'toolbar_options' => [ // Docs at https://quilljs.com/docs/modules/toolbar/
+                ['bold', 'italic', 'underline', 'strike'],
+                [['list' => 'ordered'], ['list'=> 'bullet']],
+                ['clean'],
+            ],
+        ],
     ],
 ];

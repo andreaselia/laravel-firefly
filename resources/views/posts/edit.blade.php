@@ -25,14 +25,16 @@
         <div>
             <x-label for="content" :value="__('Content')" />
 
-            <x-textarea id="content" class="block mt-1 w-full" type="text" name="content" required autofocus>{{ old('content', $post->content) }}</x-textarea>
+            <x-rich-textarea :value="$post->content" />
         </div>
 
         <div class="mt-4">
-            <x-button>
+            <x-button id="submit">
                 {{ __('Submit') }}
             </x-button>
         </div>
+
+        <x-quill-js />
     </form>
 </x-card>
 @endsection
