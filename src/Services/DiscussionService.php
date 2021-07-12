@@ -37,7 +37,7 @@ class DiscussionService
 
         $discussion->posts()->save($post);
 
-        if(config('firefly.feature.watchers')) {
+        if (config('firefly.features.watchers')) {
             $this->watch($discussion, $user);
         }
 

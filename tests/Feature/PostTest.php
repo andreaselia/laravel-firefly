@@ -2,7 +2,10 @@
 
 namespace Firefly\Test;
 
+use Firefly\Mail\PostAddedEmail;
 use Firefly\Test\Fixtures\Post;
+use Firefly\Test\Fixtures\User;
+use Illuminate\Support\Facades\Mail;
 
 class PostTest extends TestCase
 {
@@ -99,5 +102,76 @@ class PostTest extends TestCase
         $response->assertStatus(422);
         $response->assertJsonValidationErrors('content');
         $response->assertJson($validJson);
+    }
+
+    public function test_watcher_gets_added_when_post_gets_created()
+    {
+        $this->enableWatchersFeature();
+        // Clear all previous posts
+        Post::truncate();
+
+        $discussion = $this->getDiscussion();
+
+        $response = $this->actingAs($this->getUser())
+            ->postJson('forum/d/'.$discussion->uri, [
+                'content' => 'Foo Bar',
+            ]);
+
+        $posts = Post::all();
+
+        $this->assertTrue($posts->count() == 1);
+        $this->assertDatabaseHas('posts', [
+            'content' => 'Foo Bar',
+        ]);
+
+        $response->assertRedirect();
+        $response->assertLocation('forum/d/'.$discussion->uri);
+
+        $this->assertEquals(1, $discussion->watchers()->count());
+        $this->assertEquals($this->getUser()->id, $discussion->watchers()->first()->id);
+    }
+
+    public function test_email_gets_sent_to_watchers_when_post_gets_created()
+    {
+        $this->enableWatchersFeature();
+        Mail::fake();
+
+        $watchingUser = User::create([
+            'email'=>'watching@example.com',
+            'name'=>'watching Rat',
+            'password' => bcrypt('password'),
+        ]);
+
+        // Clear all previous posts
+        Post::truncate();
+
+        $discussion = $this->getDiscussion();
+
+        $discussion->watchers()->syncWithoutDetaching([$watchingUser->id]);
+        $this->assertEquals(1, $discussion->watchers()->count());
+        $this->assertEquals($watchingUser->id, $discussion->watchers()->first()->id);
+
+        $response = $this->actingAs($this->getUser())
+            ->postJson('forum/d/'.$discussion->uri, [
+                'content' => 'Foo Bar',
+            ]);
+
+        $posts = Post::all();
+
+        $this->assertTrue($posts->count() == 1);
+        $this->assertDatabaseHas('posts', [
+            'content' => 'Foo Bar',
+        ]);
+
+        $response->assertRedirect();
+        $response->assertLocation('forum/d/'.$discussion->uri);
+
+        $this->assertEquals(2, $discussion->watchers()->count());
+
+        Mail::assertSent(PostAddedEmail::class, function ($message) {
+            $this->assertEquals('watching@example.com', $message->to[0]['address']);
+
+            return true;
+        });
     }
 }
