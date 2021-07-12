@@ -36,8 +36,7 @@ class NotifyWatchersPostAdded implements ShouldQueue
             return;
         }
 
-        $recipients->each(fn ($recipient) => Mail::to($recipient)
-            ->send(new PostAddedEmail($event->post)));
+        $recipients->each(fn ($recipient) => Mail::to($recipient)->send(new PostAddedEmail($event->post)));
     }
 
     private function getWatchers(Post $post): Collection

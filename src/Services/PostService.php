@@ -29,6 +29,7 @@ class PostService
 
         if (config('firefly.features.watchers')) {
             $discussion->watchers()->syncWithoutDetaching([$user->id]);
+
             PostAdded::dispatch($post);
         }
 

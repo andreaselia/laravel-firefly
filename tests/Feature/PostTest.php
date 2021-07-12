@@ -107,6 +107,7 @@ class PostTest extends TestCase
     public function test_watcher_gets_added_when_post_gets_created()
     {
         $this->enableWatchersFeature();
+
         // Clear all previous posts
         Post::truncate();
 
@@ -134,6 +135,7 @@ class PostTest extends TestCase
     public function test_email_gets_sent_to_watchers_when_post_gets_created()
     {
         $this->enableWatchersFeature();
+
         Mail::fake();
 
         $watchingUser = User::create([
