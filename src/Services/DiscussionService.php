@@ -4,11 +4,14 @@ namespace Firefly\Services;
 
 use Firefly\Models\Discussion;
 use Firefly\Models\Group;
+use Firefly\Traits\SanitizesPosts;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Http\Request;
 
 class DiscussionService
 {
+    use SanitizesPosts;
+
     /**
      * Make a new discussion.
      *
@@ -29,7 +32,7 @@ class DiscussionService
 
         // Make the post and attach it to the user
         $post = $user->posts()->make(
-            $request->only('content')
+            $this->getSanitizedPostData($request->only('content'))
         );
 
         $discussion->posts()->save($post);

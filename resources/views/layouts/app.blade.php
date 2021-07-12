@@ -14,6 +14,10 @@
 
     <!-- Scripts -->
     <script src="{{ asset('vendor/firefly/js/app.js') }}" defer></script>
+    @if (config('firefly.features.wysiwyg.enabled'))
+    <script src="//cdn.quilljs.com/1.3.6/quill.min.js"></script>
+    <link href="https://cdn.quilljs.com/1.3.6/quill.{{ config('firefly.features.wysiwyg.theme') }}.css" rel="stylesheet">
+    @endif
 </head>
 <body class="bg-white font-sans antialiased text-gray-900">
     <x-header />
