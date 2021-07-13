@@ -2,6 +2,8 @@
 
 namespace Firefly;
 
+use BadMethodCallException;
+
 class Features
 {
     /**
@@ -39,5 +41,23 @@ class Features
         }
 
         return config("firefly.features.{$feature}.{$option}");
+    }
+    
+        /**
+     * Magic method to check any feature with a has[FeatureName]Feature method call.
+     *
+     * @param $method
+     * @param $arguments
+     * @return bool
+     *
+     * @throws BadMethodCallException
+     */
+    public static function __callStatic($method, $arguments)
+    {
+        if (preg_match('/has(.+?)Feature/', $method, $matches)) {
+            return static::enabled(strtolower($matches[1]));
+        }
+
+        throw new BadMethodCallException;
     }
 }
