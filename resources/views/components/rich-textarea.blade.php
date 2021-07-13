@@ -1,6 +1,6 @@
 @props(['value' => null])
 
-@if (config('firefly.features.wysiwyg.enabled'))
+@if (Firefly\Features::enabled('wysiwyg'))
     <input id="content_hidden" type="hidden" name="content">
     <input id="formatting" type="hidden" name="formatting" value="rich">
     <div id="content">{!! old('content', $value) !!}</div>

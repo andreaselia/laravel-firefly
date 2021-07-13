@@ -2,6 +2,8 @@
 
 namespace Firefly\Traits;
 
+use Firefly\Features;
+
 trait SanitizesPosts
 {
     /**
@@ -15,7 +17,7 @@ trait SanitizesPosts
     {
         $formatting = (isset($requestData['formatting'])) ? $requestData['formatting'] : 'plain';
 
-        if (config('firefly.features.wysiwyg.enabled') && $formatting === 'rich') {
+        if (Features::enabled('wysiwyg') && $formatting === 'rich') {
             $notAllowedTags = ['script'];
             foreach ($notAllowedTags as $tag) {
                 $requestData['content'] = preg_replace('/<\\/?'.$tag.'(.|\\s)*?>/i', '', $requestData['content']);

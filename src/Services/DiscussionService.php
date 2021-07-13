@@ -2,6 +2,7 @@
 
 namespace Firefly\Services;
 
+use Firefly\Features;
 use Firefly\Models\Discussion;
 use Firefly\Models\Group;
 use Firefly\Traits\SanitizesPosts;
@@ -36,6 +37,10 @@ class DiscussionService
         );
 
         $discussion->posts()->save($post);
+
+        if (Features::enabled('watchers')) {
+            $this->watch($discussion, $user);
+        }
 
         return $discussion->refresh();
     }

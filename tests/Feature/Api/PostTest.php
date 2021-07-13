@@ -100,4 +100,32 @@ class PostTest extends TestCase
         $response->assertJsonValidationErrors('content');
         $response->assertJson($validJson);
     }
+
+    public function test_watcher_gets_added_when_post_gets_created()
+    {
+        $this->enableWatchersFeature();
+
+        // Clear all previous posts
+        Post::truncate();
+
+        $discussion = $this->getDiscussion();
+
+        $response = $this->actingAs($this->getUser(), 'api')
+            ->postJson('api/forum/d/'.$discussion->uri, [
+                'content' => 'Foo Bar',
+            ]);
+
+        $posts = Post::all();
+
+        $this->assertTrue($posts->count() == 1);
+        $this->assertDatabaseHas('posts', [
+            'content' => 'Foo Bar',
+        ]);
+
+        $response->assertOk();
+        $response->assertJsonStructure();
+
+        $this->assertEquals(1, $discussion->watchers()->count());
+        $this->assertEquals($this->getUser()->id, $discussion->watchers()->first()->id);
+    }
 }

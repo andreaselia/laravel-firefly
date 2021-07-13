@@ -49,6 +49,37 @@ class User extends Authenticatable
 }
 ```
 
+## Optional Features
+### Watchers
+You can enable users to "watch" discussions by adding / updating the flag in the config:
+```php
+'features' => [
+    'watchers' => true,
+    ...
+],
+```
+This will allow watchers to be notified when new posts are made in the discussion
+
+### WYSIWYG Editor
+You can enable a WYSIWYG editor by adding / updating the flag in the config:
+```php
+'features' => [
+       ...
+        'wysiwyg' => [
+            'enabled' => true,
+            'theme' => 'snow', // More about themes at https://quilljs.com/docs/themes/
+            'toolbar_options' => [ // Docs at https://quilljs.com/docs/modules/toolbar/
+                ['bold', 'italic', 'underline', 'strike'],
+                [['list' => 'ordered'], ['list'=> 'bullet']],
+                ['clean'],
+            ],
+        ],
+        ...
+    ],
+```
+This uses the Quill WYSIWYG editor library, docs can be found at: https://quilljs.com/docs.
+The snow theme and basic editing controls are provided out of the box in the config, but these can be modified to fit your needs.
+
 ## Contributing
 
 You're more than welcome to submit a pull request, or if you're not feeling up to it - create an issue so someone else can pick it up.

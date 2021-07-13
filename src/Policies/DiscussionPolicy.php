@@ -2,6 +2,7 @@
 
 namespace Firefly\Policies;
 
+use Firefly\Features;
 use Firefly\Models\Discussion;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
@@ -149,7 +150,7 @@ class DiscussionPolicy
      */
     public function watch($user, Discussion $discussion)
     {
-        return config('firefly.features.watchers') && ! $user->isWatching($discussion);
+        return Features::enabled('watchers') && ! $user->isWatching($discussion);
     }
 
     /**
@@ -161,6 +162,6 @@ class DiscussionPolicy
      */
     public function unwatch($user, Discussion $discussion)
     {
-        return config('firefly.features.watchers') && $user->isWatching($discussion);
+        return Features::enabled('watchers') && $user->isWatching($discussion);
     }
 }
