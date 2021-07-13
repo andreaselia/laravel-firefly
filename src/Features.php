@@ -43,7 +43,7 @@ class Features
         return config("firefly.features.{$feature}.{$option}");
     }
     
-        /**
+    /**
      * Magic method to check any feature with a has[FeatureName]Feature method call.
      *
      * @param $method
