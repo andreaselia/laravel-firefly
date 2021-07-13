@@ -3,6 +3,7 @@
 namespace Firefly\Services;
 
 use Firefly\Events\PostAdded;
+use Firefly\Features;
 use Firefly\Models\Discussion;
 use Firefly\Models\Post;
 use Firefly\Traits\SanitizesPosts;
@@ -27,7 +28,7 @@ class PostService
 
         $discussion->posts()->save($post);
 
-        if (config('firefly.features.watchers')) {
+        if (Features::enabled('watchers')) {
             $discussion->watchers()->syncWithoutDetaching([$user->id]);
 
             PostAdded::dispatch($post);
