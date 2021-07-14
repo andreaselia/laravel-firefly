@@ -1,11 +1,11 @@
-@if (config('firefly.features.wysiwyg.enabled'))
+@if (Firefly\Features::enabled('wysiwyg'))
     <script>
-        var toolbarOptions = {!! json_encode(config('firefly.features.wysiwyg.toolbar_options')) !!};
+        var toolbarOptions = {!! json_encode(Firefly\Features::option('wysiwyg', 'toolbar_options')) !!};
         var options = {
             modules: {
                 toolbar: toolbarOptions
             },
-            theme: '{{ config('firefly.features.wysiwyg.theme') }}'
+            theme: '{{ Firefly\Features::option('wysiwyg', 'theme') }}'
         };
         var editor = new Quill('#content', options);
 

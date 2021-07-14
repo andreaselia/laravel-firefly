@@ -2,6 +2,7 @@
 
 namespace Firefly\Models;
 
+use Firefly\Features;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -134,7 +135,7 @@ class Discussion extends Model
 
     public function scopeWithIsBeingWatched(Builder $builder, $user)
     {
-        $builder->when(config('firefly.features.watchers'), function ($query) use ($user) {
+        $builder->when(Features::enabled('watchers'), function ($query) use ($user) {
             if ($user) {
                 $query->withExists(['watchers as is_being_watched' => fn ($query) => $query->where('user_id', $user->id)]);
             }

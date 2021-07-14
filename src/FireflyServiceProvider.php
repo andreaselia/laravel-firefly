@@ -2,7 +2,10 @@
 
 namespace Firefly;
 
+use Firefly\Events\PostAdded;
+use Firefly\Listeners\NotifyWatchersPostAdded;
 use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
@@ -27,6 +30,7 @@ class FireflyServiceProvider extends ServiceProvider
         $this->defineAssetPublishing();
         $this->registerRoutes();
         $this->registerPolicies();
+        $this->registerEvents();
         $this->loadViews();
     }
 
@@ -159,5 +163,18 @@ class FireflyServiceProvider extends ServiceProvider
         foreach ($this->policies as $key => $value) {
             Gate::policy($key, $value);
         }
+    }
+
+    /**
+     * Register the package's events.
+     *
+     * @return void
+     */
+    private function registerEvents()
+    {
+        Event::listen(
+            PostAdded::class,
+            [NotifyWatchersPostAdded::class, 'handle']
+        );
     }
 }

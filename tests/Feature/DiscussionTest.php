@@ -203,4 +203,42 @@ class DiscussionTest extends TestCase
         $response->assertJsonValidationErrors('title');
         $response->assertJson($validJson);
     }
+
+    public function test_watcher_was_added_when_discussion_was_created()
+    {
+        $this->enableWatchersFeature();
+
+        // Clear all previous discussions and posts
+        Discussion::truncate();
+        Post::truncate();
+
+        $response = $this->actingAs($this->getUser())
+            ->post('forum/g/example-group/d', [
+                'title'   => 'Foo Bar',
+                'content' => 'Lorem Ipsum',
+            ]);
+
+        $discussions = Discussion::all();
+
+        $this->assertTrue($discussions->count() == 1);
+        $this->assertDatabaseHas('discussions', [
+            'title' => 'Foo Bar',
+            'slug'  => 'foo-bar',
+        ]);
+
+        $posts = Post::all();
+
+        $this->assertTrue($posts->count() == 1);
+        $this->assertDatabaseHas('posts', [
+            'content' => 'Lorem Ipsum',
+        ]);
+
+        $discussion = Discussion::first();
+
+        $response->assertRedirect();
+        $response->assertLocation('forum/d/'.$discussion->uri);
+
+        $this->assertEquals(1, $discussion->watchers()->count());
+        $this->assertEquals($this->getUser()->id, $discussion->watchers()->first()->id);
+    }
 }
