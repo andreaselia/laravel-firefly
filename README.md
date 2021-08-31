@@ -79,6 +79,13 @@ You can enable a WYSIWYG editor by adding / updating the flag in the config:
 ```
 This uses the Quill WYSIWYG editor library, docs can be found at: https://quilljs.com/docs.
 The snow theme and basic editing controls are provided out of the box in the config, but these can be modified to fit your needs.
+### Views
+
+To customize the blade templates of the application, you can copy the views directory to your own resources/views/vendor as :
+
+```shell
+cp -r vendor/andreaselia/laravel-firefly/resources/views resources/views/vendor/firefly
+```
 
 ### Policies
 
