@@ -19,7 +19,7 @@ Install the package:
 composer require andreaselia/laravel-firefly
 ```
 
-Publish package files:
+Publish package files (config, migrations, assets and views) :
 
 ```bash
 php artisan vendor:publish --provider="Firefly\FireflyServiceProvider"
@@ -79,6 +79,40 @@ You can enable a WYSIWYG editor by adding / updating the flag in the config:
 ```
 This uses the Quill WYSIWYG editor library, docs can be found at: https://quilljs.com/docs.
 The snow theme and basic editing controls are provided out of the box in the config, but these can be modified to fit your needs.
+
+### Policies
+
+By default, Firefly policies are very permissive. In order to adapt the permissions model to your own application, please use
+your AuthServiceProvider file :
+
+1. Create your policy files : `php artisan make:policy MyGroupPolicy`
+2. In the generated class, extend the base Firefly policy :
+
+```php
+<?php
+
+namespace App\Policies;
+
+use Illuminate\Auth\Access\HandlesAuthorization;
+use Firefly\Policies\GroupPolicy;
+
+class MyGroupPolicy extends GroupPolicy {
+...
+```
+
+3. Implement whatever policy you wish (use the policies in `vendor/andreaselia/laravel-firefly/src/Policies` for reference)
+4. Update the policies array in `app/Providers/AuthServiceProvider.php` :
+
+```php
+...
+use Firefly\Models\Group;
+...
+protected $policies = [
+        Group::class => 'App\Policies\MyGroupPolicy',
+];
+```
+
+Learn more at https://laravel.com/docs/8.x/authorization#registering-policies
 
 ## Contributing
 
