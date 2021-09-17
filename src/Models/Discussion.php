@@ -137,7 +137,9 @@ class Discussion extends Model
     {
         $builder->when(Features::enabled('watchers'), function ($query) use ($user) {
             if ($user) {
-                $query->withExists(['watchers as is_being_watched' => fn ($query) => $query->where('user_id', $user->id)]);
+                $query->withExists([
+                    'watchers as is_being_watched' => fn ($query) => $query->where('user_id', $user->id),
+                ]);
             }
         });
     }

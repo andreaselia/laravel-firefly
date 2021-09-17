@@ -16,8 +16,8 @@ class PostService
     /**
      * Make a new Post instance and attach it to the user.
      *
-     * @param \Illuminate\Http\Request $request
-     * @param \Firefly\Models\Discussion $discussion
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Firefly\Models\Discussion  $discussion
      * @return mixed
      */
     public function make(Request $request, Discussion $discussion)
@@ -40,8 +40,8 @@ class PostService
     /**
      * Update the specified post.
      *
-     * @param Request $request
-     * @param Post $post
+     * @param  Request  $request
+     * @param  Post  $post
      * @return Post
      */
     public function update(Request $request, Post $post)
@@ -54,8 +54,9 @@ class PostService
     /**
      * Delete the specified post.
      *
-     * @param Post $post
+     * @param  Post  $post
      * @return bool|null
+     *
      * @throws \Exception
      */
     public function delete(Post $post)
