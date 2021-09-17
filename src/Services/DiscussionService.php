@@ -34,7 +34,7 @@ class DiscussionService
 
         // Make the post and attach it to the user
         $post = $user->posts()->make(
-            $this->getSanitizedPostData($request->only('content'))
+            $this->getSanitizedPostData($request->only(['formatting', 'content']))
         );
 
         $discussion->posts()->save($post);
