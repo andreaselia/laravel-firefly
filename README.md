@@ -19,7 +19,7 @@ Install the package:
 composer require andreaselia/laravel-firefly
 ```
 
-Publish package files:
+Publish package files (config, migrations, assets and views):
 
 ```bash
 php artisan vendor:publish --provider="Firefly\FireflyServiceProvider"
@@ -50,35 +50,80 @@ class User extends Authenticatable
 ```
 
 ## Optional Features
+
 ### Watchers
+
 You can enable users to "watch" discussions by adding / updating the flag in the config:
+
 ```php
 'features' => [
     'watchers' => true,
-    ...
+    // ...
 ],
 ```
+
 This will allow watchers to be notified when new posts are made in the discussion
 
 ### WYSIWYG Editor
-You can enable a WYSIWYG editor by adding / updating the flag in the config:
+
+The WYSIWYG Editor uses the Quill library, and the docs can be found [here](https://quilljs.com/docs).
+
+You can enable a WYSIWYG editor by adding/updating the flag in the config like so:
+
 ```php
 'features' => [
-       ...
-        'wysiwyg' => [
-            'enabled' => true,
-            'theme' => 'snow', // More about themes at https://quilljs.com/docs/themes/
-            'toolbar_options' => [ // Docs at https://quilljs.com/docs/modules/toolbar/
-                ['bold', 'italic', 'underline', 'strike'],
-                [['list' => 'ordered'], ['list'=> 'bullet']],
-                ['clean'],
-            ],
+    // ...
+    'wysiwyg' => [
+        'enabled' => true,
+        'theme' => 'snow', // More about themes at https://quilljs.com/docs/themes/
+        'toolbar_options' => [ // Docs at https://quilljs.com/docs/modules/toolbar/
+            ['bold', 'italic', 'underline', 'strike'],
+            [['list' => 'ordered'], ['list'=> 'bullet']],
+            ['clean'],
         ],
-        ...
     ],
+    // ...
+],
 ```
-This uses the Quill WYSIWYG editor library, docs can be found at: https://quilljs.com/docs.
+
 The snow theme and basic editing controls are provided out of the box in the config, but these can be modified to fit your needs.
+
+### Policies
+
+By default, Firefly policies are very permissive. In order to customize the permissions for your own application, please use your `AuthServiceProvider` file to overwrite the policies by following the steps below.
+
+1. Create your policy files via `php artisan make:policy MyGroupPolicy`
+2. In the generated class, extend the base Firefly policy:
+
+```php
+<?php
+
+namespace App\Policies;
+
+use Illuminate\Auth\Access\HandlesAuthorization;
+use Firefly\Policies\GroupPolicy;
+
+class MyGroupPolicy extends GroupPolicy
+{
+    // ...
+```
+
+3. Implement whatever policy you wish (use the policies in `vendor/andreaselia/laravel-firefly/src/Policies` for reference)
+4. Update the policies array in the `app/Providers/AuthServiceProvider.php` file like so:
+
+```php
+<?php
+
+use Firefly\Models\Group;
+
+// ...
+
+protected $policies = [
+    Group::class => 'App\Policies\MyGroupPolicy',
+];
+```
+
+Learn more about Laravel policies [here](https://laravel.com/docs/8.x/authorization#registering-policies).
 
 ## Contributing
 

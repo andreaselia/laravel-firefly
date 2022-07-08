@@ -21,7 +21,7 @@ class GroupController extends Controller
     /**
      * Create a new instance of the controller.
      *
-     * @param \Firefly\Services\GroupService $service
+     * @param  \Firefly\Services\GroupService  $service
      */
     public function __construct(GroupService $groupService)
     {
@@ -44,7 +44,7 @@ class GroupController extends Controller
     /**
      * Store the new group.
      *
-     * @param \Firefly\Http\Requests\StoreGroupRequest $request
+     * @param  \Firefly\Http\Requests\StoreGroupRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function store(StoreGroupRequest $request)
@@ -59,7 +59,7 @@ class GroupController extends Controller
     /**
      * Show the discussions for the specified group.
      *
-     * @param \Firefly\Models\Group $group
+     * @param  \Firefly\Models\Group  $group
      * @return \Illuminate\Http\Response
      */
     public function show(Group $group)
@@ -75,7 +75,7 @@ class GroupController extends Controller
     /**
      * Update the specified group.
      *
-     * @param \Firefly\Http\Requests\UpdateGroupRequest $request
+     * @param  \Firefly\Http\Requests\UpdateGroupRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateGroupRequest $request, Group $group)
@@ -90,7 +90,7 @@ class GroupController extends Controller
     /**
      * Delete the specified group.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function delete(Request $request, Group $group)

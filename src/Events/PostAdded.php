@@ -20,8 +20,7 @@ class PostAdded
     /**
      * Create a new event instance.
      *
-     * @param Post $post
-     *
+     * @param  Post  $post
      * @return void
      */
     public function __construct(Post $post)

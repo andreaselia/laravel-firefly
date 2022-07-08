@@ -2,6 +2,7 @@
 
 namespace Firefly\Services;
 
+use BadMethodCallException;
 use Firefly\Features;
 use Firefly\Models\Discussion;
 use Firefly\Models\Group;
@@ -16,8 +17,8 @@ class DiscussionService
     /**
      * Make a new discussion.
      *
-     * @param \Illuminate\Http\Request $request
-     * @param \Firefly\Models\Group $group
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Firefly\Models\Group  $group
      * @return \Firefly\Models\Discussion
      */
     public function make(Request $request, Group $group)
@@ -33,7 +34,7 @@ class DiscussionService
 
         // Make the post and attach it to the user
         $post = $user->posts()->make(
-            $this->getSanitizedPostData($request->only('content'))
+            $this->getSanitizedPostData($request->only(['formatting', 'content']))
         );
 
         $discussion->posts()->save($post);
@@ -48,8 +49,8 @@ class DiscussionService
     /**
      * Update the specified discussion.
      *
-     * @param \Illuminate\Http\Request $request
-     * @param \Firefly\Models\Discussion $discussion
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Firefly\Models\Discussion  $discussion
      * @return \Firefly\Models\Discussion
      */
     public function update(Request $request, Discussion $discussion)
@@ -62,8 +63,9 @@ class DiscussionService
     /**
      * Delete the specified discussion.
      *
-     * @param \Firefly\Models\Discussion $discussion
+     * @param  \Firefly\Models\Discussion  $discussion
      * @return bool|null
+     *
      * @throws \Exception
      */
     public function delete(Discussion $discussion)
@@ -74,13 +76,13 @@ class DiscussionService
     /**
      * Update a status of the specified discussion.
      *
-     * @param Discussion $discussion
+     * @param  Discussion  $discussion
      * @param $type
      */
     public function updateState(Discussion $discussion, $type)
     {
         if (! method_exists($discussion, $type)) {
-            throw new \BadMethodCallException("Method {$type} not found.");
+            throw new BadMethodCallException("Method {$type} not found.");
         }
 
         return $discussion->{$type}();
@@ -89,10 +91,10 @@ class DiscussionService
     /**
      * Watch the specified discussion.
      *
-     * @param \Firefly\Models\Discussion $discussion
-     * @param Illuminate\Foundation\Auth\User $user
-     *
+     * @param  \Firefly\Models\Discussion  $discussion
+     * @param  Illuminate\Foundation\Auth\User  $user
      * @return bool|null
+     *
      * @throws \Exception
      */
     public function watch(Discussion $discussion, User $user)
@@ -103,10 +105,10 @@ class DiscussionService
     /**
      * Unwatch the specified discussion.
      *
-     * @param \Firefly\Models\Discussion $discussion
-     * @param Illuminate\Foundation\Auth\User $user
-     *
+     * @param  \Firefly\Models\Discussion  $discussion
+     * @param  Illuminate\Foundation\Auth\User  $user
      * @return bool|null
+     *
      * @throws \Exception
      */
     public function unwatch(Discussion $discussion, User $user)

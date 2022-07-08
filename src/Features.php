@@ -9,7 +9,7 @@ class Features
     /**
      * Determine if the given feature is enabled.
      *
-     * @param string $feature
+     * @param  string  $feature
      * @return bool
      */
     public static function enabled(string $feature)
@@ -30,8 +30,8 @@ class Features
     /**
      * Get a specified option from a feature.
      *
-     * @param string $feature
-     * @param string $option
+     * @param  string  $feature
+     * @param  string  $option
      * @return bool
      */
     public static function option(string $feature, string $option)
