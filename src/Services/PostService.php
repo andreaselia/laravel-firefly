@@ -67,7 +67,7 @@ class PostService
     /**
      * Mark the specified post as correct.
      *
-     * @param Post $post
+     * @param  Post  $post
      * @return Post
      */
     public function setCorrect(Post $post)
@@ -83,7 +83,7 @@ class PostService
     /**
      * Mark the specified post as not correct.
      *
-     * @param Post $post
+     * @param  Post  $post
      * @return Post
      */
     public function unsetCorrect(Post $post)

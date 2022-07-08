@@ -7,7 +7,7 @@
         </div>
 
         <div class="flex space-x-2">
-            @if (config('firefly.features.correct_posts'))
+            @if (\Firefly\Features::enabled('correct_posts'))
                 @if($post->is_correct)
                     @can ('unmark', $post)
                     <button onclick="event.preventDefault(); document.getElementById('unmark-post-{{ $post->id }}-form').submit();">

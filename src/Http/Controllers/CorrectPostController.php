@@ -18,7 +18,7 @@ class CorrectPostController extends Controller
     /**
      * Create a new instance of the controller.
      *
-     * @param \Firefly\Services\DiscussionService $service
+     * @param  \Firefly\Services\DiscussionService  $service
      */
     public function __construct(PostService $postService)
     {
@@ -30,11 +30,10 @@ class CorrectPostController extends Controller
     /**
      * Mark the post as "correct".
      *
-     * @param \Illuminate\Http\Request   $request
-     * @param \Firefly\Models\Discussion $discussion
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Firefly\Models\Discussion  $discussion
      * @param $slug
-     * @param \Firefly\Models\Post $post
-     *
+     * @param  \Firefly\Models\Post  $post
      * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request, Post $post)
@@ -49,11 +48,10 @@ class CorrectPostController extends Controller
     /**
      * Unmark the post as correct.
      *
-     * @param \Illuminate\Http\Request   $request
-     * @param \Firefly\Models\Discussion $discussion
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Firefly\Models\Discussion  $discussion
      * @param $slug
-     * @param \Firefly\Models\Discussion $discussion
-     *
+     * @param  \Firefly\Models\Discussion  $discussion
      * @return \Illuminate\Http\RedirectResponse
      */
     public function delete(Request $request, Post $post)

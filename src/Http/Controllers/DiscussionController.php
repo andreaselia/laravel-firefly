@@ -2,6 +2,7 @@
 
 namespace Firefly\Http\Controllers;
 
+use Firefly\Features;
 use Firefly\Http\Requests\StoreDiscussionRequest;
 use Firefly\Http\Requests\UpdateDiscussionRequest;
 use Firefly\Models\Discussion;
@@ -68,7 +69,8 @@ class DiscussionController extends Controller
     public function show(Discussion $discussion)
     {
         return view('firefly::discussions.show')->withDiscussion($discussion)
-            ->withPosts($discussion->posts()->when(config('firefly.features.correct_posts'), fn ($query) => $query->orderBy('is_correct', 'desc'))->paginate(config('firefly.pagination.posts')));
+            ->withPosts($discussion->posts()->when(Features::enabled('correct_posts'), fn ($query) => $query->orderBy('is_correct', 'desc'))
+            ->paginate(config('firefly.pagination.posts')));
     }
 
     /**
