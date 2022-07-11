@@ -74,8 +74,9 @@ class PostService
     {
         Post::where('discussion_id', $post->discussion_id)
             ->where('is_correct', true)
-            ->update(['is_correct'=>false]);
-        $post->update(['is_correct'=>true]);
+            ->update(['is_correct' => false]);
+
+        $post->update(['is_correct' => true]);
 
         return $post;
     }
