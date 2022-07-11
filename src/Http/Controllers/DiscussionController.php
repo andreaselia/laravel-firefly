@@ -68,9 +68,12 @@ class DiscussionController extends Controller
      */
     public function show(Discussion $discussion)
     {
+        $posts = $discussion->posts()
+            ->when(Features::enabled('correct_posts'), fn ($query) => $query->orderBy('is_correct', 'desc'))
+            ->paginate(config('firefly.pagination.posts'));
+
         return view('firefly::discussions.show')->withDiscussion($discussion)
-            ->withPosts($discussion->posts()->when(Features::enabled('correct_posts'), fn ($query) => $query->orderBy('is_correct', 'desc'))
-            ->paginate(config('firefly.pagination.posts')));
+            ->withPosts($posts);
     }
 
     /**

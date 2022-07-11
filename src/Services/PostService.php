@@ -88,7 +88,7 @@ class PostService
      */
     public function unsetCorrect(Post $post)
     {
-        $post->update(['is_correct'=>false]);
+        $post->update(['is_correct' => false]);
 
         return $post;
     }
