@@ -143,4 +143,13 @@ class Discussion extends Model
             }
         });
     }
+
+    public function scopeWithIsAnswered(Builder $builder)
+    {
+        $builder->when(Features::enabled('correct_posts'), function ($query) {
+            $query->withExists([
+                'posts as is_answered' => fn ($query) => $query->where('is_correct', 1),
+            ]);
+        });
+    }
 }

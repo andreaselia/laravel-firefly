@@ -14,7 +14,8 @@ class AlterPostsAddIsCorrect extends Migration
     public function up()
     {
         Schema::table('posts', function (Blueprint $table) {
-            $table->boolean('is_correct')->default(0)->after('content');
+            $table->boolean('is_initial_post')->default(0)->after('content');
+            $table->boolean('is_correct')->default(0)->after('is_initial_post');
         });
     }
 
@@ -26,7 +27,7 @@ class AlterPostsAddIsCorrect extends Migration
     public function down()
     {
         Schema::table('posts', function (Blueprint $table) {
-            $table->dropColumn('is_correct');
+            $table->dropColumn(['is_correct', 'is_initial_post']);
         });
     }
 }

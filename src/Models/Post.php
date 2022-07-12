@@ -15,6 +15,7 @@ class Post extends Model
     protected $fillable = [
         'content',
         'formatting',
+        'is_initial_post',
         'is_correct',
     ];
 
