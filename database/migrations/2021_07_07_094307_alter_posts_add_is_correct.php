@@ -1,7 +1,9 @@
 <?php
 
+use Firefly\Models\Discussion;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 class AlterPostsAddIsCorrect extends Migration
@@ -17,6 +19,19 @@ class AlterPostsAddIsCorrect extends Migration
             $table->boolean('is_initial_post')->default(0)->after('content');
             $table->boolean('is_correct')->default(0)->after('is_initial_post');
         });
+
+        Discussion::whereNotExists(function ($query) {
+            $query->select(DB::raw(1))
+                ->from('posts')
+                ->whereRaw('discussion_id = discussions.id')
+                ->where('is_initial_post', 1);
+        })
+            ->select(['id'])
+            ->each(function ($discussion) {
+                $firstPost = $discussion->posts()->orderBy('created_at')->first();
+
+                $firstPost->update(['is_initial_post' => 1]);
+            });
     }
 
     /**
