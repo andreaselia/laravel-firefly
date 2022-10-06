@@ -15,7 +15,7 @@ class AlterPostsAddCorrectedAtAndIsInitialPost extends Migration
     {
         Schema::table('posts', function (Blueprint $table) {
             $table->boolean('is_initial_post')->default(0)->after('formatting');
-            $table->dateTime('corrected_at')->nullable()->after('corrected_at');
+            $table->dateTime('corrected_at')->nullable()->after('is_initial_post');
         });
     }
 
