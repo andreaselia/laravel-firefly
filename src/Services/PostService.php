@@ -2,6 +2,7 @@
 
 namespace Firefly\Services;
 
+use Carbon\Carbon;
 use Firefly\Events\PostAdded;
 use Firefly\Features;
 use Firefly\Models\Discussion;
@@ -73,10 +74,10 @@ class PostService
     public function setCorrect(Post $post)
     {
         Post::where('discussion_id', $post->discussion_id)
-            ->where('is_correct', true)
-            ->update(['is_correct' => false]);
+            ->whereNotNull('corrected_at')
+            ->update(['corrected_at' => null]);
 
-        $post->update(['is_correct' => true]);
+        $post->update(['corrected_at' => Carbon::now()]);
 
         return $post;
     }
@@ -89,7 +90,7 @@ class PostService
      */
     public function unsetCorrect(Post $post)
     {
-        $post->update(['is_correct' => false]);
+        $post->update(['corrected_at' => null]);
 
         return $post;
     }

@@ -24,7 +24,7 @@
                             @csrf
                         </form>
                     @endcan
-                @else
+                @elseif(!$post->is_initial_post)
                     @can ('mark', $post)
                         <button onclick="event.preventDefault(); document.getElementById('mark-post-{{ $post->id }}-form').submit();">
                             <span class="sr-only">{{ __('Mark as Correct') }}</span>

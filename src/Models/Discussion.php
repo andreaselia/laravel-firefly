@@ -152,4 +152,16 @@ class Discussion extends Model
             ]);
         });
     }
+
+    public function initialPost()
+    {
+        return $this->hasOne(Post::class)
+            ->where('is_initial_post', 1);
+    }
+
+    public function correctPost()
+    {
+        return $this->hasOne(Post::class)
+            ->whereNotNull('corrected_at');
+    }
 }

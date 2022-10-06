@@ -51,7 +51,15 @@ class TestCase extends \Orchestra\Testbench\TestCase
      */
     public function enableWatchersFeature()
     {
-        $this->app->config->set('firefly.features.watchers', true);
+        $this->enableFeature('watchers');
+    }
+
+    /**
+     * Enable watchers feature in the app config.
+     */
+    public function enableFeature($feature)
+    {
+        $this->app->config->set("firefly.features.{$feature}", true);
     }
 
     /**
@@ -100,7 +108,7 @@ class TestCase extends \Orchestra\Testbench\TestCase
             'discussion_id' => $this->discussion->id,
             'user_id' => $this->user->id,
             'content' => 'Lorem ipsum',
-            'is_correct' => false,
+            'is_initial_post' => 1,
         ]);
     }
 }

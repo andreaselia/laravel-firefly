@@ -2,6 +2,7 @@
 
 namespace Firefly\Test\Feature\Api;
 
+use Carbon\Carbon;
 use Firefly\Test\TestCase;
 
 class CorrectPostTest extends TestCase
@@ -30,7 +31,7 @@ class CorrectPostTest extends TestCase
 
         $discussion = $this->getDiscussion();
         $post = $this->getPost();
-        $post->update(['is_correct' => true]);
+        $post->update(['corrected_at' => Carbon::now()]);
         $this->assertTrue($post->is_correct);
 
         $response = $this->actingAs($this->getUser(), 'api')
