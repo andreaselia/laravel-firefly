@@ -148,7 +148,7 @@ class Discussion extends Model
     {
         $builder->when(Features::enabled('correct_posts'), function ($query) {
             $query->withExists([
-                'posts as is_answered' => fn ($query) => $query->where('is_correct', 1),
+                'posts as is_answered' => fn ($query) => $query->whereNotNull('corrected_at'),
             ]);
         });
     }
