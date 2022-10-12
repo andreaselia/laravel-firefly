@@ -31,7 +31,7 @@ class PostAddedEmail extends Mailable
     public function build()
     {
         return $this
-            ->subject('New Post Added to Discussion "'.$this->post->discussion->title.'"')
+            ->subject(__('New post added to discussion').' "'.$this->post->discussion->title.'"')
             ->markdown('firefly::mail.new-post');
     }
 }

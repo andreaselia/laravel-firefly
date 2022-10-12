@@ -38,6 +38,12 @@ class TestCase extends \Orchestra\Testbench\TestCase
     {
         $app['config']->set('firefly.api.enabled', true);
         $app['config']->set('firefly.user', User::class);
+
+        $app['config']->set('auth.guards.api', [
+            'driver' => 'token',
+            'provider' => 'users',
+            'hash' => false,
+        ]);
     }
 
     /**
@@ -59,8 +65,7 @@ class TestCase extends \Orchestra\Testbench\TestCase
     /**
      * Get package providers.
      *
-     * @param \Illuminate\Foundation\Application $app
-     *
+     * @param  \Illuminate\Foundation\Application  $app
      * @return array
      */
     protected function getPackageProviders($app)

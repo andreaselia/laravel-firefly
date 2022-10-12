@@ -18,7 +18,7 @@ class DiscussionWatchController extends Controller
     /**
      * Create a new instance of the controller.
      *
-     * @param \Firefly\Services\DiscussionService $service
+     * @param  \Firefly\Services\DiscussionService  $service
      */
     public function __construct(DiscussionService $discussionService)
     {
@@ -30,9 +30,8 @@ class DiscussionWatchController extends Controller
     /**
      * Watch the specified discussion.
      *
-     * @param \Illuminate\Http\Request   $request
-     * @param \Firefly\Models\Discussion $discussion
-     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Firefly\Models\Discussion  $discussion
      * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request, Discussion $discussion)
@@ -47,9 +46,8 @@ class DiscussionWatchController extends Controller
     /**
      * Unwatch the specified discussion.
      *
-     * @param \Illuminate\Http\Request   $request
-     * @param \Firefly\Models\Discussion $discussion
-     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Firefly\Models\Discussion  $discussion
      * @return \Illuminate\Http\RedirectResponse
      */
     public function delete(Request $request, Discussion $discussion)

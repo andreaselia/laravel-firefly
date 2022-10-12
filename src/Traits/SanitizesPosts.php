@@ -9,8 +9,7 @@ trait SanitizesPosts
     /**
      * Returns sanitized content for Posts when using rich formatting and the wysiwyg editor.
      *
-     * @param array $requestData
-     *
+     * @param  array  $requestData
      * @return array
      */
     public function getSanitizedPostData(array $requestData)

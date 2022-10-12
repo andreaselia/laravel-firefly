@@ -14,8 +14,7 @@ class NotifyWatchersPostAdded implements ShouldQueue
     /**
      * Handle the event.
      *
-     * @param PostAdded $event
-     *
+     * @param  PostAdded  $event
      * @return void
      */
     public function handle(PostAdded $event)

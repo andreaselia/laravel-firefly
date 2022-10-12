@@ -10,7 +10,7 @@ class GroupService
     /**
      * Make a new group.
      *
-     * @param Request $request
+     * @param  Request  $request
      * @return mixed
      */
     public function make(Request $request)
@@ -23,8 +23,8 @@ class GroupService
     /**
      * Update the specified group.
      *
-     * @param Request $request
-     * @param Group $group
+     * @param  Request  $request
+     * @param  Group  $group
      * @return bool
      */
     public function update(Request $request, Group $group)
@@ -39,8 +39,9 @@ class GroupService
     /**
      * Delete the speficied group.
      *
-     * @param Group $group
+     * @param  Group  $group
      * @return bool|null
+     *
      * @throws \Exception
      */
     public function delete(Group $group)

@@ -22,7 +22,7 @@ class PostController extends Controller
     /**
      * Create a new instance of the controller.
      *
-     * @param \Firefly\Services\PostService $service
+     * @param  \Firefly\Services\PostService  $service
      */
     public function __construct(PostService $postService)
     {
@@ -32,8 +32,8 @@ class PostController extends Controller
     /**
      * Store the new post.
      *
-     * @param \Firefly\Http\Requests\StorePostRequest $request
-     * @param \Firefly\Models\Discussion $discussion
+     * @param  \Firefly\Http\Requests\StorePostRequest  $request
+     * @param  \Firefly\Models\Discussion  $discussion
      * @return \Illuminate\Http\Response
      */
     public function store(StorePostRequest $request, Discussion $discussion)
@@ -48,10 +48,10 @@ class PostController extends Controller
     /**
      * Update the specified post.
      *
-     * @param \Firefly\Http\Requests\UpdatePostRequest $request
-     * @param \Firefly\Models\Discussion $discussion
+     * @param  \Firefly\Http\Requests\UpdatePostRequest  $request
+     * @param  \Firefly\Models\Discussion  $discussion
      * @param $slug
-     * @param \Firefly\Models\Post $post
+     * @param  \Firefly\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
     public function update(UpdatePostRequest $request, Discussion $discussion, $slug, Post $post)
@@ -66,10 +66,10 @@ class PostController extends Controller
     /**
      * Delete the specified post.
      *
-     * @param \Illuminate\Http\Request $request
-     * @param \Firefly\Models\Discussion $discussion
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Firefly\Models\Discussion  $discussion
      * @param $slug
-     * @param \Firefly\Models\Post $post
+     * @param  \Firefly\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
     public function delete(Request $request, Discussion $discussion, $slug, Post $post)
