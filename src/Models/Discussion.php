@@ -161,4 +161,25 @@ class Discussion extends Model
             });
         });
     }
+
+    public function scopeWithIsAnswered(Builder $builder)
+    {
+        $builder->when(Features::enabled('correct_posts'), function ($query) {
+            $query->withExists([
+                'posts as is_answered' => fn ($query) => $query->whereNotNull('corrected_at'),
+            ]);
+        });
+    }
+
+    public function initialPost()
+    {
+        return $this->hasOne(Post::class)
+            ->where('is_initial_post', 1);
+    }
+
+    public function correctPost()
+    {
+        return $this->hasOne(Post::class)
+            ->whereNotNull('corrected_at');
+    }
 }

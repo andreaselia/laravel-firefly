@@ -103,5 +103,6 @@ return [
             ],
         ],
         'search' => true,
+        'correct_posts' => false,
     ],
 ];

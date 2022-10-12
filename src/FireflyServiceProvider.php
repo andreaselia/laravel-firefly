@@ -2,6 +2,7 @@
 
 namespace Firefly;
 
+use Firefly\Console\Commands\AddInitialPostFlags;
 use Firefly\Events\PostAdded;
 use Firefly\Listeners\NotifyWatchersPostAdded;
 use Illuminate\Support\Facades\Blade;
@@ -31,6 +32,7 @@ class FireflyServiceProvider extends ServiceProvider
         $this->registerRoutes();
         $this->registerPolicies();
         $this->registerEvents();
+        $this->registerCommands();
         $this->loadViews();
     }
 
@@ -181,5 +183,17 @@ class FireflyServiceProvider extends ServiceProvider
             PostAdded::class,
             [NotifyWatchersPostAdded::class, 'handle']
         );
+    }
+
+    /**
+     * Register the package's events.
+     *
+     * @return void
+     */
+    private function registerCommands()
+    {
+        $this->commands([
+            AddInitialPostFlags::class,
+        ]);
     }
 }

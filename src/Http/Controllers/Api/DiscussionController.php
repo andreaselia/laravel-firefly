@@ -2,6 +2,7 @@
 
 namespace Firefly\Http\Controllers\Api;
 
+use Firefly\Features;
 use Firefly\Http\Controllers\Controller;
 use Firefly\Http\Requests\StoreDiscussionRequest;
 use Firefly\Http\Requests\UpdateDiscussionRequest;
@@ -71,7 +72,10 @@ class DiscussionController extends Controller
     {
         return response()->json([
             'discussion' => $discussion,
-            'posts' => $discussion->posts()->withSearch($request->get('search'))->paginate(config('firefly.pagination.posts')),
+            'posts' => $discussion->posts()
+                ->withSearch($request->get('search'))
+                ->when(Features::enabled('correct_posts'), fn ($query) => $query->orderBy('is_initial_post', 'desc')->orderBy('corrected_at', 'desc'))
+                ->paginate(config('firefly.pagination.posts')),
         ]);
     }
 
