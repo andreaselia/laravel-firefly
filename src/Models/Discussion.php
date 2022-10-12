@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User;
+use Illuminate\Support\Facades\DB;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 
@@ -139,6 +140,23 @@ class Discussion extends Model
             if ($user) {
                 $query->withExists(['watchers as is_being_watched' => fn ($query) => $query->where('user_id', $user->id)]);
             }
+        });
+    }
+
+    public function scopeWithSearch(Builder $builder, ?string $search)
+    {
+        $search = strtr($search, ['%' => '\%', '_' => '\_', '\\' => '\\\\']);
+
+        $builder->when(Features::enabled('search') && $search, function ($query) use ($search) {
+            $query->where(function ($query) use ($search) {
+                $query->where('title', 'like', '%'.$search.'%')
+                    ->orWhereExists(function ($query) use ($search) {
+                        $query->select(DB::raw(1))
+                            ->from('posts')
+                            ->whereColumn('discussion_id', 'discussions.id')
+                            ->where('content', 'like', '%'.$search.'%');
+                    });
+            });
         });
     }
 }

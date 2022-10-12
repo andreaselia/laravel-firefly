@@ -2,6 +2,8 @@
 
 namespace Firefly\Models;
 
+use Firefly\Features;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -48,5 +50,14 @@ class Post extends Model
     public function getIsRichlyFormattedAttribute(): bool
     {
         return $this->formatting === 'rich';
+    }
+
+    public function scopeWithSearch(Builder $builder, ?string $search)
+    {
+        $search = strtr($search, ['%' => '\%', '_' => '\_', '\\' => '\\\\']);
+
+        $builder->when(Features::enabled('search') && $search, function ($query) use ($search) {
+            $query->where('content', 'like', '%'.$search.'%');
+        });
     }
 }

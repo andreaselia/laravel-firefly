@@ -22,7 +22,7 @@ class DiscussionController extends Controller
     /**
      * Create a new instance of the controller.
      *
-     * @param \Firefly\Services\DiscussionService $service
+     * @param  \Firefly\Services\DiscussionService  $service
      */
     public function __construct(DiscussionService $discussionService)
     {
@@ -47,7 +47,7 @@ class DiscussionController extends Controller
     /**
      * Store the new discussion.
      *
-     * @param \Firefly\Http\Requests\StoreDiscussionRequest $request
+     * @param  \Firefly\Http\Requests\StoreDiscussionRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function store(StoreDiscussionRequest $request)
@@ -64,21 +64,21 @@ class DiscussionController extends Controller
     /**
      * Show the specified discussion.
      *
-     * @param \Firefly\Models\Discussion $discussion
+     * @param  \Firefly\Models\Discussion  $discussion
      * @return \Illuminate\Http\Response
      */
-    public function show(Discussion $discussion)
+    public function show(Discussion $discussion, Request $request)
     {
         return response()->json([
             'discussion' => $discussion,
-            'posts' => $discussion->posts()->paginate(config('firefly.pagination.posts')),
+            'posts' => $discussion->posts()->withSearch($request->get('search'))->paginate(config('firefly.pagination.posts')),
         ]);
     }
 
     /**
      * Update the specified discussion.
      *
-     * @param \Firefly\Http\Requests\UpdateDiscussionRequest $request
+     * @param  \Firefly\Http\Requests\UpdateDiscussionRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateDiscussionRequest $request, Discussion $discussion)
@@ -93,7 +93,7 @@ class DiscussionController extends Controller
     /**
      * Delete the specified discussion.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function delete(Request $request, Discussion $discussion)
@@ -108,8 +108,8 @@ class DiscussionController extends Controller
     /**
      * Lock the specified discussion.
      *
-     * @param \Illuminate\Http\Request $request
-     * @param \Firefly\Models\Discussion $discussion
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Firefly\Models\Discussion  $discussion
      * @return \Illuminate\Http\Response
      */
     public function lock(Request $request, Discussion $discussion)
@@ -124,8 +124,8 @@ class DiscussionController extends Controller
     /**
      * Unlock the specified discussion.
      *
-     * @param \Illuminate\Http\Request $request
-     * @param \Firefly\Models\Discussion $discussion
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Firefly\Models\Discussion  $discussion
      * @return \Illuminate\Http\Response
      */
     public function unlock(Request $request, Discussion $discussion)
@@ -140,8 +140,8 @@ class DiscussionController extends Controller
     /**
      * Pin the specified discussion.
      *
-     * @param \Illuminate\Http\Request $request
-     * @param \Firefly\Models\Discussion $discussion
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Firefly\Models\Discussion  $discussion
      * @return \Illuminate\Http\Response
      */
     public function pin(Request $request, Discussion $discussion)
@@ -156,8 +156,8 @@ class DiscussionController extends Controller
     /**
      * Unpin the specified discussion.
      *
-     * @param \Illuminate\Http\Request $request
-     * @param \Firefly\Models\Discussion $discussion
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Firefly\Models\Discussion  $discussion
      * @return \Illuminate\Http\Response
      */
     public function unpin(Request $request, Discussion $discussion)

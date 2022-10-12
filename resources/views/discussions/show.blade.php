@@ -32,6 +32,8 @@
 </div>
 
 <div class="space-y-5">
+    <x-search :search="$search"></x-search>
+
     @if (! $posts->count())
         <x-no-results>
             {{ __('There are no posts; You could be the first to create one.') }}
