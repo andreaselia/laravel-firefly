@@ -75,7 +75,7 @@ class DiscussionController extends Controller
 
         return view('firefly::discussions.show')->withDiscussion($discussion)
             ->withPosts($posts)
-            ->withSearch('search', $request->get('search'));
+            ->withSearch($request->get('search'));
     }
 
     /**
