@@ -102,7 +102,7 @@ return [
                 ['clean'],
             ],
         ],
-        'search' => true,
+        'search' => false,
         'correct_posts' => false,
     ],
 ];
