@@ -102,6 +102,6 @@ return [
                 ['clean'],
             ],
         ],
-        'search' => true,
+        'search' => false,
     ],
 ];
