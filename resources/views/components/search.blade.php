@@ -3,7 +3,7 @@
 @if (\Firefly\Features::enabled('search'))
     <form method="GET">
         <div>
-            <label for="search" class="block text-lg font-medium text-gray-700 hidden">Quick search</label>
+            <label for="search" class="sr-only">Quick search</label>
             <div class="relative mt-1 flex items-center">
                 <input
                     type="search"

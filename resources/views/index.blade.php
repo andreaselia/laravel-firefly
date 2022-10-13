@@ -5,7 +5,7 @@
     {{ __('Discussions') }}
 </h2>
 
-<x-search :search="$search"></x-search>
+<x-search :search="$search" />
 
 @if (! $discussions->count())
     <x-no-results>

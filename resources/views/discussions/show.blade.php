@@ -32,7 +32,7 @@
 </div>
 
 <div class="space-y-5">
-    <x-search :search="$search"></x-search>
+    <x-search :search="$search" />
 
     @if (! $posts->count())
         <x-no-results>
