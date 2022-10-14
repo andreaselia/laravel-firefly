@@ -24,11 +24,11 @@ trait SanitizesPosts
 
             $prevUseErrors = libxml_use_internal_errors(true);
             $dom = new \DOMDocument();
-            $dom->loadHTML('<root>' . $requestData['content'] . '</root>', LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+            $dom->loadHTML('<root>'.$requestData['content'].'</root>', LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
             $xpath = new \DOMXPath($dom);
             $selfClosingElements = ['area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input', 'link', 'meta', 'param', 'source', 'track', 'wbr'];
-            foreach( $xpath->query('//*[not(node())]') as $node ) {
-                if(!in_array($node->localName, $selfClosingElements)) {
+            foreach ($xpath->query('//*[not(node())]') as $node) {
+                if (! in_array($node->localName, $selfClosingElements)) {
                     $node->parentNode->removeChild($node);
                 }
             }
