@@ -16,7 +16,7 @@ class Features
     {
         $features = config('firefly.features', []);
 
-        if (!array_key_exists($feature, $features)) {
+        if (! array_key_exists($feature, $features)) {
             return false;
         }
 
