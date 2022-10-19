@@ -70,12 +70,14 @@ class GroupController extends Controller
     /**
      * Show the discussions for the specified group.
      *
-     * @param \Firefly\Models\Group $group
+     * @param  \Firefly\Models\Group  $group
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\View\View
      */
-    public function show(Group $group)
+    public function show(Group $group, Request $request)
     {
         $discussions = $group->discussions()
+            ->withIsBeingWatched($request->user())
             ->orderBy('pinned_at', 'desc')
             ->orderBy('created_at', 'desc')
             ->paginate(config('firefly.pagination.discussions'));
