@@ -22,7 +22,18 @@ trait SanitizesPosts
                 $requestData['content'] = preg_replace('/<\\/?'.$tag.'(.|\\s)*?>/i', '', $requestData['content']);
             }
 
-            return $requestData;
+            $prevUseErrors = libxml_use_internal_errors(true);
+            $dom = new \DOMDocument();
+            $dom->loadHTML('<root>'.$requestData['content'].'</root>', LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+            $xpath = new \DOMXPath($dom);
+            $selfClosingElements = ['area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input', 'link', 'meta', 'param', 'source', 'track', 'wbr'];
+            foreach ($xpath->query('//*[not(node())]') as $node) {
+                if (! in_array($node->localName, $selfClosingElements)) {
+                    $node->parentNode->removeChild($node);
+                }
+            }
+            $requestData['content'] = substr($dom->saveHTML(), 6, -8);
+            libxml_use_internal_errors($prevUseErrors);
         }
 
         return $requestData;
