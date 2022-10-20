@@ -65,4 +65,11 @@ class SanitizesPostsTest extends TestCase
 
         $this->assertEquals(['formatting' => 'rich', 'content' => '<p><b>Test</b></p><p>hi</p>'], $this->testClass->getSanitizedPostData(['formatting' => 'rich', 'content' => '</p ><p><p><b >Test</p><p>hi</p >']));
     }
+
+    public function test_emojis_with_wyswig_enabled_and_rich_text_submitted()
+    {
+        $this->app->config->set('firefly.features.wysiwyg.enabled', true);
+
+        $this->assertEquals(['formatting' => 'rich', 'content' => '<p>&#127995;&zwj;&#127806;</p>'], $this->testClass->getSanitizedPostData(['formatting' => 'rich', 'content' => '<p>🏻‍🌾</p>']));
+    }
 }
