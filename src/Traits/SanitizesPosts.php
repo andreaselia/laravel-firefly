@@ -24,6 +24,7 @@ trait SanitizesPosts
 
             $prevUseErrors = libxml_use_internal_errors(true);
             $dom = new \DOMDocument();
+            $requestData['content'] = mb_convert_encoding($requestData['content'], 'HTML-ENTITIES', 'UTF-8');
             $dom->loadHTML('<root>'.$requestData['content'].'</root>', LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
             $xpath = new \DOMXPath($dom);
             $selfClosingElements = ['area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input', 'link', 'meta', 'param', 'source', 'track', 'wbr'];
