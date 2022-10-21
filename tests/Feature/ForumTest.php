@@ -66,7 +66,6 @@ class ForumTest extends TestCase
         $discussion = Discussion::create([
             'user_id'  => $this->getUser()->id,
             'title'    => 'I want to search for content',
-            'group_id' => $this->getGroup()->id,
         ]);
 
         Post::create([
@@ -78,7 +77,6 @@ class ForumTest extends TestCase
         $discussionTwo = Discussion::create([
             'user_id'  => $this->getUser()->id,
             'title'    => 'I do not like finding content',
-            'group_id' => $this->getGroup()->id,
         ]);
 
         Post::create([
@@ -90,7 +88,6 @@ class ForumTest extends TestCase
         $discussionThree = Discussion::create([
             'user_id'  => $this->getUser()->id,
             'title'    => 'I like finding content in posts',
-            'group_id' => $this->getGroup()->id,
         ]);
 
         Post::create([

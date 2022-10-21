@@ -8,7 +8,6 @@ use Firefly\Services\DiscussionService;
 use Firefly\Test\Fixtures\Discussion;
 use Firefly\Test\Fixtures\Post;
 use Firefly\Test\TestCase;
-use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Str;
 
 class DiscussionTest extends TestCase

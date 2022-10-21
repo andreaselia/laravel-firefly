@@ -62,9 +62,10 @@ class GroupController extends Controller
      * @param  \Firefly\Models\Group  $group
      * @return \Illuminate\Http\Response
      */
-    public function show(Group $group)
+    public function show(Group $group, Request $request)
     {
         $discussions = $group->discussions()
+            ->withSearch($request->get('search'))
             ->orderBy('pinned_at', 'asc')
             ->orderBy('created_at', 'desc')
             ->paginate(config('firefly.pagination.discussions'));
