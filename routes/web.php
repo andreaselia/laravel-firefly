@@ -37,5 +37,8 @@ Route::name(config('firefly.web.name'))->group(function () {
     // Posts...
     Route::group(['prefix' => config('firefly.prefix.post')], function () {
         Route::get('{post}/edit', 'PostController@edit')->name('post.edit');
+
+        Route::post('{post}/correct', 'CorrectPostController@store')->name('post.correct');
+        Route::delete('{post}/correct', 'CorrectPostController@delete')->name('post.incorrect');
     });
 });

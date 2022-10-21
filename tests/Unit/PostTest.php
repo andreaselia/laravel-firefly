@@ -36,6 +36,14 @@ class PostTest extends TestCase
         $this->assertEquals('<p>This is<br>a rich text post</p>', $post->formattedContent);
     }
 
+    public function test_can_get_is_initial_post()
+    {
+        $post = $this->getPost();
+        $post->update(['is_initial_post' => 1]);
+
+        $this->assertTrue($post->is_initial_post);
+    }
+
     public function test_can_search_posts()
     {
         $this->enableFeature('search');

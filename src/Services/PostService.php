@@ -2,6 +2,7 @@
 
 namespace Firefly\Services;
 
+use Carbon\Carbon;
 use Firefly\Events\PostAdded;
 use Firefly\Features;
 use Firefly\Models\Discussion;
@@ -62,5 +63,35 @@ class PostService
     public function delete(Post $post)
     {
         return $post->delete();
+    }
+
+    /**
+     * Mark the specified post as correct.
+     *
+     * @param  Post  $post
+     * @return Post
+     */
+    public function setCorrect(Post $post)
+    {
+        Post::where('discussion_id', $post->discussion_id)
+            ->whereNotNull('corrected_at')
+            ->update(['corrected_at' => null]);
+
+        $post->update(['corrected_at' => Carbon::now()]);
+
+        return $post;
+    }
+
+    /**
+     * Mark the specified post as not correct.
+     *
+     * @param  Post  $post
+     * @return Post
+     */
+    public function unsetCorrect(Post $post)
+    {
+        $post->update(['corrected_at' => null]);
+
+        return $post;
     }
 }

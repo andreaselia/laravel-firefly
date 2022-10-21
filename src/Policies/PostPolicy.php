@@ -79,4 +79,28 @@ class PostPolicy
     {
         return true;
     }
+
+    /**
+     * Determine whether the user can mark the post correct.
+     *
+     * @param  $user
+     * @param  \Firefly\Models\Post  $post
+     * @return mixed
+     */
+    public function mark($user, Post $post)
+    {
+        return true;
+    }
+
+    /**
+     * Determine whether the user can unmark the post correct.
+     *
+     * @param  $user
+     * @param  \Firefly\Models\Post  $post
+     * @return mixed
+     */
+    public function unmark($user, Post $post)
+    {
+        return true;
+    }
 }
