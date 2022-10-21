@@ -11,5 +11,17 @@ class Post extends Model
         'content',
         'user_id',
         'discussion_id',
+        'corrected_at',
+        'is_initial_post',
+    ];
+
+    /** @var array */
+    protected $dates = [
+        'corrected_at',
+    ];
+
+    /** @var array */
+    protected $casts = [
+        'is_initial_post' => 'boolean',
     ];
 }

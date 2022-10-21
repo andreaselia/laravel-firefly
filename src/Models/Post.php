@@ -15,11 +15,14 @@ class Post extends Model
     protected $fillable = [
         'content',
         'formatting',
+        'is_initial_post',
+        'corrected_at',
     ];
 
     /** @var array */
     protected $dates = [
         'deleted_at',
+        'corrected_at',
     ];
 
     public function user(): BelongsTo
@@ -48,5 +51,10 @@ class Post extends Model
     public function getIsRichlyFormattedAttribute(): bool
     {
         return $this->formatting === 'rich';
+    }
+
+    public function getIsCorrectAttribute()
+    {
+        return ! is_null($this->corrected_at);
     }
 }

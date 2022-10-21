@@ -88,6 +88,17 @@ You can enable a WYSIWYG editor by adding/updating the flag in the config like s
 
 The snow theme and basic editing controls are provided out of the box in the config, but these can be modified to fit your needs.
 
+### Correct Posts
+
+You can enable the ability to mark a post as "correct" indicating that it answers the question or is a promoted post.
+
+```php
+'features' => [
+    'correct_posts' => true,
+    // ...
+],
+```
+
 ### Policies
 
 By default, Firefly policies are very permissive. In order to customize the permissions for your own application, please use your `AuthServiceProvider` file to overwrite the policies by following the steps below.

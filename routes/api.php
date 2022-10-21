@@ -29,3 +29,7 @@ Route::group(['prefix' => config('firefly.prefix.group')], function () {
 });
 
 // Posts...
+Route::group(['prefix' => config('firefly.prefix.post')], function () {
+    Route::post('{post}/correct', 'CorrectPostController@store');
+    Route::delete('{post}/correct', 'CorrectPostController@delete');
+});
