@@ -55,6 +55,11 @@ class Post extends Model
         return $this->formatting === 'rich';
     }
 
+    public function getIsCorrectAttribute()
+    {
+        return ! is_null($this->corrected_at);
+    }
+
     public function scopeWithSearch(Builder $builder, ?string $search)
     {
         $search = strtr($search, ['%' => '\%', '_' => '\_', '\\' => '\\\\']);
@@ -62,10 +67,5 @@ class Post extends Model
         $builder->when(Features::enabled('search') && $search, function ($query) use ($search) {
             $query->where('content', 'like', '%'.$search.'%');
         });
-    }
-
-    public function getIsCorrectAttribute()
-    {
-        return ! is_null($this->corrected_at);
     }
 }

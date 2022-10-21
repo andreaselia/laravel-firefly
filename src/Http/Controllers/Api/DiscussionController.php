@@ -72,9 +72,8 @@ class DiscussionController extends Controller
     {
         return response()->json([
             'discussion' => $discussion,
-            'posts' => $discussion->posts()
-                ->withSearch($request->get('search'))
-                ->when(Features::enabled('correct_posts'), fn ($query) => $query->orderBy('is_initial_post', 'desc')->orderBy('corrected_at', 'desc'))
+            'posts' => $discussion->posts()->withSearch($request->get('search'))
+                ->when(Features::enabled('correct_posts'), fn ($query) => $query->orderBy('is_initial_post', 'desc')->orderBy('corrected_at', 'desc')->orderBy('created_at', 'asc'))
                 ->paginate(config('firefly.pagination.posts')),
         ]);
     }

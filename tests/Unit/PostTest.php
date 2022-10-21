@@ -2,6 +2,7 @@
 
 namespace Firefly\Test\Unit;
 
+use Firefly\Test\Fixtures\Post;
 use Firefly\Test\TestCase;
 
 class PostTest extends TestCase
@@ -41,5 +42,34 @@ class PostTest extends TestCase
         $post->update(['is_initial_post' => 1]);
 
         $this->assertTrue($post->is_initial_post);
+    }
+
+    public function test_can_search_posts()
+    {
+        $this->enableFeature('search');
+
+        Post::truncate();
+
+        Post::create([
+            'discussion_id' => $this->getDiscussion()->id,
+            'user_id' => $this->getUser()->id,
+            'content' => 'Match for iPhone search',
+        ]);
+
+        Post::create([
+            'discussion_id' => $this->getDiscussion()->id,
+            'user_id' => $this->getUser()->id,
+            'content' => 'No match for i Phone search',
+        ]);
+
+        Post::create([
+            'discussion_id' => $this->getDiscussion()->id,
+            'user_id' => $this->getUser()->id,
+            'content' => 'Another match for iPhone search',
+        ]);
+
+        $this->assertEquals(3, Post::count());
+        $this->assertEquals(2, Post::withSearch('iphone')->count());
+        $this->assertEquals(1, Post::withSearch('i phone')->count());
     }
 }

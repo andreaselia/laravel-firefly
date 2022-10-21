@@ -34,6 +34,8 @@
 @endif
 
 <div class="space-y-5">
+    <x-search :search="$search" />
+
     @foreach ($discussions as $discussion)
         <x-discussion-item :discussion="$discussion" :show-groups="false" />
     @endforeach
