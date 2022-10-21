@@ -55,15 +55,7 @@ class TestCase extends \Orchestra\Testbench\TestCase
     }
 
     /**
-     * Enable watchers feature in the app config.
-     */
-    public function enableFeature($feature)
-    {
-        $this->app->config->set("firefly.features.{$feature}", true);
-    }
-
-    /**
-     * Enable watchers feature in the app config.
+     * Enable feature in the app config.
      */
     public function enableFeature($feature)
     {
