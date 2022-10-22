@@ -10,11 +10,10 @@
     <title>{{ config('app.name', 'Firefly') }}</title>
 
     <!-- Styles -->
-    <link rel="stylesheet" href="{{ asset('vendor/firefly/css/app.css') }}">
+    @vite('vendor/firefly/css/app.css')
 
     <!-- Scripts -->
-    <script src="{{ asset('vendor/firefly/js/app.js') }}" defer></script>
-    @vite('resources/css/app.css')
+    @vite('vendor/firefly/js/app.js')
     @if (Firefly\Features::enabled('wysiwyg'))
     <script src="//cdn.quilljs.com/1.3.6/quill.min.js"></script>
     <link href="https://cdn.quilljs.com/1.3.6/quill.{{ Firefly\Features::option('wysiwyg', 'theme') }}.css" rel="stylesheet">
