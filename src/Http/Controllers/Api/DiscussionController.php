@@ -68,12 +68,12 @@ class DiscussionController extends Controller
      * @param  \Firefly\Models\Discussion  $discussion
      * @return \Illuminate\Http\Response
      */
-    public function show(Discussion $discussion)
+    public function show(Discussion $discussion, Request $request)
     {
         return response()->json([
             'discussion' => $discussion,
-            'posts' => $discussion->posts()
-                ->when(Features::enabled('correct_posts'), fn ($query) => $query->orderBy('is_initial_post', 'desc')->orderBy('corrected_at', 'desc'))
+            'posts' => $discussion->posts()->withSearch($request->get('search'))
+                ->when(Features::enabled('correct_posts'), fn ($query) => $query->orderBy('is_initial_post', 'desc')->orderBy('corrected_at', 'desc')->orderBy('created_at', 'asc'))
                 ->paginate(config('firefly.pagination.posts')),
         ]);
     }

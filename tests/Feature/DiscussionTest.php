@@ -301,7 +301,9 @@ class DiscussionTest extends TestCase
             'corrected_at' => Carbon::now(),
         ]);
 
-        $view = (new DiscussionController(new DiscussionService()))->show($this->getDiscussion());
+        $request = new \Illuminate\Http\Request();
+
+        $view = (new DiscussionController(new DiscussionService()))->show($this->getDiscussion(), $request);
         $data = $view->getData();
         $posts = $data['posts']->items();
 

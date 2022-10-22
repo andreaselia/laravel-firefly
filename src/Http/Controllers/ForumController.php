@@ -20,9 +20,12 @@ class ForumController extends Controller
         $discussions = Discussion::query()
             ->withIsBeingWatched($request->user())
             ->withIsAnswered()
+            ->withSearch($request->get('search'))
             ->orderBy('created_at', 'desc')
             ->paginate(config('firefly.pagination.discussions'));
 
-        return view('firefly::index')->with(compact('groups', 'discussions'));
+        return view('firefly::index')
+            ->with(compact('groups', 'discussions'))
+            ->withSearch($request->get('search'));
     }
 }
