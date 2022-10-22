@@ -1,8 +1,10 @@
+/** @type {import('tailwindcss').Config} */
 module.exports = {
-    purge: [
-        './resources/views/**/*.blade.php'
+    content: [
+        "./resources/**/*.blade.php",
     ],
-    plugins: [
-        require('@tailwindcss/forms'),
-    ],
-};
+    theme: {
+        extend: {},
+    },
+    plugins: [require('@tailwindcss/forms')],
+}
