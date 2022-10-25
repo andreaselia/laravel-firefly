@@ -57,4 +57,15 @@ class Post extends Model
     {
         return ! is_null($this->corrected_at);
     }
+
+    public function reactions()
+    {
+        return $this->hasMany(Reaction::class);
+    }
+
+    public function groupedReactions()
+    {
+        return $this->hasMany(Reaction::class)
+            ->grouped();
+    }
 }

@@ -103,4 +103,16 @@ class PostPolicy
     {
         return true;
     }
+
+    /**
+     * Determine whether the user can react to the post.
+     *
+     * @param  $user
+     * @param  \Firefly\Models\Post  $post
+     * @return mixed
+     */
+    public function react($user, Post $post)
+    {
+        return \Firefly\Features::enabled('reactions');
+    }
 }

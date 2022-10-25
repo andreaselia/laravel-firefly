@@ -1,6 +1,6 @@
 @props(['post'])
 
-<x-card>
+<x-card class="relative">
     <div class="flex justify-between items-center">
         <div class="text-sm text-gray-500">
             {{ __('Posted by') }} {{ $post->user->name }} &#8226; {{ $post->created_at->diffForHumans() }}
@@ -69,4 +69,9 @@
     <div class="mt-2 unreset">
         {!! $post->formatted_content !!}
     </div>
+
+    @can('react', $post)
+        @include('firefly::posts.reactions')
+    @endcan
 </x-card>
+

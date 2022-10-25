@@ -32,4 +32,7 @@ Route::group(['prefix' => config('firefly.prefix.group')], function () {
 Route::group(['prefix' => config('firefly.prefix.post')], function () {
     Route::post('{post}/correct', 'CorrectPostController@store');
     Route::delete('{post}/correct', 'CorrectPostController@delete');
+
+    Route::post('{post}/react', 'ReactionController@store');
+    Route::delete('{post}/reaction/{reaction}', 'ReactionController@delete');
 });
