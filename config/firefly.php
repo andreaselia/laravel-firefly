@@ -103,6 +103,7 @@ return [
             ],
         ],
         'correct_posts' => false,
+        'search' => false,
         'reactions' => false,
     ],
 ];

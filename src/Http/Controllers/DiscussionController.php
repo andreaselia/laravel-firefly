@@ -66,13 +66,16 @@ class DiscussionController extends Controller
      * @param  \Firefly\Models\Discussion  $discussion
      * @return \Illuminate\View\View
      */
-    public function show(Discussion $discussion)
+    public function show(Discussion $discussion, Request $request)
     {
         $posts = $discussion->posts()
+            ->withSearch($request->get('search'))
             ->when(Features::enabled('correct_posts'), fn ($query) => $query->orderBy('is_initial_post', 'desc')->orderBy('corrected_at', 'desc')->orderBy('created_at', 'asc'))
             ->paginate(config('firefly.pagination.posts'));
 
-        return view('firefly::discussions.show')->withDiscussion($discussion)
+        return view('firefly::discussions.show')
+            ->withDiscussion($discussion)
+            ->with('search', $request->get('search'))
             ->withPosts($posts);
     }
 

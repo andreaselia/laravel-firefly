@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User;
+use Illuminate\Support\Facades\DB;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 
@@ -163,5 +164,22 @@ class Discussion extends Model
     {
         return $this->hasOne(Post::class)
             ->whereNotNull('corrected_at');
+    }
+
+    public function scopeWithSearch(Builder $builder, ?string $search)
+    {
+        $search = strtr($search, ['%' => '\%', '_' => '\_', '\\' => '\\\\']);
+
+        $builder->when(Features::enabled('search') && $search, function ($query) use ($search) {
+            $query->where(function ($query) use ($search) {
+                $query->where('title', 'like', '%'.$search.'%')
+                    ->orWhereExists(function ($query) use ($search) {
+                        $query->select(DB::raw(1))
+                            ->from('posts')
+                            ->whereColumn('discussion_id', 'discussions.id')
+                            ->where('content', 'like', '%'.$search.'%');
+                    });
+            });
+        });
     }
 }

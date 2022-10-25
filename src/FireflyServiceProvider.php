@@ -82,6 +82,7 @@ class FireflyServiceProvider extends ServiceProvider
         Blade::component('firefly::components.post-item', 'post-item');
         Blade::component('firefly::components.quill-js', 'quill-js');
         Blade::component('firefly::components.rich-textarea', 'rich-textarea');
+        Blade::component('firefly::components.search', 'search');
     }
 
     /**

@@ -2,7 +2,9 @@
 
 namespace Firefly\Test\Feature;
 
+use Firefly\Test\Fixtures\Discussion;
 use Firefly\Test\Fixtures\Group;
+use Firefly\Test\Fixtures\Post;
 use Firefly\Test\TestCase;
 use Illuminate\Support\Str;
 
@@ -134,5 +136,67 @@ class GroupTest extends TestCase
         $response->assertStatus(422);
         $response->assertJsonValidationErrors('name');
         $response->assertJson($validJson);
+    }
+
+    public function test_can_get_discussion_list_with_search()
+    {
+        $this->enableFeature('search');
+
+        Post::truncate();
+        Discussion::truncate();
+
+        $group = $this->getGroup();
+
+        $discussion = Discussion::create([
+            'user_id'  => $this->getUser()->id,
+            'title'    => 'I want to search for content',
+        ]);
+
+        $group->discussions()->save($discussion);
+
+        Post::create([
+            'discussion_id' => $discussion->id,
+            'user_id'       => $this->getUser()->id,
+            'content'       => 'Does Not Match',
+        ]);
+
+        $discussionTwo = Discussion::create([
+            'user_id'  => $this->getUser()->id,
+            'title'    => 'I do not like finding content',
+        ]);
+
+        $group->discussions()->save($discussionTwo);
+
+        Post::create([
+            'discussion_id' => $discussionTwo->id,
+            'user_id'       => $this->getUser()->id,
+            'content'       => 'Does Not Match',
+        ]);
+
+        $discussionThree = Discussion::create([
+            'user_id'  => $this->getUser()->id,
+            'title'    => 'I like finding content in posts',
+        ]);
+
+        $group->discussions()->save($discussionThree);
+
+        Post::create([
+            'discussion_id' => $discussionThree->id,
+            'user_id'       => $this->getUser()->id,
+            'content'       => 'Should search for a match',
+        ]);
+
+        $this->assertEquals(3, Discussion::count());
+        $this->assertEquals(3, $this->getGroup()->discussions->count());
+
+        $response = $this->actingAs($this->getUser())
+            ->get('forum/g/'.$group->slug.'?search=search');
+
+        $discussions = $response->viewData('discussions');
+
+        $this->assertEquals(2, $discussions->count());
+
+        $this->assertEquals($discussion->id, $discussions->first()->id);
+        $this->assertEquals($discussionThree->id, $discussions->skip(1)->first()->id);
     }
 }

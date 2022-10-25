@@ -5,6 +5,8 @@
     {{ __('Discussions') }}
 </h2>
 
+<x-search :search="$search" />
+
 @if (! $discussions->count())
     <x-no-results>
         {{ __('There are no groups; You could be the first to create one.') }}
