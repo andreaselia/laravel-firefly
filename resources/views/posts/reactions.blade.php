@@ -2,7 +2,7 @@
      x-on:keydown.escape.prevent.stop="close($refs.button)"
      x-on:focusin.window="! $refs.panel.contains($event.target) && close()"
      x-id="['dropdown-button-{{$post->id}}']"
-     class="mt-2"
+     class="mt-2 relative"
 >
     <button class="inline-flex items-center rounded-full bg-gray-100 px-3 py-0.5 text-sm font-medium text-gray-800"
             data-tippy-content="React to this Post"
