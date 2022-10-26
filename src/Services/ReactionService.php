@@ -20,9 +20,11 @@ class ReactionService
         $user = $request->user();
 
         if ($request->get('reaction')) {
+            $reactionString = mb_convert_encoding($request->get('reaction'), 'HTML-ENTITIES', 'UTF-8');
+
             $existingReaction = Reaction::where([
                 'user_id'  => $user->id,
-                'reaction' => $request->get('reaction'),
+                'reaction' => $reactionString,
                 'post_id'  => $post->id,
             ])->first();
 
@@ -32,7 +34,7 @@ class ReactionService
 
             $reaction = new Reaction([
                 'user_id'  => $user->id,
-                'reaction' => $request->get('reaction'),
+                'reaction' => $reactionString,
             ]);
 
             $post->reactions()->save($reaction);

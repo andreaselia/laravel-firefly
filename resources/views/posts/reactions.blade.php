@@ -35,7 +35,7 @@
     </div>
     <template x-for="reaction in reactions" :key="reaction.reaction">
         <button class="inline-flex items-center rounded-full bg-gray-100 px-3 py-0.5 text-sm font-medium text-gray-800" x-on:click="sendReaction(reaction.reaction)">
-            <span x-text="reaction.reaction"></span>
+            <span x-html="reaction.reaction"></span>
             <span x-show="reaction.count > 1" class="rounded-full bg-black text-white ml-2 py-0.5 px-2 text-xs" x-text="reaction.count"></span>
         </button>
     </template>
