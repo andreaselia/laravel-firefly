@@ -2,6 +2,7 @@
 
 namespace Firefly\Models;
 
+use Firefly\Features;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -30,5 +31,18 @@ class Reaction extends Model
                 'reaction',
                 DB::raw('count(id) as count'),
             ]);
+    }
+
+    public static function convertReactions($reactions) : string
+    {
+        if ( Features::option('reactions','convert') ) {
+            return json_encode(collect($reactions)->map(function ($reaction) {
+                $reaction->reaction = mb_convert_encoding($reaction->reaction, 'UTF-8', 'HTML-ENTITIES');
+
+                return $reaction;
+            })->toArray());
+        }
+
+        return json_encode($reactions);
     }
 }

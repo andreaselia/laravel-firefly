@@ -104,6 +104,9 @@ return [
         ],
         'correct_posts' => false,
         'search' => false,
-        'reactions' => false,
+        'reactions' => [
+            'enabled' => false,
+            'convert' => true
+        ]
     ],
 ];
