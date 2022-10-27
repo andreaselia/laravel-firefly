@@ -41,7 +41,7 @@ Route::name(config('firefly.web.name'))->group(function () {
         Route::post('{post}/correct', 'CorrectPostController@store')->name('post.correct');
         Route::delete('{post}/correct', 'CorrectPostController@delete')->name('post.incorrect');
 
-        Route::post('{post}/react', 'ReactionController@store')->name('post.react');
-        Route::delete('{post}/reaction/{reaction}', 'ReactionController@delete')->name('post.reaction.delete');
+        Route::post('{post}/reactions', 'ReactionController@store')->name('post.react');
+        Route::delete('{post}/reactions/{reaction}', 'ReactionController@delete')->name('post.reaction.delete');
     });
 });

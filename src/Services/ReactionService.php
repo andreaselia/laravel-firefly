@@ -20,7 +20,7 @@ class ReactionService
         $user = $request->user();
 
         if ($request->get('reaction')) {
-            $reactionString = mb_convert_encoding(mb_substr($request->get('reaction'), 0, 1), 'HTML-ENTITIES', 'UTF-8');
+            $reactionString = $request->get('reaction');
 
             $existingReaction = Reaction::where([
                 'user_id'  => $user->id,

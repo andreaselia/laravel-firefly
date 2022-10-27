@@ -2,6 +2,7 @@
 
 namespace Firefly\Policies;
 
+use Firefly\Features;
 use Firefly\Models\Post;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
@@ -113,6 +114,6 @@ class PostPolicy
      */
     public function react($user, Post $post)
     {
-        return \Firefly\Features::enabled('reactions');
+        return Features::enabled('reactions');
     }
 }

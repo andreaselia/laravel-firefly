@@ -13,7 +13,7 @@ class ReactionTest extends TestCase
         $this->assertEquals(0, $this->getPost()->reactions()->count());
 
         $response = $this->actingAs($this->getUser(), 'api')
-            ->postJson('api/forum/p/'.$this->getPost()->id.'/react', [
+            ->postJson('api/forum/p/'.$this->getPost()->id.'/reactions', [
                 'reaction' => '😀',
             ]);
 
@@ -39,7 +39,7 @@ class ReactionTest extends TestCase
         $this->assertEquals(1, $this->getPost()->reactions()->count());
 
         $response = $this->actingAs($this->getUser(), 'api')
-            ->post('api/forum/p/'.$this->getPost()->id.'/react', [
+            ->post('api/forum/p/'.$this->getPost()->id.'/reactions', [
                 'reaction' => '😀',
             ]);
 
@@ -60,7 +60,7 @@ class ReactionTest extends TestCase
         $this->assertEquals(1, $this->getPost()->reactions()->count());
 
         $response = $this->actingAs($this->getUser(), 'api')
-            ->delete('api/forum/p/'.$this->getPost()->id.'/reaction/'.$reaction->id);
+            ->delete('api/forum/p/'.$this->getPost()->id.'/reactions/'.$reaction->id);
 
         $this->assertEquals(0, Reaction::count());
         $this->assertEquals(0, $this->getPost()->reactions()->count());

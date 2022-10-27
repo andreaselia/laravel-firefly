@@ -1,9 +1,6 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
-.space-y-5 > :not([hidden]) ~ :not([hidden]).mb-10 {
-    margin-bottom: 2.5rem;
-}
 .unreset a {
     @apply text-blue-700 underline;
 }

@@ -79,7 +79,6 @@ function ReactionsToPost{{$post->id}}(reactions) {
             return window.EMOJIS.symbols.sort(() => Math.random() - 0.5).slice(0, 12)
         },
         sendReaction(emoji) {
-            console.log('reaction = ' + emoji);
             fetch(' {{ route('firefly.post.react',['post'=>$post]) }}', {
                 method: 'POST',
                 headers: {'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content, 'Content-Type': 'application/json'},
