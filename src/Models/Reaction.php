@@ -33,9 +33,9 @@ class Reaction extends Model
             ]);
     }
 
-    public static function convertReactions($reactions) : string
+    public static function convertReactions($reactions): string
     {
-        if ( Features::option('reactions','convert') ) {
+        if (Features::option('reactions', 'convert')) {
             return json_encode(collect($reactions)->map(function ($reaction) {
                 $reaction->reaction = mb_convert_encoding($reaction->reaction, 'UTF-8', 'HTML-ENTITIES');
 

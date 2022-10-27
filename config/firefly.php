@@ -106,7 +106,7 @@ return [
         'search' => false,
         'reactions' => [
             'enabled' => false,
-            'convert' => true
-        ]
+            'convert' => true,
+        ],
     ],
 ];

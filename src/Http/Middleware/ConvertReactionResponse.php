@@ -2,7 +2,6 @@
 
 namespace Firefly\Http\Middleware;
 
-
 use Closure;
 use Firefly\Features;
 use Firefly\Models\Reaction;
@@ -24,7 +23,7 @@ class ConvertReactionResponse
          */
         $response = $next($request);
 
-        if ( Features::option('reactions','convert') ) {
+        if (Features::option('reactions', 'convert')) {
             $emojis = json_decode($response->getContent());
             $converted = Reaction::convertReactions($emojis);
 

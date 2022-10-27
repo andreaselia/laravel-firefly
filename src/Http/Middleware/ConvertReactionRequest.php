@@ -2,7 +2,6 @@
 
 namespace Firefly\Http\Middleware;
 
-
 use Closure;
 use Firefly\Features;
 use Illuminate\Http\Request;
@@ -18,10 +17,10 @@ class ConvertReactionRequest
      */
     public function handle(Request $request, Closure $next)
     {
-        if ( Features::option('reactions','convert') ) {
+        if (Features::option('reactions', 'convert')) {
             $values = $request->all();
 
-            if ( array_key_exists('reaction', $values) ) {
+            if (array_key_exists('reaction', $values)) {
                 $values['reaction'] = mb_convert_encoding($values['reaction'], 'HTML-ENTITIES', 'UTF-8');
             }
 
