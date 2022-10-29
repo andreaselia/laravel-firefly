@@ -2,6 +2,7 @@
 
 namespace Firefly\Policies;
 
+use Firefly\Features;
 use Firefly\Models\Post;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
@@ -102,5 +103,17 @@ class PostPolicy
     public function unmark($user, Post $post)
     {
         return true;
+    }
+
+    /**
+     * Determine whether the user can react to the post.
+     *
+     * @param  $user
+     * @param  \Firefly\Models\Post  $post
+     * @return mixed
+     */
+    public function react($user, Post $post)
+    {
+        return Features::enabled('reactions');
     }
 }

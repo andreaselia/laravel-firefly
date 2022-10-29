@@ -18,6 +18,9 @@
     <script src="//cdn.quilljs.com/1.3.6/quill.min.js"></script>
     <link href="https://cdn.quilljs.com/1.3.6/quill.{{ Firefly\Features::option('wysiwyg', 'theme') }}.css" rel="stylesheet">
     @endif
+    @if (Firefly\Features::enabled('reactions'))
+    <script src="{{ asset('vendor/firefly/js/emojis.js') }}"></script>
+    @endif
 </head>
 <body class="bg-white font-sans antialiased text-gray-900">
     <x-header />

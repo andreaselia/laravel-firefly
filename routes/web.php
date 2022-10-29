@@ -1,5 +1,8 @@
 <?php
 
+use Firefly\Http\Middleware\ConvertReactionRequest;
+use Firefly\Http\Middleware\ConvertReactionResponse;
+
 Route::name(config('firefly.web.name'))->group(function () {
     Route::get('/', 'ForumController@index')->name('index');
 
@@ -40,5 +43,11 @@ Route::name(config('firefly.web.name'))->group(function () {
 
         Route::post('{post}/correct', 'CorrectPostController@store')->name('post.correct');
         Route::delete('{post}/correct', 'CorrectPostController@delete')->name('post.incorrect');
+
+        Route::post('{post}/reactions', 'ReactionController@store')->name('post.react')
+            ->middleware([ConvertReactionRequest::class, ConvertReactionResponse::class]);
+
+        Route::delete('{post}/reactions/{reaction}', 'ReactionController@delete')->name('post.unreact')
+            ->middleware([ConvertReactionRequest::class, ConvertReactionResponse::class]);
     });
 });

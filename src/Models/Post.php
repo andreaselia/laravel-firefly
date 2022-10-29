@@ -68,4 +68,15 @@ class Post extends Model
             $query->where('content', 'like', '%'.$search.'%');
         });
     }
+
+    public function reactions()
+    {
+        return $this->hasMany(Reaction::class);
+    }
+
+    public function groupedReactions()
+    {
+        return $this->hasMany(Reaction::class)
+            ->grouped();
+    }
 }

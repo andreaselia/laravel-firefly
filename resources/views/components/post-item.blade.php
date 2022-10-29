@@ -69,4 +69,9 @@
     <div class="mt-2 unreset">
         {!! $post->formatted_content !!}
     </div>
+
+    @can('react', $post)
+        @include('firefly::posts.reactions')
+    @endcan
 </x-card>
+
