@@ -3,7 +3,7 @@
     x-on:keydown.escape.prevent.stop="close($refs.button)"
     x-on:focusin.window="! $refs.panel.contains($event.target) && close()"
     x-id="['dropdown-button-{{$post->id}}']"
-    class="mt-2 relative"
+    class="mt-2 flex items-center space-x-1 relative"
 >
     <button
         class="inline-flex items-center rounded-full bg-gray-100 px-3 py-1 text-sm font-medium text-gray-800"
@@ -22,11 +22,11 @@
         x-show="open"
         @click.away="close($refs.button)"
         style="display: none; width: 24.85rem;"
-        class="absolute left-0 mt-2 p-4 max-h-64 bg-white shadow-md overflow-scroll rounded z-50"
+        class="absolute left-0 mt-2 p-4 bg-white shadow-md border border-gray-100 max-h-64 overflow-scroll rounded z-50"
     >
         <template x-for="ecategory in categories" :key="ecategory.category">
             <button
-                class="inline-block p-2 cursor-pointer hover:bg-blue-100 br border-gray-300 focus:ring-0 focus:outline-0"
+                class="inline-block p-2 cursor-pointer hover:bg-blue-100 rounded-md border-gray-300 focus:ring-0 focus:outline-0"
                 :class="{ 'bg-blue-100': ecategory.group === category }"
                 :title="ecategory.category" x-on:click="category = ecategory.group;"
             >
@@ -34,21 +34,28 @@
             </button>
         </template>
 
-        <input type="search" x-model="search" class="h-10 w-full px-2 mb-2 text-sm border border-1 border-slate-200 bg-gray-50 rounded-md placeholder:text-gray-500" placeholder="Search an emoji...">
+        <x-input id="search" class="block my-2 w-full" type="search" x-model="search" placeholder="Search for an emoji..." />
 
-        <template x-for="emoji in filteredEmojis" :key="emoji.emoji">
-            <button class="inline-block py-2 px-3 m-1 cursor-pointer rounded-md bg-gray-100 hover:bg-blue-100" :title="emoji.keywords" x-on:click="input = emoji.emoji; toggle(); sendReaction(emoji.emoji);">
-                <span class="inline-block w-5 h-5" x-text="emoji.emoji"></span>
+        <div class="grid grid-cols-6 gap-2">
+            <template x-for="emoji in filteredEmojis" :key="emoji.emoji">
+                <button class="inline-block py-2 px-3 cursor-pointer rounded-md bg-gray-100 hover:bg-blue-100" :title="emoji.keywords" x-on:click="input = emoji.emoji; toggle(); sendReaction(emoji.emoji);">
+                    <span class="inline-block w-5 h-5" x-text="emoji.emoji"></span>
+                </button>
+            </template>
+            <span class="text-sm text-gray-900 col-span-full" x-show="!filteredEmojis.length" style="display: none;">
+                No emojis found.
+            </span>
+        </div>
+    </div>
+
+    <div class="gap-2">
+        <template x-for="reaction in reactions" :key="reaction.reaction">
+            <button class="inline-flex items-center rounded-full bg-gray-100 px-3 py-1 text-sm font-medium text-gray-800" x-on:click="sendReaction(reaction.reaction)">
+                <span class="h-4 w-4" x-html="reaction.reaction"></span>
+                <span x-show="reaction.count > 1" class="text-gray-900 ml-2 py-0.5 text-xs font-semibold" x-text="reaction.count"></span>
             </button>
         </template>
     </div>
-
-    <template x-for="reaction in reactions" :key="reaction.reaction">
-        <button class="inline-flex items-center rounded-full bg-gray-100 px-3 py-1 text-sm font-medium text-gray-800" x-on:click="sendReaction(reaction.reaction)">
-            <span class="h-4 w-4" x-html="reaction.reaction"></span>
-            <span x-show="reaction.count > 1" class="text-gray-900 ml-2 py-0.5 text-xs font-semibold" x-text="reaction.count"></span>
-        </button>
-    </template>
 </div>
 
 <script>
