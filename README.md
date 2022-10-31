@@ -90,7 +90,9 @@ The snow theme and basic editing controls are provided out of the box in the con
 
 ### Correct Posts
 
-You can enable the ability to mark a post as "correct" indicating that it answers the question or is a promoted post.
+You can enable the ability to mark a post as "correct" indicating that it answers the question or is a promoted post. Correct posts are promoted to the top, directly under the initial post.
+
+**Note:** If you are enabling this on an existing install, you should make sure to run database migrations and then run the `posts:set-initial-flag` command, to bring your database up to date. This also introduces two new policies, `mark` and `unmark`.
 
 ```php
 'features' => [
@@ -99,7 +101,25 @@ You can enable the ability to mark a post as "correct" indicating that it answer
 ],
 ```
 
-### Policies
+### Reactions
+
+Enabling reactions allows users to react to posts with emojis. This work similarly to Discord, Slack and other popluar messaging systems. Clicking a reaction will add it to the post. Clicking the same one again will remove it.
+
+If you are running an older version or older charset in mySQL or using another database that does not handle native emojis correctly, enabling the `convert` flag will convert the emojis to and from html entities so they are stored correctly on the back-end. If you are using`utf8mb4` charsets or newer, this is not needed.
+
+**Note:** If you are enabling this on an existing install, you should make sure to run database migrations. This also introduces a new policy `react`.
+
+```php
+'features' => [
+    'reactions' => [
+        'enabled' => true,
+        'convert' => true
+     ]
+    // ...
+],
+```
+
+## Policies
 
 By default, Firefly policies are very permissive. In order to customize the permissions for your own application, please use your `AuthServiceProvider` file to overwrite the policies by following the steps below.
 
