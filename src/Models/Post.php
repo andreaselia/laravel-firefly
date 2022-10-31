@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Collection;
 
 class Post extends Model
 {
@@ -74,9 +75,22 @@ class Post extends Model
         return $this->hasMany(Reaction::class);
     }
 
-    public function groupedReactions()
+    public function groupedReactions(): Collection
     {
         return $this->hasMany(Reaction::class)
-            ->grouped();
+            ->with('user')
+            ->get()
+            ->groupBy('reaction')
+            ->map(function ($reactionGroup, $reaction) {
+                return [
+                    'reaction' => $reaction,
+                    'count'    => $reactionGroup->count(),
+                    'users'    => $reactionGroup
+                        ->sortByDesc(fn ($reactionGroup) => $reactionGroup->user->id == auth()->id() ? 1 : 0)
+                        ->map(fn ($reactionGroup) => $reactionGroup->user->id == auth()->id() ? 'You' : $reactionGroup->user->{config('firefly.name')})
+                        ->implode(', '),
+                ];
+            })
+            ->values();
     }
 }

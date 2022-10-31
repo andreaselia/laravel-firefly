@@ -20,7 +20,7 @@ class ReactionTest extends TestCase
         $this->assertEquals(1, Reaction::count());
         $this->assertEquals(1, $this->getPost()->reactions()->count());
 
-        $reactions = $this->getPost()->groupedReactions->toArray();
+        $reactions = $this->getPost()->groupedReactions()->toArray();
         $response->assertJson($reactions);
     }
 

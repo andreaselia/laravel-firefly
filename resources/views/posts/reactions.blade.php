@@ -1,5 +1,6 @@
 <div
-    x-data="ReactionsToPost{{$post->id}}({{\Firefly\Models\Reaction::convertReactions($post->groupedReactions)}})"
+    x-data="ReactionsToPost{{$post->id}}({{\Firefly\Models\Reaction::convertReactions($post->groupedReactions())}})"
+    x-init="initReactions"
     x-on:keydown.escape.prevent.stop="close($refs.button)"
     x-on:focusin.window="! $refs.panel.contains($event.target) && close()"
     x-id="['dropdown-button-{{$post->id}}']"
@@ -50,7 +51,9 @@
 
     <div class="gap-2">
         <template x-for="reaction in reactions" :key="reaction.reaction">
-            <button class="inline-flex items-center rounded-full bg-gray-100 px-3 py-1 text-sm font-medium text-gray-800" x-on:click="sendReaction(reaction.reaction)">
+            <button class="inline-flex items-center rounded-full bg-gray-100 px-3 py-1 text-sm font-medium text-gray-800"
+                    :data-tippy-content="reaction.users + ' reacted with ' + reaction.reaction"
+                    x-on:click="sendReaction(reaction.reaction)">
                 <span class="h-4 w-4" x-html="reaction.reaction"></span>
                 <span x-show="reaction.count > 1" class="text-gray-900 ml-2 py-0.5 text-xs font-semibold" x-text="reaction.count"></span>
             </button>
@@ -96,6 +99,9 @@ function ReactionsToPost{{$post->id}}(reactions) {
 
             return window.EMOJIS.symbols.sort(() => Math.random() - 0.5).slice(0, 12);
         },
+        initReactions() {
+            window.tippy('[data-tippy-content]');
+        },
         sendReaction(emoji) {
             fetch('{{ route('firefly.post.react', ['post' => $post]) }}', {
                 method: 'POST',
@@ -108,7 +114,10 @@ function ReactionsToPost{{$post->id}}(reactions) {
                 })
             })
                 .then((response) => response.json())
-                .then((reactions) => this.reactions = reactions)
+                .then((reactions) => {
+                    this.reactions = reactions;
+                    this.$nextTick(() => window.tippy('[data-tippy-content]'))
+                })
                 .catch(() => {
                     console.log('Ooops! Something went wrong!')
                 });
