@@ -96,6 +96,8 @@ function ReactionsToPost{{$post->id}}() {
         },
         categories: window.EMOJIS.categories,
         get filteredEmojis() {
+            this.$nextTick(() => window.tippy('[data-tippy-content]'))
+
             if (this.search != '') {
                 return window.EMOJIS.symbols.filter(symbol => symbol.keywords.includes(this.search));
             }
