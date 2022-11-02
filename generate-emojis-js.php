@@ -5,7 +5,7 @@ require_once './vendor/autoload.php';
 //replace with an access key obtained from https://emoji-api.com/
 $accessKey = '';
 
-$ch = curl_init('https://emoji-api.com/emojis?access_key=' . $accessKey);
+$ch = curl_init('https://emoji-api.com/emojis?access_key='.$accessKey);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
 $response = curl_exec($ch);
@@ -22,7 +22,7 @@ foreach ($data as $emoji) {
     if ($emoji->subGroup) {
         $keys[] = str_replace('-', ' ', $emoji->subGroup);
     }
-    if (!$emojis->has($emoji->character)) {
+    if (! $emojis->has($emoji->character)) {
         $emojis->put($emoji->character,
             [
                 'emoji'    => $emoji->character,
@@ -49,6 +49,6 @@ $content = [
     'symbols'    => $emojis->values(),
 ];
 
-$jsFile = 'window.EMOJIS = ' . json_encode($content);
+$jsFile = 'window.EMOJIS = '.json_encode($content);
 
-file_put_contents(dirname(__FILE__) . '/resources/js/emojis.js', $jsFile);
+file_put_contents(dirname(__FILE__).'/resources/js/emojis.js', $jsFile);
