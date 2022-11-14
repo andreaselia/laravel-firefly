@@ -28,7 +28,7 @@ foreach ($data as $emoji) {
                 'emoji'    => $emoji->character,
                 'keywords' => implode(',', $keys),
                 'group'    => $emoji->group,
-                'name'     => $emoji->unicodeName,
+                'name'     => ucwords($emoji->unicodeName),
             ]);
     }
 }
