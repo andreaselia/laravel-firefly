@@ -28,16 +28,17 @@ foreach ($data as $emoji) {
                 'emoji'    => $emoji->character,
                 'keywords' => implode(',', $keys),
                 'group'    => $emoji->group,
+                'name'     => ucwords($emoji->unicodeName),
             ]);
     }
 }
 
 $groups = [
     ['emoji' => '😃', 'category' => 'Smileys', 'group' => 'smileys-emotion'],
-    ['emoji' => '🐻', 'category' => 'Animals &amp; Nature', 'group' => 'animals-nature'],
-    ['emoji' => '🍔', 'category' => 'Food &amp; Drink', 'group' => 'food-drink'],
+    ['emoji' => '🐻', 'category' => 'Animals & Nature', 'group' => 'animals-nature'],
+    ['emoji' => '🍔', 'category' => 'Food & Drink', 'group' => 'food-drink'],
     ['emoji' => '⚽', 'category' => 'Activity', 'group' => 'activities'],
-    ['emoji' => '🚀', 'category' => 'Travel &amp; Places', 'group' => 'travel-places'],
+    ['emoji' => '🚀', 'category' => 'Travel & Places', 'group' => 'travel-places'],
     ['emoji' => '💡', 'category' => 'Objects', 'group' => 'objects'],
     ['emoji' => '💕', 'category' => 'Symbols', 'group' => 'symbols'],
     ['emoji' => '🎌', 'category' => 'Flags', 'group' => 'flags'],

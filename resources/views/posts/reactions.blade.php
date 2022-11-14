@@ -1,5 +1,6 @@
 <div
-    x-data="ReactionsToPost{{$post->id}}({{\Firefly\Models\Reaction::convertReactions($post->groupedReactions)}})"
+    x-data="ReactionsToPost{{$post->id}}()"
+    x-init="initReactions({{\Firefly\Models\Reaction::convertReactions($post->groupedReactions())}})"
     x-on:keydown.escape.prevent.stop="close($refs.button)"
     x-on:focusin.window="! $refs.panel.contains($event.target) && close()"
     x-id="['dropdown-button-{{$post->id}}']"
@@ -28,7 +29,9 @@
             <button
                 class="inline-block p-2 cursor-pointer hover:bg-blue-100 rounded-md border-gray-300 focus:ring-0 focus:outline-0"
                 :class="{ 'bg-blue-100': ecategory.group === category }"
-                :title="ecategory.category" x-on:click="category = ecategory.group;"
+                :data-tippy-content="ecategory.category"
+                :title="ecategory.category"
+                x-on:click="category = ecategory.group;"
             >
                 <span class="inline-block w-5 h-5" x-text="ecategory.emoji" :title="ecategory.category"></span>
             </button>
@@ -38,7 +41,10 @@
 
         <div class="grid grid-cols-6 gap-2">
             <template x-for="emoji in filteredEmojis" :key="emoji.emoji">
-                <button class="inline-block py-2 px-3 cursor-pointer rounded-md bg-gray-100 hover:bg-blue-100" :title="emoji.keywords" x-on:click="input = emoji.emoji; toggle(); sendReaction(emoji.emoji);">
+                <button class="inline-block py-2 px-3 cursor-pointer rounded-md bg-gray-100 hover:bg-blue-100"
+                        :title="emoji.name"
+                        :data-tippy-content="emoji.name"
+                        x-on:click="input = emoji.emoji; toggle(); sendReaction(emoji.emoji);">
                     <span class="inline-block w-5 h-5" x-text="emoji.emoji"></span>
                 </button>
             </template>
@@ -50,7 +56,9 @@
 
     <div class="gap-2">
         <template x-for="reaction in reactions" :key="reaction.reaction">
-            <button class="inline-flex items-center rounded-full bg-gray-100 px-3 py-1 text-sm font-medium text-gray-800" x-on:click="sendReaction(reaction.reaction)">
+            <button class="inline-flex items-center rounded-full bg-gray-100 px-3 py-1 text-sm font-medium text-gray-800"
+                    :data-tippy-content="reaction.users + ' reacted with ' + reaction.reaction + ' (' + reaction.name + ')'"
+                    x-on:click="sendReaction(reaction.reaction)">
                 <span class="h-4 w-4" x-html="reaction.reaction"></span>
                 <span x-show="reaction.count > 1" class="text-gray-900 ml-2 py-0.5 text-xs font-semibold" x-text="reaction.count"></span>
             </button>
@@ -59,13 +67,13 @@
 </div>
 
 <script>
-function ReactionsToPost{{$post->id}}(reactions) {
+function ReactionsToPost{{$post->id}}() {
     return {
         open: false,
         search: '',
         category: '',
         input: '...',
-        reactions: reactions,
+        reactions: [],
         toggle() {
             if (this.open) {
                 return this.close()
@@ -74,6 +82,8 @@ function ReactionsToPost{{$post->id}}(reactions) {
             this.$refs.button.focus()
 
             this.open = true
+
+            this.$nextTick(() => this.resetTippy())
         },
         close(focusAfter) {
             if (! this.open) {
@@ -86,6 +96,8 @@ function ReactionsToPost{{$post->id}}(reactions) {
         },
         categories: window.EMOJIS.categories,
         get filteredEmojis() {
+            this.$nextTick(() => this.resetTippy())
+
             if (this.search != '') {
                 return window.EMOJIS.symbols.filter(symbol => symbol.keywords.includes(this.search));
             }
@@ -95,6 +107,30 @@ function ReactionsToPost{{$post->id}}(reactions) {
             }
 
             return window.EMOJIS.symbols.sort(() => Math.random() - 0.5).slice(0, 12);
+        },
+        initReactions(reactions) {
+            this.mapReactions(reactions)
+            this.resetTippy()
+        },
+        mapReactions(reactions) {
+            for( var i= 0; i < reactions.length; i++ ) {
+                var symbols = window.EMOJIS.symbols.filter(symbol => symbol.emoji == reactions[i].reaction)
+                if ( symbols.length ) {
+                    var symbol = symbols[0]
+                    reactions[i].name = symbol.name
+                } else {
+                    reactions[i].name = ''
+                }
+            }
+            this.reactions = reactions
+        },
+        resetTippy() {
+            [...document.querySelectorAll('[data-tippy-content]')].forEach(node => {
+                if (node._tippy) {
+                    node._tippy.destroy();
+                }
+            });
+            window.tippy('[data-tippy-content]');
         },
         sendReaction(emoji) {
             fetch('{{ route('firefly.post.react', ['post' => $post]) }}', {
@@ -108,7 +144,10 @@ function ReactionsToPost{{$post->id}}(reactions) {
                 })
             })
                 .then((response) => response.json())
-                .then((reactions) => this.reactions = reactions)
+                .then((reactions) => {
+                    this.mapReactions(reactions)
+                    this.$nextTick(() => this.initReactions(reactions))
+                })
                 .catch(() => {
                     console.log('Ooops! Something went wrong!')
                 });

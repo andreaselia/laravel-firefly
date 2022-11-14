@@ -32,13 +32,13 @@ class ReactionController extends Controller
     {
         $post = $this->reactionService->make($request, $post);
 
-        return $post->groupedReactions;
+        return $post->groupedReactions();
     }
 
     public function delete(Post $post, Reaction $reaction)
     {
         $this->reactionService->delete($reaction);
 
-        return $post->groupedReactions;
+        return $post->groupedReactions();
     }
 }
