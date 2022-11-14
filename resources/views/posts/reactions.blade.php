@@ -83,7 +83,7 @@ function ReactionsToPost{{$post->id}}() {
 
             this.open = true
 
-            this.$nextTick(() => window.tippy('[data-tippy-content]'))
+            this.$nextTick(() => this.resetTippy())
         },
         close(focusAfter) {
             if (! this.open) {
@@ -96,7 +96,7 @@ function ReactionsToPost{{$post->id}}() {
         },
         categories: window.EMOJIS.categories,
         get filteredEmojis() {
-            this.$nextTick(() => window.tippy('[data-tippy-content]'))
+            this.$nextTick(() => this.resetTippy())
 
             if (this.search != '') {
                 return window.EMOJIS.symbols.filter(symbol => symbol.keywords.includes(this.search));
@@ -109,7 +109,10 @@ function ReactionsToPost{{$post->id}}() {
             return window.EMOJIS.symbols.sort(() => Math.random() - 0.5).slice(0, 12);
         },
         initReactions(reactions) {
-            window.tippy('[data-tippy-content]');
+            this.mapReactions(reactions)
+            this.resetTippy()
+        },
+        mapReactions(reactions) {
             for( var i= 0; i < reactions.length; i++ ) {
                 var symbols = window.EMOJIS.symbols.filter(symbol => symbol.emoji == reactions[i].reaction)
                 if ( symbols.length ) {
@@ -120,6 +123,14 @@ function ReactionsToPost{{$post->id}}() {
                 }
             }
             this.reactions = reactions
+        },
+        resetTippy() {
+            [...document.querySelectorAll('[data-tippy-content]')].forEach(node => {
+                if (node._tippy) {
+                    node._tippy.destroy();
+                }
+            });
+            window.tippy('[data-tippy-content]');
         },
         sendReaction(emoji) {
             fetch('{{ route('firefly.post.react', ['post' => $post]) }}', {
@@ -134,6 +145,7 @@ function ReactionsToPost{{$post->id}}() {
             })
                 .then((response) => response.json())
                 .then((reactions) => {
+                    this.mapReactions(reactions)
                     this.$nextTick(() => this.initReactions(reactions))
                 })
                 .catch(() => {
