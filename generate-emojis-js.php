@@ -2,7 +2,7 @@
 
 require_once './vendor/autoload.php';
 
-//replace with an access key obtained from https://emoji-api.com/
+// Replace with an access key obtained from https://emoji-api.com/
 $accessKey = '';
 
 $ch = curl_init('https://emoji-api.com/emojis?access_key='.$accessKey);
@@ -16,20 +16,22 @@ $emojis = collect();
 
 foreach ($data as $emoji) {
     $keys = [$emoji->unicodeName];
+
     if ($emoji->group) {
         $keys[] = str_replace('-', ' ', $emoji->group);
     }
+
     if ($emoji->subGroup) {
         $keys[] = str_replace('-', ' ', $emoji->subGroup);
     }
+
     if (! $emojis->has($emoji->character)) {
-        $emojis->put($emoji->character,
-            [
-                'emoji'    => $emoji->character,
-                'keywords' => implode(',', $keys),
-                'group'    => $emoji->group,
-                'name'     => ucwords($emoji->unicodeName),
-            ]);
+        $emojis->put($emoji->character, [
+            'emoji'    => $emoji->character,
+            'keywords' => implode(',', $keys),
+            'group'    => $emoji->group,
+            'name'     => ucwords($emoji->unicodeName),
+        ]);
     }
 }
 

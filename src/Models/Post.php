@@ -30,7 +30,8 @@ class Post extends Model
 
     public function user(): BelongsTo
     {
-        return $this->belongsTo(config('firefly.user'))
+        return $this
+            ->belongsTo(config('firefly.user'))
             ->withDefault([
                 'name' => 'Unknown Author',
             ]);
@@ -48,7 +49,9 @@ class Post extends Model
 
     public function getFormattedContentAttribute(): string
     {
-        return $this->isRichlyFormatted ? $this->content : nl2br(e($this->content));
+        return $this->isRichlyFormatted
+            ? $this->content
+            : nl2br(e($this->content));
     }
 
     public function getIsRichlyFormattedAttribute(): bool
@@ -77,18 +80,21 @@ class Post extends Model
 
     public function groupedReactions(): Collection
     {
-        return $this->hasMany(Reaction::class)
+        return $this
+            ->hasMany(Reaction::class)
             ->with('user')
             ->get()
             ->groupBy('reaction')
             ->map(function ($reactionGroup, $reaction) {
+                $users = $reactionGroup
+                    ->sortByDesc(fn ($reactionGroup) => $reactionGroup->user->id == auth()->id() ? 1 : 0)
+                    ->map(fn ($reactionGroup) => $reactionGroup->user->id == auth()->id() ? __('You') : $reactionGroup->user->{config('firefly.name')})
+                    ->implode(', ');
+
                 return [
                     'reaction' => $reaction,
                     'count'    => $reactionGroup->count(),
-                    'users'    => $reactionGroup
-                        ->sortByDesc(fn ($reactionGroup) => $reactionGroup->user->id == auth()->id() ? 1 : 0)
-                        ->map(fn ($reactionGroup) => $reactionGroup->user->id == auth()->id() ? 'You' : $reactionGroup->user->{config('firefly.name')})
-                        ->implode(', '),
+                    'users'    => $users,
                 ];
             })
             ->values();

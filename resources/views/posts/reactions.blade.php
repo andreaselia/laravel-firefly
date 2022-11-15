@@ -1,14 +1,14 @@
 <div
-    x-data="ReactionsToPost{{$post->id}}()"
-    x-init="initReactions({{\Firefly\Models\Reaction::convertReactions($post->groupedReactions())}})"
+    x-data="ReactionsToPost{{ $post->id }}()"
+    x-init="initReactions({{ \Firefly\Models\Reaction::convertReactions($post->groupedReactions()) }})"
     x-on:keydown.escape.prevent.stop="close($refs.button)"
     x-on:focusin.window="! $refs.panel.contains($event.target) && close()"
-    x-id="['dropdown-button-{{$post->id}}']"
+    x-id="['dropdown-button-{{ $post->id }}']"
     class="mt-2 flex items-center space-x-1 relative"
 >
     <button
         class="inline-flex items-center rounded-full bg-gray-100 px-3 py-1 text-sm font-medium text-gray-800"
-        data-tippy-content="React to this Post"
+        data-tippy-content="{{ __('React to this Post') }}"
         x-ref="button"
         x-on:click="toggle()"
         :aria-expanded="open"
@@ -37,28 +37,33 @@
             </button>
         </template>
 
-        <x-input id="search" class="block my-2 w-full" type="search" x-model="search" placeholder="Search for an emoji..." />
+        <x-input id="search" class="block my-2 w-full" type="search" x-model="search" placeholder="{{ __('Search for an emoji...') }}" />
 
         <div class="grid grid-cols-6 gap-2">
             <template x-for="emoji in filteredEmojis" :key="emoji.emoji">
-                <button class="inline-block py-2 px-3 cursor-pointer rounded-md bg-gray-100 hover:bg-blue-100"
-                        :title="emoji.name"
-                        :data-tippy-content="emoji.name"
-                        x-on:click="input = emoji.emoji; toggle(); sendReaction(emoji.emoji);">
+                <button
+                    class="inline-block py-2 px-3 cursor-pointer rounded-md bg-gray-100 hover:bg-blue-100"
+                    :title="emoji.name"
+                    :data-tippy-content="emoji.name"
+                    x-on:click="input = emoji.emoji; toggle(); sendReaction(emoji.emoji);"
+                >
                     <span class="inline-block w-5 h-5" x-text="emoji.emoji"></span>
                 </button>
             </template>
+
             <span class="text-sm text-gray-900 col-span-full" x-show="!filteredEmojis.length" style="display: none;">
-                No emojis found.
+                {{ __('No emojis found.') }}
             </span>
         </div>
     </div>
 
     <div class="gap-2">
         <template x-for="reaction in reactions" :key="reaction.reaction">
-            <button class="inline-flex items-center rounded-full bg-gray-100 px-3 py-1 text-sm font-medium text-gray-800"
-                    :data-tippy-content="reaction.users + ' reacted with ' + reaction.reaction + ' (' + reaction.name + ')'"
-                    x-on:click="sendReaction(reaction.reaction)">
+            <button
+                class="inline-flex items-center rounded-full bg-gray-100 px-3 py-1 text-sm font-medium text-gray-800"
+                :data-tippy-content="reaction.users + ' reacted with ' + reaction.reaction + ' (' + reaction.name + ')'"
+                x-on:click="sendReaction(reaction.reaction)"
+            >
                 <span class="h-4 w-4" x-html="reaction.reaction"></span>
                 <span x-show="reaction.count > 1" class="text-gray-900 ml-2 py-0.5 text-xs font-semibold" x-text="reaction.count"></span>
             </button>
@@ -67,7 +72,7 @@
 </div>
 
 <script>
-function ReactionsToPost{{$post->id}}() {
+function ReactionsToPost{{ $post->id }}() {
     return {
         open: false,
         search: '',
@@ -76,14 +81,14 @@ function ReactionsToPost{{$post->id}}() {
         reactions: [],
         toggle() {
             if (this.open) {
-                return this.close()
+                return this.close();
             }
 
-            this.$refs.button.focus()
+            this.$refs.button.focus();
 
-            this.open = true
+            this.open = true;
 
-            this.$nextTick(() => this.resetTippy())
+            this.$nextTick(() => this.resetTippy());
         },
         close(focusAfter) {
             if (! this.open) {
@@ -96,7 +101,7 @@ function ReactionsToPost{{$post->id}}() {
         },
         categories: window.EMOJIS.categories,
         get filteredEmojis() {
-            this.$nextTick(() => this.resetTippy())
+            this.$nextTick(() => this.resetTippy());
 
             if (this.search != '') {
                 return window.EMOJIS.symbols.filter(symbol => symbol.keywords.includes(this.search));
@@ -113,16 +118,20 @@ function ReactionsToPost{{$post->id}}() {
             this.resetTippy()
         },
         mapReactions(reactions) {
-            for( var i= 0; i < reactions.length; i++ ) {
-                var symbols = window.EMOJIS.symbols.filter(symbol => symbol.emoji == reactions[i].reaction)
-                if ( symbols.length ) {
-                    var symbol = symbols[0]
-                    reactions[i].name = symbol.name
+            for (let i = 0; i < reactions.length; i++) {
+                const symbols = window.EMOJIS.symbols
+                    .filter(symbol => symbol.emoji == reactions[i].reaction);
+
+                if (symbols.length) {
+                    const symbol = symbols[0];
+
+                    reactions[i].name = symbol.name;
                 } else {
-                    reactions[i].name = ''
+                    reactions[i].name = '';
                 }
             }
-            this.reactions = reactions
+
+            this.reactions = reactions;
         },
         resetTippy() {
             [...document.querySelectorAll('[data-tippy-content]')].forEach(node => {
@@ -130,6 +139,7 @@ function ReactionsToPost{{$post->id}}() {
                     node._tippy.destroy();
                 }
             });
+
             window.tippy('[data-tippy-content]');
         },
         sendReaction(emoji) {
@@ -149,7 +159,7 @@ function ReactionsToPost{{$post->id}}() {
                     this.$nextTick(() => this.initReactions(reactions))
                 })
                 .catch(() => {
-                    console.log('Ooops! Something went wrong!')
+                    console.log('{{ __('Oops! Something went wrong!') }}')
                 });
         }
     }
