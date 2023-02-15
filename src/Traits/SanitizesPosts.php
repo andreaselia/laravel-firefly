@@ -12,11 +12,8 @@ trait SanitizesPosts
 
         if (Features::enabled('wysiwyg') && $formatting === 'rich') {
             $requestData['content'] = $this->sanitizeContent($requestData['content']);
-
             $requestData['content'] = $this->convertToHtmlEntities($requestData['content']);
-
             $requestData['content'] = $this->removeEmptyTags($requestData['content']);
-
             $requestData['content'] = $this->removeRootTag($requestData['content']);
         }
 
@@ -26,9 +23,11 @@ trait SanitizesPosts
     private function sanitizeContent(string $content): string
     {
         $notAllowedTags = ['script'];
+
         foreach ($notAllowedTags as $tag) {
             $content = preg_replace('/<\\/?'.$tag.'(.|\\s)*?>/i', '', $content);
         }
+
         return $content;
     }
 
@@ -41,13 +40,17 @@ trait SanitizesPosts
     {
         $dom = new \DOMDocument();
         $dom->loadHTML($content, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+
         $xpath = new \DOMXPath($dom);
+
         $selfClosingElements = ['area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input', 'link', 'meta', 'param', 'source', 'track', 'wbr'];
+
         foreach ($xpath->query('//*[not(node())]') as $node) {
             if (! in_array($node->localName, $selfClosingElements)) {
                 $node->parentNode->removeChild($node);
             }
         }
+
         return substr($dom->saveHTML(), 6, -8);
     }
 
