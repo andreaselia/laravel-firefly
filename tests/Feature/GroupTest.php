@@ -110,7 +110,7 @@ class GroupTest extends TestCase
         $validJson = [
             'errors' => [
                 'name' => [
-                    'The name must not be greater than 255 characters.',
+                    'The name field must not be greater than 255 characters.',
                 ],
             ],
         ];

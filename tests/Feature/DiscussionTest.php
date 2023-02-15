@@ -179,7 +179,7 @@ class DiscussionTest extends TestCase
         $validJson = [
             'errors' => [
                 'title' => [
-                    'The title must not be greater than 255 characters.',
+                    'The title field must not be greater than 255 characters.',
                 ],
             ],
         ];

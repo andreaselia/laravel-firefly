@@ -1,5 +1,6 @@
 /vendor
 /node_modules
+/.phpunit.cache
 composer.lock
 .phpunit.result.cache
 .idea
