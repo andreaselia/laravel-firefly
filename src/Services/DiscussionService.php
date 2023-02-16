@@ -33,7 +33,7 @@ class DiscussionService
         $group->discussions()->save($discussion);
 
         $data = $this->getSanitizedPostData($request->only(['formatting', 'content']));
-        
+
         // Set the post as the initial post of the discussion
         $data['is_initial_post'] = 1;
 
