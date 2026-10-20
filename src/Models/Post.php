@@ -3,6 +3,7 @@
 namespace Firefly\Models;
 
 use Firefly\Features;
+use Firefly\Support\HtmlSanitizer;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -23,9 +24,9 @@ class Post extends Model
     ];
 
     /** @var array */
-    protected $dates = [
-        'deleted_at',
-        'corrected_at',
+    protected $casts = [
+        'deleted_at' => 'datetime',
+        'corrected_at' => 'datetime',
     ];
 
     public function user(): BelongsTo
@@ -50,7 +51,7 @@ class Post extends Model
     public function getFormattedContentAttribute(): string
     {
         return $this->isRichlyFormatted
-            ? $this->content
+            ? HtmlSanitizer::purify($this->content)
             : nl2br(e($this->content));
     }
 
@@ -66,7 +67,7 @@ class Post extends Model
 
     public function scopeWithSearch(Builder $builder, ?string $search)
     {
-        $search = strtr($search, ['%' => '\%', '_' => '\_', '\\' => '\\\\']);
+        $search = strtr($search ?? '', ['%' => '\%', '_' => '\_', '\\' => '\\\\']);
 
         $builder->when(Features::enabled('search') && $search, function ($query) use ($search) {
             $query->where('content', 'like', '%'.$search.'%');

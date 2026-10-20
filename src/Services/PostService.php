@@ -25,7 +25,7 @@ class PostService
     {
         $user = $request->user();
 
-        $post = $user->posts()->make($this->getSanitizedPostData($request->all()));
+        $post = $user->posts()->make($this->getSanitizedPostData($request->only(['formatting', 'content'])));
 
         $discussion->posts()->save($post);
 
@@ -47,7 +47,7 @@ class PostService
      */
     public function update(Request $request, Post $post)
     {
-        $post->update($this->getSanitizedPostData($request->all()));
+        $post->update($this->getSanitizedPostData($request->only(['formatting', 'content'])));
 
         return $post->refresh();
     }

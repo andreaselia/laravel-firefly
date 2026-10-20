@@ -16,12 +16,8 @@ class Post extends Model
     ];
 
     /** @var array */
-    protected $dates = [
-        'corrected_at',
-    ];
-
-    /** @var array */
     protected $casts = [
+        'corrected_at' => 'datetime',
         'is_initial_post' => 'boolean',
     ];
 }

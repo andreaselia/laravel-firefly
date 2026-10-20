@@ -112,6 +112,8 @@ return [
                 [['list' => 'ordered'], ['list'=> 'bullet']],
                 ['clean'],
             ],
+            // The HTML kept in rich posts, extend this if you add toolbar options (HTML Purifier syntax)
+            'allowed_html' => 'p,br,strong,b,em,i,u,s,ol,ul,li[class],a[href|target]',
         ],
         'correct_posts' => false,
         'search' => false,

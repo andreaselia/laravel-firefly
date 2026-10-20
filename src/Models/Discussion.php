@@ -10,7 +10,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\DB;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
@@ -27,16 +26,10 @@ class Discussion extends Model
     ];
 
     /** @var array */
-    protected $dates = [
-        'locked_at',
-        'pinned_at',
-        'deleted_at',
-    ];
-
-    /** @var array */
-    protected $appended = [
-        'is_private',
-        'reply_count',
+    protected $casts = [
+        'locked_at' => 'datetime',
+        'pinned_at' => 'datetime',
+        'deleted_at' => 'datetime',
     ];
 
     public function getSlugOptions(): SlugOptions
@@ -131,7 +124,7 @@ class Discussion extends Model
 
     public function watchers(): BelongsToMany
     {
-        return $this->belongsToMany(User::class);
+        return $this->belongsToMany(config('firefly.user'), 'discussion_user', 'discussion_id', 'user_id');
     }
 
     public function scopeWithIsBeingWatched(Builder $builder, $user)
@@ -168,7 +161,7 @@ class Discussion extends Model
 
     public function scopeWithSearch(Builder $builder, ?string $search)
     {
-        $search = strtr($search, ['%' => '\%', '_' => '\_', '\\' => '\\\\']);
+        $search = strtr($search ?? '', ['%' => '\%', '_' => '\_', '\\' => '\\\\']);
 
         $builder->when(Features::enabled('search') && $search, function ($query) use ($search) {
             $query->where(function ($query) use ($search) {

@@ -63,6 +63,24 @@ class DiscussionTest extends TestCase
         $response->assertLocation('forum/d/'.$discussion->uri);
     }
 
+    public function test_discussion_update_cannot_lock_or_pin()
+    {
+        $discussion = $this->getDiscussion();
+
+        $this->actingAs($this->getUser())
+            ->put('forum/d/'.$discussion->uri, [
+                'title' => 'Bar Foo',
+                'locked_at' => '2020-01-01 00:00:00',
+                'pinned_at' => '2020-01-01 00:00:00',
+            ]);
+
+        $discussion->refresh();
+
+        $this->assertEquals('Bar Foo', $discussion->title);
+        $this->assertNull($discussion->locked_at);
+        $this->assertNull($discussion->pinned_at);
+    }
+
     public function test_discussion_was_soft_deleted()
     {
         $discussion = $this->getDiscussion();
