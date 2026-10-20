@@ -51,9 +51,30 @@ class Reaction extends Model
                 $reaction = (object) $reaction;
             }
 
-            $reaction->reaction = mb_convert_encoding($reaction->reaction, 'UTF-8', 'HTML-ENTITIES');
+            $reaction->reaction = static::decode($reaction->reaction);
 
             return $reaction;
         })->toArray());
+    }
+
+    /**
+     * Encode non-ASCII characters as HTML entities, matching the output of the
+     * deprecated mb_convert_encoding($reaction, 'HTML-ENTITIES', 'UTF-8').
+     */
+    public static function encode(string $reaction): string
+    {
+        $entities = get_html_translation_table(HTML_ENTITIES, ENT_NOQUOTES | ENT_HTML401, 'UTF-8');
+
+        return preg_replace_callback('/[^\x00-\x7F]/u', function ($match) use ($entities) {
+            return $entities[$match[0]] ?? '&#'.mb_ord($match[0], 'UTF-8').';';
+        }, $reaction);
+    }
+
+    /**
+     * Decode a reaction encoded with encode().
+     */
+    public static function decode(string $reaction): string
+    {
+        return html_entity_decode($reaction, ENT_QUOTES | ENT_HTML401, 'UTF-8');
     }
 }
