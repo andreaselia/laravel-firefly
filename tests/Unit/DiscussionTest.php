@@ -17,8 +17,8 @@ class DiscussionTest extends TestCase
 
         $secondPost = Post::create([
             'discussion_id' => $discussion->id,
-            'user_id'       => $this->getUser()->id,
-            'content'       => 'Lorem ipsum',
+            'user_id' => $this->getUser()->id,
+            'content' => 'Lorem ipsum',
         ]);
 
         $this->assertNotNull($discussion->initialPost);
@@ -32,9 +32,9 @@ class DiscussionTest extends TestCase
         $post = $this->getPost();
         $secondPost = Post::create([
             'discussion_id' => $discussion->id,
-            'user_id'       => $this->getUser()->id,
-            'content'       => 'Lorem ipsum',
-            'corrected_at'  => Carbon::now(),
+            'user_id' => $this->getUser()->id,
+            'content' => 'Lorem ipsum',
+            'corrected_at' => Carbon::now(),
         ]);
 
         $this->assertNotNull($discussion->correctPost);
@@ -49,39 +49,39 @@ class DiscussionTest extends TestCase
         Discussion::truncate();
 
         $discussion = Discussion::create([
-            'user_id'  => $this->getUser()->id,
-            'title'    => 'I want to search for content',
+            'user_id' => $this->getUser()->id,
+            'title' => 'I want to search for content',
             'group_id' => $this->getGroup()->id,
         ]);
 
         Post::create([
             'discussion_id' => $discussion->id,
-            'user_id'       => $this->getUser()->id,
-            'content'       => 'Does Not Match',
+            'user_id' => $this->getUser()->id,
+            'content' => 'Does Not Match',
         ]);
 
         $discussionTwo = Discussion::create([
-            'user_id'  => $this->getUser()->id,
-            'title'    => 'I do not like finding content',
+            'user_id' => $this->getUser()->id,
+            'title' => 'I do not like finding content',
             'group_id' => $this->getGroup()->id,
         ]);
 
         Post::create([
             'discussion_id' => $discussionTwo->id,
-            'user_id'       => $this->getUser()->id,
-            'content'       => 'Does Not Match',
+            'user_id' => $this->getUser()->id,
+            'content' => 'Does Not Match',
         ]);
 
         $discussionThree = Discussion::create([
-            'user_id'  => $this->getUser()->id,
-            'title'    => 'I like finding content in posts',
+            'user_id' => $this->getUser()->id,
+            'title' => 'I like finding content in posts',
             'group_id' => $this->getGroup()->id,
         ]);
 
         Post::create([
             'discussion_id' => $discussionThree->id,
-            'user_id'       => $this->getUser()->id,
-            'content'       => 'Should search for a match',
+            'user_id' => $this->getUser()->id,
+            'content' => 'Should search for a match',
         ]);
 
         $this->assertEquals(3, Discussion::count());

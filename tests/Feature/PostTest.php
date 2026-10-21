@@ -139,8 +139,8 @@ class PostTest extends TestCase
         Mail::fake();
 
         $watchingUser = User::create([
-            'email'=>'watching@example.com',
-            'name'=>'watching Rat',
+            'email' => 'watching@example.com',
+            'name' => 'watching Rat',
             'password' => bcrypt('password'),
         ]);
 

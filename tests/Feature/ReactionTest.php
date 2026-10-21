@@ -30,7 +30,7 @@ class ReactionTest extends TestCase
         $this->actingAs($this->getUser());
 
         $reaction = new Reaction([
-            'user_id'  => $this->getUser()->id,
+            'user_id' => $this->getUser()->id,
             'reaction' => '😀',
         ]);
 
@@ -54,7 +54,7 @@ class ReactionTest extends TestCase
         $this->actingAs($this->getUser());
 
         $reaction = $this->getPost()->reactions()->save(new Reaction([
-            'user_id'  => $this->getUser()->id,
+            'user_id' => $this->getUser()->id,
             'reaction' => '😀',
         ]));
 

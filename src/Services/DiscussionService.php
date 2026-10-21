@@ -80,7 +80,7 @@ class DiscussionService
      * Update a status of the specified discussion.
      *
      * @param  Discussion  $discussion
-     * @param $type
+     * @param  $type
      */
     public function updateState(Discussion $discussion, $type)
     {

@@ -23,9 +23,9 @@ class ReactionService
             $reactionString = $request->get('reaction');
 
             $existingReaction = Reaction::where([
-                'user_id'  => $user->id,
+                'user_id' => $user->id,
                 'reaction' => $reactionString,
-                'post_id'  => $post->id,
+                'post_id' => $post->id,
             ])->first();
 
             if ($existingReaction) {
@@ -33,7 +33,7 @@ class ReactionService
             }
 
             $reaction = new Reaction([
-                'user_id'  => $user->id,
+                'user_id' => $user->id,
                 'reaction' => $reactionString,
             ]);
 

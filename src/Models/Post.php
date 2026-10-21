@@ -94,8 +94,8 @@ class Post extends Model
 
                 return [
                     'reaction' => $reaction,
-                    'count'    => $reactionGroup->count(),
-                    'users'    => $users,
+                    'count' => $reactionGroup->count(),
+                    'users' => $users,
                 ];
             })
             ->values();

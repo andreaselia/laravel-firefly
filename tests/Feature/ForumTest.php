@@ -64,36 +64,36 @@ class ForumTest extends TestCase
         Discussion::truncate();
 
         $discussion = Discussion::create([
-            'user_id'  => $this->getUser()->id,
-            'title'    => 'I want to search for content',
+            'user_id' => $this->getUser()->id,
+            'title' => 'I want to search for content',
         ]);
 
         Post::create([
             'discussion_id' => $discussion->id,
-            'user_id'       => $this->getUser()->id,
-            'content'       => 'Does Not Match',
+            'user_id' => $this->getUser()->id,
+            'content' => 'Does Not Match',
         ]);
 
         $discussionTwo = Discussion::create([
-            'user_id'  => $this->getUser()->id,
-            'title'    => 'I do not like finding content',
+            'user_id' => $this->getUser()->id,
+            'title' => 'I do not like finding content',
         ]);
 
         Post::create([
             'discussion_id' => $discussionTwo->id,
-            'user_id'       => $this->getUser()->id,
-            'content'       => 'Does Not Match',
+            'user_id' => $this->getUser()->id,
+            'content' => 'Does Not Match',
         ]);
 
         $discussionThree = Discussion::create([
-            'user_id'  => $this->getUser()->id,
-            'title'    => 'I like finding content in posts',
+            'user_id' => $this->getUser()->id,
+            'title' => 'I like finding content in posts',
         ]);
 
         Post::create([
             'discussion_id' => $discussionThree->id,
-            'user_id'       => $this->getUser()->id,
-            'content'       => 'Should search for a match',
+            'user_id' => $this->getUser()->id,
+            'content' => 'Should search for a match',
         ]);
 
         $response = $this->actingAs($this->getUser())

@@ -65,7 +65,7 @@ class PostController extends Controller
      *
      * @param  \Firefly\Http\Requests\UpdatePostRequest  $request
      * @param  \Firefly\Models\Discussion  $discussion
-     * @param $slug
+     * @param  $slug
      * @param  \Firefly\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
@@ -83,7 +83,7 @@ class PostController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \Firefly\Models\Discussion  $discussion
-     * @param $slug
+     * @param  $slug
      * @param  \Firefly\Models\Post  $post
      * @return \Illuminate\Http\Response
      */

@@ -32,7 +32,7 @@ class CorrectPostController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \Firefly\Models\Discussion  $discussion
-     * @param $slug
+     * @param  $slug
      * @param  \Firefly\Models\Post  $post
      * @return \Illuminate\Http\RedirectResponse
      */
@@ -50,7 +50,7 @@ class CorrectPostController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \Firefly\Models\Discussion  $discussion
-     * @param $slug
+     * @param  $slug
      * @param  \Firefly\Models\Discussion  $discussion
      * @return \Illuminate\Http\RedirectResponse
      */

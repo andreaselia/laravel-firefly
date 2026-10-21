@@ -29,7 +29,7 @@ class ReactionTest extends TestCase
     public function test_reaction_was_deleted_when_sending_the_same_reaction()
     {
         $reaction = new Reaction([
-            'user_id'  => $this->getUser()->id,
+            'user_id' => $this->getUser()->id,
             'reaction' => '😀',
         ]);
 
@@ -52,7 +52,7 @@ class ReactionTest extends TestCase
     public function test_reaction_was_deleted()
     {
         $reaction = $this->getPost()->reactions()->save(new Reaction([
-            'user_id'  => $this->getUser()->id,
+            'user_id' => $this->getUser()->id,
             'reaction' => '😀',
         ]));
 
