@@ -20,7 +20,7 @@ class DiscussionTest extends TestCase
 
         $response = $this->actingAs($this->getUser())
             ->post('forum/g/example-group/d', [
-                'title'   => 'Foo Bar',
+                'title' => 'Foo Bar',
                 'content' => 'Lorem Ipsum',
             ]);
 
@@ -29,7 +29,7 @@ class DiscussionTest extends TestCase
         $this->assertTrue($discussions->count() == 1);
         $this->assertDatabaseHas('discussions', [
             'title' => 'Foo Bar',
-            'slug'  => 'foo-bar',
+            'slug' => 'foo-bar',
         ]);
 
         $posts = Post::all();
@@ -61,6 +61,24 @@ class DiscussionTest extends TestCase
 
         $response->assertRedirect();
         $response->assertLocation('forum/d/'.$discussion->uri);
+    }
+
+    public function test_discussion_update_cannot_lock_or_pin()
+    {
+        $discussion = $this->getDiscussion();
+
+        $this->actingAs($this->getUser())
+            ->put('forum/d/'.$discussion->uri, [
+                'title' => 'Bar Foo',
+                'locked_at' => '2020-01-01 00:00:00',
+                'pinned_at' => '2020-01-01 00:00:00',
+            ]);
+
+        $discussion->refresh();
+
+        $this->assertEquals('Bar Foo', $discussion->title);
+        $this->assertNull($discussion->locked_at);
+        $this->assertNull($discussion->pinned_at);
     }
 
     public function test_discussion_was_soft_deleted()
@@ -217,7 +235,7 @@ class DiscussionTest extends TestCase
 
         $response = $this->actingAs($this->getUser())
             ->post('forum/g/example-group/d', [
-                'title'   => 'Foo Bar',
+                'title' => 'Foo Bar',
                 'content' => 'Lorem Ipsum',
             ]);
 
@@ -226,7 +244,7 @@ class DiscussionTest extends TestCase
         $this->assertTrue($discussions->count() == 1);
         $this->assertDatabaseHas('discussions', [
             'title' => 'Foo Bar',
-            'slug'  => 'foo-bar',
+            'slug' => 'foo-bar',
         ]);
 
         $posts = Post::all();
@@ -255,7 +273,7 @@ class DiscussionTest extends TestCase
 
         $response = $this->actingAs($this->getUser())
             ->post('forum/g/example-group/d', [
-                'title'   => 'Foo Bar',
+                'title' => 'Foo Bar',
                 'content' => 'Lorem Ipsum',
             ]);
 
@@ -264,7 +282,7 @@ class DiscussionTest extends TestCase
         $this->assertTrue($discussions->count() == 1);
         $this->assertDatabaseHas('discussions', [
             'title' => 'Foo Bar',
-            'slug'  => 'foo-bar',
+            'slug' => 'foo-bar',
         ]);
 
         $posts = Post::all();
@@ -289,13 +307,13 @@ class DiscussionTest extends TestCase
         $this->enableFeature('correct_posts');
 
         $secondPost = Post::create([
-            'discussion_id' =>$this->getDiscussion()->id,
+            'discussion_id' => $this->getDiscussion()->id,
             'user_id' => $this->getUser()->id,
             'content' => 'Not correct',
         ]);
 
         $thirdPost = Post::create([
-            'discussion_id' =>$this->getDiscussion()->id,
+            'discussion_id' => $this->getDiscussion()->id,
             'user_id' => $this->getUser()->id,
             'content' => 'Correct',
             'corrected_at' => Carbon::now(),

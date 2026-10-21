@@ -139,8 +139,8 @@ class PostTest extends TestCase
         Mail::fake();
 
         $watchingUser = User::create([
-            'email'=>'watching@example.com',
-            'name'=>'watching Rat',
+            'email' => 'watching@example.com',
+            'name' => 'watching Rat',
             'password' => bcrypt('password'),
         ]);
 
@@ -175,5 +175,119 @@ class PostTest extends TestCase
 
             return true;
         });
+    }
+
+    public function test_rich_formatting_is_ignored_when_wysiwyg_is_disabled()
+    {
+        Post::truncate();
+
+        $discussion = $this->getDiscussion();
+
+        $this->actingAs($this->getUser())
+            ->post('forum/d/'.$discussion->uri, [
+                'content' => '<img src=x onerror=alert(1)>',
+                'formatting' => 'rich',
+            ]);
+
+        $this->assertDatabaseHas('posts', [
+            'content' => '<img src=x onerror=alert(1)>',
+            'formatting' => 'plain',
+        ]);
+
+        $this->actingAs($this->getUser())
+            ->get('forum/d/'.$discussion->uri)
+            ->assertSee('&lt;img src=x onerror=alert(1)&gt;', false)
+            ->assertDontSee('<img src=x onerror=alert(1)>', false);
+    }
+
+    public function test_rich_post_is_sanitized_when_wysiwyg_is_enabled()
+    {
+        $this->app->config->set('firefly.features.wysiwyg.enabled', true);
+
+        Post::truncate();
+
+        $discussion = $this->getDiscussion();
+
+        $this->actingAs($this->getUser())
+            ->post('forum/d/'.$discussion->uri, [
+                'content' => '<p onclick="alert(1)">Foo <a href="javascript:alert(1)">Bar</a></p><script>alert(1)</script>',
+                'formatting' => 'rich',
+            ]);
+
+        $this->assertDatabaseHas('posts', [
+            'content' => '<p>Foo <a>Bar</a></p>',
+            'formatting' => 'rich',
+        ]);
+    }
+
+    public function test_stored_rich_post_is_sanitized_when_rendered()
+    {
+        $this->app->config->set('firefly.features.wysiwyg.enabled', true);
+
+        $post = $this->getPost();
+        $post->forceFill([
+            'content' => '<p>Foo</p><img src=x onerror=alert(1)>',
+            'formatting' => 'rich',
+        ])->save();
+
+        $this->actingAs($this->getUser())
+            ->get('forum/d/'.$post->discussion->uri)
+            ->assertSee('<p>Foo</p>', false)
+            ->assertSee('integrity="sha384-07UbSXbd8HpaOfxZsiO6Y8H1HTX6v0J96b5qP6PKSpYEuSZSYD4GFFHlLRjvjVrL"', false)
+            ->assertDontSee('onerror', false);
+    }
+
+    public function test_formatting_must_be_plain_or_rich()
+    {
+        $discussion = $this->getDiscussion();
+        $post = $this->getPost();
+
+        $this->actingAs($this->getUser())
+            ->postJson('forum/d/'.$discussion->uri, [
+                'content' => 'Foo Bar',
+                'formatting' => 'html',
+            ])
+            ->assertStatus(422)
+            ->assertJsonValidationErrors('formatting');
+
+        $this->actingAs($this->getUser())
+            ->putJson('forum/d/'.$discussion->uri.'/p/'.$post->id, [
+                'content' => 'Foo Bar',
+                'formatting' => 'html',
+            ])
+            ->assertStatus(422)
+            ->assertJsonValidationErrors('formatting');
+    }
+
+    public function test_protected_fields_cannot_be_mass_assigned()
+    {
+        Post::truncate();
+
+        $discussion = $this->getDiscussion();
+
+        $this->actingAs($this->getUser())
+            ->post('forum/d/'.$discussion->uri, [
+                'content' => 'Foo Bar',
+                'corrected_at' => '2020-01-01 00:00:00',
+                'is_initial_post' => 1,
+            ]);
+
+        $post = Post::first();
+
+        $this->assertNull($post->corrected_at);
+        $this->assertFalse($post->is_initial_post);
+
+        $this->actingAs($this->getUser())
+            ->put('forum/d/'.$discussion->uri.'/p/'.$post->id, [
+                'content' => 'Bar Foo',
+                'corrected_at' => '2020-01-01 00:00:00',
+                'is_initial_post' => 1,
+            ]);
+
+        $post->refresh();
+
+        $this->assertEquals('Bar Foo', $post->content);
+        $this->assertNull($post->corrected_at);
+        $this->assertFalse($post->is_initial_post);
     }
 }

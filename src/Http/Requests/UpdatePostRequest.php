@@ -25,6 +25,7 @@ class UpdatePostRequest extends FormRequest
     {
         return [
             'content' => 'required|max:5000',
+            'formatting' => 'nullable|in:plain,rich',
         ];
     }
 }

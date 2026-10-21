@@ -46,8 +46,8 @@ class Features
     /**
      * Magic method to check any feature with a has[FeatureName]Feature method call.
      *
-     * @param $method
-     * @param $arguments
+     * @param  $method
+     * @param  $arguments
      * @return bool
      *
      * @throws BadMethodCallException

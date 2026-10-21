@@ -17,7 +17,7 @@ class GroupService
     {
         $request->merge(['is_private' => $request->has('is_private')]);
 
-        return Group::create($request->all());
+        return Group::create($request->only(['name', 'color', 'is_private']));
     }
 
     /**
@@ -31,7 +31,7 @@ class GroupService
     {
         $request->merge(['is_private' => $request->has('is_private')]);
 
-        $group->update($request->all());
+        $group->update($request->only(['name', 'color', 'is_private']));
 
         return $group->refresh();
     }

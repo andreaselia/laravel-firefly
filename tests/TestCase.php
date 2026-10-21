@@ -7,6 +7,7 @@ use Firefly\Test\Fixtures\Discussion;
 use Firefly\Test\Fixtures\Group;
 use Firefly\Test\Fixtures\Post;
 use Firefly\Test\Fixtures\User;
+use Spatie\Sluggable\SluggableServiceProvider;
 
 class TestCase extends \Orchestra\Testbench\TestCase
 {
@@ -78,7 +79,14 @@ class TestCase extends \Orchestra\Testbench\TestCase
      */
     protected function getPackageProviders($app)
     {
-        return [FireflyServiceProvider::class];
+        $providers = [FireflyServiceProvider::class];
+
+        // spatie/laravel-sluggable v4+ needs its service provider registered
+        if (class_exists(SluggableServiceProvider::class)) {
+            $providers[] = SluggableServiceProvider::class;
+        }
+
+        return $providers;
     }
 
     /**

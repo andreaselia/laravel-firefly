@@ -26,6 +26,7 @@ class StoreDiscussionRequest extends FormRequest
         return [
             'title' => 'required|max:255',
             'content' => 'required|max:5000',
+            'formatting' => 'nullable|in:plain,rich',
         ];
     }
 }

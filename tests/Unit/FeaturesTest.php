@@ -55,7 +55,7 @@ class FeaturesTest extends TestCase
     {
         $this->app->config->set('firefly.features.wysiwyg', [
             'enabled' => true,
-            'theme'   => 'snow',
+            'theme' => 'snow',
         ]);
 
         $this->assertTrue(Features::enabled('wysiwyg'));

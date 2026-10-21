@@ -57,10 +57,10 @@ return [
     */
 
     'pagination' => [
-        'view'        => 'firefly::pagination.default',
-        'groups'      => 12,
+        'view' => 'firefly::pagination.default',
+        'groups' => 12,
         'discussions' => 20,
-        'posts'       => 15,
+        'posts' => 15,
     ],
 
     /*
@@ -88,17 +88,17 @@ return [
     */
 
     'api' => [
-        'enabled'    => false,
-        'prefix'     => 'api/forum',
-        'namespace'  => '\Firefly\Http\Controllers\Api',
+        'enabled' => false,
+        'prefix' => 'api/forum',
+        'namespace' => '\Firefly\Http\Controllers\Api',
         'middleware' => ['api', 'auth:api'],
     ],
 
     'web' => [
-        'name'       => 'firefly.',
-        'enabled'    => true,
-        'prefix'     => 'forum',
-        'namespace'  => '\Firefly\Http\Controllers',
+        'name' => 'firefly.',
+        'enabled' => true,
+        'prefix' => 'forum',
+        'namespace' => '\Firefly\Http\Controllers',
         'middleware' => 'web',
     ],
 
@@ -109,9 +109,11 @@ return [
             'theme' => 'snow', // More about themes at https://quilljs.com/docs/themes/
             'toolbar_options' => [ // Docs at https://quilljs.com/docs/modules/toolbar/
                 ['bold', 'italic', 'underline', 'strike'],
-                [['list' => 'ordered'], ['list'=> 'bullet']],
+                [['list' => 'ordered'], ['list' => 'bullet']],
                 ['clean'],
             ],
+            // The HTML kept in rich posts, extend this if you add toolbar options (HTML Purifier syntax)
+            'allowed_html' => 'p,br,strong,b,em,i,u,s,ol,ul,li[class],a[href|target]',
         ],
         'correct_posts' => false,
         'search' => false,

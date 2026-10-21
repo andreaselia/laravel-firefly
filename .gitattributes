@@ -2,12 +2,19 @@
 # https://www.kernel.org/pub/software/scm/git/docs/gitattributes.html
 
 # Ignore all test and documentation with "export-ignore".
-/.gitattributes     export-ignore
-/.gitignore         export-ignore
-/.travis.yml        export-ignore
-/phpunit.xml.dist   export-ignore
-/.scrutinizer.yml   export-ignore
-/readme.md          export-ignore
-/tests              export-ignore
-/.editorconfig      export-ignore
-/logo.png           export-ignore
+/.gitattributes         export-ignore
+/.gitignore             export-ignore
+/.github                export-ignore
+/.styleci.yml           export-ignore
+/phpunit.xml            export-ignore
+/tests                  export-ignore
+/.editorconfig          export-ignore
+/logo.png               export-ignore
+
+# Ignore the frontend build tooling, the compiled assets live in /public
+/package.json           export-ignore
+/package-lock.json      export-ignore
+/webpack.mix.js         export-ignore
+/tailwind.config.js     export-ignore
+/mix-manifest.json      export-ignore
+/generate-emojis-js.php export-ignore

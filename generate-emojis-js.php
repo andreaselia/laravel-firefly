@@ -27,10 +27,10 @@ foreach ($data as $emoji) {
 
     if (! $emojis->has($emoji->character)) {
         $emojis->put($emoji->character, [
-            'emoji'    => $emoji->character,
+            'emoji' => $emoji->character,
             'keywords' => implode(',', $keys),
-            'group'    => $emoji->group,
-            'name'     => ucwords($emoji->unicodeName),
+            'group' => $emoji->group,
+            'name' => ucwords($emoji->unicodeName),
         ]);
     }
 }
@@ -48,7 +48,7 @@ $groups = [
 
 $content = [
     'categories' => $groups,
-    'symbols'    => $emojis->values(),
+    'symbols' => $emojis->values(),
 ];
 
 $jsFile = 'window.EMOJIS = '.json_encode($content);

@@ -1,7 +1,7 @@
 [![Latest Stable Version](https://img.shields.io/packagist/v/AndreasElia/laravel-firefly.svg)](https://packagist.org/packages/AndreasElia/laravel-firefly)
 [![PHP version](https://img.shields.io/packagist/php-v/AndreasElia/laravel-firefly.svg)](https://packagist.org/packages/AndreasElia/laravel-firefly)
 [![License](https://img.shields.io/packagist/l/AndreasElia/laravel-firefly.svg)](https://packagist.org/packages/AndreasElia/laravel-firefly)
-[![StyleCI](https://github.styleci.io/repos/149909240/shield?branch=master)](https://github.styleci.io/repos/149909240?branch=master)
+[![Tests](https://github.com/andreaselia/laravel-firefly/actions/workflows/tests.yml/badge.svg?branch=master)](https://github.com/andreaselia/laravel-firefly/actions/workflows/tests.yml)
 
 ![Laravel Firefly Logo](/logo.png?raw=true "Laravel Firefly Logo")
 
@@ -87,6 +87,8 @@ You can enable a WYSIWYG editor by adding/updating the flag in the config like s
 ```
 
 The snow theme and basic editing controls are provided out of the box in the config, but these can be modified to fit your needs.
+
+Rich text posts are sanitized with [HTML Purifier](http://htmlpurifier.org), which only keeps the markup produced by the default toolbar (bold, italic, underline, strike, lists and links). Any other formatting is removed when a post is saved or displayed. If you add toolbar options, extend the `allowed_html` option of the `wysiwyg` feature to match (e.g. `'p,br,strong,em,h1,h2,ol,ul,li[class],a[href|target]'`).
 
 ### Correct Posts
 

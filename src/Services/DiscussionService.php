@@ -58,7 +58,7 @@ class DiscussionService
      */
     public function update(Request $request, Discussion $discussion)
     {
-        $discussion->update($request->all());
+        $discussion->update($request->only('title'));
 
         return $discussion->refresh();
     }
@@ -80,7 +80,7 @@ class DiscussionService
      * Update a status of the specified discussion.
      *
      * @param  Discussion  $discussion
-     * @param $type
+     * @param  $type
      */
     public function updateState(Discussion $discussion, $type)
     {

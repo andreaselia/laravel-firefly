@@ -34,6 +34,9 @@ class PostTest extends TestCase
         $post->content = '<p>This is<br>a rich text post</p>';
         $this->assertEquals('<p>This is<br>a rich text post</p>', $post->formatted_content);
         $this->assertEquals('<p>This is<br>a rich text post</p>', $post->formattedContent);
+
+        $post->content = '<p onclick="alert(1)">This is</p><img src=x onerror=alert(1)><script>alert(1)</script>';
+        $this->assertEquals('<p>This is</p>', $post->formatted_content);
     }
 
     public function test_can_get_is_initial_post()
